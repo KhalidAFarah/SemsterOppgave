@@ -1,0 +1,6 @@
+asd;23.2;Prosessor;:now;
+Khasd;0.2;Prosessor;:now;
+sdsd;50.2;Prosessor;:now;
+Sdew;150.0;Harddisk;:now;
+harddisk;399.99;Harddisk;:now;
+THIS;120.99;Harddisk;:now;
