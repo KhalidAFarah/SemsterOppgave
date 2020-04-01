@@ -1,8 +1,30 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+        <TextField fx:id="txtBrukernavn" layoutX="178.0" layoutY="85.0" prefHeight="30.0" prefWidth="170.0" />
+        <Label layoutX="53.0" layoutY="91.0" prefHeight="18.0" prefWidth="86.0" text="Brukernavn" />
+        <Label layoutX="53.0" layoutY="143.0" prefHeight="18.0" prefWidth="68.0" text="Passord" />
+        <Label layoutX="37.0" layoutY="204.0" prefHeight="18.0" prefWidth="110.0" text="Telefonnummer" />
+        <Label layoutX="53.0" layoutY="254.0" prefHeight="18.0" prefWidth="93.0" text="Email" />
+        <TextField fx:id="txtPassord" layoutX="178.0" layoutY="137.0" prefHeight="30.0" prefWidth="170.0" />
+        <TextField fx:id="txtTelefonnummer" layoutX="178.0" layoutY="198.0" prefHeight="30.0" prefWidth="170.0" />
+        <TextField fx:id="txtEmail" layoutX="179.0" layoutY="248.0" prefHeight="30.0" prefWidth="170.0" />
+        <CheckBox fx:id="chxAdmin" layoutX="100.0" layoutY="326.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Admin" />
+        <CheckBox fx:id="chxStandarbruker" layoutX="263.0" layoutY="326.0" mnemonicParsing="false" text="Standarbruker" />
+        <Button layoutX="407.0" layoutY="110.0" mnemonicParsing="false" onAction="#onClick_btn_Register" prefHeight="66.0" prefWidth="118.0" text="Register" />
+        <Button layoutX="407.0" layoutY="221.0" mnemonicParsing="false" onAction="#onClick_btn_Avbryt" prefHeight="66.0" prefWidth="118.0" text="Avbryt" />
+        <Label layoutX="187.0" layoutY="27.0" prefHeight="30.0" prefWidth="205.0" text="Register ny bruker">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

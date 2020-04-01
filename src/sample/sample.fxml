@@ -7,13 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <TextField fx:id="txtBrukernavn" layoutX="178.0" layoutY="85.0" prefHeight="30.0" prefWidth="170.0" />
-        <Label layoutX="53.0" layoutY="91.0" prefHeight="18.0" prefWidth="68.0" text="Brukernavn" />
+        <Label layoutX="53.0" layoutY="91.0" prefHeight="18.0" prefWidth="86.0" text="Brukernavn" />
         <Label layoutX="53.0" layoutY="143.0" prefHeight="18.0" prefWidth="68.0" text="Passord" />
-        <Label layoutX="53.0" layoutY="204.0" prefHeight="18.0" prefWidth="93.0" text="Telefonnummer" />
+        <Label layoutX="37.0" layoutY="204.0" prefHeight="18.0" prefWidth="110.0" text="Telefonnummer" />
         <Label layoutX="53.0" layoutY="254.0" prefHeight="18.0" prefWidth="93.0" text="Email" />
         <TextField fx:id="txtPassord" layoutX="178.0" layoutY="137.0" prefHeight="30.0" prefWidth="170.0" />
         <TextField fx:id="txtTelefonnummer" layoutX="178.0" layoutY="198.0" prefHeight="30.0" prefWidth="170.0" />
