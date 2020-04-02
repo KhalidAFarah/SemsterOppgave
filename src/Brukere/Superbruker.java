@@ -19,7 +19,7 @@ public class Superbruker extends Bruker {
     public void setEmail(String email){bruker.setEmail(email);}
     public void setTlf(String tlf){bruker.setTlf(tlf);}
 
-    public String toStringTxt(){
+    public String toStringFormat(){
         return bruker.toStringFormat() + ADMIN + ";";
     }
 

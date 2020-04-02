@@ -17,7 +17,7 @@ public class Register {
         String ut = "";
 
         for(int i = 0; i < brukere.size(); i++){
-            ut += brukere.get(i).toStringFormat();
+            ut += brukere.get(i).toStringFormat() + "\n";
         }
 
         return ut;

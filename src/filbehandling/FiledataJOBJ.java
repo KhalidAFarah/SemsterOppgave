@@ -6,7 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class KomponentLagringJOBJ {
+public class FiledataJOBJ {
 
     public void save(Komponenter komp, Path path) throws IOException {
         try(OutputStream os = Files.newOutputStream(path);

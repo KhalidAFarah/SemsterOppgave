@@ -54,7 +54,7 @@ public class Standardbruker extends Bruker {
         }
     }
 
-    public String toStringTxt(){
-        return bruker.toStringFormat() + ADMIN + ";" + sum + ";" + handelskurv.getMainArray().size() + "\n" + handelskurv.toStringTxt();
+    public String toStringFormat(){
+        return bruker.toStringFormat() + ADMIN + ";" + sum + ";" + handelskurv.getMainArray().size() + handelskurv.toStringTxt();
     }
 }

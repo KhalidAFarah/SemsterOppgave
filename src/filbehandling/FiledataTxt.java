@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class KomponentLagringTxt {
+public class FiledataTxt {
 
     private int intervaler = 0;
     private Standardbruker bruker;

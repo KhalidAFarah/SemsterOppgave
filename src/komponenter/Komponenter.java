@@ -28,20 +28,10 @@ public class Komponenter {//lager en main liste for alle typer komponenter
     public String toStringTxt(){
         String ut = "";
         for(int i = 0; i < main.size(); i++){
-            ut += main.get(i).toStringTxt() + "\n";
+            ut += "\n" + main.get(i).toStringTxt();
         }
         return ut;
     }
-
-    public String toStringStandardBruker(){
-        String ut = "";
-        for(int i = 0; i < main.size(); i++){
-            ut += main.get(i).toStringTxt();
-        }
-        return ut;
-    }
-
-
 
     public void sort(){
         ArrayList<Komponent> newMain = new ArrayList<>();
