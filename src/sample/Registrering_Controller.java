@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Controller {
+public class Registrering_Controller {
 
     @FXML
     private TextField txtBrukernavn;
