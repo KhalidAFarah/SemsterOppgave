@@ -14,15 +14,6 @@ public class Prosessor extends Komponent {
 
     @Override
     public String toStringTxt() {
-        String s = "";// + getSpecs().get(0);
-        for(int i = 0; i < getSpecs().size(); i++){
-            s += ":" + getSpecs().get(i);
-        }
-        return getNavn() + ";"  + getPris() + ";" + getType() + ";" + s + ";";
-    }
-
-    @Override
-    public String toStringCsv() {
         String ut = getNavn() + ";"  + getPris() + ";" + getType() + ";";
         for(int i = 0; i < getSpecs().size(); i++){
             ut += getSpecs().get(i) + ";";

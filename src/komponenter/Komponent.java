@@ -66,7 +66,6 @@ public abstract class Komponent {
 
     public abstract String toString();
     public abstract String toStringTxt();
-    public abstract String toStringCsv();
 
     /*public abstract void writeObject(ObjectOutputStream stream) throws IOException;
     public abstract <T extends Komponent> T readObject(ObjectInputStream stream) throws IOException;*/

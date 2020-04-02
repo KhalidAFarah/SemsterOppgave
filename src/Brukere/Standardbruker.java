@@ -19,12 +19,14 @@ public class Standardbruker extends Bruker {
     public String getPassord(){return bruker.getPassord();}
     public String getEmail(){return bruker.getEmail();}
     public Komponenter getHandelskurv(){return handelskurv;}
+    public String getTlf(){return bruker.getTlf();}
     public boolean isAdmin(){return ADMIN;}
 
     public void setBrukernavn(String brukernavn){bruker.setBrukernavn(brukernavn);}
     public void setPassord(String passord){bruker.setPassord(passord);}
     public void setEmail(String email){bruker.setEmail(email);}
     public void setHandelskurv(Komponenter handelskurv){this.handelskurv = handelskurv;}
+    public void setTlf(String tlf){bruker.setTlf(tlf);}
 
     public void setSum(){
         this.sum = 0;
@@ -54,8 +56,5 @@ public class Standardbruker extends Bruker {
 
     public String toStringTxt(){
         return bruker.toStringFormat() + sum + ";" + ADMIN + ";" + handelskurv.toStringTxt();
-    }
-    public String toStringCsv(){
-        return bruker.toStringFormat() + sum + ";" + ADMIN + ";" + handelskurv.toStringCsv();
     }
 }

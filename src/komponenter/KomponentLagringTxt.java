@@ -27,7 +27,13 @@ public class KomponentLagringTxt {
                     showMessageDialog(null, "klarte ikke å laste inn komponenter");
                 }
                 String type = strings[2];
-                String[] specs = strings[3].split(":");
+
+                String[] specs = new String[strings.length-3];
+
+                for(int i = 3; i < strings.length;i++){
+                    int teller = 3 - i;
+                    specs[teller] = strings[i];
+                }
 
                 if(type.equals("Prosessor")){
                     komp.add(new Prosessor(navn, pris, type, specs));
