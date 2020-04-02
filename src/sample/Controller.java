@@ -39,7 +39,7 @@ public class Controller {
 
     private Register brukere = new Register();
     private FiledataTxt lagreTxt;
-    private Path path = Paths.get("src/filbehandling/Brukerinfo.txt");
+    private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
     private void save(){
         lagreTxt = new FiledataTxt();
@@ -71,7 +71,7 @@ public class Controller {
             brukere.add(A);
         }else if(chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
            Standardbruker A = new Standardbruker(b);
-           A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
+           //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
            brukere.add(A);
 
         }else if(chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
