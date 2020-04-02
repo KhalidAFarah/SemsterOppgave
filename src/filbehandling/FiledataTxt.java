@@ -77,6 +77,7 @@ public class FiledataTxt {
 
                     if (Admin) {
                         admin = new Superbruker(b);
+                        brukere.add(admin);
                     } else if (!Admin) {
                         bruker = new Standardbruker(b);
                         //String[5] er sum som ikke trengs for set før brukes
@@ -105,7 +106,7 @@ public class FiledataTxt {
                     String[] specs = new String[strings.length-3];
 
                     for(int i = 3; i < strings.length;i++){
-                        int teller = 3 - i;
+                        int teller = i - 3;
                         specs[teller] = strings[i];
                     }
 
