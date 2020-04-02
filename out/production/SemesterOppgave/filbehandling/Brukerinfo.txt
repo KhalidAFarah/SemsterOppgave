@@ -1,5 +1,0 @@
-kj;kj;kj;kj;true;kj;kj;kj;kj;true;kj;kj;kj;kj;false;200.0;1
-AMD;200.0;Prossesor;hdd;ssd;
-kj;kj;kj;kj;false;200.0;1
-AMD;200.0;Prossesor;hdd;ssd;
-kj;kj;kj;kj;true;kj;kj;kj;kj;true;

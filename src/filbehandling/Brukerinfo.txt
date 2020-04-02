@@ -1,6 +1,0 @@
-kssk;ks;sk;sk;true;
-kssk;ks;sk;sk;true;
-kssk;ks;sk;sk;false;200.0;1
-AMD;200.0;Prossesor;hdd;ssd;
-kssk;ks;sk;sk;false;200.0;1
-AMD;200.0;Prossesor;hdd;ssd;
