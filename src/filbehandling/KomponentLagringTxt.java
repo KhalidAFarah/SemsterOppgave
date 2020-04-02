@@ -11,6 +11,10 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class KomponentLagringTxt {
 
+    private int intervaler = 0;
+    private Standardbruker bruker;
+    private Superbruker admin;
+
     public void save(String data, Path path) throws IOException {
         Files.write(path,data.getBytes());
     }
@@ -61,30 +65,34 @@ public class KomponentLagringTxt {
             String line = "";
             while ((line = Reader.readLine()) != null) {
                 String[] strings = line.split(";");
-                Bruker b = new Bruker();
+                if(intervaler == 0) {
+                    Bruker b = new Bruker();
 
-                b.setBrukernavn(strings[0]);
-                b.setPassord(strings[1]);
-                b.setEmail(strings[2]);
-                b.setTlf(strings[3]);
+                    b.setBrukernavn(strings[0]);
+                    b.setPassord(strings[1]);
+                    b.setEmail(strings[2]);
+                    b.setTlf(strings[3]);
 
-                boolean Admin = Boolean.parseBoolean(strings[4]);
+                    boolean Admin = Boolean.parseBoolean(strings[4]);
 
-                if(Admin){
-                    Superbruker bruker = new Superbruker(b);
-                }else if(!Admin){
-                    Standardbruker bruker = new Standardbruker(b);
-                    double sum = 0;
-                    try{
-                        sum = Double.parseDouble(strings[5]);
-                    }catch (Exception e){
-                        throw new Exception("Ugyldig data lagret");
+                    if (Admin) {
+                        admin = new Superbruker(b);
+                    } else if (!Admin) {
+                        bruker = new Standardbruker(b);
+                        //String[5] er sum som ikke trengs for set før brukes
+                        try {
+                            intervaler = Integer.parseInt(strings[6]);
+                        } catch (Exception e) {
+                            intervaler = 0;
+                            throw new InvalidDataLoadedException("Ugyldig data lagret");
+                        }
+                    }else{
+                        throw new InvalidDataLoadedException("Ugyldig data lagret");
                     }
-                    String[] varer = new String[7];//7 typer komponenter
+                }else if(intervaler > 0){
 
-                    //for(int i = 6; i < strings.length; i += )
 
-                    /*String navn = strings[6];
+                    String navn = strings[0];
                     double pris;
                     try{
                         pris = Double.parseDouble(strings[1]);
@@ -115,14 +123,12 @@ public class KomponentLagringTxt {
                         bruker.leggTilHandlekurv(new Mus(navn, pris, type, specs));
                     }else if(type.equals("Skjerm")){
                         bruker.leggTilHandlekurv(new Skjerm(navn, pris, type, specs));
-                    }*/
-
-
-                }else{
-                    throw new InvalidDataLoadedException("Ugyldig data lagret");
+                    }
+                    intervaler--;
+                    if(intervaler == 0){
+                        brukere.add(bruker);
+                    }
                 }
-
-
             }
         }
     }
