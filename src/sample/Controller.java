@@ -53,8 +53,9 @@ public class Controller {
             A = new Superbruker(b);
         }else if(chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
             A = new Standardbruker(b);
-        }else if(chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()){
+        }else if(chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
             txtError.setText("Vennligst kryss av en av boksene");
+        }
 
 
 
