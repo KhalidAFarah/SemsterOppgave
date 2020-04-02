@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import komponenter.*;
 
 public class Controller {
 
@@ -32,8 +31,7 @@ public class Controller {
     @FXML
     private Label txtError;
 
-    private Komponenter varer = new Komponenter();
-
+    private Register brukere = new Register();
     @FXML
     void onClick_btn_Avbryt(ActionEvent event) {
         Platform.exit();
@@ -48,7 +46,7 @@ public class Controller {
         b.setTlf(txtTelefonnummer.getText());
         b.setEmail(txtEmail.getText());
 
-        Bruker A;
+        Bruker A = null;
         if(chxAdmin.isSelected() && !chxStandarbruker.isSelected()){
             A = new Superbruker(b);
         }else if(chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
@@ -56,10 +54,7 @@ public class Controller {
         }else if(chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
             txtError.setText("Vennligst kryss av en av boksene");
         }
-
-
-
-
+        brukere.add(A);
     }
 
 }

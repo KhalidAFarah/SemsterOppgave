@@ -33,6 +33,16 @@ public class Komponenter {//lager en main liste for alle typer komponenter
         return ut;
     }
 
+    public String toStringStandardBruker(){
+        String ut = "";
+        for(int i = 0; i < main.size(); i++){
+            ut += main.get(i).toStringTxt();
+        }
+        return ut;
+    }
+
+
+
     public void sort(){
         ArrayList<Komponent> newMain = new ArrayList<>();
         for(int i = 0; i < TYPER; i++){
