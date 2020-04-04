@@ -3,9 +3,16 @@ package sample;
 import Brukere.*;
 import filbehandling.FiledataTxt;
 import filbehandling.InvalidDataLoadedException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
 import static javax.swing.JOptionPane.*;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -54,8 +61,19 @@ public class LoggInn_Controller {
     }
 
     @FXML
-    void onClick_btn_RegistrerNyBruker(ActionEvent event) {
+    void onClick_btn_RegistrerNyBruker(ActionEvent event) throws IOException {
 
+        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
+        Scene Register_ny_bruker = new Scene(Logg_inn);
+        Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_1.setScene(Register_ny_bruker);
+        Scene_1.show();
+    }
+
+    //Får å gå ut fra applikasjonen
+    @FXML
+    void onClick_btn_Avslutt(ActionEvent event) {
+        Platform.exit();
     }
 
 }

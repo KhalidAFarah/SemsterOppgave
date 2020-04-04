@@ -5,9 +5,14 @@ import filbehandling.FiledataTxt;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import komponenter.Prosessor;
 
 import java.io.IOException;
@@ -50,10 +55,17 @@ public class Registrering_Controller {
         }
     }
 
+
+
     @FXML
-    void onClick_btn_Avbryt(ActionEvent event) {
-        save();
-        Platform.exit();
+    void onClick_btn_Avbryt(ActionEvent event) throws IOException {
+        save(); // se på denne
+
+        Parent Registrering = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+        Scene Avbryt = new Scene(Registrering);
+        Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_2.setScene(Avbryt);
+        Scene_2.show();
 
     }
 

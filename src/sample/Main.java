@@ -11,10 +11,18 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-        primaryStage.setTitle("Registrer ny bruker");
-        primaryStage.setScene(new Scene(root, 650, 450));
+        primaryStage.setTitle("Inn_logging");
+        primaryStage.setScene(new Scene(root, 403, 364));
         primaryStage.show();
     }
+/*
+    public void Registrering(Stage Scene_2) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
+        Scene_2.setTitle("Registrer ny bruker");
+        Scene_2.setScene(new Scene(root, 450, 450));
+    }
+
+ */
 
 
     public static void main(String[] args) {
