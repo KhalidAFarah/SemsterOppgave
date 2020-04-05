@@ -24,7 +24,9 @@
       </TableView>
       <Label layoutX="336.0" layoutY="82.0" text="Rediger komponenter" />
       <ImageView fitHeight="85.0" fitWidth="140.0" layoutX="231.0" layoutY="-5.0">
-          /*
+         <image>
+            <Image url="@../../../../../Desktop/prog/logo3.png" />
+         </image>
       </ImageView>
       <Separator layoutX="7.0" layoutY="67.0" prefHeight="1.0" prefWidth="590.0" />
       <Separator layoutX="158.0" layoutY="69.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="8.0" />
