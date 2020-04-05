@@ -53,6 +53,7 @@ public class LoggInn_Controller {
             }
         }
 
+        //Sjekker
         if(login_sucessfull){
             //en eller annen funksjon som bytter UI og sender inn indexen til brukeren i bruker listen
 
