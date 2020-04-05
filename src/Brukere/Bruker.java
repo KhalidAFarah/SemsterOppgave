@@ -10,6 +10,7 @@ public class Bruker {
     public String getPassord(){return passord;}
     public String getEmail(){return email;}
     public String getTlf(){return tlf;}
+    public boolean isAdmin(){return false;}
 
     public void setBrukernavn(String brukernavn){this.brukernavn = brukernavn;}
     public void setPassord(String passord){this.passord = passord;}
