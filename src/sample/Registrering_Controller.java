@@ -73,7 +73,7 @@ public class Registrering_Controller {
     }
 
     @FXML
-    void onClick_btn_Register(ActionEvent event) {
+    void onClick_btn_Register(ActionEvent event){
         Bruker b = new Bruker();
         b.setBrukernavn(txtBrukernavn.getText());
         b.setPassord(txtPassord.getText());
@@ -93,7 +93,18 @@ public class Registrering_Controller {
         }
         save();
 
-      //  showMessagedialog(x)
+        /*
+        Parent Registrering = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
+        Scene MellomSide = new Scene(Registrering);
+        Stage Scene_7 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_7.setScene(MellomSide);
+        Scene_7.setHeight(500);
+        Scene_7.setWidth(500);
+        Scene_7.show();
+
+         */
+
+
     }
 
 }
