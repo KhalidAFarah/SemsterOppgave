@@ -41,7 +41,7 @@ public class LoggInn_Controller {
     }
 
     @FXML
-    void onClick_btn_LoggInn(ActionEvent event) {
+    void onClick_btn_LoggInn(ActionEvent event) throws IOException {
         load();
         boolean login_sucessfull = false;
         int user = 0;
@@ -55,6 +55,12 @@ public class LoggInn_Controller {
 
         if(login_sucessfull){
             //en eller annen funksjon som bytter UI og sender inn indexen til brukeren i bruker listen
+
+            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standarbruker.fxml"));
+            Scene Standarbruker = new Scene(Logg_inn);
+            Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_1.setScene(Standarbruker);
+            Scene_1.show();
 
         }
 
