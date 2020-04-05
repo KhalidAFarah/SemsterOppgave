@@ -58,9 +58,12 @@ public class LoggInn_Controller {
 
             Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
             Scene Standarbruker = new Scene(Logg_inn);
-            Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-            Scene_1.setScene(Standarbruker);
-            Scene_1.show();
+            Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_5.setScene(Standarbruker);
+            Scene_5.setHeight(420);
+            Scene_5.setWidth(410);
+            Scene_5.show();
+
 
         }
 
@@ -71,9 +74,11 @@ public class LoggInn_Controller {
 
         Parent Logg_inn = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
         Scene Register_ny_bruker = new Scene(Logg_inn);
-        Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-        Scene_1.setScene(Register_ny_bruker);
-        Scene_1.show();
+        Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_2.setScene(Register_ny_bruker);
+        Scene_2.setHeight(450);
+        Scene_2.setWidth(600);
+        Scene_2.show();
     }
 
     //Får å gå ut fra applikasjonen

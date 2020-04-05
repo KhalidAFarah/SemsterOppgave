@@ -18,6 +18,7 @@ import komponenter.Prosessor;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.JOptionPane;
 
 public class Registrering_Controller {
 
@@ -63,9 +64,11 @@ public class Registrering_Controller {
 
         Parent Registrering = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
         Scene Avbryt = new Scene(Registrering);
-        Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-        Scene_2.setScene(Avbryt);
-        Scene_2.show();
+        Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_1.setScene(Avbryt);
+        Scene_1.setHeight(420);
+        Scene_1.setWidth(410);
+        Scene_1.show();
 
     }
 
@@ -76,7 +79,6 @@ public class Registrering_Controller {
         b.setPassord(txtPassord.getText());
         b.setTlf(txtTelefonnummer.getText());
         b.setEmail(txtEmail.getText());
-
 
         if(chxAdmin.isSelected() && !chxStandarbruker.isSelected()){
             Superbruker A = new Superbruker(b);
@@ -90,6 +92,8 @@ public class Registrering_Controller {
             txtError.setText("Vennligst kryss av en av boksene");
         }
         save();
+
+      //  showMessagedialog(x)
     }
 
 }
