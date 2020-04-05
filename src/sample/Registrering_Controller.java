@@ -43,7 +43,7 @@ public class Registrering_Controller {
     @FXML
     private Label txtError;
 
-    private Register brukere = new Register();
+    public static Register brukere = new Register();
     private FiledataTxt lagreTxt;
     private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 

@@ -25,7 +25,7 @@ public class LoggInn_Controller {
     @FXML
     private TextField txtPassord;
 
-    private Register brukere = new Register();
+    private Register brukere = Registrering_Controller.brukere;
 
     private FiledataTxt lese = new FiledataTxt();
     Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
@@ -47,26 +47,26 @@ public class LoggInn_Controller {
         for(int i = 0; i < brukere.getArray().size(); i++){
             if(brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                 && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())){
-                login_sucessfull = true;
-                user = i;
+
+                if(brukere.getArray().get(i).isAdmin()){
+                    Parent Logg_inn = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
+                    Scene Standarbruker = new Scene(Logg_inn);
+                    Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+                    Scene_5.setScene(Standarbruker);
+                    Scene_5.setHeight(420);
+                    Scene_5.setWidth(410);
+                    Scene_5.show();
+                }else{
+                    Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
+                    Scene Standarbruker = new Scene(Logg_inn);
+                    Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+                    Scene_5.setScene(Standarbruker);
+                    Scene_5.setHeight(420);
+                    Scene_5.setWidth(410);
+                    Scene_5.show();
+                }
             }
         }
-
-        //Sjekker
-        if(login_sucessfull){
-            //en eller annen funksjon som bytter UI og sender inn indexen til brukeren i bruker listen
-
-            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
-            Scene Standarbruker = new Scene(Logg_inn);
-            Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-            Scene_5.setScene(Standarbruker);
-            Scene_5.setHeight(420);
-            Scene_5.setWidth(410);
-            Scene_5.show();
-
-
-        }
-
     }
 
     @FXML
