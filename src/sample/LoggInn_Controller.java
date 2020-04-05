@@ -2,7 +2,6 @@ package sample;
 
 import Brukere.*;
 import filbehandling.FiledataTxt;
-import filbehandling.InvalidDataLoadedException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,7 +56,7 @@ public class LoggInn_Controller {
         if(login_sucessfull){
             //en eller annen funksjon som bytter UI og sender inn indexen til brukeren i bruker listen
 
-            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standarbruker.fxml"));
+            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
             Scene Standarbruker = new Scene(Logg_inn);
             Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
             Scene_1.setScene(Standarbruker);

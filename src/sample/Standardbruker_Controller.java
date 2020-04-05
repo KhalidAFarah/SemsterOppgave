@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Standarbruker_Controller {
+public class Standardbruker_Controller {
 
     @FXML
     private TextField txtMaskin;
@@ -22,8 +22,8 @@ public class Standarbruker_Controller {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) throws IOException {
 
-        Parent Standarbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-        Scene LoggInn = new Scene(Standarbruker);
+        Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+        Scene LoggInn = new Scene(Standardbruker);
         Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
         Scene_1.setScene(LoggInn);
         Scene_1.show();
