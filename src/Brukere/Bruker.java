@@ -16,6 +16,7 @@ public class Bruker {
     public void setEmail(String email){this.email = email;}
     public void setTlf(String tlf){this.tlf = tlf;}
 
+
     public String toStringFormat(){
         return brukernavn + ";" + passord + ";" + email + ";" + tlf + ";";
     }
