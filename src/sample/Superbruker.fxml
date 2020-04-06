@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Superbruker_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Superbruker_Controller">
     <children>
         <TableView layoutY="114.0" prefHeight="286.0" prefWidth="602.0">
             <columns>
@@ -25,7 +25,7 @@
         <Separator layoutX="479.0" layoutY="69.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="8.0" />
       <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="210.0" layoutY="-35.0">
          <image>
-            <Image url="@../../img/logo3.png" />
+            <Image url="@../img/logo3.png" />
          </image>
       </ImageView>
       <Button layoutX="7.0" layoutY="67.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="154.0" text="Legg til komponenter" />

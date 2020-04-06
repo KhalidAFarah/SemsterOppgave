@@ -41,7 +41,7 @@
       <Button layoutX="164.0" layoutY="324.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="24.0" prefWidth="75.0" text="Avslutt" />
       <ImageView fitHeight="79.0" fitWidth="95.0" layoutX="304.0" layoutY="11.0">
          <image>
-            <Image url="@../../img/logo2.png" />
+            <Image url="@../img/logo2.png" />
          </image>
       </ImageView>
    </children>

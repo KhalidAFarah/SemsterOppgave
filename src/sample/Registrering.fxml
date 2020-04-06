@@ -31,7 +31,7 @@
       <Label fx:id="txtError" layoutX="149.0" layoutY="356.0" prefHeight="18.0" prefWidth="230.0" />
       <ImageView fitHeight="66.0" fitWidth="86.0" layoutX="504.0" layoutY="9.0">
          <image>
-            <Image url="@../../img/logo2.png" />
+             <Image url="@../img/logo2.png" />
          </image>
       </ImageView>
     </children>
