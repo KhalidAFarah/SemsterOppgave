@@ -35,7 +35,7 @@
             <Font name="Consolas Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="279.0" layoutY="-32.0">
+      <ImageView fx:id="img_Techmet" fitHeight="149.0" fitWidth="200.0" layoutX="279.0" layoutY="-32.0">
          <image>
             <Image url="@../../img/logo3.png" />
          </image>

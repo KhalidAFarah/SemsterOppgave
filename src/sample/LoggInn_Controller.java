@@ -76,7 +76,8 @@ public class LoggInn_Controller {
         Scene Register_ny_bruker = new Scene(Logg_inn);
         Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
         Scene_2.setScene(Register_ny_bruker);
-        Scene_2.setHeight(450);
+        //Scene_2.setHeight(450);
+        Scene_2.setHeight(600);
         Scene_2.setWidth(600);
         Scene_2.show();
     }

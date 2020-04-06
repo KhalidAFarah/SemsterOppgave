@@ -2,7 +2,6 @@ package sample;
 
 import Brukere.*;
 import filbehandling.FiledataTxt;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -73,7 +72,7 @@ public class Registrering_Controller {
     }
 
     @FXML
-    void onClick_btn_Register(ActionEvent event){
+    void onClick_btn_Register(ActionEvent event) throws IOException {
         Bruker b = new Bruker();
         b.setBrukernavn(txtBrukernavn.getText());
         b.setPassord(txtPassord.getText());
@@ -83,27 +82,34 @@ public class Registrering_Controller {
         if(chxAdmin.isSelected() && !chxStandarbruker.isSelected()){
             Superbruker A = new Superbruker(b);
             brukere.add(A);
+
+
+            Parent Registering_ny_Admin = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
+            Scene MellomSide = new Scene(Registering_ny_Admin);
+            Stage Scene_9 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_9.setScene(MellomSide);
+            Scene_9.setHeight(400);
+            Scene_9.setWidth(600);
+            Scene_9.show();
+            save();
+
         }else if(chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
            Standardbruker A = new Standardbruker(b);
            //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
            brukere.add(A);
 
+            Parent Registering_ny_Standarbruker = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
+            Scene MellomSide = new Scene(Registering_ny_Standarbruker);
+            Stage Scene_10 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_10.setScene(MellomSide);
+            Scene_10.setHeight(400);
+            Scene_10.setWidth(600);
+            Scene_10.show();
+            save();
+
         }else if(chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
             txtError.setText("Vennligst kryss av en av boksene");
         }
-        save();
-
-        /*
-        Parent Registrering = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
-        Scene MellomSide = new Scene(Registrering);
-        Stage Scene_7 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-        Scene_7.setScene(MellomSide);
-        Scene_7.setHeight(500);
-        Scene_7.setWidth(500);
-        Scene_7.show();
-
-         */
-
 
     }
 
