@@ -10,7 +10,17 @@ public class Register {
     }
 
     public ArrayList<Bruker> getArray(){return brukere;}
-    public void add(Bruker bruker){brukere.add(bruker);}
+    public boolean add(Bruker bruker){
+        brukere.add(bruker);
+        for(int i = 0; i < brukere.size(); i++){
+            if(brukere.get(i).getBrukernavn().equals(bruker.getBrukernavn()) &&
+                    brukere.get(i).getPassord().equals(bruker.getPassord())){
+                brukere.add(bruker);
+                return true;
+            }
+        }
+        return false;
+    }
     public void setArray(ArrayList<Bruker> brukere){this.brukere = brukere;}
 
     public String toStringTxt(){
