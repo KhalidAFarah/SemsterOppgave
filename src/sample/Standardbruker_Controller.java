@@ -6,7 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +22,12 @@ public class Standardbruker_Controller {
 
     @FXML
     private TextField txtHandlekurve;
+
+    @FXML
+    private SubScene subScene;
+
+    @FXML
+    private AnchorPane pane;
 
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) throws IOException {
@@ -53,7 +63,22 @@ public class Standardbruker_Controller {
     }
 
     @FXML
-    void On_Click_Btn_Prosessor(ActionEvent event) {
+    void On_Click_Btn_Prosessor(ActionEvent event) throws IOException {
+
+        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+
+        Scene_3.setWidth(900);
+
+        Label la = new Label();
+        la.setText("hallo");
+        la.setLayoutY(100);
+        la.setLayoutX(50);
+
+
+        la.setLayoutX(36.0);
+        la.setLayoutY(175.0);
+
+        pane.getChildren().add(la);
 
     }
 
