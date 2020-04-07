@@ -53,16 +53,16 @@ public class LoggInn_Controller {
                     Scene Standarbruker = new Scene(Logg_inn);
                     Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
                     Scene_5.setScene(Standarbruker);
-                    Scene_5.setHeight(410);
-                    Scene_5.setWidth(610.4);
+                    Scene_5.setHeight(600);
+                    Scene_5.setWidth(650);
                     Scene_5.show();
                 }else{
                     Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
                     Scene Standarbruker = new Scene(Logg_inn);
                     Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
                     Scene_5.setScene(Standarbruker);
-                    Scene_5.setHeight(480);
-                    Scene_5.setWidth(620);
+                    Scene_5.setHeight(600);
+                    Scene_5.setWidth(650);
                     Scene_5.show();
                 }
             }
@@ -76,7 +76,8 @@ public class LoggInn_Controller {
         Scene Register_ny_bruker = new Scene(Logg_inn);
         Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
         Scene_2.setScene(Register_ny_bruker);
-        Scene_2.setHeight(450);
+        //Scene_2.setHeight(450);
+        Scene_2.setHeight(600);
         Scene_2.setWidth(600);
         Scene_2.show();
     }

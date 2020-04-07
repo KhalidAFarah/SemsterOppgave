@@ -25,7 +25,7 @@
         <Separator layoutX="479.0" layoutY="69.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="8.0" />
       <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="210.0" layoutY="-35.0">
          <image>
-            <Image url="@../img/logo3.png" />
+            <Image url="@../../img/logo3.png" />
          </image>
       </ImageView>
       <Button layoutX="7.0" layoutY="67.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="154.0" text="Legg til komponenter" />

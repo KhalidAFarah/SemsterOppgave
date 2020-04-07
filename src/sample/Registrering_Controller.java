@@ -88,8 +88,8 @@ public class Registrering_Controller {
             Scene MellomSide = new Scene(Registering_ny_Admin);
             Stage Scene_9 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
             Scene_9.setScene(MellomSide);
-            Scene_9.setHeight(300);
-            Scene_9.setWidth(420);
+            Scene_9.setHeight(400);
+            Scene_9.setWidth(600);
             Scene_9.show();
             save();
 
@@ -102,8 +102,8 @@ public class Registrering_Controller {
             Scene MellomSide = new Scene(Registering_ny_Standarbruker);
             Stage Scene_10 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
             Scene_10.setScene(MellomSide);
-            Scene_10.setHeight(300);
-            Scene_10.setWidth(420);
+            Scene_10.setHeight(400);
+            Scene_10.setWidth(600);
             Scene_10.show();
             save();
 
