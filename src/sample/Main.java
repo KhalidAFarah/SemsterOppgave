@@ -10,10 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
         primaryStage.setTitle("TechMet");
-       //primaryStage.setScene(new Scene(root, 380, 450)); //details for LoggInn.FXML
-        primaryStage.setScene(new Scene(root, 700, 800));
+      //primaryStage.setScene(new Scene(root, 400, 400)); //details for LoggInn.FXML
+       primaryStage.setScene(new Scene(root, 602.4, 400)); //test for andre fxml filer
         primaryStage.show();
     }
 
