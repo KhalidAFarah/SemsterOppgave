@@ -146,6 +146,8 @@ public class Superbruker_Controller implements Initializable {
                 btnAdd.setLayoutY(150);
                 LeggTilKomponent_pane.getChildren().add(btnAdd);
 
+                //spesifikke attributter for typer komponenter legges til her
+
                 btnAdd.setOnAction(new EventHandler<ActionEvent> () {
 
                     @Override
@@ -157,7 +159,7 @@ public class Superbruker_Controller implements Initializable {
                         }catch(Exception e){
                             pris = 0;
                         }
-                        if(choice.getValue().equals("Prosessor")){
+                        if(choice.getValue().equals("Prosessor")){//spesifikke attributter går inn i if eller else if setningene
                             komponenter.add(new Prosessor(txtNavn.getText(), pris, "Prosessor", specs));
                         }else if(choice.getValue().equals("Skjermkort")){
                             komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
