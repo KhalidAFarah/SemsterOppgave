@@ -52,7 +52,7 @@ public class Superbruker_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadKomponenter();
+        //loadKomponenter();
     }
 
     @FXML

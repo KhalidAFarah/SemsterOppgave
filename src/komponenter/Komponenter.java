@@ -53,6 +53,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
         }
 
         if(sjekk) {
+            elem.setID(main.size());
             main.add(elem);
             sort();
         }

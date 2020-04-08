@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Komponent {
+    private int ID;
     private String navn;
     private double pris;
     private List<String> specs;
@@ -42,6 +43,7 @@ public abstract class Komponent {
     public String getType(){
         return type;
     }
+    public int getID(){return ID;}
 
     public void setNavn(String navn){
         this.navn = navn;
@@ -63,6 +65,7 @@ public abstract class Komponent {
             specs.add(spec);
         }
     }
+    public void setID(int ID){this.ID = ID;}
 
     public abstract String toString();
     public abstract String toStringTxt();
