@@ -1,11 +1,13 @@
 package sample;
 
 
+import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,13 +15,45 @@ import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import komponenter.Harddisk;
-import komponenter.Komponenter;
+import komponenter.*;
 import komponenter.Prosessor;
-
+import komponenter.Skjermkort;
+import static javax.swing.JOptionPane.showMessageDialog;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
-public class Superbruker_Controller {
+public class Superbruker_Controller implements Initializable {
+
+    public void loadKomponenter(){
+        FiledataJOBJ data = new FiledataJOBJ();
+        Path path = Paths.get("filbehandling/LagredeKomponenter.JOBJ");
+
+        try {
+            data.load(komponenter, path);
+        }catch (IOException e){
+            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
+        }catch (Exception e){
+            showMessageDialog(null, "klarte ikke å laste inn data");
+        }
+    }
+    public void saveKomponenter(){
+        FiledataJOBJ data = new FiledataJOBJ();
+        Path path = Paths.get("filbehandling/LagredeKomponenter.JOBJ");
+
+        try {
+            data.save(komponenter, path);
+        }catch (IOException e){
+            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadKomponenter();
+    }
 
     @FXML
     private SubScene LeggTilKomponent_sub;
@@ -28,6 +62,8 @@ public class Superbruker_Controller {
     private AnchorPane LeggTilKomponent_pane;
 
     private String KomponentType;
+
+    private Komponenter komponenter;
 
     @FXML
     void On_Click_BtnBestilling(ActionEvent event) {
@@ -43,6 +79,8 @@ public class Superbruker_Controller {
     void On_Click_BtnLeggTilKomponenter(ActionEvent event) {
         LeggTilKomponent_sub.setVisible(true);
         LeggTilKomponent_pane.setVisible(true);
+
+        LeggTilKomponent_pane.getChildren().clear();
 
         ChoiceBox choice = new ChoiceBox(FXCollections.observableArrayList(
                 "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm"
@@ -79,7 +117,7 @@ public class Superbruker_Controller {
 
                 //produkt pris
 
-                Label labelPris = new Label("Produkt navn");
+                Label labelPris = new Label("Produkt pris");
                 labelPris.setLayoutX(250);
                 labelPris.setLayoutY(70);
                 LeggTilKomponent_pane.getChildren().add(labelPris);
@@ -120,11 +158,22 @@ public class Superbruker_Controller {
                             pris = 0;
                         }
                         if(choice.getValue().equals("Prosessor")){
-                            Prosessor prosessor = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
+                            komponenter.add(new Prosessor(txtNavn.getText(), pris, "Prosessor", specs));
+                        }else if(choice.getValue().equals("Skjermkort")){
+                            komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
+                        }else if(choice.getValue().equals("Minne")){
+                            komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
+                        }else if(choice.getValue().equals("Harddisk")){
+                            komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
+                        }else if(choice.getValue().equals("Tastatur")){
+                            komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
+                        }else if(choice.getValue().equals("Mus")){
+                            komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
+                        }else if(choice.getValue().equals("Skjerm")){
+                            komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
                         }
-
-                        //etc. for de andre komponent typer
-                        //deretter laste inn og lagre Komponenter
+                        //deretter lagre Komponenter
+                        saveKomponenter();
                     }
                 });
             }
@@ -147,5 +196,4 @@ public class Superbruker_Controller {
         Scene_4.show();
 
     }
-
 }
