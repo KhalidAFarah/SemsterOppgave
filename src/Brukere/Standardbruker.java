@@ -28,6 +28,7 @@ public class Standardbruker extends Bruker {
     public void setHandelskurv(Komponenter handelskurv){this.handelskurv = handelskurv;}
     public void setTlf(String tlf){bruker.setTlf(tlf);}
 
+
     public void setSum(){
         this.sum = 0;
         for(int i = 0; i < handelskurv.getMainArray().size(); i++){
