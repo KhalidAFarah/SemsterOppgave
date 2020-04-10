@@ -1,5 +1,9 @@
 package komponenter;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,16 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Komponent {
-    private int ID;
-    private String navn;
-    private double pris;
-    private List<String> specs;
-    private String type;
+    private transient SimpleIntegerProperty ID;
+    private transient SimpleStringProperty navn;
+    private transient SimpleDoubleProperty pris;
+    private transient List<String> specs;
+    private transient SimpleStringProperty type;
 
     public Komponent(String navn, double pris, String type, String... strings){
-        this.navn = navn;
-        this.pris = pris;
-        this.type = type;
+        setNavn(navn);
+        setPris(pris);
+        setType(type);
 
         specs = new ArrayList<>();
         for(String s: strings){
@@ -25,10 +29,10 @@ public abstract class Komponent {
     }
 
     public String getNavn(){
-        return navn;
+        return navn.getValue();
     }
     public double getPris(){
-        return pris;
+        return pris.getValue();
     }
     public List<String> getSpecs(){
         return specs;
@@ -41,21 +45,21 @@ public abstract class Komponent {
         return ut;
     }
     public String getType(){
-        return type;
+        return type.getValue();
     }
-    public int getID(){return ID;}
+    public int getID(){return ID.getValue();}
 
     public void setNavn(String navn){
-        this.navn = navn;
+        this.navn = new SimpleStringProperty(navn);
     }
     public void setPris(double pris){
-        this.pris = pris;
+        this.pris = new SimpleDoubleProperty(pris);
     }
     public void setSpecs(ArrayList<String> specs2){
         specs = specs2;
     }
     public void setType(String type){
-        this.type = type;
+        this.type = new SimpleStringProperty(type);
     }
     public void addSpec(String spec){
         specs.add(spec);
@@ -65,7 +69,7 @@ public abstract class Komponent {
             specs.add(spec);
         }
     }
-    public void setID(int ID){this.ID = ID;}
+    public void setID(int ID){this.ID = new SimpleIntegerProperty(ID);}
 
     public abstract String toString();
     public abstract String toStringTxt();

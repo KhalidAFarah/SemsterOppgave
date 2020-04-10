@@ -1,5 +1,8 @@
 package komponenter;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,13 +19,11 @@ public class Komponenter {//lager en main liste for alle typer komponenter
 
     //lag ny arraylist som sorteres etter komponent type med add<T> og get<T> som leter for typer[i-1] og teller dem
     //add metoden sorterer dem hver gang
-    ArrayList<Komponent> main;
+    ObservableList<Komponent> main = FXCollections.observableArrayList();
 
-
-    public Komponenter(){ main = new ArrayList<>();}
     public static Komponent[] getTyper2(){return typer2;}
-    public ArrayList<Komponent> getMainArray(){return main;}
-    public void setMainArray(ArrayList<Komponent> elems){main = elems;}
+    public ObservableList<Komponent> getMainArray(){return main;}
+    public void setMainArray(ObservableList<Komponent> elems){main = elems;}
 
 
     public String toStringTxt(){
@@ -34,7 +35,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
     }
 
     public void sort(){
-        ArrayList<Komponent> newMain = new ArrayList<>();
+        ObservableList<Komponent> newMain = FXCollections.observableArrayList();
         for(int i = 0; i < TYPER; i++){
             for(int j = 0; j < main.size(); j++){
                 if(typer2[i].getClass().equals(main.get(j).getClass())){

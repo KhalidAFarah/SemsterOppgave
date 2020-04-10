@@ -13,8 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import komponenter.*;
 import komponenter.Prosessor;
 import komponenter.Skjermkort;
@@ -23,7 +28,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Superbruker_Controller implements Initializable {
 
@@ -61,6 +69,9 @@ public class Superbruker_Controller implements Initializable {
     @FXML
     private AnchorPane LeggTilKomponent_pane;
 
+    @FXML
+    private TableView tableView;
+
     private String KomponentType;
 
     private Komponenter komponenter;
@@ -72,6 +83,64 @@ public class Superbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_BtnFjernKomponenter(ActionEvent event) {
+        LeggTilKomponent_pane.setVisible(true);
+        LeggTilKomponent_sub.setVisible(true);
+        Stage Scene_4 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_4.setHeight(550);
+        LeggTilKomponent_pane.getChildren().clear();
+
+        loadKomponenter();
+
+        Label labelNavn = new Label("Søk produktnavn");
+        TextField txtSøk = new TextField();
+        TableView tableSøk = new TableView();
+        Komponenter komp = new Komponenter();
+
+        LeggTilKomponent_pane.getChildren().add(labelNavn);
+        LeggTilKomponent_pane.getChildren().add(txtSøk);
+        LeggTilKomponent_pane.getChildren().add(tableSøk);
+
+        labelNavn.setLayoutY(15);
+        labelNavn.setLayoutY(15);
+
+        txtSøk.setLayoutX(115);
+        txtSøk.setLayoutY(15);
+
+        tableSøk.setLayoutX(15);
+        tableSøk.setLayoutY(115);
+
+        IntegerStringConverter intstring = new IntegerStringConverter();
+        DoubleStringConverter doubleString = new DoubleStringConverter();
+
+        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>();
+        TableColumn<Komponent, String> navnKolonne = new TableColumn<>();
+        TableColumn<Komponent, String> typeKolonne = new TableColumn<>();
+        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>();
+
+        IDKolonne.setCellFactory(TextFieldTableCell.forTableColumn(intstring));
+        //IDKolonne.setCellFactory(new PropertyValueFactory<Komponent, Integer>());
+        //navnKolonne.setCellFactory(new PropertyValueFactory<Komponent, String>());
+        navnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+        typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+        prisKolonne.setCellFactory(TextFieldTableCell.forTableColumn(doubleString));
+
+        //tableSøk.setCol
+
+        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                Predicate<Komponent> Navn = Komponent -> {
+                    boolean sjekk =  Komponent.getNavn().indexOf(txtSøk.getText()) != -1 || txtSøk != null;
+                    return sjekk;
+                };
+
+                komp.setMainArray(komponenter.getMainArray().stream().filter(Navn)
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                tableSøk.setItems(komp.getMainArray());
+            }
+        });
+
+
 
     }
 
@@ -79,6 +148,8 @@ public class Superbruker_Controller implements Initializable {
     void On_Click_BtnLeggTilKomponenter(ActionEvent event) {
         LeggTilKomponent_sub.setVisible(true);
         LeggTilKomponent_pane.setVisible(true);
+        Stage Scene_4 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_4.setHeight(410);
 
         LeggTilKomponent_pane.getChildren().clear();
 
