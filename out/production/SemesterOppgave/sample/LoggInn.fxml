@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
    <children>
       <Label layoutX="30.0" layoutY="89.0" prefHeight="22.0" prefWidth="86.0" text="Brukernavn">
          <font>
@@ -33,13 +33,13 @@
       </TextField>
       <Button layoutX="116.0" layoutY="212.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="42.0" prefWidth="172.0" text="Logg inn" />
       <Button layoutX="119.0" layoutY="277.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="35.0" prefWidth="166.0" text="Registrer ny bruker" />
-      <Label layoutX="149.0" layoutY="19.0" prefHeight="31.0" prefWidth="101.0" text="Logg inn">
+      <Label layoutX="139.0" layoutY="29.0" prefHeight="38.0" prefWidth="126.0" text="Logg inn">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Button layoutX="164.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="24.0" prefWidth="75.0" text="Avslutt" />
-      <ImageView fitHeight="79.0" fitWidth="95.0" layoutX="304.0" layoutY="11.0">
+      <Button layoutX="167.0" layoutY="345.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="27.0" prefWidth="66.0" text="Avslutt" />
+      <ImageView fitHeight="79.0" fitWidth="95.0" layoutX="299.0" layoutY="9.0">
          <image>
             <Image url="@../img/logo2.png" />
          </image>
