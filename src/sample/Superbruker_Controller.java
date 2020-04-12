@@ -21,9 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import komponenter.*;
-import komponenter.Prosessor;
-import komponenter.Skjermkort;
-import static javax.swing.JOptionPane.showMessageDialog;
+import static javax.swing.JOptionPane.*;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -37,7 +35,7 @@ public class Superbruker_Controller implements Initializable {
 
     public void loadKomponenter(){
         FiledataJOBJ data = new FiledataJOBJ();
-        Path path = Paths.get("filbehandling/LagredeKomponenter.JOBJ");
+        Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
         try {
             data.load(komponenter, path);
@@ -47,12 +45,12 @@ public class Superbruker_Controller implements Initializable {
             showMessageDialog(null, "klarte ikke å laste inn data");
         }
     }
-    public void saveKomponenter(){
+    public void saveKomponenter(Komponenter newKomponenter){
         FiledataJOBJ data = new FiledataJOBJ();
-        Path path = Paths.get("filbehandling/LagredeKomponenter.JOBJ");
+        Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
         try {
-            data.save(komponenter, path);
+            data.save(newKomponenter, path);
         }catch (IOException e){
             showMessageDialog(null, "klarte ikke å laste inn data");// for nå
         }
@@ -74,7 +72,8 @@ public class Superbruker_Controller implements Initializable {
 
     private String KomponentType;
 
-    private Komponenter komponenter;
+    private Komponenter komponenter = new Komponenter();
+    private Komponenter komp = new Komponenter();
 
     @FXML
     void On_Click_BtnBestilling(ActionEvent event) {
@@ -94,49 +93,74 @@ public class Superbruker_Controller implements Initializable {
         Label labelNavn = new Label("Søk produktnavn");
         TextField txtSøk = new TextField();
         TableView tableSøk = new TableView();
-        Komponenter komp = new Komponenter();
+        //Komponenter komp = new Komponenter();
 
         LeggTilKomponent_pane.getChildren().add(labelNavn);
         LeggTilKomponent_pane.getChildren().add(txtSøk);
         LeggTilKomponent_pane.getChildren().add(tableSøk);
 
-        labelNavn.setLayoutY(15);
+        labelNavn.setLayoutX(15);
         labelNavn.setLayoutY(15);
 
-        txtSøk.setLayoutX(115);
+        txtSøk.setLayoutX(150);
         txtSøk.setLayoutY(15);
 
         tableSøk.setLayoutX(15);
-        tableSøk.setLayoutY(115);
+        tableSøk.setLayoutY(80);
+        tableSøk.setPrefHeight(275);
+        tableSøk.setPrefWidth(575);
 
-        IntegerStringConverter intstring = new IntegerStringConverter();
-        DoubleStringConverter doubleString = new DoubleStringConverter();
+        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
+        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
 
-        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>();
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>();
-        TableColumn<Komponent, String> typeKolonne = new TableColumn<>();
-        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>();
+        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
 
-        IDKolonne.setCellFactory(TextFieldTableCell.forTableColumn(intstring));
-        //IDKolonne.setCellFactory(new PropertyValueFactory<Komponent, Integer>());
-        //navnKolonne.setCellFactory(new PropertyValueFactory<Komponent, String>());
-        navnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-        typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-        prisKolonne.setCellFactory(TextFieldTableCell.forTableColumn(doubleString));
-
-        //tableSøk.setCol
+        tableSøk.getColumns().setAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne/*, specsKolonne*/);
+        komp.setMainArray(komponenter.getMainArray());
+        tableSøk.setItems(komp.getMainArray());
 
         txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 Predicate<Komponent> Navn = Komponent -> {
-                    boolean sjekk =  Komponent.getNavn().indexOf(txtSøk.getText()) != -1 || txtSøk != null;
+                    boolean sjekk =  Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
                     return sjekk;
                 };
 
                 komp.setMainArray(komponenter.getMainArray().stream().filter(Navn)
                         .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                 tableSøk.setItems(komp.getMainArray());
+            }
+        });
+
+        //slette komponenter
+        Button btnFjern = new Button("Fjern vare");
+        LeggTilKomponent_pane.getChildren().add(btnFjern);
+        btnFjern.setLayoutX(425);
+        btnFjern.setLayoutY(15);
+
+        btnFjern.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String melding = showInputDialog(null, "Skriv varens ID");
+                int valgtKomponent;
+                try {
+                    valgtKomponent = Integer.parseInt(melding);
+                } catch (Exception e) {
+                    showMessageDialog(null, "Vennligst skriv inn riktig varens ID");
+                    valgtKomponent = -1;
+                }
+                if(valgtKomponent != -1) {
+                    komp.getMainArray().remove(valgtKomponent);
+                    saveKomponenter(komp);
+                }
             }
         });
 
@@ -231,7 +255,12 @@ public class Superbruker_Controller implements Initializable {
                             pris = 0;
                         }
                         if(choice.getValue().equals("Prosessor")){//spesifikke attributter går inn i if eller else if setningene
-                            komponenter.add(new Prosessor(txtNavn.getText(), pris, "Prosessor", specs));
+                            Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
+                            if(komponenter.add(pro)){
+                                System.out.println("funker");
+                            }else{
+                                System.out.println("Noe er galt");
+                            }
                         }else if(choice.getValue().equals("Skjermkort")){
                             komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
                         }else if(choice.getValue().equals("Minne")){
@@ -246,7 +275,7 @@ public class Superbruker_Controller implements Initializable {
                             komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
                         }
                         //deretter lagre Komponenter
-                        saveKomponenter();
+                        saveKomponenter(komponenter);
                     }
                 });
             }
