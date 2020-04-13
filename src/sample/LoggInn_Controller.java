@@ -53,7 +53,7 @@ public class LoggInn_Controller {
                     Scene Standarbruker = new Scene(Logg_inn);
                     Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
                     Scene_5.setScene(Standarbruker);
-                    Scene_5.setHeight(410);
+                    Scene_5.setHeight(420);
                     Scene_5.setWidth(610.4);
                     Scene_5.show();
                 }else{
