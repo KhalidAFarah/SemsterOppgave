@@ -33,6 +33,25 @@ import java.util.stream.Collectors;
 
 public class Superbruker_Controller implements Initializable {
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //loadKomponenter();
+    }
+
+    @FXML
+    private SubScene LeggTilKomponent_sub;
+
+    @FXML
+    private AnchorPane LeggTilKomponent_pane;
+
+    @FXML
+    private TableView tableView;
+
+    private String KomponentType;
+
+    private Komponenter komponenter = new Komponenter();
+    private Komponenter komp = new Komponenter();
+
     public void loadKomponenter(){
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
@@ -56,28 +75,76 @@ public class Superbruker_Controller implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //loadKomponenter();
-    }
+    private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError){
+        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
+        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
 
-    @FXML
-    private SubScene LeggTilKomponent_sub;
+        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
 
-    @FXML
-    private AnchorPane LeggTilKomponent_pane;
+        tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+        komp.setMainArray(komponenter.getMainArray());
+        tableSøk.setItems(komp.getMainArray());
 
-    @FXML
-    private TableView tableView;
+        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                Predicate<Komponent> Navn = Komponent -> {
+                    boolean sjekk =  Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                    return sjekk;
+                };
 
-    private String KomponentType;
+                komp.setMainArray(komponenter.getMainArray().stream().filter(Navn)
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                tableSøk.setItems(komp.getMainArray());
+            }
+        });
 
-    private Komponenter komponenter = new Komponenter();
-    private Komponenter komp = new Komponenter();
+        if(setEditAble){//redigering
+            tableSøk.setEditable(setEditAble);
+            DoubleStringConverter doubleString = new DoubleStringConverter();
 
-    @FXML
-    void On_Click_BtnBestilling(ActionEvent event) {
+            navnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            prisKolonne.setCellFactory(TextFieldTableCell.forTableColumn(doubleString));
 
+            navnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Komponent, String> event) {
+                    event.getRowValue().setNavn(event.getNewValue());
+
+                    navnKolonne.getTableView().refresh();
+
+                    saveKomponenter(komponenter);
+                }
+            });
+            typeKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Komponent, String> event) {
+                    event.getRowValue().setType(event.getNewValue());
+
+                    typeKolonne.getTableView().refresh();
+                    saveKomponenter(komponenter);
+                }
+            });
+            prisKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, Double>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Komponent, Double> event) {
+                    event.getRowValue().setPris(event.getNewValue());
+
+                    prisKolonne.getTableView().refresh();
+                    saveKomponenter(komponenter);
+                }
+
+            });
+
+        }
     }
 
     @FXML
@@ -110,35 +177,8 @@ public class Superbruker_Controller implements Initializable {
         tableSøk.setPrefHeight(275);
         tableSøk.setPrefWidth(575);
 
-        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
-        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
-        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
 
-        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
-
-        tableSøk.getColumns().setAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne/*, specsKolonne*/);
-        komp.setMainArray(komponenter.getMainArray());
-        tableSøk.setItems(komp.getMainArray());
-
-        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                Predicate<Komponent> Navn = Komponent -> {
-                    boolean sjekk =  Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
-                    return sjekk;
-                };
-
-                komp.setMainArray(komponenter.getMainArray().stream().filter(Navn)
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                tableSøk.setItems(komp.getMainArray());
-            }
-        });
+        søk(txtSøk, tableSøk, false, new Label());
 
         //slette komponenter
         Button btnFjern = new Button("Fjern vare");
@@ -163,9 +203,6 @@ public class Superbruker_Controller implements Initializable {
                 }
             }
         });
-
-
-
     }
 
     @FXML
@@ -174,6 +211,7 @@ public class Superbruker_Controller implements Initializable {
         LeggTilKomponent_pane.setVisible(true);
         Stage Scene_4 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
         Scene_4.setHeight(410);
+        loadKomponenter();
 
         LeggTilKomponent_pane.getChildren().clear();
 
@@ -284,8 +322,42 @@ public class Superbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_BtnRedigerKomponenter(ActionEvent event) {
+        LeggTilKomponent_pane.setVisible(true);
+        LeggTilKomponent_sub.setVisible(true);
+        Stage Scene_4 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Scene_4.setHeight(550);
+        LeggTilKomponent_pane.getChildren().clear();
+
+        loadKomponenter();
+
+        Label labelNavn = new Label("Søk produktnavn");
+        TextField txtSøk = new TextField();
+        TableView tableSøk = new TableView();
+
+        LeggTilKomponent_pane.getChildren().add(labelNavn);
+        LeggTilKomponent_pane.getChildren().add(txtSøk);
+        LeggTilKomponent_pane.getChildren().add(tableSøk);
+
+        labelNavn.setLayoutX(15);
+        labelNavn.setLayoutY(15);
+
+        txtSøk.setLayoutX(175);
+        txtSøk.setLayoutY(15);
+
+        Label labelError = new Label();
+
+        tableSøk.setLayoutX(15);
+        tableSøk.setLayoutY(80);
+        tableSøk.setPrefHeight(275);
+        tableSøk.setPrefWidth(575);
+
+
+
+        søk(txtSøk, tableSøk, true, labelError);
 
     }
+
+
 
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) throws IOException {
