@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -90,7 +91,7 @@ public class LoggInn_Controller {
     }
 
     @FXML
-    void onClick_btn_LoggInn(ActionEvent event) throws IOException {
+    void onClick_btn_LoggInn(ActionEvent event) {
         load();
         boolean login_sucessfull = false;
         int user = 0;
@@ -99,36 +100,53 @@ public class LoggInn_Controller {
                 && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())){
 
                 if(brukere.getArray().get(i).isAdmin()){
-                    Parent Logg_inn = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
-                    Scene Standarbruker = new Scene(Logg_inn);
-                    Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-                    Scene_5.setScene(Standarbruker);
-                    Scene_5.setHeight(420);
-                    Scene_5.setWidth(610.4);
-                    Scene_5.show();
+
+                    try{
+                        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
+                        Scene Standarbruker = new Scene(Logg_inn);
+                        Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setHeight(420);
+                        Scene_5.setWidth(610.4);
+                        Scene_5.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }else{
-                    Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
-                    Scene Standarbruker = new Scene(Logg_inn);
-                    Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-                    Scene_5.setScene(Standarbruker);
-                    Scene_5.setHeight(480);
-                    Scene_5.setWidth(620);
-                    Scene_5.show();
+                    try{
+                        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
+                        Scene Standarbruker = new Scene(Logg_inn);
+                        Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setHeight(480);
+                        Scene_5.setWidth(620);
+                        Scene_5.show();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+
                 }
             }
         }
     }
 
     @FXML
-    void onClick_btn_RegistrerNyBruker(ActionEvent event) throws IOException {
+    void onClick_btn_RegistrerNyBruker(ActionEvent event)  {
 
-        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
-        Scene Register_ny_bruker = new Scene(Logg_inn);
-        Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-        Scene_2.setScene(Register_ny_bruker);
-        Scene_2.setHeight(450);
-        Scene_2.setWidth(600);
-        Scene_2.show();
+        try{
+            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
+            Scene Register_ny_bruker = new Scene(Logg_inn);
+            Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_2.setScene(Register_ny_bruker);
+            Scene_2.setHeight(450);
+            Scene_2.setWidth(600);
+            Scene_2.show();
+        }catch(IOException e){
+            e.printStackTrace(); //trace the exception..
+        }
+
+
     }
 
     //Får å gå ut fra applikasjonen

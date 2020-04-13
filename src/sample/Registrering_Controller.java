@@ -133,61 +133,73 @@ public class Registrering_Controller implements Initializable {
 
 
     @FXML
-    void onClick_btn_Avbryt(ActionEvent event) throws IOException {
-        save(); // se på denne
+    void onClick_btn_Avbryt(ActionEvent event){
 
-        Parent Registrering = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-        Scene Avbryt = new Scene(Registrering);
-        Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-        Scene_1.setScene(Avbryt);
-        Scene_1.setHeight(420);
-        Scene_1.setWidth(410);
-        Scene_1.show();
+        try{
+            save(); // se på denne
+
+            Parent Registrering = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Scene Avbryt = new Scene(Registrering);
+            Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_1.setScene(Avbryt);
+            Scene_1.setHeight(420);
+            Scene_1.setWidth(410);
+            Scene_1.show();
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
 
     }
 
     @FXML
-    void onClick_btn_Register(ActionEvent event) throws IOException {
-        Bruker b = new Bruker();
-        b.setBrukernavn(txtBrukernavn.getText());
-        b.setPassord(txtPassord.getText());
-        b.setTlf(txtTelefonnummer.getText());
-        b.setEmail(txtEmail.getText());
+    void onClick_btn_Register(ActionEvent event) {
 
-        if(chxAdmin.isSelected() && !chxStandarbruker.isSelected()){
-            Superbruker A = new Superbruker(b);
-            brukere.add(A);
+        try {
+
+            Bruker b = new Bruker();
+            b.setBrukernavn(txtBrukernavn.getText());
+            b.setPassord(txtPassord.getText());
+            b.setTlf(txtTelefonnummer.getText());
+            b.setEmail(txtEmail.getText());
+
+            if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()){
+                Superbruker A = new Superbruker(b);
+                brukere.add(A);
 
 
-            Parent Registering_ny_Admin = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
-            Scene MellomSide = new Scene(Registering_ny_Admin);
-            Stage Scene_9 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-            Scene_9.setScene(MellomSide);
-            Scene_9.setHeight(300);
-            Scene_9.setWidth(420);
-            Scene_9.show();
-            save();
+                Parent Registering_ny_Admin = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
+                Scene MellomSide = new Scene(Registering_ny_Admin);
+                Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene_9.setScene(MellomSide);
+                Scene_9.setHeight(600);
+                Scene_9.setWidth(540);
+                Scene_9.show();
+                save(); //se her på problemet med size på fxml vinduet *
 
-        }else if(chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
-           Standardbruker A = new Standardbruker(b);
-           //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
-           brukere.add(A);
+            } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
+                Standardbruker A = new Standardbruker(b);
+                //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
+                brukere.add(A);
 
-            Parent Registering_ny_Standarbruker = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
-            Scene MellomSide = new Scene(Registering_ny_Standarbruker);
-            Stage Scene_10 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-            Scene_10.setScene(MellomSide);
-            Scene_10.setHeight(300);
-            Scene_10.setWidth(420);
-            Scene_10.show();
-            save();
+                Parent Registering_ny_Standarbruker = FXMLLoader.load(getClass().getResource("MellomSide.fxml"));
+                Scene MellomSide = new Scene(Registering_ny_Standarbruker);
+                Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene_10.setScene(MellomSide);
+                Scene_10.setHeight(300);
+                Scene_10.setWidth(420);
+                Scene_10.show();
+                save();
 
-        }else if(chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
-            txtError.setText("Vennligst kryss av en av boksene");
+            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()){
+                txtError.setText("Vennligst kryss av en av boksene");
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
         }
-
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         load();

@@ -56,15 +56,21 @@ public class Standardbruker_Controller {
     }
 
     @FXML
-    void On_Click_BtnTilbake(ActionEvent event) throws IOException {
+    void On_Click_BtnTilbake(ActionEvent event) {
 
-        Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-        Scene LoggInn = new Scene(Standardbruker);
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
-        Scene_3.setScene(LoggInn);
-        Scene_3.setHeight(420);
-        Scene_3.setWidth(410);
-        Scene_3.show();
+        try{
+            Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Scene LoggInn = new Scene(Standardbruker);
+            Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Scene_3.setScene(LoggInn);
+            Scene_3.setHeight(420);
+            Scene_3.setWidth(410);
+            Scene_3.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+
 
     }
 
