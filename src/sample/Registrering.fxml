@@ -9,18 +9,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="596.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="596.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
     <children>
-        <TextField fx:id="txtBrukernavn" layoutX="208.0" layoutY="135.0" prefHeight="30.0" prefWidth="170.0" promptText="Brukernavn" />
-        <Label layoutX="76.0" layoutY="142.0" prefHeight="18.0" prefWidth="68.0" text="Brukernavn" />
-        <Label layoutX="78.0" layoutY="193.0" prefHeight="18.0" prefWidth="48.0" text="Passord" />
-        <Label layoutX="71.0" layoutY="254.0" prefHeight="18.0" prefWidth="93.0" text="Telefonnummer" />
-        <Label layoutX="79.0" layoutY="304.0" prefHeight="18.0" prefWidth="86.0" text="E-postadresse" />
-        <TextField fx:id="txtPassord" layoutX="208.0" layoutY="187.0" prefHeight="30.0" prefWidth="170.0" promptText="Passord" />
-        <TextField fx:id="txtTelefonnummer" layoutX="208.0" layoutY="248.0" prefHeight="30.0" prefWidth="170.0" promptText="Telefonnummer" />
-        <TextField fx:id="txtEmail" layoutX="209.0" layoutY="298.0" prefHeight="30.0" prefWidth="170.0" promptText="E-postadresse" />
-        <CheckBox fx:id="chxAdmin" layoutX="186.0" layoutY="369.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Admin" />
-        <CheckBox fx:id="chxStandarbruker" layoutX="293.0" layoutY="368.0" mnemonicParsing="false" text="Standardbruker" />
+        <TextField fx:id="txtBrukernavn" layoutX="194.0" layoutY="136.0" prefHeight="30.0" prefWidth="170.0" promptText="Brukernavn">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></TextField>
+        <Label layoutX="68.0" layoutY="142.0" prefHeight="18.0" prefWidth="68.0" text="Brukernavn">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Label>
+        <Label layoutX="68.0" layoutY="193.0" prefHeight="18.0" prefWidth="48.0" text="Passord">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Label>
+        <Label layoutX="68.0" layoutY="254.0" prefHeight="18.0" prefWidth="93.0" text="Telefonnummer">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Label>
+        <Label layoutX="68.0" layoutY="304.0" prefHeight="18.0" prefWidth="86.0" text="E-postadresse">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Label>
+        <TextField fx:id="txtPassord" layoutX="194.0" layoutY="187.0" prefHeight="30.0" prefWidth="170.0" promptText="Passord">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></TextField>
+        <TextField fx:id="txtTelefonnummer" layoutX="194.0" layoutY="248.0" prefHeight="30.0" prefWidth="170.0" promptText="Telefonnummer">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></TextField>
+        <TextField fx:id="txtEmail" layoutX="194.0" layoutY="298.0" prefHeight="30.0" prefWidth="170.0" promptText="E-postadresse">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></TextField>
+        <CheckBox fx:id="chxAdmin" layoutX="179.0" layoutY="368.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Admin">
+         <font>
+            <Font name="Futura Bold" size="13.0" />
+         </font></CheckBox>
+        <CheckBox fx:id="chxStandarbruker" layoutX="279.0" layoutY="368.0" mnemonicParsing="false" text="Standardbruker">
+         <font>
+            <Font name="Futura Bold" size="13.0" />
+         </font></CheckBox>
         <Button fx:id="btnRegistrer" layoutX="433.0" layoutY="154.0" mnemonicParsing="false" onAction="#onClick_btn_Register" prefHeight="66.0" prefWidth="118.0" style="-fx-background-color: #3daee4;" text="Register">
          <font>
             <Font name="Futura Bold" size="13.0" />
@@ -29,12 +59,12 @@
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font></Button>
-        <Label layoutX="185.0" layoutY="76.0" prefHeight="30.0" prefWidth="230.0" text="Register ny bruker">
+        <Label layoutX="179.0" layoutY="74.0" prefHeight="30.0" prefWidth="230.0" text="Register ny bruker">
             <font>
                 <Font name="Futura Bold" size="22.0" />
             </font>
         </Label>
-      <Label fx:id="txtError" layoutX="149.0" layoutY="356.0" prefHeight="18.0" prefWidth="230.0" />
+      <Label fx:id="txtError" layoutX="179.0" layoutY="410.0" prefHeight="18.0" prefWidth="230.0" />
       <ImageView fitHeight="90.0" fitWidth="109.0" layoutX="473.0" layoutY="14.0">
          <image>
              <Image url="@../img/logo2.png" />
