@@ -9,32 +9,45 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Superbruker_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="609.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Superbruker_Controller">
     <children>
-        <TableView fx:id="tableview" layoutY="114.0" prefHeight="286.0" prefWidth="609.0">
+        <TableView fx:id="tableview" editable="true" layoutY="114.0" prefHeight="286.0" prefWidth="609.0" tableMenuButtonVisible="true">
             <columns>
-                <TableColumn prefWidth="75.0" text="Type" />
-                <TableColumn prefWidth="75.0" text="1" />
-                <TableColumn prefWidth="75.0" text="2" />
-                <TableColumn prefWidth="74.0" text="3" />
-                <TableColumn prefWidth="76.0" text="Pris" />
+                <TableColumn prefWidth="75.0" style="-fx-font-family: futura;" text="Type" />
+                <TableColumn prefWidth="75.0" style="-fx-font-family: futura;" text="1" />
+                <TableColumn prefWidth="75.0" style="-fx-font-family: futura;" text="2" />
+                <TableColumn prefWidth="74.0" style="-fx-font-family: futura;" text="3" />
+                <TableColumn prefWidth="76.0" style="-fx-font-family: futura;" text="Pris" />
             </columns>
         </TableView>
-        <Separator layoutX="7.0" layoutY="67.0" prefHeight="1.0" prefWidth="590.0" />
-        <Separator layoutX="158.0" layoutY="69.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="8.0" />
-        <Separator layoutX="306.0" layoutY="69.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="8.0" />
-        <Separator layoutX="479.0" layoutY="69.0" orientation="VERTICAL" prefHeight="45.0" prefWidth="8.0" />
+        <Separator layoutY="67.0" prefHeight="3.0" prefWidth="610.0" />
       <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="210.0" layoutY="-35.0">
          <image>
             <Image url="@../img/logo3.png" />
          </image>
       </ImageView>
-      <Button layoutX="7.0" layoutY="67.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="154.0" text="Legg til komponenter" />
-      <Button layoutX="162.0" layoutY="67.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="146.0" text="Fjern komponenter" />
-      <Button layoutX="310.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="171.0" text="Rediger komponenter" />
-      <Button layoutX="482.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnBestilling" prefHeight="46.0" prefWidth="119.0" text="Bestillinger" />
-      <Button layoutX="515.0" layoutY="27.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" text="Tilbake" />
+      <Button layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="162.0" text="Legg til komponenter">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Button>
+      <Button layoutX="157.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0" text="Fjern komponenter">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Button>
+      <Button layoutX="319.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="173.0" text="Rediger komponenter">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Button>
+      <Button layoutX="491.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnBestilling" prefHeight="46.0" prefWidth="119.0" text="Bestillinger">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Button>
+      <Button layoutX="535.0" layoutY="14.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" text="Tilbake">
+         <font>
+            <Font name="Futura Medium" size="13.0" />
+         </font></Button>
       <SubScene fx:id="LeggTilKomponent_sub" height="286.0" layoutY="113.0" visible="false" width="610.0">
         <root>
           <Region />
