@@ -3,12 +3,15 @@ package sample;
 import Brukere.*;
 import filbehandling.FiledataTxt;
 import javafx.application.Platform;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -25,18 +28,65 @@ public class LoggInn_Controller {
     @FXML
     private TextField txtPassord;
 
+    @FXML
+    private Button btnLogginn;
+
+    @FXML
+    private Button btnRegistrer;
+
     private Register brukere = Registrering_Controller.brukere;
 
-    private FiledataTxt lese = new FiledataTxt();
-    Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
-
     private void load(){
-        try {
+        FiledataTxt lese = new FiledataTxt();
+        Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+
+        lese.setPathTxt(path);
+        lese.setRegister(brukere);
+
+        txtBrukernavn.setDisable(true);
+        txtPassord.setDisable(true);
+        btnLogginn.setDisable(true);
+        btnRegistrer.setDisable(true);
+
+        lese.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                txtBrukernavn.setDisable(false);
+                txtPassord.setDisable(false);
+                btnLogginn.setDisable(false);
+                btnRegistrer.setDisable(false);
+            }
+        });
+        lese.setOnFailed(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                txtBrukernavn.setDisable(false);
+                txtPassord.setDisable(false);
+                btnLogginn.setDisable(false);
+                btnRegistrer.setDisable(false);
+
+                showMessageDialog(null, "Klarte ikke laste inn lagert data");
+            }
+        });
+
+        Thread tr = new Thread(lese);
+        tr.setDaemon(true);
+        tr.start();
+
+        try{
+            tr.sleep(5000);
+        }catch (InterruptedException e){
+            showMessageDialog(null, "Klarte ikke å stoppen tråden");
+        }
+
+
+
+        /*try {
             lese.loadBruker(brukere, path);
         }catch (Exception e){
             //for nå
             showMessageDialog(null, "klarte ikke å laste inn data");
-        }
+        }*/
     }
 
     @FXML

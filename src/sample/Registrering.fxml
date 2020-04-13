@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="596.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="596.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
     <children>
         <TextField fx:id="txtBrukernavn" layoutX="208.0" layoutY="135.0" prefHeight="30.0" prefWidth="170.0" promptText="Brukernavn" />
         <Label layoutX="76.0" layoutY="142.0" prefHeight="18.0" prefWidth="68.0" text="Brukernavn" />
@@ -21,11 +21,11 @@
         <TextField fx:id="txtEmail" layoutX="209.0" layoutY="298.0" prefHeight="30.0" prefWidth="170.0" promptText="E-postadresse" />
         <CheckBox fx:id="chxAdmin" layoutX="186.0" layoutY="369.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="77.0" text="Admin" />
         <CheckBox fx:id="chxStandarbruker" layoutX="293.0" layoutY="368.0" mnemonicParsing="false" text="Standardbruker" />
-        <Button layoutX="433.0" layoutY="154.0" mnemonicParsing="false" onAction="#onClick_btn_Register" prefHeight="66.0" prefWidth="118.0" style="-fx-background-color: #3daee4;" text="Register">
+        <Button fx:id="btnRegistrer" layoutX="433.0" layoutY="154.0" mnemonicParsing="false" onAction="#onClick_btn_Register" prefHeight="66.0" prefWidth="118.0" style="-fx-background-color: #3daee4;" text="Register">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font></Button>
-        <Button layoutX="433.0" layoutY="254.0" mnemonicParsing="false" onAction="#onClick_btn_Avbryt" prefHeight="66.0" prefWidth="118.0" style="-fx-background-color: #3daee4;" text="Avbryt">
+        <Button fx:id="btnAvbryt" layoutX="433.0" layoutY="254.0" mnemonicParsing="false" onAction="#onClick_btn_Avbryt" prefHeight="66.0" prefWidth="118.0" style="-fx-background-color: #3daee4;" text="Avbryt">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font></Button>

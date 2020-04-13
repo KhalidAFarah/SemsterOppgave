@@ -2,12 +2,16 @@ package sample;
 
 import Brukere.*;
 import filbehandling.FiledataTxt;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,11 +19,15 @@ import javafx.stage.Stage;
 import komponenter.Prosessor;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
-public class Registrering_Controller {
+import static javax.swing.JOptionPane.showMessageDialog;
+
+public class Registrering_Controller implements Initializable {
 
     @FXML
     private TextField txtBrukernavn;
@@ -40,6 +48,12 @@ public class Registrering_Controller {
     private CheckBox chxStandarbruker;
 
     @FXML
+    private Button btnRegistrer;
+
+    @FXML
+    private Button btnAvbryt;
+
+    @FXML
     private Label txtError;
 
     public static Register brukere = new Register();
@@ -53,6 +67,67 @@ public class Registrering_Controller {
         }catch (IOException e){
             txtError.setText(e.getMessage());
         }
+    }
+
+    private void load(){
+        FiledataTxt lese = new FiledataTxt();
+        Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+
+        lese.setPathTxt(path);
+        lese.setRegister(brukere);
+
+        txtBrukernavn.setDisable(true);
+        txtPassord.setDisable(true);
+        txtTelefonnummer.setDisable(true);
+        txtEmail.setDisable(true);
+        chxAdmin.setDisable(true);
+        chxStandarbruker.setDisable(true);
+
+
+
+        lese.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                txtBrukernavn.setDisable(false);
+                txtPassord.setDisable(false);
+                txtTelefonnummer.setDisable(false);
+                txtEmail.setDisable(false);
+                chxAdmin.setDisable(false);
+                chxStandarbruker.setDisable(false);
+            }
+        });
+        lese.setOnFailed(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                txtBrukernavn.setDisable(false);
+                txtPassord.setDisable(false);
+                txtTelefonnummer.setDisable(false);
+                txtEmail.setDisable(false);
+                chxAdmin.setDisable(false);
+                chxStandarbruker.setDisable(false);
+
+                showMessageDialog(null, "Klarte ikke laste inn lagert data");
+            }
+        });
+
+        Thread tr = new Thread(lese);
+        tr.setDaemon(true);
+        tr.start();
+
+        try{
+            tr.sleep(5000);
+        }catch (InterruptedException e){
+            showMessageDialog(null, "Klarte ikke å stoppen tråden");
+        }
+
+
+
+        /*try {
+            lese.loadBruker(brukere, path);
+        }catch (Exception e){
+            //for nå
+            showMessageDialog(null, "klarte ikke å laste inn data");
+        }*/
     }
 
 
@@ -113,5 +188,9 @@ public class Registrering_Controller {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        load();
+    }
 }
 

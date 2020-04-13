@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="423.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="423.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
    <children>
       <TextField fx:id="txtBrukernavn" layoutX="125.0" layoutY="192.0" promptText="Brukernavn">
          <font>
@@ -28,11 +28,11 @@
             <Font name="Futura Bold" size="13.0" />
          </font>
       </TextField>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0" style="-fx-border-color: black; -fx-color: #3daee4;" text="Logg inn">
+      <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0" style="-fx-border-color: black; -fx-color: #3daee4;" text="Logg inn">
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font></Button>
-      <Button layoutX="153.0" layoutY="376.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="28.0" prefWidth="135.0" text="Registrer ny bruker">
+      <Button fx:id="btnRegistrer" layoutX="153.0" layoutY="376.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="28.0" prefWidth="135.0" text="Registrer ny bruker">
          <font>
             <Font name="Futura Medium" size="13.0" />
          </font></Button>
