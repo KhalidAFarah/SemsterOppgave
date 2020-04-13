@@ -11,7 +11,7 @@
    <children>
       <Label layoutX="61.0" layoutY="154.0" prefHeight="33.0" prefWidth="325.0" text="Du har nå laget en bruker, vil du nå?">
          <font>
-            <Font name="Futura Condensed Medium" size="27.0" />
+            <Font name="Futura Medium" size="19.0" />
          </font>
       </Label>
       <Button layoutX="61.0" layoutY="210.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
@@ -22,7 +22,7 @@
          <font>
             <Font name="Futura Bold" size="13.0" />
          </font></Button>
-      <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="7.0">
+      <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="12.0">
          <image>
             <Image url="@../img/logo1.png" />
          </image>
