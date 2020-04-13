@@ -1,6 +1,5 @@
 package sample;
 
-
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -19,14 +18,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import komponenter.*;
 import static javax.swing.JOptionPane.*;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
