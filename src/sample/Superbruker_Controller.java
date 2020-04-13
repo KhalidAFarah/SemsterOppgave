@@ -33,11 +33,6 @@ import java.util.stream.Collectors;
 
 public class Superbruker_Controller implements Initializable {
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //loadKomponenter();
-    }
-
     @FXML
     private SubScene LeggTilKomponent_sub;
 
@@ -50,7 +45,29 @@ public class Superbruker_Controller implements Initializable {
     private String KomponentType;
 
     private Komponenter komponenter = new Komponenter();
+
     private Komponenter komp = new Komponenter();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadKomponenter();
+
+        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
+        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+
+        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+
+        tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+
+        tableView.setItems(komponenter.getMainArray());
+    }
 
     public void loadKomponenter(){
         FiledataJOBJ data = new FiledataJOBJ();
@@ -79,8 +96,8 @@ public class Superbruker_Controller implements Initializable {
         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
         TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
         TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
 
         IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
         navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
