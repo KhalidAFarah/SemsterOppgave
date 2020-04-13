@@ -1,12 +1,15 @@
 package filbehandling;
 
+import javafx.concurrent.Task;
 import komponenter.*;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FiledataJOBJ {
+public class FiledataJOBJ extends Task<Void> {
+
+    private Path path;
+    private Komponenter komponenter;
 
     public void save(Komponenter komp, Path path) throws IOException {
         try(OutputStream os = Files.newOutputStream(path);
@@ -21,5 +24,14 @@ public class FiledataJOBJ {
         ObjectInputStream oin = new ObjectInputStream(is)){          // komponent type inne i komponent typens klasse
             komp.readObject(oin);
         }
+    }
+
+    public void setPath(Path path){this.path = path;}
+    public void setKomponent(Komponenter komponenter){this.komponenter = komponenter;}
+
+    @Override
+    protected Void call() throws Exception {
+        load(komponenter, path);
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package sample;
 
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -74,13 +75,60 @@ public class Superbruker_Controller implements Initializable {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
+        data.setPath(path);
+        data.setKomponent(komponenter);
+
+        data.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                tableView.setDisable(false);
+
+                for(int i = 0; i < LeggTilKomponent_pane.getChildren().size(); i++){
+                    LeggTilKomponent_pane.getChildren().get(i).setDisable(false);
+                }
+            }
+        });
+        data.setOnFailed(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                tableView.setDisable(true);
+
+                for(int i = 0; i < LeggTilKomponent_pane.getChildren().size(); i++){
+                    LeggTilKomponent_pane.getChildren().get(i).setDisable(true);
+                }
+
+                if(path.toAbsolutePath() == null || path.toString().isEmpty()) {
+
+                    showMessageDialog(null, "kan ikke finne lagrings filen");
+                }else if(komponenter == null){
+                    showMessageDialog(null, "Mangler informasjons kapslen");
+                }
+            }
+        });
+
+        tableView.setDisable(true);
+
+        for(int i = 0; i < LeggTilKomponent_pane.getChildren().size(); i++){
+            LeggTilKomponent_pane.getChildren().get(i).setDisable(true);
+        }
+
+        Thread tr = new Thread(data);
+
+        tr.setDaemon(true);
+        tr.start();
         try {
+            tr.sleep(5000);
+        }catch (InterruptedException e){
+            showMessageDialog(null, "Klarte ikke å stoppe tråden");
+        }
+
+        /*try {
             data.load(komponenter, path);
         }catch (IOException e){
             showMessageDialog(null, "klarte ikke å laste inn data");// for nå
         }catch (Exception e){
             showMessageDialog(null, "klarte ikke å laste inn data");
-        }
+        }*/
     }
     public void saveKomponenter(Komponenter newKomponenter){
         FiledataJOBJ data = new FiledataJOBJ();
@@ -170,6 +218,8 @@ public class Superbruker_Controller implements Initializable {
         if(!showFjern) {
             LeggTilKomponent_pane.setVisible(true);
             LeggTilKomponent_sub.setVisible(true);
+
+
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(550);
             LeggTilKomponent_pane.getChildren().clear();

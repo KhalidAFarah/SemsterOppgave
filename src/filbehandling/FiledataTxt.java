@@ -1,6 +1,7 @@
 package filbehandling;
 
 import Brukere.*;
+import javafx.concurrent.Task;
 import komponenter.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,11 +10,14 @@ import java.nio.file.Path;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class FiledataTxt {
+public class FiledataTxt extends Task<Void> {
 
     private int intervaler = 0;
     private Standardbruker bruker;
     private Superbruker admin;
+
+    private Register register;
+    private Path pathTxt;
 
     public void save(String data, Path path) throws IOException {
         Files.write(path,data.getBytes());
@@ -132,5 +136,14 @@ public class FiledataTxt {
                 }
             }
         }
+    }
+
+    public void setRegister(Register brukere){this.register = brukere;}
+    public void setPathTxt(Path pathTxt){this.pathTxt = pathTxt;}
+
+    @Override
+    protected Void call() throws Exception {
+        loadBruker(register, pathTxt);
+        return null;
     }
 }
