@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Harddisk extends Komponent {
 
 
-    public Harddisk(String navn, double pris, String type, String... strings){
+    public Harddisk(String navn, double pris, String type, String... strings) {
         super(navn, pris, type, strings);
     }
 
@@ -19,8 +19,8 @@ public class Harddisk extends Komponent {
 
     @Override
     public String toStringTxt() {
-        String ut = getNavn() + ";"  + getPris() + ";" + getType() + ";";
-        for(int i = 0; i < getSpecs().size(); i++){
+        String ut = getNavn() + ";" + getPris() + ";" + getType() + ";";
+        for (int i = 0; i < getSpecs().size(); i++) {
             ut += getSpecs().get(i) + ";";
         }
         return ut;

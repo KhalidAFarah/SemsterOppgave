@@ -60,16 +60,16 @@ public class Registrering_Controller implements Initializable {
     private FiledataTxt lagreTxt;
     private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
-    private void save(){
+    private void save() {
         lagreTxt = new FiledataTxt();
-        try{
-            lagreTxt.save(brukere.toStringTxt(),path);
-        }catch (IOException e){
+        try {
+            lagreTxt.save(brukere.toStringTxt(), path);
+        } catch (IOException e) {
             txtError.setText(e.getMessage());
         }
     }
 
-    private void load(){
+    private void load() {
         FiledataTxt lese = new FiledataTxt();
         Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
@@ -82,7 +82,6 @@ public class Registrering_Controller implements Initializable {
         txtEmail.setDisable(true);
         chxAdmin.setDisable(true);
         chxStandarbruker.setDisable(true);
-
 
 
         lese.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
@@ -114,9 +113,9 @@ public class Registrering_Controller implements Initializable {
         tr.setDaemon(true);
         tr.start();
 
-        try{
+        try {
             tr.sleep(5000);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppen tråden");
         }
 
@@ -131,22 +130,21 @@ public class Registrering_Controller implements Initializable {
     }
 
 
-
     @FXML
-    void onClick_btn_Avbryt(ActionEvent event){
+    void onClick_btn_Avbryt(ActionEvent event) {
 
-        try{
+        try {
             save(); // se på denne
 
             Parent Registrering = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
             Scene Avbryt = new Scene(Registrering);
-            Stage Scene_1 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Avbryt);
             Scene_1.setHeight(420);
             Scene_1.setWidth(410);
             Scene_1.show();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -164,7 +162,7 @@ public class Registrering_Controller implements Initializable {
             b.setTlf(txtTelefonnummer.getText());
             b.setEmail(txtEmail.getText());
 
-            if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()){
+            if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
                 Superbruker A = new Superbruker(b);
                 brukere.add(A);
 
@@ -178,7 +176,7 @@ public class Registrering_Controller implements Initializable {
                 Scene_9.show();
                 save(); //se her på problemet med size på fxml vinduet *
 
-            } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()){
+            } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
                 Standardbruker A = new Standardbruker(b);
                 //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
                 brukere.add(A);
@@ -192,14 +190,15 @@ public class Registrering_Controller implements Initializable {
                 Scene_10.show();
                 save();
 
-            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()){
+            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
                 txtError.setText("Vennligst kryss av en av boksene");
             }
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         load();

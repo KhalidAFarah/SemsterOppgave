@@ -21,39 +21,47 @@ public class Komponenter {//lager en main liste for alle typer komponenter
     //add metoden sorterer dem hver gang
     ObservableList<Komponent> main = FXCollections.observableArrayList();
 
-    public static Komponent[] getTyper2(){return typer2;}
-    public ObservableList<Komponent> getMainArray(){return main;}
-    public void setMainArray(ObservableList<Komponent> elems){main = elems;}
+    public static Komponent[] getTyper2() {
+        return typer2;
+    }
+
+    public ObservableList<Komponent> getMainArray() {
+        return main;
+    }
+
+    public void setMainArray(ObservableList<Komponent> elems) {
+        main = elems;
+    }
 
 
-    public String toStringTxt(){
+    public String toStringTxt() {
         String ut = "";
-        for(int i = 0; i < main.size(); i++){
+        for (int i = 0; i < main.size(); i++) {
             ut += "\n" + main.get(i).toStringTxt();
         }
         return ut;
     }
 
-    public void sort(){
+    public void sort() {
         ObservableList<Komponent> newMain = FXCollections.observableArrayList();
-        for(int i = 0; i < TYPER; i++){
-            for(int j = 0; j < main.size(); j++){
-                if(typer2[i].getClass().equals(main.get(j).getClass())){
+        for (int i = 0; i < TYPER; i++) {
+            for (int j = 0; j < main.size(); j++) {
+                if (typer2[i].getClass().equals(main.get(j).getClass())) {
                     newMain.add(main.get(j));
                 }
             }
         }
     }
 
-    public<T extends Komponent> boolean add(T elem){
+    public <T extends Komponent> boolean add(T elem) {
         boolean sjekk = false;
-        for(int i = 0; i < typer2.length; i++){
-            if(typer2[i].getClass().equals(elem.getClass())){
+        for (int i = 0; i < typer2.length; i++) {
+            if (typer2[i].getClass().equals(elem.getClass())) {
                 sjekk = true;
             }
         }
 
-        if(sjekk) {
+        if (sjekk) {
             elem.setID(main.size());
             main.add(elem);
             sort();
@@ -61,11 +69,12 @@ public class Komponenter {//lager en main liste for alle typer komponenter
         return sjekk;
     }
 
-    public void remove(int index){
+    public void remove(int index) {
         sort();
         main.remove(index);
     }
-    public <T extends Komponent> Komponent getFromMain(int index){
+
+    public <T extends Komponent> Komponent getFromMain(int index) {
         /*boolean sjekk = false;
         for(int i = 0; i < typer2.length; i++){
             if(typer2[i].getClass().equals(T.getClass())){
@@ -74,7 +83,6 @@ public class Komponenter {//lager en main liste for alle typer komponenter
         }*/
         return (T) (main.get(index));
     }
-
 
 
     public void writeObject(ObjectOutputStream stream) throws IOException {
@@ -96,30 +104,31 @@ public class Komponenter {//lager en main liste for alle typer komponenter
             }
         }
     }
-    public void readObject(ObjectInputStream stream) throws IOException, Exception{
+
+    public void readObject(ObjectInputStream stream) throws IOException, Exception {
         boolean fortsett = true;
-        while(fortsett){
+        while (fortsett) {
             String navn = stream.readUTF();
             double pris = stream.readDouble();
             String type = stream.readUTF();
             String string = stream.readUTF();
             String[] strings = string.split(":");
 
-            if(type.equals("Prosessor")){
+            if (type.equals("Prosessor")) {
                 add(new Prosessor(navn, pris, type, strings));
-            }else if(type.equals("Skjermkort")){
+            } else if (type.equals("Skjermkort")) {
                 add(new Skjermkort(navn, pris, type, strings));
-            }else if(type.equals("Minne")){
+            } else if (type.equals("Minne")) {
                 add(new Minne(navn, pris, type, strings));
-            }else if(type.equals("Harddisk")){
+            } else if (type.equals("Harddisk")) {
                 add(new Harddisk(navn, pris, type, strings));
-            }else if(type.equals("Tastatur")){
+            } else if (type.equals("Tastatur")) {
                 add(new Tastatur(navn, pris, type, strings));
-            }else if(type.equals("Mus")){
+            } else if (type.equals("Mus")) {
                 add(new Mus(navn, pris, type, strings));
-            }else if(type.equals("Skjerm")){
+            } else if (type.equals("Skjerm")) {
                 add(new Skjerm(navn, pris, type, strings));
-            }else {
+            } else {
                 throw new Exception("Klarte ikke å laste inn data komponent typen eksisterer ikke i registeret");
             }
             fortsett = stream.readBoolean();

@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import static javax.swing.JOptionPane.*;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,7 +38,7 @@ public class LoggInn_Controller {
 
     private Register brukere = Registrering_Controller.brukere;
 
-    private void load(){
+    private void load() {
         FiledataTxt lese = new FiledataTxt();
         Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
@@ -74,9 +75,9 @@ public class LoggInn_Controller {
         tr.setDaemon(true);
         tr.start();
 
-        try{
+        try {
             tr.sleep(5000);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppen tråden");
         }
 
@@ -95,16 +96,16 @@ public class LoggInn_Controller {
         load();
         boolean login_sucessfull = false;
         int user = 0;
-        for(int i = 0; i < brukere.getArray().size(); i++){
-            if(brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
-                && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())){
+        for (int i = 0; i < brukere.getArray().size(); i++) {
+            if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
+                    && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
 
-                if(brukere.getArray().get(i).isAdmin()){
+                if (brukere.getArray().get(i).isAdmin()) {
 
-                    try{
+                    try {
                         Parent Logg_inn = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
                         Scene Standarbruker = new Scene(Logg_inn);
-                        Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+                        Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
                         Scene_5.setHeight(420);
                         Scene_5.setWidth(610.4);
@@ -113,13 +114,13 @@ public class LoggInn_Controller {
                         e.printStackTrace();
                     }
 
-                }else{
-                    try{
+                } else {
+                    try {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(getClass().getResource("Standardbruker.fxml"));
                         Parent Logg_inn = loader.load();
                         Scene Standarbruker = new Scene(Logg_inn);
-                        Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+                        Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
                         Scene_5.setHeight(480);
                         Scene_5.setWidth(620);
@@ -130,7 +131,7 @@ public class LoggInn_Controller {
                         controller.initBruker(standardbruker);
 
                         Scene_5.show();
-                    }catch(IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
 
@@ -140,17 +141,17 @@ public class LoggInn_Controller {
     }
 
     @FXML
-    void onClick_btn_RegistrerNyBruker(ActionEvent event)  {
+    void onClick_btn_RegistrerNyBruker(ActionEvent event) {
 
-        try{
+        try {
             Parent Logg_inn = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
             Scene Register_ny_bruker = new Scene(Logg_inn);
-            Stage Scene_2 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Stage Scene_2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_2.setScene(Register_ny_bruker);
             Scene_2.setHeight(450);
             Scene_2.setWidth(600);
             Scene_2.show();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace(); //trace the exception..
         }
 

@@ -19,7 +19,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import komponenter.*;
+
 import static javax.swing.JOptionPane.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -70,30 +72,31 @@ public class Superbruker_Controller implements Initializable {
         tableView.setItems(komponenter.getMainArray());
     }
 
-    public void loadKomponenter(){
+    public void loadKomponenter() {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
         try {
             data.load(komponenter, path);
-        }catch (IOException e){
+        } catch (IOException e) {
             showMessageDialog(null, "klarte ikke å laste inn data");// for nå
-        }catch (Exception e){
+        } catch (Exception e) {
             showMessageDialog(null, "klarte ikke å laste inn data");
         }
     }
-    public void saveKomponenter(Komponenter newKomponenter){
+
+    public void saveKomponenter(Komponenter newKomponenter) {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
         try {
             data.save(newKomponenter, path);
-        }catch (IOException e){
+        } catch (IOException e) {
             showMessageDialog(null, "klarte ikke å laste inn data");// for nå
         }
     }
 
-    private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError){
+    private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError) {
         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
         TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
@@ -114,7 +117,7 @@ public class Superbruker_Controller implements Initializable {
             @Override
             public void handle(KeyEvent event) {
                 Predicate<Komponent> Navn = Komponent -> {
-                    boolean sjekk =  Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                    boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
                     return sjekk;
                 };
 
@@ -124,7 +127,7 @@ public class Superbruker_Controller implements Initializable {
             }
         });
 
-        if(setEditAble){//redigering
+        if (setEditAble) {//redigering
             tableSøk.setEditable(setEditAble);
             DoubleStringConverter doubleString = new DoubleStringConverter();
 
@@ -167,7 +170,7 @@ public class Superbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_BtnFjernKomponenter(ActionEvent event) {
-        if(!showFjern) {
+        if (!showFjern) {
             LeggTilKomponent_pane.setVisible(true);
             LeggTilKomponent_sub.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -226,7 +229,7 @@ public class Superbruker_Controller implements Initializable {
             showFjern = true;
             showRediger = false;
             showLeggTil = false;
-        }else if(showFjern){
+        } else if (showFjern) {
             LeggTilKomponent_pane.setVisible(false);
             LeggTilKomponent_sub.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -237,7 +240,7 @@ public class Superbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_BtnLeggTilKomponenter(ActionEvent event) {
-        if(!showLeggTil) {
+        if (!showLeggTil) {
             LeggTilKomponent_sub.setVisible(true);
             LeggTilKomponent_pane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -351,7 +354,7 @@ public class Superbruker_Controller implements Initializable {
             showLeggTil = true;
             showRediger = false;
             showFjern = false;
-        }else if(showLeggTil){
+        } else if (showLeggTil) {
             LeggTilKomponent_pane.setVisible(false);
             LeggTilKomponent_sub.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -362,7 +365,7 @@ public class Superbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_BtnRedigerKomponenter(ActionEvent event) {
-        if(!showRediger) {
+        if (!showRediger) {
             LeggTilKomponent_pane.setVisible(true);
             LeggTilKomponent_sub.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -394,7 +397,7 @@ public class Superbruker_Controller implements Initializable {
             showRediger = true;
             showLeggTil = false;
             showFjern = false;
-        }else if(showRediger){
+        } else if (showRediger) {
             LeggTilKomponent_pane.setVisible(false);
             LeggTilKomponent_sub.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -404,18 +407,17 @@ public class Superbruker_Controller implements Initializable {
     }
 
 
-
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
-        try{
+        try {
             Parent Superbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
             Scene LoggInn = new Scene(Superbruker);
-            Stage Scene_4 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(LoggInn);
             Scene_4.setHeight(420);
             Scene_4.setWidth(410);
             Scene_4.show();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

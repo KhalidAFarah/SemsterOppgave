@@ -12,20 +12,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try{
+        try {
             Parent root = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
             primaryStage.setTitle("TechMet");
             //primaryStage.setScene(new Scene(root, 423, 475)); //details for LoggInn.FXML
             primaryStage.setScene(new Scene(root, 602.4, 400)); //test for andre fxml filer
             primaryStage.show();
 
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-
-
 
 
     public static void main(String[] args) {

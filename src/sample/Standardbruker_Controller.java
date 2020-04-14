@@ -21,7 +21,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import komponenter.Komponenter;
+
 import static javax.swing.JOptionPane.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -56,17 +58,17 @@ public class Standardbruker_Controller implements Initializable {
         loadKomponenter();
     }
 
-    public void initBruker(Standardbruker bruker){
+    public void initBruker(Standardbruker bruker) {
         this.bruker = bruker;
     }
 
-    public void loadKomponenter(){
+    public void loadKomponenter() {
         FiledataJOBJ filedata = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
-        try{
+        try {
             filedata.load(komponenter, path);
-        }catch (Exception e){
+        } catch (Exception e) {
             showMessageDialog(null, e.getMessage());
         }
     }
@@ -74,23 +76,23 @@ public class Standardbruker_Controller implements Initializable {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
 
-        try{
+        try {
             Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
             Scene LoggInn = new Scene(Standardbruker);
-            Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+            Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
             Scene_3.setHeight(420);
             Scene_3.setWidth(410);
             Scene_3.show();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void visVarer(String type){
+    private void visVarer(String type) {
         pane.getChildren().clear();
         int y = 50;
-        for(int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
+        for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
             //ImageView img = new ImageView();
 
             if (komponenter.getMainArray().get(i).getType().equals(type)) {
@@ -117,13 +119,13 @@ public class Standardbruker_Controller implements Initializable {
     }
 
     @FXML
-    void On_Click_BtnKurv(ActionEvent event){
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+    void On_Click_BtnKurv(ActionEvent event) {
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         pane.getChildren().clear();
         int y = 50;
-        for(int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++){
+        for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
             Label label = new Label(komponenter.getMainArray().get(i).getNavn());
             label.setLayoutY(y);
             Button btn = new Button("Fjern");
@@ -146,7 +148,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Grafikkort(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Skjermkort");
@@ -154,7 +156,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Harddisk(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Harddisk");
@@ -162,7 +164,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Minnebrikke(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Minne");
@@ -170,7 +172,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Mus(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Mus");
@@ -178,7 +180,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Prosessor(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Prosessor");
@@ -186,7 +188,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Skjerm(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Skjerm");
@@ -194,7 +196,7 @@ public class Standardbruker_Controller implements Initializable {
 
     @FXML
     void On_Click_Btn_Tastatur(ActionEvent event) {
-        Stage Scene_3 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
 
         visVarer("Tastatur");

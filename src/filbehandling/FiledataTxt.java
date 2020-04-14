@@ -3,6 +3,7 @@ package filbehandling;
 import Brukere.*;
 import javafx.concurrent.Task;
 import komponenter.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,44 +21,44 @@ public class FiledataTxt extends Task<Void> {
     private Path pathTxt;
 
     public void save(String data, Path path) throws IOException {
-        Files.write(path,data.getBytes());
+        Files.write(path, data.getBytes());
     }
 
-    public void loadKomponent(Komponenter komp, Path path) throws IOException{
-        try(BufferedReader Reader = Files.newBufferedReader(path)){
+    public void loadKomponent(Komponenter komp, Path path) throws IOException {
+        try (BufferedReader Reader = Files.newBufferedReader(path)) {
             String line = "";
             while ((line = Reader.readLine()) != null) {
                 String[] strings = line.split(";");
                 String navn = strings[0];
                 double pris;
-                try{
+                try {
                     pris = Double.parseDouble(strings[1]);
-                }catch (Exception e){
+                } catch (Exception e) {
                     pris = 0;
                     showMessageDialog(null, "klarte ikke å laste inn komponenter");
                 }
                 String type = strings[2];
 
-                String[] specs = new String[strings.length-3];
+                String[] specs = new String[strings.length - 3];
 
-                for(int i = 3; i < strings.length;i++){
+                for (int i = 3; i < strings.length; i++) {
                     int teller = 3 - i;
                     specs[teller] = strings[i];
                 }
 
-                if(type.equals("Prosessor")){
+                if (type.equals("Prosessor")) {
                     komp.add(new Prosessor(navn, pris, type, specs));
-                }else if(type.equals("Skjermkort")){
+                } else if (type.equals("Skjermkort")) {
                     komp.add(new Skjermkort(navn, pris, type, specs));
-                }else if(type.equals("Minne")){
+                } else if (type.equals("Minne")) {
                     komp.add(new Minne(navn, pris, type, specs));
-                }else if(type.equals("Harddisk")){
+                } else if (type.equals("Harddisk")) {
                     komp.add(new Harddisk(navn, pris, type, specs));
-                }else if(type.equals("Tastatur")){
+                } else if (type.equals("Tastatur")) {
                     komp.add(new Tastatur(navn, pris, type, specs));
-                }else if(type.equals("Mus")){
+                } else if (type.equals("Mus")) {
                     komp.add(new Mus(navn, pris, type, specs));
-                }else if(type.equals("Skjerm")){
+                } else if (type.equals("Skjerm")) {
                     komp.add(new Skjerm(navn, pris, type, specs));
                 }
             }
@@ -65,11 +66,11 @@ public class FiledataTxt extends Task<Void> {
     }
 
     public void loadBruker(Register brukere, Path path) throws Exception, InvalidDataLoadedException {
-        try(BufferedReader Reader = Files.newBufferedReader(path)) {
+        try (BufferedReader Reader = Files.newBufferedReader(path)) {
             String line = "";
             while ((line = Reader.readLine()) != null) {
                 String[] strings = line.split(";");
-                if(intervaler == 0) {
+                if (intervaler == 0) {
                     Bruker b = new Bruker();
 
                     b.setBrukernavn(strings[0]);
@@ -91,46 +92,46 @@ public class FiledataTxt extends Task<Void> {
                             intervaler = 0;
                             throw new InvalidDataLoadedException("Ugyldig data lagret");
                         }
-                    }else{
+                    } else {
                         throw new InvalidDataLoadedException("Ugyldig data lagret");
                     }
-                }else if(intervaler > 0){
+                } else if (intervaler > 0) {
 
 
                     String navn = strings[0];
                     double pris;
-                    try{
+                    try {
                         pris = Double.parseDouble(strings[1]);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         pris = 0;
                         showMessageDialog(null, "klarte ikke å laste inn komponenter");
                     }
                     String type = strings[2];
 
-                    String[] specs = new String[strings.length-3];
+                    String[] specs = new String[strings.length - 3];
 
-                    for(int i = 3; i < strings.length;i++){
+                    for (int i = 3; i < strings.length; i++) {
                         int teller = i - 3;
                         specs[teller] = strings[i];
                     }
 
-                    if(type.equals("Prosessor")){
+                    if (type.equals("Prosessor")) {
                         bruker.leggTilHandlekurv(new Prosessor(navn, pris, type, specs));
-                    }else if(type.equals("Skjermkort")){
+                    } else if (type.equals("Skjermkort")) {
                         bruker.leggTilHandlekurv(new Skjermkort(navn, pris, type, specs));
-                    }else if(type.equals("Minne")){
+                    } else if (type.equals("Minne")) {
                         bruker.leggTilHandlekurv(new Minne(navn, pris, type, specs));
-                    }else if(type.equals("Harddisk")){
+                    } else if (type.equals("Harddisk")) {
                         bruker.leggTilHandlekurv(new Harddisk(navn, pris, type, specs));
-                    }else if(type.equals("Tastatur")){
+                    } else if (type.equals("Tastatur")) {
                         bruker.leggTilHandlekurv(new Tastatur(navn, pris, type, specs));
-                    }else if(type.equals("Mus")){
+                    } else if (type.equals("Mus")) {
                         bruker.leggTilHandlekurv(new Mus(navn, pris, type, specs));
-                    }else if(type.equals("Skjerm")){
+                    } else if (type.equals("Skjerm")) {
                         bruker.leggTilHandlekurv(new Skjerm(navn, pris, type, specs));
                     }
                     intervaler--;
-                    if(intervaler == 0){
+                    if (intervaler == 0) {
                         brukere.add(bruker);
                     }
                 }
@@ -138,8 +139,13 @@ public class FiledataTxt extends Task<Void> {
         }
     }
 
-    public void setRegister(Register brukere){this.register = brukere;}
-    public void setPathTxt(Path pathTxt){this.pathTxt = pathTxt;}
+    public void setRegister(Register brukere) {
+        this.register = brukere;
+    }
+
+    public void setPathTxt(Path pathTxt) {
+        this.pathTxt = pathTxt;
+    }
 
     @Override
     protected Void call() throws Exception {
