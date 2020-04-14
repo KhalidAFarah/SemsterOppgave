@@ -60,6 +60,11 @@ public class Komponenter {//lager en main liste for alle typer komponenter
         }
         return sjekk;
     }
+
+    public void remove(int index){
+        sort();
+        main.remove(index);
+    }
     public <T extends Komponent> Komponent getFromMain(int index){
         /*boolean sjekk = false;
         for(int i = 0; i < typer2.length; i++){

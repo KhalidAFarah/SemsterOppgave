@@ -115,12 +115,20 @@ public class LoggInn_Controller {
 
                 }else{
                     try{
-                        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Standardbruker.fxml"));
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("Standardbruker.fxml"));
+                        Parent Logg_inn = loader.load();
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ( (Node)event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
                         Scene_5.setHeight(480);
                         Scene_5.setWidth(620);
+
+                        //paserer inn data i standardBruker_Controller
+                        Standardbruker_Controller controller = loader.getController();
+                        Standardbruker standardbruker = new Standardbruker(brukere.getArray().get(i));
+                        controller.initBruker(standardbruker);
+
                         Scene_5.show();
                     }catch(IOException e){
                         e.printStackTrace();
