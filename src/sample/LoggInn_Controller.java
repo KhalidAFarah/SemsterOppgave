@@ -82,18 +82,18 @@ public class LoggInn_Controller implements Initializable {
         lese.setOnFailed(this::Failed);
 
         Thread tr = new Thread(lese);
-        tr.setDaemon(true);
+        //tr.setDaemon(true);
         tr.start();
 
         /*try {
             tr.sleep(5000);
         } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppen tråden");
-        }*/
+        }
 
 
 
-        /*try {
+        try {
             lese.loadBruker(brukere, path);
         }catch (Exception e){
             //for nå
@@ -103,15 +103,13 @@ public class LoggInn_Controller implements Initializable {
 
     @FXML
     void onClick_btn_LoggInn(ActionEvent event) {
+        //load();
         boolean login_sucessfull = false;
-        int user = 0;
-        for(int i = 0; i < brukere.getArray().size(); i++){
-            System.out.println(brukere.getArray().get(i).getBrukernavn() + " sd");
-        }
+
         for (int i = 0; i < brukere.getArray().size(); i++) {
             if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
-
+                login_sucessfull = true;
                 if (brukere.getArray().get(i).isAdmin()) {
 
                     try {
@@ -150,6 +148,9 @@ public class LoggInn_Controller implements Initializable {
 
                 }
             }
+        }
+        if (!login_sucessfull){
+            showMessageDialog(null, "Ugyldig brukernavn eller passord");
         }
     }
 

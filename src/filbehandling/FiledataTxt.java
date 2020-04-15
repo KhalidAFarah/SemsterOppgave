@@ -65,7 +65,7 @@ public class FiledataTxt extends Task<Void> {
         }
     }
 
-    public void loadBruker(Register brukere, Path path) throws Exception, InvalidDataLoadedException {
+    public Register loadBruker(Register brukere, Path path) throws Exception, InvalidDataLoadedException {
         try (BufferedReader Reader = Files.newBufferedReader(path)) {
             String line = "";
             while ((line = Reader.readLine()) != null) {
@@ -84,22 +84,29 @@ public class FiledataTxt extends Task<Void> {
                         admin = new Superbruker(b);
                         brukere.add(admin);
                     } else if (!Admin) {
-                        bruker = new Standardbruker(b);
+                         bruker = new Standardbruker(b);
                         //String[5] er sum som ikke trengs for set før brukes
                         try {
                             intervaler = Integer.parseInt(strings[6]);
                         } catch (Exception e) {
                             intervaler = 0;
-                            throw new InvalidDataLoadedException("Ugyldig data lagret");
+                            //throw new InvalidDataLoadedException("Ugyldig data lagret");
                         }
-                    } else {
-                        throw new InvalidDataLoadedException("Ugyldig data lagret");
+
+                        if(intervaler == 0){
+                            brukere.add(bruker);
+                        }
+                    }
+
+                    else {
+                        //throw new InvalidDataLoadedException("Ugyldig data lagret");
                     }
                 } else if (intervaler > 0) {
 
 
                     String navn = strings[0];
                     double pris;
+
                     try {
                         pris = Double.parseDouble(strings[1]);
                     } catch (Exception e) {
@@ -132,11 +139,13 @@ public class FiledataTxt extends Task<Void> {
                     }
                     intervaler--;
                     if (intervaler == 0) {
-                        brukere.add(bruker);
+                        //brukere.add(bruker);
                     }
+
                 }
             }
         }
+        return brukere;
     }
 
     public void setRegister(Register brukere) {
@@ -149,7 +158,8 @@ public class FiledataTxt extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
-        loadBruker(register, pathTxt);
+        register.setArray(loadBruker(register, pathTxt).getArray());
+        //System.out.println(register.toStringTxt() + " hdd");
         return null;
     }
 }
