@@ -103,13 +103,13 @@ public class LoggInn_Controller {
                 if (brukere.getArray().get(i).isAdmin()) {
 
                     try {
-                        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
-                        Scene Standarbruker = new Scene(Logg_inn);
-                        Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene_5.setScene(Standarbruker);
-                        Scene_5.setHeight(420);
-                        Scene_5.setWidth(610.4);
-                        Scene_5.show();
+                        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Mellom_side_Superbruker.fxml"));
+                        Scene  Mellom_sideSuperbruker = new Scene(Logg_inn);
+                        Stage Scene_11 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene_11.setScene(Mellom_sideSuperbruker);
+                        Scene_11.setHeight(316);
+                        Scene_11.setWidth(447);
+                        Scene_11.show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
