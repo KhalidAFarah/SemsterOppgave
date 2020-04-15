@@ -105,6 +105,9 @@ public class LoggInn_Controller implements Initializable {
     void onClick_btn_LoggInn(ActionEvent event) {
         boolean login_sucessfull = false;
         int user = 0;
+        for(int i = 0; i < brukere.getArray().size(); i++){
+            System.out.println(brukere.getArray().get(i).getBrukernavn() + " sd");
+        }
         for (int i = 0; i < brukere.getArray().size(); i++) {
             if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
@@ -128,16 +131,17 @@ public class LoggInn_Controller implements Initializable {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(getClass().getResource("Standardbruker.fxml"));
                         Parent Logg_inn = loader.load();
-                        Scene Standarbruker = new Scene(Logg_inn);
-                        Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene_5.setScene(Standarbruker);
-                        Scene_5.setHeight(480);
-                        Scene_5.setWidth(620);
 
                         //paserer inn data i standardBruker_Controller
                         Standardbruker_Controller controller = loader.getController();
                         Standardbruker standardbruker = new Standardbruker(brukere.getArray().get(i));
                         controller.initBruker(standardbruker);
+
+                        Scene Standarbruker = new Scene(Logg_inn);
+                        Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setHeight(480);
+                        Scene_5.setWidth(620);
 
                         Scene_5.show();
                     } catch (IOException e) {

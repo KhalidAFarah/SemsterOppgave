@@ -153,7 +153,7 @@ public class Registrering_Controller implements Initializable {
             Scene_1.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            showMessageDialog(null, e.getMessage());
         }
 
 
@@ -214,9 +214,9 @@ public class Registrering_Controller implements Initializable {
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                showMessageDialog(null, e.getMessage());
             }
-        }else{
+        }else if(brukere == null){
             showMessageDialog(null, "registeret er ikke initialisert!");
         }
     }

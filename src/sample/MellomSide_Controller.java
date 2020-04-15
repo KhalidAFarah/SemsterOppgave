@@ -50,8 +50,12 @@ public class MellomSide_Controller {
     void On_Click_BtnNyBruker(ActionEvent event) {
 
         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Registrering.fxml"));
+            Parent MellomSide = loader.load();
 
-            Parent MellomSide = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
+            Registrering_Controller controller = loader.getController();
+            controller.initRegister(brukere);
             Scene Register_ny_bruker = new Scene(MellomSide);
             Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_9.setScene(Register_ny_bruker);
