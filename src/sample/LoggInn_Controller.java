@@ -117,8 +117,8 @@ public class LoggInn_Controller implements Initializable {
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
-                        Scene_5.setHeight(420);
-                        Scene_5.setWidth(610.4);
+                        Scene_5.setHeight(360);
+                        Scene_5.setWidth(450);
                         Scene_5.show();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -162,11 +162,11 @@ public class LoggInn_Controller implements Initializable {
             Parent Logg_inn = loader.load();
 
             Registrering_Controller controller = loader.getController();
-            //controller.initRegister(brukere);
+            controller.initRegister(brukere);
             Scene Register_ny_bruker = new Scene(Logg_inn);
             Stage Scene_2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_2.setScene(Register_ny_bruker);
-            Scene_2.setHeight(450);
+            Scene_2.setHeight(480);
             Scene_2.setWidth(600);
             Scene_2.show();
         } catch (IOException e) {

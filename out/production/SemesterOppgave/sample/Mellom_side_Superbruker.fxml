@@ -14,14 +14,14 @@
             <Font name="Futura Medium" size="19.0" />
          </font>
       </Label>
-      <Button layoutX="61.0" layoutY="210.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Vis Kompnenter">
+      <Button layoutX="56.0" layoutY="203.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Vis Kompnenter">
          <font>
-            <Font name="Futura Bold" size="11.0" />
+            <Font name="Candara Light" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="259.0" layoutY="210.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Vis Brukere">
+      <Button layoutX="250.0" layoutY="203.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Vis Brukere">
          <font>
-            <Font name="Futura Bold" size="13.0" />
+            <Font name="Candara Light" size="15.0" />
          </font>
       </Button>
       <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="12.0">
@@ -29,5 +29,10 @@
             <Image url="@../../../../../SemsterOppgave/src/img/logo1.png" />
          </image>
       </ImageView>
+      <Label layoutX="201.0" layoutY="219.0" prefHeight="26.0" prefWidth="45.0" text="Eller">
+         <font>
+            <Font name="Candara Light" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

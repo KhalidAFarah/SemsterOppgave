@@ -34,8 +34,8 @@ public class MellomSide_Controller {
                 Scene LoggInn = new Scene(MellomSide);
                 Stage Scene_8 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene_8.setScene(LoggInn);
-                Scene_8.setHeight(420);
-                Scene_8.setWidth(410);
+                Scene_8.setHeight(480);
+                Scene_8.setWidth(440);
                 Scene_8.show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,7 +59,7 @@ public class MellomSide_Controller {
             Scene Register_ny_bruker = new Scene(MellomSide);
             Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_9.setScene(Register_ny_bruker);
-            Scene_9.setHeight(450);
+            Scene_9.setHeight(480);
             Scene_9.setWidth(600);
             Scene_9.show();
         } catch (IOException e) {

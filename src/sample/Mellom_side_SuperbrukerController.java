@@ -16,23 +16,37 @@ public class Mellom_side_SuperbrukerController {
     @FXML
     void On_Click_BtnVisBrukere(ActionEvent event) {
 
+        try {
+            Parent Mellom_side_Superbruker = FXMLLoader.load(getClass().getResource("Visbruker_Superbruker.fxml"));
+            Scene  VisBruker_Super = new Scene(Mellom_side_Superbruker);
+            Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene_12.setScene(VisBruker_Super);
+            Scene_12.setHeight(420);
+            Scene_12.setWidth(625);
+            Scene_12.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
     }
 
     @FXML
     void On_Click_BtnVisKomponenter(ActionEvent event) {
 
         try {
-            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Superbruker.fxml"));
-            Scene Mellom_side_SuperbrukerController = new Scene(Logg_inn);
-            Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_10.setScene(Mellom_side_SuperbrukerController);
-            Scene_10.setHeight(420);
-            Scene_10.setWidth(610.4);
-            Scene_10.show();
+            Parent Mellom_side_Superbruker = FXMLLoader.load(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+            Scene VisKomponenter_Super = new Scene(Mellom_side_Superbruker);
+            Stage Scene_13 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene_13.setScene(VisKomponenter_Super);
+            Scene_13.setHeight(420);
+            Scene_13.setWidth(625);
+            Scene_13.show();
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+
 
     }
 }

@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Superbruker_Controller implements Initializable {
+public class Viskomponenter_Superbruker_Controller implements Initializable {
 
     @FXML
     private SubScene LeggTilKomponent_sub;
@@ -418,8 +418,8 @@ public class Superbruker_Controller implements Initializable {
             Scene LoggInn = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(LoggInn);
-            Scene_4.setHeight(420);
-            Scene_4.setWidth(410);
+            Scene_4.setHeight(480);
+            Scene_4.setWidth(440);
             Scene_4.show();
         } catch (IOException e) {
             e.printStackTrace();

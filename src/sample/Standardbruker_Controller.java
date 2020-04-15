@@ -81,8 +81,8 @@ public class Standardbruker_Controller implements Initializable {
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(420);
-            Scene_3.setWidth(410);
+            Scene_3.setHeight(480);
+            Scene_3.setWidth(440);
             Scene_3.show();
         } catch (IOException e) {
             e.printStackTrace();

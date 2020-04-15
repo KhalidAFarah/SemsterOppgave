@@ -148,8 +148,8 @@ public class Registrering_Controller implements Initializable {
             Scene Avbryt = new Scene(Registrering);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Avbryt);
-            Scene_1.setHeight(420);
-            Scene_1.setWidth(410);
+            Scene_1.setHeight(480);
+            Scene_1.setWidth(440);
             Scene_1.show();
 
         } catch (IOException e) {
@@ -184,8 +184,8 @@ public class Registrering_Controller implements Initializable {
                     Scene MellomSide = new Scene(Registering_ny_Admin);
                     Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene_9.setScene(MellomSide);
-                    Scene_9.setHeight(600);
-                    Scene_9.setWidth(540);
+                    Scene_9.setHeight(380);
+                    Scene_9.setWidth(450);
                     Scene_9.show();
                     save(); //se her på problemet med size på fxml vinduet *
 
@@ -204,8 +204,8 @@ public class Registrering_Controller implements Initializable {
                     Scene MellomSide = new Scene(Registering_ny_Standarbruker);
                     Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     Scene_10.setScene(MellomSide);
-                    Scene_10.setHeight(300);
-                    Scene_10.setWidth(420);
+                    Scene_10.setHeight(380);
+                    Scene_10.setWidth(450);
                     Scene_10.show();
                     save();
 

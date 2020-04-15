@@ -11,14 +11,14 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="423.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="420.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
     <children>
-        <TextField fx:id="txtBrukernavn" layoutX="123.0" layoutY="193.0" promptText="Brukernavn">
+        <TextField fx:id="txtBrukernavn" layoutX="139.0" layoutY="192.0" promptText="Brukernavn">
             <font>
                 <Font name="Futura Bold" size="13.0" />
             </font>
         </TextField>
-        <TextField fx:id="txtPassord" layoutX="123.0" layoutY="237.0" promptText="Passord">
+        <TextField fx:id="txtPassord" layoutX="138.0" layoutY="236.0" promptText="Passord">
             <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
@@ -29,12 +29,12 @@
                 <Font name="Futura Bold" size="13.0" />
             </font>
         </TextField>
-        <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="290.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0" style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
+        <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="280.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0" style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
             <font>
                 <Font name="Futura Bold" size="13.0" />
             </font>
         </Button>
-        <Button fx:id="btnRegistrer" layoutX="150.0" layoutY="376.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="143.0" text="Registrer ny bruker">
+        <Button fx:id="btnRegistrer" layoutX="147.0" layoutY="335.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="143.0" text="Registrer ny bruker">
             <font>
                 <Font name="Futura Medium" size="13.0" />
             </font>
@@ -44,23 +44,23 @@
                 <Font name="Futura Bold" size="30.0" />
             </font>
         </Label>
-        <Button fx:id="btnAvslutt" layoutX="187.0" layoutY="428.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE">
+        <Button fx:id="btnAvslutt" layoutX="188.0" layoutY="388.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE">
             <font>
                 <Font name="Futura Bold" size="10.0" />
             </font>
         </Button>
-        <ImageView fitHeight="84.0" fitWidth="112.0" layoutX="164.0" layoutY="14.0">
+        <ImageView fitHeight="84.0" fitWidth="112.0" layoutX="165.0" layoutY="32.0">
             <image>
                 <Image url="@../img/logo2.png" />
             </image>
         </ImageView>
         <Line endX="35.0" layoutX="220.0" layoutY="170.0" startX="-35.0" stroke="#3daee4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
-        <ImageView fitHeight="45.0" fitWidth="42.0" layoutX="59.0" layoutY="184.0">
+        <ImageView fitHeight="45.0" fitWidth="42.0" layoutX="80.0" layoutY="184.0">
             <image>
                 <Image url="@../img/bruker.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="59.0" layoutY="232.0">
+        <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="80.0" layoutY="232.0">
             <image>
                 <Image url="@../img/passord.png" />
             </image>
