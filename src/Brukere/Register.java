@@ -14,15 +14,14 @@ public class Register {
     }
 
     public boolean add(Bruker bruker) {
-        brukere.add(bruker);
         for (int i = 0; i < brukere.size(); i++) {
             if (brukere.get(i).getBrukernavn().equals(bruker.getBrukernavn()) &&
                     brukere.get(i).getPassord().equals(bruker.getPassord())) {
-                brukere.add(bruker);
-                return true;
+                return false;
             }
         }
-        return false;
+        brukere.add(bruker);
+        return true;
     }
 
     public void setArray(ArrayList<Bruker> brukere) {

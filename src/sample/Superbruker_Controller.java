@@ -219,9 +219,13 @@ public class Superbruker_Controller implements Initializable {
                     }
                     if (valgtKomponent != -1) {
 
-                        komp.remove(valgtKomponent);
                         komponenter.remove(valgtKomponent);
-                        saveKomponenter(komp);
+                        komp.setMainArray(komponenter.getMainArray());
+
+                        tableSøk.setItems(komp.getMainArray());
+                        tableView.setItems(komponenter.getMainArray());
+
+                        saveKomponenter(komponenter);
 
                     }
                 }

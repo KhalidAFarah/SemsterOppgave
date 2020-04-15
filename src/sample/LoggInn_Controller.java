@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -19,10 +20,12 @@ import javafx.stage.Stage;
 import static javax.swing.JOptionPane.*;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 
-public class LoggInn_Controller {
+public class LoggInn_Controller implements Initializable {
 
     @FXML
     private TextField txtBrukernavn;
@@ -36,7 +39,32 @@ public class LoggInn_Controller {
     @FXML
     private Button btnRegistrer;
 
-    private Register brukere = Registrering_Controller.brukere;
+    @FXML
+    private Button btnAvslutt;
+
+    private Register brukere = new Register();
+
+    public void setRegister(Register reg){
+        brukere = reg;
+    }
+
+    private void Succeded(WorkerStateEvent event){
+        txtBrukernavn.setDisable(false);
+        txtPassord.setDisable(false);
+        btnLogginn.setDisable(false);
+        btnRegistrer.setDisable(false);
+        btnAvslutt.setDisable(false);
+    }
+
+    private void Failed(WorkerStateEvent event){
+        txtBrukernavn.setDisable(false);
+        txtPassord.setDisable(false);
+        btnLogginn.setDisable(false);
+        btnRegistrer.setDisable(false);
+        btnAvslutt.setDisable(false);
+
+        showMessageDialog(null, "Klarte ikke laste inn lagert data");
+    }
 
     private void load() {
         FiledataTxt lese = new FiledataTxt();
@@ -50,36 +78,18 @@ public class LoggInn_Controller {
         btnLogginn.setDisable(true);
         btnRegistrer.setDisable(true);
 
-        lese.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                txtBrukernavn.setDisable(false);
-                txtPassord.setDisable(false);
-                btnLogginn.setDisable(false);
-                btnRegistrer.setDisable(false);
-            }
-        });
-        lese.setOnFailed(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                txtBrukernavn.setDisable(false);
-                txtPassord.setDisable(false);
-                btnLogginn.setDisable(false);
-                btnRegistrer.setDisable(false);
-
-                showMessageDialog(null, "Klarte ikke laste inn lagert data");
-            }
-        });
+        lese.setOnSucceeded(this::Succeded);
+        lese.setOnFailed(this::Failed);
 
         Thread tr = new Thread(lese);
         tr.setDaemon(true);
         tr.start();
 
-        try {
+        /*try {
             tr.sleep(5000);
         } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppen tråden");
-        }
+        }*/
 
 
 
@@ -93,7 +103,6 @@ public class LoggInn_Controller {
 
     @FXML
     void onClick_btn_LoggInn(ActionEvent event) {
-        load();
         boolean login_sucessfull = false;
         int user = 0;
         for (int i = 0; i < brukere.getArray().size(); i++) {
@@ -142,9 +151,13 @@ public class LoggInn_Controller {
 
     @FXML
     void onClick_btn_RegistrerNyBruker(ActionEvent event) {
-
         try {
-            Parent Logg_inn = FXMLLoader.load(getClass().getResource("Registrering.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Registrering.fxml"));
+            Parent Logg_inn = loader.load();
+
+            Registrering_Controller controller = loader.getController();
+            controller.initRegister(brukere);
             Scene Register_ny_bruker = new Scene(Logg_inn);
             Stage Scene_2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_2.setScene(Register_ny_bruker);
@@ -164,4 +177,8 @@ public class LoggInn_Controller {
         Platform.exit();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        load();
+    }
 }
