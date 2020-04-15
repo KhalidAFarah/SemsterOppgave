@@ -118,6 +118,33 @@ public class Standardbruker_Controller implements Initializable {
         }
     }
 
+    private void updateVarer(){
+        pane.getChildren().clear();
+        int y = 50;
+        if(bruker != null) {
+            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
+                Label label = new Label(komponenter.getMainArray().get(i).getNavn());
+                label.setLayoutY(y);
+                Button btn = new Button("Fjern");
+                btn.setLayoutY(y + 25);
+                y += 50;
+
+                kompNr = i;
+                btn.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        bruker.getHandelskurv().getMainArray().remove(kompNr);
+                        updateVarer();
+                    }
+                });
+                pane.getChildren().add(label);
+                pane.getChildren().add(btn);
+            }
+        }else if(bruker == null){
+            showMessageDialog(null, "Klarte ikke å laste inn brukeren");
+        }
+    }
+
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -125,25 +152,28 @@ public class Standardbruker_Controller implements Initializable {
 
         pane.getChildren().clear();
         int y = 50;
-        for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
-            Label label = new Label(komponenter.getMainArray().get(i).getNavn());
-            label.setLayoutY(y);
-            Button btn = new Button("Fjern");
-            btn.setLayoutY(y + 25);
-            y += 50;
+        if(bruker != null) {
+            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
+                Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
+                label.setLayoutY(y);
+                Button btn = new Button("Fjern");
+                btn.setLayoutY(y + 25);
+                y += 50;
 
-            kompNr = i;
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    System.out.println("halle");
-                    bruker.getHandelskurv().getMainArray().remove(kompNr);
-                }
-            });
-            pane.getChildren().add(label);
-            pane.getChildren().add(btn);
+                kompNr = i;
+                btn.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        bruker.getHandelskurv().getMainArray().remove(kompNr);
+                        updateVarer();
+                    }
+                });
+                pane.getChildren().add(label);
+                pane.getChildren().add(btn);
+            }
+        }else if(bruker == null){
+            showMessageDialog(null, "Klarte ikke å laste inn brukeren");
         }
-
     }
 
     @FXML
