@@ -11,6 +11,15 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="423.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
+    <children>
+        <TextField fx:id="txtBrukernavn" layoutX="123.0" layoutY="193.0" promptText="Brukernavn">
+            <font>
+                <Font name="Futura Bold" size="13.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="txtPassord" layoutX="123.0" layoutY="237.0" promptText="Passord">
+            <cursor>
                 <Cursor fx:constant="DEFAULT" />
             </cursor>
             <opaqueInsets>
