@@ -2,6 +2,8 @@ package sample;
 
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,10 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import komponenter.*;
 
@@ -26,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -46,6 +51,21 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
     private Komponenter komponenter = new Komponenter();
 
     private Komponenter komp = new Komponenter();
+
+    private int IDs;
+
+    @FXML
+    private Button btnLeggTil;
+
+    @FXML
+    private Button btnFjern;
+
+    @FXML
+    private Button btnRediger;
+
+    @FXML
+    private Button btnTilbake;
+
 
     private boolean showLeggTil = false;
     private boolean showFjern = false;
@@ -72,16 +92,46 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         tableView.setItems(komponenter.getMainArray());
     }
 
+    private void succeded(WorkerStateEvent event){
+        tableView.setDisable(false);
+        btnLeggTil.setDisable(false);
+        btnFjern.setDisable(false);
+        btnRediger.setDisable(false);
+        btnTilbake.setDisable(false);
+    }
+    private void failed(WorkerStateEvent event){
+        tableView.setDisable(false);
+        btnLeggTil.setDisable(false);
+        btnFjern.setDisable(false);
+        btnRediger.setDisable(false);
+        btnTilbake.setDisable(false);
+
+        showMessageDialog(null, "Klarte ikke å laste inn varer!");
+    }
+
     public void loadKomponenter() {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
-        try {
-            data.load(komponenter, path);
-        } catch (IOException e) {
-            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
-        } catch (Exception e) {
-            showMessageDialog(null, "klarte ikke å laste inn data");
+        data.setKomponent(komponenter);
+        data.setPath(path);
+
+        data.setOnSucceeded(this::succeded);
+        data.setOnFailed(this::failed);
+
+        tableView.setDisable(true);
+        btnLeggTil.setDisable(true);
+        btnFjern.setDisable(true);
+        btnRediger.setDisable(true);
+        btnTilbake.setDisable(true);
+
+        Thread tr = new Thread(data);
+        tr.start();
+
+        try{
+            tr.sleep(1000);
+        }catch (InterruptedException e){
+            showMessageDialog(null, "Klarte ikke å stoppe tråden");
         }
     }
 
@@ -379,16 +429,67 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
+            Button btnVisSpecs = new Button("Rediger varens beskrivelser");
 
             LeggTilKomponent_pane.getChildren().add(labelNavn);
             LeggTilKomponent_pane.getChildren().add(txtSøk);
             LeggTilKomponent_pane.getChildren().add(tableSøk);
+            LeggTilKomponent_pane.getChildren().add(btnVisSpecs);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
 
             txtSøk.setLayoutX(175);
             txtSøk.setLayoutY(15);
+
+            btnVisSpecs.setLayoutY(15);
+            btnVisSpecs.setLayoutX(350);
+
+            btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    String strID = showInputDialog("Skriv inn varens id");
+                    int ID;
+                    try {
+                        ID = Integer.parseInt(strID);
+                    } catch (Exception e) {
+                        ID = -1;
+                    }
+                    if (ID >= 0) {
+                        tableSøk.setVisible(false);
+                        ListView<String> list = new ListView<>();
+                        list.setVisible(true);
+                        list.setItems(komponenter.getMainArray().get(ID).getSpecs());
+                        IDs = ID;
+                        list.setLayoutX(15);
+                        list.setLayoutY(75);
+
+                        list.setMaxHeight(200);
+                        list.setEditable(true);
+
+                        list.setCellFactory(TextFieldListCell.forListView());
+
+                        list.setOnEditCommit(new EventHandler<ListView.EditEvent<String>>() {
+                            @Override
+                            public void handle(ListView.EditEvent<String> event) {
+                                komponenter.getMainArray().get(IDs).getSpecs().remove(event.getIndex());
+                                komponenter.getMainArray().get(IDs).getSpecs().add(event.getIndex(), event.getNewValue());
+                                saveKomponenter(komponenter);
+                            }
+                        });
+
+                        LeggTilKomponent_pane.getChildren().add(list);
+                        btnVisSpecs.setText("Tilbake");
+                        btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                                public void handle(ActionEvent event) {
+                                    list.setVisible(false);
+                                    tableSøk.setVisible(true);
+                            }
+                        });
+                    }
+                }
+            });
 
             Label labelError = new Label();
 

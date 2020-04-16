@@ -3,6 +3,8 @@ package komponenter;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,7 +16,7 @@ public abstract class Komponent {
     private transient SimpleIntegerProperty ID;
     private transient SimpleStringProperty navn;
     private transient SimpleDoubleProperty pris;
-    private transient List<String> specs;
+    private transient ObservableList<String> specs;
     private transient SimpleStringProperty type;
 
     public Komponent(String navn, double pris, String type, String... strings) {
@@ -22,7 +24,7 @@ public abstract class Komponent {
         setPris(pris);
         setType(type);
 
-        specs = new ArrayList<>();
+        specs = FXCollections.observableArrayList();
         for (String s : strings) {
             specs.add(s);
         }
@@ -36,7 +38,7 @@ public abstract class Komponent {
         return pris.getValue();
     }
 
-    public List<String> getSpecs() {
+    public ObservableList<String> getSpecs() {
         return specs;
     }
 
@@ -64,7 +66,7 @@ public abstract class Komponent {
         this.pris = new SimpleDoubleProperty(pris);
     }
 
-    public void setSpecs(ArrayList<String> specs2) {
+    public void setSpecs(ObservableList<String> specs2) {
         specs = specs2;
     }
 
