@@ -445,6 +445,13 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
             btnVisSpecs.setLayoutY(15);
             btnVisSpecs.setLayoutX(350);
 
+            Button btnSkjulSpecs = new Button("Tilbake");
+            btnSkjulSpecs.setLayoutY(15);
+            btnSkjulSpecs.setLayoutX(350);
+
+            LeggTilKomponent_pane.getChildren().add(btnSkjulSpecs);
+            btnSkjulSpecs.setVisible(false);
+
             btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -479,12 +486,16 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
                         });
 
                         LeggTilKomponent_pane.getChildren().add(list);
-                        btnVisSpecs.setText("Tilbake");
-                        btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
+                        btnVisSpecs.setVisible(false);
+                        btnSkjulSpecs.setVisible(true);
+
+                        btnSkjulSpecs.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
-                                public void handle(ActionEvent event) {
-                                    list.setVisible(false);
-                                    tableSøk.setVisible(true);
+                            public void handle(ActionEvent event) {
+                                list.setVisible(false);
+                                tableSøk.setVisible(true);
+                                btnSkjulSpecs.setVisible(false);
+                                btnVisSpecs.setVisible(true);
                             }
                         });
                     }
