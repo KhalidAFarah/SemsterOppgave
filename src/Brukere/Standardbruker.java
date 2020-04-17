@@ -1,30 +1,29 @@
 package Brukere;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import komponenter.*;
 
 public class Standardbruker extends Bruker {
-    private double sum;
+    private SimpleDoubleProperty sum;
     private Komponenter handelskurv;
-    private Bruker bruker;
-    private static final boolean ADMIN = false;
+    private static final SimpleBooleanProperty ADMIN = new SimpleBooleanProperty(false);
 
-    public Standardbruker(Bruker bruker) {
-        this.bruker = bruker;
-        sum = 0;
+    public Standardbruker() {
+        sum = new SimpleDoubleProperty(0);
         handelskurv = new Komponenter();
-
     }
 
     public String getBrukernavn() {
-        return bruker.getBrukernavn();
+        return super.getBrukernavn();
     }
 
     public String getPassord() {
-        return bruker.getPassord();
+        return super.getPassord();
     }
 
     public String getEmail() {
-        return bruker.getEmail();
+        return super.getEmail();
     }
 
     public Komponenter getHandelskurv() {
@@ -32,23 +31,23 @@ public class Standardbruker extends Bruker {
     }
 
     public String getTlf() {
-        return bruker.getTlf();
+        return super.getTlf();
     }
 
     public boolean isAdmin() {
-        return ADMIN;
+        return ADMIN.getValue();
     }
 
     public void setBrukernavn(String brukernavn) {
-        bruker.setBrukernavn(brukernavn);
+        super.setBrukernavn(brukernavn);
     }
 
     public void setPassord(String passord) {
-        bruker.setPassord(passord);
+        super.setPassord(passord);
     }
 
     public void setEmail(String email) {
-        bruker.setEmail(email);
+        super.setEmail(email);
     }
 
     public void setHandelskurv(Komponenter handelskurv) {
@@ -56,15 +55,17 @@ public class Standardbruker extends Bruker {
     }
 
     public void setTlf(String tlf) {
-        bruker.setTlf(tlf);
+        super.setTlf(tlf);
     }
 
 
     public void setSum() {
-        this.sum = 0;
+        this.sum.setValue(0);
+        double sum2 = 0;
         for (int i = 0; i < handelskurv.getMainArray().size(); i++) {
-            sum += handelskurv.getMainArray().get(i).getPris();
+            sum2 += handelskurv.getMainArray().get(i).getPris();
         }
+        this.sum.setValue(sum2);
     }
 
     public <T extends Komponent> void leggTilHandlekurv(T elem) {
@@ -87,6 +88,6 @@ public class Standardbruker extends Bruker {
     }
 
     public String toStringFormat() {
-        return bruker.toStringFormat() + ADMIN + ";" + sum + ";" + handelskurv.getMainArray().size() + handelskurv.toStringTxt();
+        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";" + handelskurv.getMainArray().size() + ";" + handelskurv.toStringTxt();
     }
 }

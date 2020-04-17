@@ -106,10 +106,14 @@ public class LoggInn_Controller implements Initializable {
         //load();
         boolean login_sucessfull = false;
 
+        System.out.println(brukere.toStringTxt());
+
         for (int i = 0; i < brukere.getArray().size(); i++) {
             if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
                 login_sucessfull = true;
+
+                System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
 
                     try {
@@ -132,8 +136,7 @@ public class LoggInn_Controller implements Initializable {
 
                         //paserer inn data i standardBruker_Controller
                         Standardbruker_Controller controller = loader.getController();
-                        Standardbruker standardbruker = new Standardbruker(brukere.getArray().get(i));
-                        controller.initBruker(standardbruker);
+                        controller.initBruker((Standardbruker) brukere.getArray().get(i));
 
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();

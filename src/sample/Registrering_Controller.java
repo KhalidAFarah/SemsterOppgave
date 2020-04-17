@@ -163,16 +163,15 @@ public class Registrering_Controller implements Initializable {
     void onClick_btn_Register(ActionEvent event) {
         if(brukere != null) {
             try {
-
-                Bruker b = new Bruker();
-                b.setBrukernavn(txtBrukernavn.getText());
-                b.setPassord(txtPassord.getText());
-                b.setTlf(txtTelefonnummer.getText());
-                b.setEmail(txtEmail.getText());
-
+                Bruker b;
                 if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
-                    Superbruker A = new Superbruker(b);
-                    brukere.add(A);
+                    b = new Superbruker();
+                    b.setBrukernavn(txtBrukernavn.getText());
+                    b.setPassord(txtPassord.getText());
+                    b.setTlf(txtTelefonnummer.getText());
+                    b.setEmail(txtEmail.getText());
+
+                    brukere.add(b);
 
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("MellomSide.fxml"));
@@ -190,9 +189,13 @@ public class Registrering_Controller implements Initializable {
                     save(); //se her på problemet med size på fxml vinduet *
 
                 } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
-                    Standardbruker A = new Standardbruker(b);
+                    b = new Standardbruker();
+                    b.setBrukernavn(txtBrukernavn.getText());
+                    b.setPassord(txtPassord.getText());
+                    b.setTlf(txtTelefonnummer.getText());
+                    b.setEmail(txtEmail.getText());
                     //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
-                    brukere.add(A);
+                    brukere.add(b);
 
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("MellomSide.fxml"));

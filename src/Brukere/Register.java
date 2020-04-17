@@ -1,30 +1,38 @@
 package Brukere;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Register {
-    private ArrayList<Bruker> brukere;
+    private ObservableList<Bruker> brukere;
 
     public Register() {
-        brukere = new ArrayList<>();
+        brukere = FXCollections.observableArrayList();
     }
 
-    public ArrayList<Bruker> getArray() {
+    public ObservableList<Bruker> getArray() {
         return brukere;
     }
 
     public boolean add(Bruker bruker) {
+        String br = bruker.getBrukernavn();
+        String ps = bruker.getPassord();
         for (int i = 0; i < brukere.size(); i++) {
-            if (brukere.get(i).getBrukernavn().equals(bruker.getBrukernavn()) &&
-                    brukere.get(i).getPassord().equals(bruker.getPassord())) {
+            String br2 = brukere.get(i).getBrukernavn();
+            String ps2 = brukere.get(i).getPassord();
+            if (br2.equals(br) &&
+                    ps2.equals(ps)) {
                 return false;
             }
         }
+        bruker.setID(brukere.size());
         brukere.add(bruker);
         return true;
     }
 
-    public void setArray(ArrayList<Bruker> brukere) {
+    public void setArray(ObservableList<Bruker> brukere) {
         this.brukere = brukere;
     }
 
