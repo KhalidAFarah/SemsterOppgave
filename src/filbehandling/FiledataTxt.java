@@ -71,9 +71,9 @@ public class FiledataTxt extends Task<Void> {
                 String[] strings = line.split(";");
                 if (intervaler == 0) {
                     boolean Admin = Boolean.parseBoolean(strings[4]);
-                    if (Admin){
+                    if (Admin) {
                         bruker = new Superbruker();
-                    }else{
+                    } else {
                         bruker = new Standardbruker();
                     }
 
@@ -81,7 +81,6 @@ public class FiledataTxt extends Task<Void> {
                     bruker.setPassord(strings[1]);
                     bruker.setEmail(strings[2]);
                     bruker.setTlf(strings[3]);
-
 
 
                     if (Admin) {
@@ -95,12 +94,10 @@ public class FiledataTxt extends Task<Void> {
                             //throw new InvalidDataLoadedException("Ugyldig data lagret");
                         }
 
-                        if(intervaler == 0){
+                        if (intervaler == 0) {
                             brukere.add(bruker);
                         }
-                    }
-
-                    else {
+                    } else {
                         //throw new InvalidDataLoadedException("Ugyldig data lagret");
                     }
                 } else if (intervaler > 0) {
@@ -124,7 +121,7 @@ public class FiledataTxt extends Task<Void> {
                         specs[teller] = strings[i];
                     }
 
-                    if(bruker instanceof Standardbruker) {
+                    if (bruker instanceof Standardbruker) {
                         if (type.equals("Prosessor")) {
                             ((Standardbruker) bruker).leggTilHandlekurv(new Prosessor(navn, pris, type, specs));
                         } else if (type.equals("Skjermkort")) {

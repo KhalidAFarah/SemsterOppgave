@@ -44,11 +44,11 @@ public class LoggInn_Controller implements Initializable {
 
     private Register brukere = new Register();
 
-    public void setRegister(Register reg){
+    public void setRegister(Register reg) {
         brukere = reg;
     }
 
-    private void Succeded(WorkerStateEvent event){
+    private void Succeded(WorkerStateEvent event) {
         txtBrukernavn.setDisable(false);
         txtPassord.setDisable(false);
         btnLogginn.setDisable(false);
@@ -56,7 +56,7 @@ public class LoggInn_Controller implements Initializable {
         btnAvslutt.setDisable(false);
     }
 
-    private void Failed(WorkerStateEvent event){
+    private void Failed(WorkerStateEvent event) {
         txtBrukernavn.setDisable(false);
         txtPassord.setDisable(false);
         btnLogginn.setDisable(false);
@@ -152,7 +152,7 @@ public class LoggInn_Controller implements Initializable {
                 }
             }
         }
-        if (!login_sucessfull){
+        if (!login_sucessfull) {
             showMessageDialog(null, "Ugyldig brukernavn eller passord");
         }
     }

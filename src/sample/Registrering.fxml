@@ -82,7 +82,7 @@
                 <Font name="Futura Bold" size="13.0"/>
             </font>
         </Button>
-        <Label layoutX="179.0" layoutY="74.0" prefHeight="30.0" prefWidth="230.0" text="Register ny bruker">
+        <Label layoutX="179.0" layoutY="74.0" prefHeight="30.0" prefWidth="230.0" text="Registrer ny bruker">
             <font>
                 <Font name="Futura Bold" size="22.0"/>
             </font>

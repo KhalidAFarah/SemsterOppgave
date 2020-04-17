@@ -69,7 +69,7 @@ public class Registrering_Controller implements Initializable {
         }
     }
 
-    public void initRegister(Register reg){
+    public void initRegister(Register reg) {
         brukere = reg;
     }
 
@@ -161,7 +161,7 @@ public class Registrering_Controller implements Initializable {
 
     @FXML
     void onClick_btn_Register(ActionEvent event) {
-        if(brukere != null) {
+        if (brukere != null) {
             try {
                 Bruker b;
                 if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
@@ -219,7 +219,7 @@ public class Registrering_Controller implements Initializable {
             } catch (IOException e) {
                 showMessageDialog(null, e.getMessage());
             }
-        }else if(brukere == null){
+        } else if (brukere == null) {
             showMessageDialog(null, "registeret er ikke initialisert!");
         }
     }

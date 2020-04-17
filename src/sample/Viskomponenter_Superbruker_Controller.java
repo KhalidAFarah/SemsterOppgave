@@ -92,14 +92,15 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         tableView.setItems(komponenter.getMainArray());
     }
 
-    private void succeded(WorkerStateEvent event){
+    private void succeded(WorkerStateEvent event) {
         tableView.setDisable(false);
         btnLeggTil.setDisable(false);
         btnFjern.setDisable(false);
         btnRediger.setDisable(false);
         btnTilbake.setDisable(false);
     }
-    private void failed(WorkerStateEvent event){
+
+    private void failed(WorkerStateEvent event) {
         tableView.setDisable(false);
         btnLeggTil.setDisable(false);
         btnFjern.setDisable(false);
@@ -128,9 +129,9 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         Thread tr = new Thread(data);
         tr.start();
 
-        try{
+        try {
             tr.sleep(1000);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppe tråden");
         }
     }

@@ -118,10 +118,10 @@ public class Standardbruker_Controller implements Initializable {
         }
     }
 
-    private void updateVarer(){
+    private void updateVarer() {
         pane.getChildren().clear();
         int y = 50;
-        if(bruker != null) {
+        if (bruker != null) {
             for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
                 Label label = new Label(komponenter.getMainArray().get(i).getNavn());
                 label.setLayoutY(y);
@@ -140,7 +140,7 @@ public class Standardbruker_Controller implements Initializable {
                 pane.getChildren().add(label);
                 pane.getChildren().add(btn);
             }
-        }else if(bruker == null){
+        } else if (bruker == null) {
             showMessageDialog(null, "Klarte ikke å laste inn brukeren");
         }
     }
@@ -152,7 +152,7 @@ public class Standardbruker_Controller implements Initializable {
 
         pane.getChildren().clear();
         int y = 50;
-        if(bruker != null) {
+        if (bruker != null) {
             for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
                 Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
                 label.setLayoutY(y);
@@ -171,7 +171,7 @@ public class Standardbruker_Controller implements Initializable {
                 pane.getChildren().add(label);
                 pane.getChildren().add(btn);
             }
-        }else if(bruker == null){
+        } else if (bruker == null) {
             showMessageDialog(null, "Klarte ikke å laste inn brukeren");
         }
     }
