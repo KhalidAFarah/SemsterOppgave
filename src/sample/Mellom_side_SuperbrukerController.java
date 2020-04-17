@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class Mellom_side_SuperbrukerController {
 
     @FXML
@@ -46,7 +48,22 @@ public class Mellom_side_SuperbrukerController {
             e.printStackTrace();
 
         }
+    }
+    @FXML
+    void On_Click_BtnReturnerTilStart(ActionEvent event) {
 
+        try {
+            Parent Superbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Scene LoggInn = new Scene(Superbruker);
+            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene_4.setScene(LoggInn);
+            Scene_4.setHeight(480);
+            Scene_4.setWidth(440);
+            Scene_4.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
+
 }

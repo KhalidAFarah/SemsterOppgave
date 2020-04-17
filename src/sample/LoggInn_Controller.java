@@ -118,7 +118,7 @@ public class LoggInn_Controller implements Initializable {
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
                         Scene_5.setHeight(360);
-                        Scene_5.setWidth(450);
+                        Scene_5.setWidth(580);
                         Scene_5.show();
                     } catch (IOException e) {
                         e.printStackTrace();

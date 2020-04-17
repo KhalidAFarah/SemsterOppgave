@@ -515,12 +515,12 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
         try {
-            Parent Superbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-            Scene LoggInn = new Scene(Superbruker);
+            Parent Superbruker = FXMLLoader.load(getClass().getResource("Mellom_side_Superbruker.fxml"));
+            Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setScene(LoggInn);
-            Scene_4.setHeight(480);
-            Scene_4.setWidth(440);
+            Scene_4.setScene(Mellom_side);
+            Scene_4.setHeight(360);
+            Scene_4.setWidth(580);
             Scene_4.show();
         } catch (IOException e) {
             e.printStackTrace();

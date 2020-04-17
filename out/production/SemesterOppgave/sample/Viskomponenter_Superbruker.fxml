@@ -19,22 +19,22 @@
                 <Image url="@../img/logo3.png" />
             </image>
         </ImageView>
-        <Button layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Legg til komponenter">
+        <Button fx:id="btnLeggTil" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Legg til komponenter">
             <font>
                 <Font name="Candara Light" size="15.0" />
             </font>
         </Button>
-        <Button layoutX="229.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Fjern komponenter">
+        <Button fx:id="btnFjern" layoutX="229.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Fjern komponenter">
             <font>
                 <Font name="Candara Light" size="15.0" />
             </font>
         </Button>
-        <Button layoutX="436.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #3daee4;" text="Rediger komponenter">
+        <Button fx:id="btnRediger" layoutX="436.0" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="173.0" style="-fx-background-color: #3daee4;" text="Rediger komponenter">
             <font>
                 <Font name="Candara Light" size="15.0" />
             </font>
         </Button>
-        <Button layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
+        <Button fx:id="btnTilbake" layoutX="532.0" layoutY="14.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
             <font>
                 <Font name="Candara Light" size="15.0" />
             </font>
