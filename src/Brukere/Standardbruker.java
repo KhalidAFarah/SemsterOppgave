@@ -73,15 +73,15 @@ public class Standardbruker extends Bruker {
         //tester om det samme komponent type eksisterer dersom den finnes fjernes den gamle og legger til den nye
         for (int i = 0; i < handelskurv.getMainArray().size(); i++) {
             if (handelskurv.getMainArray().get(i).getType().equals(elem.getType())) {
-                handelskurv.getMainArray().remove(i);
-                handelskurv.getMainArray().add(elem);
+                handelskurv.remove(i);
+                handelskurv.add(elem);
                 sjekk = false;
 
                 setSum();//ny sum av all varer
             }
         }
         if (sjekk) {
-            handelskurv.getMainArray().add(elem);
+            handelskurv.add(elem);
 
             setSum();//ny sum av alle varer
         }

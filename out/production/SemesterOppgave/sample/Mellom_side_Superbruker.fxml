@@ -7,31 +7,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="562.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Mellom_side_SuperbrukerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0"
+            prefWidth="562.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Mellom_side_SuperbrukerController">
     <children>
-        <Label layoutX="71.0" layoutY="147.0" prefHeight="34.0" prefWidth="440.0" text="Du har nå logget inn som administrator, vil du nå?">
+        <Label layoutX="71.0" layoutY="147.0" prefHeight="34.0" prefWidth="440.0"
+               text="Du har nå logget inn som administrator, vil du nå?">
             <font>
-                <Font name="Futura Medium" size="19.0" />
+                <Font name="Futura Medium" size="19.0"/>
             </font>
         </Label>
-        <Button layoutX="71.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Systemets komponenter">
+        <Button layoutX="71.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter"
+                prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Systemets komponenter">
             <font>
-                <Font name="Candara Light" size="15.0" />
+                <Font name="Candara Light" size="15.0"/>
             </font>
         </Button>
-        <Button layoutX="328.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Brukere">
+        <Button layoutX="328.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere"
+                prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Brukere">
             <font>
-                <Font name="Candara Light" size="15.0" />
+                <Font name="Candara Light" size="15.0"/>
             </font>
         </Button>
         <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="191.0" layoutY="14.0">
             <image>
-                <Image url="@../img/logo1.png" />
+                <Image url="@../img/logo1.png"/>
             </image>
         </ImageView>
-        <Button layoutX="244.0" layoutY="273.0" mnemonicParsing="false" onAction="#On_Click_BtnReturnerTilStart" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: black;" text="Logg ut" textFill="WHITE">
+        <Button layoutX="244.0" layoutY="273.0" mnemonicParsing="false" onAction="#On_Click_BtnReturnerTilStart"
+                prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: black;" text="Logg ut" textFill="WHITE">
             <font>
-                <Font name="Candara Light" size="15.0" />
+                <Font name="Candara Light" size="15.0"/>
             </font>
         </Button>
     </children>

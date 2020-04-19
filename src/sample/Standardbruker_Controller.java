@@ -1,10 +1,9 @@
 package sample;
 
-import Brukere.Bruker;
 import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
-import filbehandling.FiledataTxt;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Standardbruker_Controller implements Initializable {
@@ -71,6 +70,11 @@ public class Standardbruker_Controller implements Initializable {
         } catch (Exception e) {
             showMessageDialog(null, e.getMessage());
         }
+
+        /*FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+        Viskomponenter_Superbruker_Controller controller = loader.getController();
+        controller.loadKomponenter();*/
     }
 
     @FXML
@@ -92,6 +96,7 @@ public class Standardbruker_Controller implements Initializable {
     private void visVarer(String type) {
         pane.getChildren().clear();
         int y = 50;
+        ArrayList<Integer> ints = new ArrayList<>(komponenter.getMainArray().size()-1);
         for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
             //ImageView img = new ImageView();
 
@@ -103,14 +108,18 @@ public class Standardbruker_Controller implements Initializable {
                 btn.setLayoutY(y + 25);
                 y += 50;
 
-                kompNr = i;
-
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent event) {
-                        bruker.leggTilHandlekurv(komponenter.getMainArray().get(kompNr));
+                    public void handle(ActionEvent event){
+                        for(int j = 0; j < komponenter.getMainArray().size(); j++){
+                            if(komponenter.getMainArray().get(j).getNavn().equals(label.getText())){
+                                bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
+                            }
+                        }
                     }
                 });
+
+
 
                 pane.getChildren().add(label);
                 pane.getChildren().add(btn);
