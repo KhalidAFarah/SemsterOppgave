@@ -9,20 +9,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import static javax.swing.JOptionPane.showMessageDialog;
+
 import java.io.IOException;
 
 public class MellomSide_Controller {
 
     private Register brukere;
 
-    public void initRegister(Register brukere){
+    public void initRegister(Register brukere) {
         this.brukere = brukere;
     }
 
     @FXML
     void On_Click_BtnLoggInn(ActionEvent event) {
-        if(brukere != null) {
+        if (brukere != null) {
             try {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("LoggInn.fxml"));
@@ -40,7 +42,7 @@ public class MellomSide_Controller {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             showMessageDialog(null, "Mangel på data");
         }
 

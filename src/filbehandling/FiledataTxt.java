@@ -14,8 +14,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class FiledataTxt extends Task<Void> {
 
     private int intervaler = 0;
-    private Standardbruker bruker;
-    private Superbruker admin;
+    private Bruker bruker;
 
     private Register register;
     private Path pathTxt;
@@ -71,20 +70,22 @@ public class FiledataTxt extends Task<Void> {
             while ((line = Reader.readLine()) != null) {
                 String[] strings = line.split(";");
                 if (intervaler == 0) {
-                    Bruker b = new Bruker();
-
-                    b.setBrukernavn(strings[0]);
-                    b.setPassord(strings[1]);
-                    b.setEmail(strings[2]);
-                    b.setTlf(strings[3]);
-
                     boolean Admin = Boolean.parseBoolean(strings[4]);
+                    if (Admin) {
+                        bruker = new Superbruker();
+                    } else {
+                        bruker = new Standardbruker();
+                    }
+
+                    bruker.setBrukernavn(strings[0]);
+                    bruker.setPassord(strings[1]);
+                    bruker.setEmail(strings[2]);
+                    bruker.setTlf(strings[3]);
+
 
                     if (Admin) {
-                        admin = new Superbruker(b);
-                        brukere.add(admin);
+                        brukere.add(bruker);
                     } else if (!Admin) {
-                         bruker = new Standardbruker(b);
                         //String[5] er sum som ikke trengs for set før brukes
                         try {
                             intervaler = Integer.parseInt(strings[6]);
@@ -93,12 +94,10 @@ public class FiledataTxt extends Task<Void> {
                             //throw new InvalidDataLoadedException("Ugyldig data lagret");
                         }
 
-                        if(intervaler == 0){
+                        if (intervaler == 0) {
                             brukere.add(bruker);
                         }
-                    }
-
-                    else {
+                    } else {
                         //throw new InvalidDataLoadedException("Ugyldig data lagret");
                     }
                 } else if (intervaler > 0) {
@@ -122,24 +121,26 @@ public class FiledataTxt extends Task<Void> {
                         specs[teller] = strings[i];
                     }
 
-                    if (type.equals("Prosessor")) {
-                        bruker.leggTilHandlekurv(new Prosessor(navn, pris, type, specs));
-                    } else if (type.equals("Skjermkort")) {
-                        bruker.leggTilHandlekurv(new Skjermkort(navn, pris, type, specs));
-                    } else if (type.equals("Minne")) {
-                        bruker.leggTilHandlekurv(new Minne(navn, pris, type, specs));
-                    } else if (type.equals("Harddisk")) {
-                        bruker.leggTilHandlekurv(new Harddisk(navn, pris, type, specs));
-                    } else if (type.equals("Tastatur")) {
-                        bruker.leggTilHandlekurv(new Tastatur(navn, pris, type, specs));
-                    } else if (type.equals("Mus")) {
-                        bruker.leggTilHandlekurv(new Mus(navn, pris, type, specs));
-                    } else if (type.equals("Skjerm")) {
-                        bruker.leggTilHandlekurv(new Skjerm(navn, pris, type, specs));
-                    }
-                    intervaler--;
-                    if (intervaler == 0) {
-                        //brukere.add(bruker);
+                    if (bruker instanceof Standardbruker) {
+                        if (type.equals("Prosessor")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Prosessor(navn, pris, type, specs));
+                        } else if (type.equals("Skjermkort")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Skjermkort(navn, pris, type, specs));
+                        } else if (type.equals("Minne")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Minne(navn, pris, type, specs));
+                        } else if (type.equals("Harddisk")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Harddisk(navn, pris, type, specs));
+                        } else if (type.equals("Tastatur")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Tastatur(navn, pris, type, specs));
+                        } else if (type.equals("Mus")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Mus(navn, pris, type, specs));
+                        } else if (type.equals("Skjerm")) {
+                            ((Standardbruker) bruker).leggTilHandlekurv(new Skjerm(navn, pris, type, specs));
+                        }
+                        intervaler--;
+                        if (intervaler == 0) {
+                            brukere.add(bruker);
+                        }
                     }
 
                 }

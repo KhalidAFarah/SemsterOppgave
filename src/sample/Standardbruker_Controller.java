@@ -1,10 +1,11 @@
 package sample;
 
-import Brukere.Bruker;
+import Brukere.Register;
 import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Standardbruker_Controller implements Initializable {
@@ -52,14 +53,29 @@ public class Standardbruker_Controller implements Initializable {
     private Komponenter komponenter = new Komponenter();
 
     private int kompNr;
+    private Register brukere;
+    private FiledataTxt lagreTxt;
+    private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+
+    private void save() {
+        lagreTxt = new FiledataTxt();
+        try {
+            lagreTxt.save(brukere.toStringTxt(), path);
+        } catch (IOException e) {
+            //txtError.setText(e.getMessage());
+            showMessageDialog(null, e.getMessage());
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadKomponenter();
     }
 
-    public void initBruker(Standardbruker bruker) {
+    public void initBruker(Standardbruker bruker, Register brukere) {
         this.bruker = bruker;
+        this.brukere = brukere;
+
     }
 
     public void loadKomponenter() {
@@ -71,6 +87,11 @@ public class Standardbruker_Controller implements Initializable {
         } catch (Exception e) {
             showMessageDialog(null, e.getMessage());
         }
+
+        /*FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+        Viskomponenter_Superbruker_Controller controller = loader.getController();
+        controller.loadKomponenter();*/
     }
 
     @FXML
@@ -92,6 +113,7 @@ public class Standardbruker_Controller implements Initializable {
     private void visVarer(String type) {
         pane.getChildren().clear();
         int y = 50;
+        ArrayList<Integer> ints = new ArrayList<>(komponenter.getMainArray().size()-1);
         for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
             //ImageView img = new ImageView();
 
@@ -103,14 +125,19 @@ public class Standardbruker_Controller implements Initializable {
                 btn.setLayoutY(y + 25);
                 y += 50;
 
-                kompNr = i;
-
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent event) {
-                        bruker.leggTilHandlekurv(komponenter.getMainArray().get(kompNr));
+                    public void handle(ActionEvent event){
+                        for(int j = 0; j < komponenter.getMainArray().size(); j++){
+                            if(komponenter.getMainArray().get(j).getNavn().equals(label.getText())){
+                                bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
+                                save();
+                            }
+                        }
                     }
                 });
+
+
 
                 pane.getChildren().add(label);
                 pane.getChildren().add(btn);
@@ -118,41 +145,10 @@ public class Standardbruker_Controller implements Initializable {
         }
     }
 
-    private void updateVarer(){
+    private void updateVarer() {
         pane.getChildren().clear();
         int y = 50;
-        if(bruker != null) {
-            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
-                Label label = new Label(komponenter.getMainArray().get(i).getNavn());
-                label.setLayoutY(y);
-                Button btn = new Button("Fjern");
-                btn.setLayoutY(y + 25);
-                y += 50;
-
-                kompNr = i;
-                btn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        bruker.getHandelskurv().getMainArray().remove(kompNr);
-                        updateVarer();
-                    }
-                });
-                pane.getChildren().add(label);
-                pane.getChildren().add(btn);
-            }
-        }else if(bruker == null){
-            showMessageDialog(null, "Klarte ikke å laste inn brukeren");
-        }
-    }
-
-    @FXML
-    void On_Click_BtnKurv(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(900);
-
-        pane.getChildren().clear();
-        int y = 50;
-        if(bruker != null) {
+        if (bruker != null) {
             for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
                 Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
                 label.setLayoutY(y);
@@ -164,14 +160,55 @@ public class Standardbruker_Controller implements Initializable {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        bruker.getHandelskurv().getMainArray().remove(kompNr);
+                        for(int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++){
+                            if(bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())){
+                                bruker.getHandelskurv().getMainArray().remove(j);
+                            }
+                        }
                         updateVarer();
+                        save();
                     }
                 });
                 pane.getChildren().add(label);
                 pane.getChildren().add(btn);
             }
-        }else if(bruker == null){
+        } else if (bruker == null) {
+            showMessageDialog(null, "Klarte ikke å laste inn brukeren");
+        }
+    }
+
+    @FXML
+    void On_Click_BtnKurv(ActionEvent event) {
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene_3.setWidth(900);
+
+        pane.getChildren().clear();
+        int y = 50;
+        if (bruker != null) {
+            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
+                Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
+                label.setLayoutY(y);
+                Button btn = new Button("Fjern");
+                btn.setLayoutY(y + 25);
+                y += 50;
+
+                kompNr = i;
+                btn.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        for(int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++){
+                            if(bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())){
+                                bruker.getHandelskurv().getMainArray().remove(j);
+                            }
+                        }
+                        updateVarer();
+                        save();
+                    }
+                });
+                pane.getChildren().add(label);
+                pane.getChildren().add(btn);
+            }
+        } else if (bruker == null) {
             showMessageDialog(null, "Klarte ikke å laste inn brukeren");
         }
     }

@@ -44,9 +44,9 @@ public class Komponenter {//lager en main liste for alle typer komponenter
 
     public void sort() {
         ObservableList<Komponent> newMain = FXCollections.observableArrayList();
-        for(int i = 0; i < TYPER; i++){
-            for(int j = 0; j < main.size(); j++){
-                if(typer2[i].getClass().equals(main.get(j).getClass())){
+        for (int i = 0; i < TYPER; i++) {
+            for (int j = 0; j < main.size(); j++) {
+                if (typer2[i].getClass().equals(main.get(j).getClass())) {
                     main.get(j).setID(newMain.size());
                     newMain.add(main.get(j));
                 }
@@ -57,13 +57,13 @@ public class Komponenter {//lager en main liste for alle typer komponenter
 
     public <T extends Komponent> boolean add(T elem) {
         boolean sjekk = false;
-        for(int i = 0; i < typer2.length; i++){
-            if(typer2[i].getClass().equals(elem.getClass())){
+        for (int i = 0; i < typer2.length; i++) {
+            if (typer2[i].getClass().equals(elem.getClass())) {
                 sjekk = true;
             }
         }
 
-        if(sjekk) {
+        if (sjekk) {
             main.add(elem);
             sort();
         }

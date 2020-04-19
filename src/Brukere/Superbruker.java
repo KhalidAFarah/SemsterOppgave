@@ -1,51 +1,53 @@
 package Brukere;
 
-public class Superbruker extends Bruker {
-    private static final boolean ADMIN = true;
-    private Bruker bruker;
+import javafx.beans.property.SimpleBooleanProperty;
 
-    public Superbruker(Bruker bruker) {
-        this.bruker = bruker;
+public class Superbruker extends Bruker {
+    private static final SimpleBooleanProperty ADMIN = new SimpleBooleanProperty(true);
+
+
+    public Superbruker() {
+
     }
 
     public String getBrukernavn() {
-        return bruker.getBrukernavn();
+        return super.getBrukernavn();
     }
 
     public String getPassord() {
-        return bruker.getPassord();
+        return super.getPassord();
     }
 
     public String getEmail() {
-        return bruker.getEmail();
+        return super.getEmail();
     }
 
     public String getTlf() {
-        return bruker.getTlf();
+        return super.getTlf();
     }
 
     public boolean isAdmin() {
-        return ADMIN;
+        return ADMIN.getValue();
     }
 
     public void setBrukernavn(String brukernavn) {
-        bruker.setBrukernavn(brukernavn);
+        super.setBrukernavn(brukernavn);
     }
 
     public void setPassord(String passord) {
-        bruker.setPassord(passord);
+        super.setPassord(passord);
     }
 
     public void setEmail(String email) {
-        bruker.setEmail(email);
+        super.setEmail(email);
     }
 
     public void setTlf(String tlf) {
-        bruker.setTlf(tlf);
+        super.setTlf(tlf);
     }
 
     public String toStringFormat() {
-        return bruker.toStringFormat() + ADMIN + ";";
+        return super.toStringFormat() + isAdmin() + ";";
     }
 
 }

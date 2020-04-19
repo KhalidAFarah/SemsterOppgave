@@ -1,49 +1,65 @@
 package Brukere;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Bruker {
-    private String brukernavn;
-    private String passord;
-    private String email;
-    private String tlf;
+    private SimpleIntegerProperty ID;
+    private SimpleStringProperty brukernavn;
+    private SimpleStringProperty passord;
+    private SimpleStringProperty email;
+    private SimpleStringProperty tlf;
+
+    public Bruker (){
+        ID = new SimpleIntegerProperty();
+        brukernavn = new SimpleStringProperty();
+        passord = new SimpleStringProperty();
+        email = new SimpleStringProperty();
+        tlf = new SimpleStringProperty();
+    }
 
     public String getBrukernavn() {
-        return brukernavn;
+        return brukernavn.getValue();
     }
 
     public String getPassord() {
-        return passord;
+        return passord.getValue();
     }
 
     public String getEmail() {
-        return email;
+        return email.getValue();
     }
 
     public String getTlf() {
-        return tlf;
+        return tlf.getValue();
     }
 
     public boolean isAdmin() {
         return false;
     }
 
+    public int getID(){return ID.getValue();}
+
     public void setBrukernavn(String brukernavn) {
-        this.brukernavn = brukernavn;
+        this.brukernavn.setValue(brukernavn);
     }
 
     public void setPassord(String passord) {
-        this.passord = passord;
+        this.passord.setValue(passord);
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email.setValue(email);
     }
 
     public void setTlf(String tlf) {
-        this.tlf = tlf;
+        this.tlf.setValue(tlf);
     }
+
+    public void setID(int ID){this.ID.setValue(ID);}
 
 
     public String toStringFormat() {
-        return brukernavn + ";" + passord + ";" + email + ";" + tlf + ";";
+        return getBrukernavn() + ";" + getPassord() + ";" + getEmail() + ";" + getTlf() + ";";
     }
 }

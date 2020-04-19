@@ -20,7 +20,7 @@ public class Mellom_side_SuperbrukerController {
 
         try {
             Parent Mellom_side_Superbruker = FXMLLoader.load(getClass().getResource("Visbruker_Superbruker.fxml"));
-            Scene  VisBruker_Super = new Scene(Mellom_side_Superbruker);
+            Scene VisBruker_Super = new Scene(Mellom_side_Superbruker);
             Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_12.setScene(VisBruker_Super);
             Scene_12.setHeight(420);
@@ -49,6 +49,7 @@ public class Mellom_side_SuperbrukerController {
 
         }
     }
+
     @FXML
     void On_Click_BtnReturnerTilStart(ActionEvent event) {
 

@@ -92,14 +92,15 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         tableView.setItems(komponenter.getMainArray());
     }
 
-    private void succeded(WorkerStateEvent event){
+    private void succeded(WorkerStateEvent event) {
         tableView.setDisable(false);
         btnLeggTil.setDisable(false);
         btnFjern.setDisable(false);
         btnRediger.setDisable(false);
         btnTilbake.setDisable(false);
     }
-    private void failed(WorkerStateEvent event){
+
+    private void failed(WorkerStateEvent event) {
         tableView.setDisable(false);
         btnLeggTil.setDisable(false);
         btnFjern.setDisable(false);
@@ -128,9 +129,9 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         Thread tr = new Thread(data);
         tr.start();
 
-        try{
+        try {
             tr.sleep(1000);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppe tråden");
         }
     }
@@ -445,6 +446,13 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
             btnVisSpecs.setLayoutY(15);
             btnVisSpecs.setLayoutX(350);
 
+            Button btnSkjulSpecs = new Button("Tilbake");
+            btnSkjulSpecs.setLayoutY(15);
+            btnSkjulSpecs.setLayoutX(350);
+
+            LeggTilKomponent_pane.getChildren().add(btnSkjulSpecs);
+            btnSkjulSpecs.setVisible(false);
+
             btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -479,12 +487,16 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
                         });
 
                         LeggTilKomponent_pane.getChildren().add(list);
-                        btnVisSpecs.setText("Tilbake");
-                        btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
+                        btnVisSpecs.setVisible(false);
+                        btnSkjulSpecs.setVisible(true);
+
+                        btnSkjulSpecs.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
-                                public void handle(ActionEvent event) {
-                                    list.setVisible(false);
-                                    tableSøk.setVisible(true);
+                            public void handle(ActionEvent event) {
+                                list.setVisible(false);
+                                tableSøk.setVisible(true);
+                                btnSkjulSpecs.setVisible(false);
+                                btnVisSpecs.setVisible(true);
                             }
                         });
                     }
