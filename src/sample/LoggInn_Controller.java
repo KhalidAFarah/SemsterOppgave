@@ -136,7 +136,7 @@ public class LoggInn_Controller implements Initializable {
 
                         //paserer inn data i standardBruker_Controller
                         Standardbruker_Controller controller = loader.getController();
-                        controller.initBruker((Standardbruker) brukere.getArray().get(i));
+                        controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere);
 
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -1,7 +1,9 @@
 package sample;
 
+import Brukere.Register;
 import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
+import filbehandling.FiledataTxt;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -51,14 +53,29 @@ public class Standardbruker_Controller implements Initializable {
     private Komponenter komponenter = new Komponenter();
 
     private int kompNr;
+    private Register brukere;
+    private FiledataTxt lagreTxt;
+    private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+
+    private void save() {
+        lagreTxt = new FiledataTxt();
+        try {
+            lagreTxt.save(brukere.toStringTxt(), path);
+        } catch (IOException e) {
+            //txtError.setText(e.getMessage());
+            showMessageDialog(null, e.getMessage());
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadKomponenter();
     }
 
-    public void initBruker(Standardbruker bruker) {
+    public void initBruker(Standardbruker bruker, Register brukere) {
         this.bruker = bruker;
+        this.brukere = brukere;
+
     }
 
     public void loadKomponenter() {
@@ -114,6 +131,7 @@ public class Standardbruker_Controller implements Initializable {
                         for(int j = 0; j < komponenter.getMainArray().size(); j++){
                             if(komponenter.getMainArray().get(j).getNavn().equals(label.getText())){
                                 bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
+                                save();
                             }
                         }
                     }
@@ -132,7 +150,7 @@ public class Standardbruker_Controller implements Initializable {
         int y = 50;
         if (bruker != null) {
             for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
-                Label label = new Label(komponenter.getMainArray().get(i).getNavn());
+                Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
                 label.setLayoutY(y);
                 Button btn = new Button("Fjern");
                 btn.setLayoutY(y + 25);
@@ -142,8 +160,13 @@ public class Standardbruker_Controller implements Initializable {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        bruker.getHandelskurv().getMainArray().remove(kompNr);
+                        for(int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++){
+                            if(bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())){
+                                bruker.getHandelskurv().getMainArray().remove(j);
+                            }
+                        }
                         updateVarer();
+                        save();
                     }
                 });
                 pane.getChildren().add(label);
@@ -173,8 +196,13 @@ public class Standardbruker_Controller implements Initializable {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        bruker.getHandelskurv().getMainArray().remove(kompNr);
+                        for(int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++){
+                            if(bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())){
+                                bruker.getHandelskurv().getMainArray().remove(j);
+                            }
+                        }
                         updateVarer();
+                        save();
                     }
                 });
                 pane.getChildren().add(label);
