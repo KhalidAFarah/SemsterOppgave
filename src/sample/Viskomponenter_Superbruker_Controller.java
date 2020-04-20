@@ -76,7 +76,7 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         loadKomponenter();
 
         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
+        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
         TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
         //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
@@ -149,7 +149,7 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
 
     private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError) {
         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
+        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
         TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
         //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
