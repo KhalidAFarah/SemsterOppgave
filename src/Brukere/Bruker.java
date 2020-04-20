@@ -10,7 +10,6 @@ public abstract class Bruker {
     private SimpleStringProperty passord;
     private SimpleStringProperty email;
     private SimpleStringProperty tlf;
-    private static SimpleBooleanProperty ADMIN;
 
     public Bruker (){
         ID = new SimpleIntegerProperty();
