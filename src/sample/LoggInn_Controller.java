@@ -1,6 +1,7 @@
 package sample;
 
 import Brukere.*;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import filbehandling.FiledataTxt;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
@@ -108,8 +109,15 @@ public class LoggInn_Controller implements Initializable {
                 System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
 
+
+
                     try {
-                        Parent Logg_inn = FXMLLoader.load(getClass().getResource("Mellom_Side_Superbruker.fxml"));
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
+                        Parent Logg_inn = loader.load();
+
+                        Mellom_side_SuperbrukerController Controller = loader.getController();
+
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);

@@ -1,5 +1,7 @@
 package sample;
 
+import Brukere.*;
+import Brukere.Register;
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
 import javafx.concurrent.WorkerStateEvent;
@@ -69,25 +71,27 @@ public class Visbruker_Superbruker_Controller implements Initializable {
     private boolean showFjern = false;
     private boolean showRediger = false;
 
+    private Register brukere;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadKomponenter();
 
-        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
-        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+        TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
+        TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
+        TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
+        TableColumn<Bruker, String> tlfKolonne = new TableColumn<>("tlf");
+        TableColumn<Bruker, String> emailKolonne = new TableColumn<>("email");
 
-        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+        IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
+        brukernavnKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
+        passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
+        tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
+        emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
 
-        tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+        tableView.getColumns().addAll(IDKolonne, brukernavnKolonne,passordKolonne, tlfKolonne, emailKolonne);
 
-        tableView.setItems(komponenter.getMainArray());
+        tableView.setItems(brukere.getArray());
     }
 
     private void succeded(WorkerStateEvent event) {
@@ -536,5 +540,8 @@ public class Visbruker_Superbruker_Controller implements Initializable {
             e.printStackTrace();
         }
 
+    }
+    public void initBrukere(Register brukere){
+        this.brukere= brukere;
     }
 }

@@ -1,6 +1,7 @@
 package sample;
 
 
+import Brukere.Register;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +16,20 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Mellom_side_SuperbrukerController {
 
+    private Register brukere;
+
     @FXML
     void On_Click_BtnVisBrukere(ActionEvent event) {
 
         try {
-            Parent Mellom_side_Superbruker = FXMLLoader.load(getClass().getResource("Visbruker_Superbruker.fxml"));
-            Scene VisBruker_Super = new Scene(Mellom_side_Superbruker);
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Visbruker_Superbruker.fxml"));
+            Parent Mellom_side_superbruker = loader.load();
+
+            Visbruker_Superbruker_Controller controller = loader.getController();
+            controller.initBrukere(brukere);
+            Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
             Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_12.setScene(VisBruker_Super);
             Scene_12.setHeight(420);
@@ -65,6 +74,9 @@ public class Mellom_side_SuperbrukerController {
             e.printStackTrace();
         }
 
+    }
+    public void initBrukere(Register brukere){
+        this.brukere= brukere;
     }
 
 }
