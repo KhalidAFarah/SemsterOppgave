@@ -116,7 +116,8 @@ public class LoggInn_Controller implements Initializable {
                         loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
                         Parent Logg_inn = loader.load();
 
-                        Mellom_side_SuperbrukerController Controller = loader.getController();
+                        Mellom_side_SuperbrukerController controller = loader.getController();
+                        controller.initBrukere(brukere);
 
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -29,6 +29,8 @@ public class Mellom_side_SuperbrukerController {
 
             Visbruker_Superbruker_Controller controller = loader.getController();
             controller.initBrukere(brukere);
+            controller.start();
+
             Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
             Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_12.setScene(VisBruker_Super);
@@ -63,7 +65,12 @@ public class Mellom_side_SuperbrukerController {
     void On_Click_BtnReturnerTilStart(ActionEvent event) {
 
         try {
-            Parent Superbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("LoggInn.fxml"));
+            Parent Superbruker = loader.load();
+
+            LoggInn_Controller controller = loader.getController();
+            controller.setRegister(brukere);
             Scene LoggInn = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(LoggInn);

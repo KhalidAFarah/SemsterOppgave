@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class Visbruker_Superbruker_Controller implements Initializable {
+public class Visbruker_Superbruker_Controller {
 
     @FXML
     private SubScene LeggTilKomponent_sub;
@@ -73,25 +73,27 @@ public class Visbruker_Superbruker_Controller implements Initializable {
 
     private Register brukere;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loadKomponenter();
+    public void start() {
+        if(brukere != null) {
 
-        TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
-        TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
-        TableColumn<Bruker, String> tlfKolonne = new TableColumn<>("tlf");
-        TableColumn<Bruker, String> emailKolonne = new TableColumn<>("email");
+            TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
+            TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
+            TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
+            TableColumn<Bruker, String> tlfKolonne = new TableColumn<>("tlf");
+            TableColumn<Bruker, String> emailKolonne = new TableColumn<>("email");
 
-        IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
-        brukernavnKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
-        passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
-        tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
-        emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
+            IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
+            brukernavnKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
+            passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
+            tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
+            emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
 
-        tableView.getColumns().addAll(IDKolonne, brukernavnKolonne,passordKolonne, tlfKolonne, emailKolonne);
-
-        tableView.setItems(brukere.getArray());
+            tableView.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, tlfKolonne, emailKolonne);
+            //System.out.println(brukere.toStringTxt());
+            tableView.setItems(brukere.getArray());
+        }else if(this.brukere == null){
+            showMessageDialog(null, "brukere er null");
+        }
     }
 
     private void succeded(WorkerStateEvent event) {
@@ -529,7 +531,13 @@ public class Visbruker_Superbruker_Controller implements Initializable {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
         try {
-            Parent Superbruker = FXMLLoader.load(getClass().getResource("Mellom_side_Superbruker.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
+            Parent Superbruker = loader.load();
+
+            Mellom_side_SuperbrukerController controller = loader.getController();
+            controller.initBrukere(brukere);
+
             Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(Mellom_side);
@@ -542,6 +550,6 @@ public class Visbruker_Superbruker_Controller implements Initializable {
 
     }
     public void initBrukere(Register brukere){
-        this.brukere= brukere;
+        this.brukere = brukere;
     }
 }
