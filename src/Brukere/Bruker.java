@@ -1,14 +1,16 @@
 package Brukere;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Bruker {
+public abstract class Bruker {
     private SimpleIntegerProperty ID;
     private SimpleStringProperty brukernavn;
     private SimpleStringProperty passord;
     private SimpleStringProperty email;
     private SimpleStringProperty tlf;
+    private static SimpleBooleanProperty ADMIN;
 
     public Bruker (){
         ID = new SimpleIntegerProperty();

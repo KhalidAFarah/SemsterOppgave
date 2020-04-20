@@ -3,6 +3,8 @@ package sample;
 import Brukere.*;
 import Brukere.Register;
 import filbehandling.FiledataJOBJ;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import komponenter.*;
 
@@ -81,14 +84,23 @@ public class Visbruker_Superbruker_Controller {
             TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
             TableColumn<Bruker, String> tlfKolonne = new TableColumn<>("tlf");
             TableColumn<Bruker, String> emailKolonne = new TableColumn<>("email");
+            TableColumn<Bruker, Boolean> adminKolonne = new TableColumn<>("Admin");
 
             IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
             brukernavnKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
             passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
             tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
             emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
+            PropertyValueFactory<? extends Bruker, Boolean> sd = new PropertyValueFactory<>("ADMIN");
+            //adminKolonne.setCellValueFactory(sd);
+            adminKolonne.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bruker, Boolean>, ObservableValue<Boolean>>() {
+                @Override
+                public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Bruker, Boolean> param) {
+                    return new SimpleBooleanProperty(param.getValue().isAdmin());
+                }
+            });
 
-            tableView.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, tlfKolonne, emailKolonne);
+            tableView.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, tlfKolonne, emailKolonne, adminKolonne);
             //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
         }else if(this.brukere == null){
