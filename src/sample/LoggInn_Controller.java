@@ -90,14 +90,6 @@ public class LoggInn_Controller implements Initializable {
         } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppen tråden");
         }
-
-
-
-        try {
-            lese.loadBruker(brukere, path);
-        }catch (Exception e){
-            //for nå
-            showMessageDialog(null, "klarte ikke å laste inn data");
         }*/
     }
 
