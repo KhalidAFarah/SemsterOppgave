@@ -444,7 +444,7 @@ public class Visbruker_Superbruker_Controller {
                 @Override
                 public void handle(ActionEvent event) {
                     String ID = showInputDialog("Vennligst skriv inn brukerens ID");
-                    int valgtBruker;
+                    int valgtBruker = -1;
                     try{
                         valgtBruker = Integer.parseInt(ID);
                     }catch (Exception e){
@@ -453,9 +453,8 @@ public class Visbruker_Superbruker_Controller {
 
                     if(valgtBruker >= 0 &&
                             brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
-                            valgtBruker < ((Standardbruker) brukere.getArray().
-                                    get(valgtBruker)).getHandelskurv().getMainArray().size()){
-
+                            valgtBruker < brukere.getArray().size()){
+                        System.out.println("sdds");
                         tableSøk.getColumns().clear();
 
                         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
@@ -473,8 +472,7 @@ public class Visbruker_Superbruker_Controller {
                         tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
                         tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
                                     .getHandelskurv().getMainArray());
-                    }else if(valgtBruker >= ((Standardbruker) brukere.getArray().
-                            get(valgtBruker)).getHandelskurv().getMainArray().size()){
+                    }else if(valgtBruker >= brukere.getArray().size()){
                         showMessageDialog(null, "Vennligst velg en bruker som eksisterer");
                     }else if(!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)){
                         showMessageDialog(null, "Vennligst velg en kunde");
