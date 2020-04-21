@@ -24,6 +24,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.converter.BooleanStringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import komponenter.*;
 
@@ -75,6 +76,7 @@ public class Visbruker_Superbruker_Controller {
     private boolean showRediger = false;
 
     private Register brukere;
+    private Register brukere2 = new Register();
 
     public void start() {
         if(brukere != null) {
@@ -164,70 +166,90 @@ public class Visbruker_Superbruker_Controller {
     }
 
     private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError) {
-        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Navn");
-        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+        TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
+        TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
+        TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
+        TableColumn<Bruker, String> tlfKolonne = new TableColumn<>("tlf");
+        TableColumn<Bruker, String> emailKolonne = new TableColumn<>("email");
+        TableColumn<Bruker, Boolean> adminKolonne = new TableColumn<>("Admin");
 
-        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+        IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
+        brukernavnKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
+        passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
+        tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
+        emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
+        PropertyValueFactory<? extends Bruker, Boolean> sd = new PropertyValueFactory<>("ADMIN");
+        //adminKolonne.setCellValueFactory(sd);
+        adminKolonne.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bruker, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Bruker, Boolean> param) {
+                return new SimpleBooleanProperty(param.getValue().isAdmin());
+            }
+        });
 
-        tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
-        komp.setMainArray(komponenter.getMainArray());
-        tableSøk.setItems(komp.getMainArray());
+        tableSøk.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, emailKolonne, tlfKolonne, adminKolonne);
+        brukere2.setArray(brukere.getArray());
+        tableSøk.setItems(brukere2.getArray());
 
         txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                Predicate<Komponent> Navn = Komponent -> {
-                    boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                Predicate<Bruker> Navn = Bruker -> {
+                    boolean sjekk = Bruker.getBrukernavn().indexOf(txtSøk.getText()) != -1;
                     return sjekk;
                 };
 
-                komp.setMainArray(komponenter.getMainArray().stream().filter(Navn)
+                brukere2.setArray(brukere.getArray().stream().filter(Navn)
                         .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                tableSøk.setItems(komp.getMainArray());
+                tableSøk.setItems(brukere2.getArray());
             }
         });
 
         if (setEditAble) {//redigering
             tableSøk.setEditable(setEditAble);
-            DoubleStringConverter doubleString = new DoubleStringConverter();
+            BooleanStringConverter s = new BooleanStringConverter();
 
-            navnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-            typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-            prisKolonne.setCellFactory(TextFieldTableCell.forTableColumn(doubleString));
+            brukernavnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            passordKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            emailKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            tlfKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
 
-            navnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
+            brukernavnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
                 @Override
-                public void handle(TableColumn.CellEditEvent<Komponent, String> event) {
-                    event.getRowValue().setNavn(event.getNewValue());
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    event.getRowValue().setBrukernavn(event.getNewValue());
 
-                    navnKolonne.getTableView().refresh();
+                    brukernavnKolonne.getTableView().refresh();
 
-                    saveKomponenter(komponenter);
+                    //saveKomponenter(komponenter);
                 }
             });
-            typeKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
+            passordKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
                 @Override
-                public void handle(TableColumn.CellEditEvent<Komponent, String> event) {
-                    event.getRowValue().setType(event.getNewValue());
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    event.getRowValue().setPassord(event.getNewValue());
 
-                    typeKolonne.getTableView().refresh();
-                    saveKomponenter(komponenter);
+                    passordKolonne.getTableView().refresh();
+                    //saveKomponenter(komponenter);
                 }
             });
-            prisKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, Double>>() {
+            emailKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
                 @Override
-                public void handle(TableColumn.CellEditEvent<Komponent, Double> event) {
-                    event.getRowValue().setPris(event.getNewValue());
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    event.getRowValue().setEmail(event.getNewValue());
 
-                    prisKolonne.getTableView().refresh();
-                    saveKomponenter(komponenter);
+                    emailKolonne.getTableView().refresh();
+                    //saveKomponenter(komponenter);
+                }
+
+            });
+            tlfKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    event.getRowValue().setTlf(event.getNewValue());
+
+                    tlfKolonne.getTableView().refresh();
+                    //saveKomponenter(komponenter);
                 }
 
             });
@@ -236,7 +258,7 @@ public class Visbruker_Superbruker_Controller {
     }
 
     @FXML
-    void On_Click_BtnFjernKomponenter(ActionEvent event) {
+    void On_Click_BtnFjernBruker(ActionEvent event) {
         if (!showFjern) {
             LeggTilKomponent_pane.setVisible(true);
             LeggTilKomponent_sub.setVisible(true);
@@ -310,7 +332,7 @@ public class Visbruker_Superbruker_Controller {
     }
 
     @FXML
-    void On_Click_BtnLeggTilKomponenter(ActionEvent event) {
+    void On_Click_BtnVisKomponenterTilBrukeren(ActionEvent event) {
         if (!showLeggTil) {
             LeggTilKomponent_sub.setVisible(true);
             LeggTilKomponent_pane.setVisible(true);
@@ -435,7 +457,7 @@ public class Visbruker_Superbruker_Controller {
     }
 
     @FXML
-    void On_Click_BtnRedigerKomponenter(ActionEvent event) {
+    void On_Click_BtnRedigerBruker(ActionEvent event) {
         if (!showRediger) {
             LeggTilKomponent_pane.setVisible(true);
             LeggTilKomponent_sub.setVisible(true);
@@ -451,7 +473,7 @@ public class Visbruker_Superbruker_Controller {
             LeggTilKomponent_pane.getChildren().add(labelNavn);
             LeggTilKomponent_pane.getChildren().add(txtSøk);
             LeggTilKomponent_pane.getChildren().add(tableSøk);
-            LeggTilKomponent_pane.getChildren().add(btnVisSpecs);
+            //LeggTilKomponent_pane.getChildren().add(btnVisSpecs);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -459,17 +481,17 @@ public class Visbruker_Superbruker_Controller {
             txtSøk.setLayoutX(175);
             txtSøk.setLayoutY(15);
 
-            btnVisSpecs.setLayoutY(15);
-            btnVisSpecs.setLayoutX(350);
+            //btnVisSpecs.setLayoutY(15);
+            //btnVisSpecs.setLayoutX(350);
 
-            Button btnSkjulSpecs = new Button("Tilbake");
-            btnSkjulSpecs.setLayoutY(15);
-            btnSkjulSpecs.setLayoutX(350);
+            //Button btnSkjulSpecs = new Button("Tilbake");
+            //btnSkjulSpecs.setLayoutY(15);
+            //btnSkjulSpecs.setLayoutX(350);
 
-            LeggTilKomponent_pane.getChildren().add(btnSkjulSpecs);
-            btnSkjulSpecs.setVisible(false);
+            //LeggTilKomponent_pane.getChildren().add(btnSkjulSpecs);
+            //btnSkjulSpecs.setVisible(false);
 
-            btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
+            /*btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     String strID = showInputDialog("Skriv inn varens id");
@@ -517,7 +539,7 @@ public class Visbruker_Superbruker_Controller {
                         });
                     }
                 }
-            });
+            });*/
 
             Label labelError = new Label();
 
