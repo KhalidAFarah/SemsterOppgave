@@ -48,7 +48,13 @@ public class Mellom_side_SuperbrukerController {
     void On_Click_BtnVisKomponenter(ActionEvent event) {
 
         try {
-            Parent Mellom_side_Superbruker = FXMLLoader.load(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+            Parent Mellom_side_Superbruker = loader.load();
+
+            Viskomponenter_Superbruker_Controller controller = loader.getController();
+            controller.setBruker(brukere);
+
             Scene VisKomponenter_Super = new Scene(Mellom_side_Superbruker);
             Stage Scene_13 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_13.setScene(VisKomponenter_Super);

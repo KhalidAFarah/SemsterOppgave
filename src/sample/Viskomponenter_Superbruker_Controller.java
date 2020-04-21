@@ -1,5 +1,6 @@
 package sample;
 
+import Brukere.Register;
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +47,7 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
     @FXML
     private TableView tableView;
 
-    private String KomponentType;
+    private Register Brukere;
 
     private Komponenter komponenter = new Komponenter();
 
@@ -527,7 +528,13 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
         try {
-            Parent Superbruker = FXMLLoader.load(getClass().getResource("Mellom_side_Superbruker.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
+            Parent Superbruker = loader.load();
+
+            Mellom_side_SuperbrukerController controller = loader.getController();
+            controller.initBrukere(Brukere);
+
             Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(Mellom_side);
@@ -538,5 +545,8 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
             e.printStackTrace();
         }
 
+    }
+    public void setBruker(Register brukere){
+        this.Brukere = brukere;
     }
 }

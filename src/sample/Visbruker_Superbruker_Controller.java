@@ -2,7 +2,7 @@ package sample;
 
 import Brukere.*;
 import Brukere.Register;
-import filbehandling.FiledataJOBJ;
+import filbehandling.FiledataTxt;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -128,7 +128,7 @@ public class Visbruker_Superbruker_Controller {
         showMessageDialog(null, "Klarte ikke å laste inn varer!");
     }
 
-    public void loadKomponenter() {
+    /*public void loadKomponenter() {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = (Path) Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
@@ -152,14 +152,14 @@ public class Visbruker_Superbruker_Controller {
         } catch (InterruptedException e) {
             showMessageDialog(null, "Klarte ikke å stoppe tråden");
         }
-    }
+    }*/
 
-    public void saveKomponenter(Komponenter newKomponenter) {
-        FiledataJOBJ data = new FiledataJOBJ();
-        Path path = (Path) Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
+    public void saveBrukere(){
+        FiledataTxt data = new FiledataTxt();
+        Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
         try {
-            data.save(newKomponenter, (java.nio.file.Path) path);
+            data.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
             showMessageDialog(null, "klarte ikke å laste inn data");// for nå
         }
@@ -221,7 +221,7 @@ public class Visbruker_Superbruker_Controller {
 
                     brukernavnKolonne.getTableView().refresh();
 
-                    //saveKomponenter(komponenter);
+                    saveBrukere();
                 }
             });
             passordKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
@@ -230,7 +230,7 @@ public class Visbruker_Superbruker_Controller {
                     event.getRowValue().setPassord(event.getNewValue());
 
                     passordKolonne.getTableView().refresh();
-                    //saveKomponenter(komponenter);
+                    saveBrukere();
                 }
             });
             emailKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
@@ -239,7 +239,7 @@ public class Visbruker_Superbruker_Controller {
                     event.getRowValue().setEmail(event.getNewValue());
 
                     emailKolonne.getTableView().refresh();
-                    //saveKomponenter(komponenter);
+                    saveBrukere();
                 }
 
             });
@@ -249,7 +249,7 @@ public class Visbruker_Superbruker_Controller {
                     event.getRowValue().setTlf(event.getNewValue());
 
                     tlfKolonne.getTableView().refresh();
-                    //saveKomponenter(komponenter);
+                    saveBrukere();
                 }
 
             });
@@ -308,13 +308,13 @@ public class Visbruker_Superbruker_Controller {
                     }
                     if (valgtKomponent != -1) {
 
-                        komponenter.remove(valgtKomponent);
-                        komp.setMainArray(komponenter.getMainArray());
+                        brukere.remove(valgtKomponent);
+                        brukere2.setArray(brukere.getArray());
 
-                        tableSøk.setItems(komp.getMainArray());
-                        tableView.setItems(komponenter.getMainArray());
+                        tableSøk.setItems(brukere2.getArray());
+                        tableView.setItems(brukere.getArray());
 
-                        saveKomponenter(komponenter);
+                        saveBrukere();
 
                     }
                 }
@@ -439,7 +439,7 @@ public class Visbruker_Superbruker_Controller {
                                 komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
                             }
                             //deretter lagre Komponenter
-                            saveKomponenter(komponenter);
+                            //saveKomponenter(komponenter);
                         }
                     });
                 }
