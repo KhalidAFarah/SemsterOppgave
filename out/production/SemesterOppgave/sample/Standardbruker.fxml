@@ -11,19 +11,19 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1"
+            prefWidth="600.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_Controller">
     <children>
         <Button fx:id="btnTilbake" layoutX="460.0" layoutY="297.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnTilbake" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;"
                 text="Tilbake" textFill="WHITE">
             <font>
-                <Font name="Futura Bold" size="10.0"/>
+                <Font name="Helvetica Bold" size="11.0"/>
             </font>
         </Button>
         <Label layoutX="22.0" layoutY="57.0" prefHeight="18.0" prefWidth="98.0" text="Velg maskin:">
             <font>
-                <Font name="Futura Bold" size="14.0"/>
+                <Font name="Helvetica Bold" size="14.0"/>
             </font>
         </Label>
         <TextField fx:id="txtMaskin" layoutX="22.0" layoutY="82.0" prefHeight="26.0" prefWidth="137.0"/>
@@ -42,7 +42,7 @@
         <Button layoutX="328.0" layoutY="279.0" mnemonicParsing="false" onAction="#On_Click_Btn_Minnebrikke"
                 prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="RAM minnebrikke">
             <font>
-                <Font name="Futura Medium" size="11.0"/>
+                <Font name="Helvetica Bold" size="11.0"/>
             </font>
         </Button>
         <Button layoutX="193.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Harddisk"
@@ -85,10 +85,10 @@
             </children>
         </AnchorPane>
         <Button fx:id="btnKurv" layoutX="200.0" layoutY="296.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv"
-                prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;" text="din handlekurv"
+                prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;" text="Din handlekurv"
                 textFill="WHITE">
             <font>
-                <Font name="Futura Bold" size="10.0"/>
+                <Font name="Helvetica Bold" size="11.0"/>
             </font>
         </Button>
     </children>
