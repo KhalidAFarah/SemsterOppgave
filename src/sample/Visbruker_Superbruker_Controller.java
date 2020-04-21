@@ -6,6 +6,7 @@ import filbehandling.FiledataTxt;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -290,25 +291,35 @@ public class Visbruker_Superbruker_Controller {
             søk(txtSøk, tableSøk, false, new Label());
 
             //slette komponenter
-            Button btnFjern = new Button("Fjern vare");
-            LeggTilKomponent_pane.getChildren().add(btnFjern);
-            btnFjern.setLayoutX(425);
-            btnFjern.setLayoutY(15);
+            Button btnFjernBruker = new Button("Fjern bruker");
+            Button btnFjernVare = new Button("Fjern en brukers vare");
+            Button btnFjernVare2 = new Button("Fjern en brukerens vare");
+            LeggTilKomponent_pane.getChildren().add(btnFjernBruker);
+            LeggTilKomponent_pane.getChildren().add(btnFjernVare);
+            LeggTilKomponent_pane.getChildren().add(btnFjernVare2);
+            btnFjernBruker.setLayoutX(425);
+            btnFjernBruker.setLayoutY(15);
+            btnFjernVare.setLayoutX(425);
+            btnFjernVare2.setLayoutX(425);
+            btnFjernVare.setLayoutY(50);
+            btnFjernVare2.setLayoutY(50);
 
-            btnFjern.setOnAction(new EventHandler<ActionEvent>() {
+            btnFjernVare2.setVisible(false);
+
+            btnFjernBruker.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     String melding = showInputDialog(null, "Skriv varens ID");
-                    int valgtKomponent;
+                    int valgtBruker;
                     try {
-                        valgtKomponent = Integer.parseInt(melding);
+                        valgtBruker = Integer.parseInt(melding);
                     } catch (Exception e) {
                         showMessageDialog(null, "Vennligst skriv inn riktig varens ID");
-                        valgtKomponent = -1;
+                        valgtBruker = -1;
                     }
-                    if (valgtKomponent != -1) {
+                    if (valgtBruker != -1) {
 
-                        brukere.remove(valgtKomponent);
+                        brukere.remove(valgtBruker);
                         brukere2.setArray(brukere.getArray());
 
                         tableSøk.setItems(brukere2.getArray());
@@ -319,6 +330,69 @@ public class Visbruker_Superbruker_Controller {
                     }
                 }
             });
+
+            btnFjernVare.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    String melding = showInputDialog(null, "Skriv varens ID");
+                    int valgtBruker;
+                    try {
+                        valgtBruker = Integer.parseInt(melding);
+                    } catch (Exception e) {
+                        showMessageDialog(null, "Vennligst skriv inn riktig varens ID");
+                        valgtBruker = -1;
+                    }
+                    IDs = valgtBruker;
+
+                    if(brukere.getArray().get(valgtBruker) instanceof Standardbruker){
+
+                        tableSøk.getColumns().clear();
+
+                        //senere bruke komponenter sin søk
+
+                        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
+                        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+                        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+
+                        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+
+                        tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+
+                        tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker)).
+                                getHandelskurv().getMainArray());
+                        btnFjernVare.setVisible(false);
+                        btnFjernVare2.setVisible(true);
+
+                        btnFjernVare2.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                String id = showInputDialog("Skiv inn varens ID");
+                                int valgtKomponent;
+                                try{
+                                    valgtKomponent = Integer.parseInt(id);
+                                }catch (Exception e){
+                                    showMessageDialog(null, "venligst skriv inn et gyldig tall");
+                                    valgtKomponent = -1;
+                                }
+
+                                if(valgtKomponent >= 0){
+                                    ((Standardbruker) brukere.getArray().get(IDs)).getHandelskurv().remove(valgtKomponent);
+                                    saveBrukere();
+                                }
+                            }
+                        });
+
+                    }else{
+                        showMessageDialog(null, "denne brukeren er ikke en kunde! \n Og" +
+                                " derfor har ikke en handelskurv der varer kan fjernes");
+                    }
+                }
+            });
+
             showFjern = true;
             showRediger = false;
             showLeggTil = false;
@@ -570,7 +644,7 @@ public class Visbruker_Superbruker_Controller {
             Parent Superbruker = loader.load();
 
             Mellom_side_SuperbrukerController controller = loader.getController();
-            controller.initBrukere(brukere);
+            controller.initBrukere(brukere, komponenter);
 
             Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -583,7 +657,8 @@ public class Visbruker_Superbruker_Controller {
         }
 
     }
-    public void initBrukere(Register brukere){
+    public void initBrukere(Register brukere, Komponenter komponenter){
         this.brukere = brukere;
+        this.komponenter = komponenter;
     }
 }

@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import komponenter.Komponent;
+import komponenter.Komponenter;
 
 import java.io.IOException;
 
@@ -17,6 +19,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class Mellom_side_SuperbrukerController {
 
     private Register brukere;
+    private Komponenter komponenter;
 
     @FXML
     void On_Click_BtnVisBrukere(ActionEvent event) {
@@ -28,7 +31,7 @@ public class Mellom_side_SuperbrukerController {
             Parent Mellom_side_superbruker = loader.load();
 
             Visbruker_Superbruker_Controller controller = loader.getController();
-            controller.initBrukere(brukere);
+            controller.initBrukere(brukere, komponenter);
             controller.start();
 
             Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
@@ -53,7 +56,8 @@ public class Mellom_side_SuperbrukerController {
             Parent Mellom_side_Superbruker = loader.load();
 
             Viskomponenter_Superbruker_Controller controller = loader.getController();
-            controller.setBruker(brukere);
+            controller.setBruker(brukere, komponenter);
+            controller.start();
 
             Scene VisKomponenter_Super = new Scene(Mellom_side_Superbruker);
             Stage Scene_13 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -76,7 +80,7 @@ public class Mellom_side_SuperbrukerController {
             Parent Superbruker = loader.load();
 
             LoggInn_Controller controller = loader.getController();
-            controller.setRegister(brukere);
+            controller.setRegister(brukere, komponenter);
             Scene LoggInn = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(LoggInn);
@@ -88,8 +92,9 @@ public class Mellom_side_SuperbrukerController {
         }
 
     }
-    public void initBrukere(Register brukere){
+    public void initBrukere(Register brukere, Komponenter komponenter){
         this.brukere= brukere;
+        this.komponenter = komponenter;
     }
 
 }

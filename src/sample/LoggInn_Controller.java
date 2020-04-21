@@ -2,6 +2,7 @@ package sample;
 
 import Brukere.*;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import komponenter.Komponenter;
 
 import static javax.swing.JOptionPane.*;
 
@@ -43,13 +45,11 @@ public class LoggInn_Controller implements Initializable {
     @FXML
     private Button btnAvslutt;
 
-    private Register brukere = new Register();
+    private Register brukere;
 
-    public void setRegister(Register reg) {
-        brukere = reg;
-    }
+    private Komponenter komponenter;
 
-    private void Succeded(WorkerStateEvent event) {
+    private void succededKomponenter(WorkerStateEvent event) {
         txtBrukernavn.setDisable(false);
         txtPassord.setDisable(false);
         btnLogginn.setDisable(false);
@@ -57,7 +57,62 @@ public class LoggInn_Controller implements Initializable {
         btnAvslutt.setDisable(false);
     }
 
-    private void Failed(WorkerStateEvent event) {
+    private void failedKomponenter(WorkerStateEvent event) {
+        txtBrukernavn.setDisable(false);
+        txtPassord.setDisable(false);
+        btnLogginn.setDisable(false);
+        btnRegistrer.setDisable(false);
+        btnAvslutt.setDisable(false);
+
+        showMessageDialog(null, "Klarte ikke å laste inn varer!");
+    }
+
+    public void loadKomponenter() {
+        if(komponenter == null) {
+            komponenter = new Komponenter();
+            System.out.println("hal");
+            FiledataJOBJ data = new FiledataJOBJ();
+            Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
+
+            data.setKomponent(komponenter);
+            data.setPath(path);
+
+            data.setOnSucceeded(this::succededKomponenter);
+            data.setOnFailed(this::failedKomponenter);
+
+            txtBrukernavn.setDisable(true);
+            txtPassord.setDisable(true);
+            btnLogginn.setDisable(true);
+            btnRegistrer.setDisable(true);
+
+            Thread tr = new Thread(data);
+            tr.start();
+
+            try {
+                tr.sleep(1000);
+            } catch (InterruptedException e) {
+                showMessageDialog(null, "Klarte ikke å stoppe tråden");
+            }
+        }
+    }
+
+    public void setRegister(Register reg, Komponenter komponenter) {
+        this.brukere = reg;
+        this.komponenter = komponenter;
+    }
+    public void setRegister(Register reg) {
+        this.brukere = reg;
+    }
+
+    private void SuccededBruker(WorkerStateEvent event) {
+        txtBrukernavn.setDisable(false);
+        txtPassord.setDisable(false);
+        btnLogginn.setDisable(false);
+        btnRegistrer.setDisable(false);
+        btnAvslutt.setDisable(false);
+    }
+
+    private void FailedBruker(WorkerStateEvent event) {
         txtBrukernavn.setDisable(false);
         txtPassord.setDisable(false);
         btnLogginn.setDisable(false);
@@ -67,31 +122,33 @@ public class LoggInn_Controller implements Initializable {
         showMessageDialog(null, "Klarte ikke laste inn lagert data");
     }
 
-    private void load() {
-        FiledataTxt lese = new FiledataTxt();
-        Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+    private void loadBruker() {
+        if(brukere == null) {
+            brukere = new Register();
+            FiledataTxt lese = new FiledataTxt();
+            Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
-        lese.setPathTxt(path);
-        lese.setRegister(brukere);
+            lese.setPathTxt(path);
+            lese.setRegister(brukere);
 
-        txtBrukernavn.setDisable(true);
-        txtPassord.setDisable(true);
-        btnLogginn.setDisable(true);
-        btnRegistrer.setDisable(true);
+            txtBrukernavn.setDisable(true);
+            txtPassord.setDisable(true);
+            btnLogginn.setDisable(true);
+            btnRegistrer.setDisable(true);
 
-        lese.setOnSucceeded(this::Succeded);
-        lese.setOnFailed(this::Failed);
+            lese.setOnSucceeded(this::SuccededBruker);
+            lese.setOnFailed(this::FailedBruker);
 
-        Thread tr = new Thread(lese);
-        //tr.setDaemon(true);
-        tr.start();
+            Thread tr = new Thread(lese);
+            //tr.setDaemon(true);
+            tr.start();
 
-        /*try {
-            tr.sleep(5000);
-        } catch (InterruptedException e) {
-            showMessageDialog(null, "Klarte ikke å stoppen tråden");
+            try {
+                tr.sleep(1000);
+            } catch (InterruptedException e) {
+                showMessageDialog(null, "Klarte ikke å stoppen tråden");
+            }
         }
-        }*/
     }
 
     @FXML
@@ -117,7 +174,7 @@ public class LoggInn_Controller implements Initializable {
                         Parent Logg_inn = loader.load();
 
                         Mellom_side_SuperbrukerController controller = loader.getController();
-                        controller.initBrukere(brukere);
+                        controller.initBrukere(brukere, komponenter);
 
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -137,7 +194,7 @@ public class LoggInn_Controller implements Initializable {
 
                         //paserer inn data i standardBruker_Controller
                         Standardbruker_Controller controller = loader.getController();
-                        controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere);
+                        controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
 
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -188,6 +245,7 @@ public class LoggInn_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        load();
+        loadBruker();
+        loadKomponenter();
     }
 }

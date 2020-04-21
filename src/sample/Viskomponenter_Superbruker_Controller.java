@@ -36,7 +36,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Viskomponenter_Superbruker_Controller implements Initializable {
+public class Viskomponenter_Superbruker_Controller {
 
     @FXML
     private SubScene LeggTilKomponent_sub;
@@ -72,10 +72,7 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
     private boolean showFjern = false;
     private boolean showRediger = false;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loadKomponenter();
-
+    public void start() {
         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
         TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
@@ -93,49 +90,7 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         tableView.setItems(komponenter.getMainArray());
     }
 
-    private void succeded(WorkerStateEvent event) {
-        tableView.setDisable(false);
-        btnLeggTil.setDisable(false);
-        btnFjern.setDisable(false);
-        btnRediger.setDisable(false);
-        btnTilbake.setDisable(false);
-    }
 
-    private void failed(WorkerStateEvent event) {
-        tableView.setDisable(false);
-        btnLeggTil.setDisable(false);
-        btnFjern.setDisable(false);
-        btnRediger.setDisable(false);
-        btnTilbake.setDisable(false);
-
-        showMessageDialog(null, "Klarte ikke å laste inn varer!");
-    }
-
-    public void loadKomponenter() {
-        FiledataJOBJ data = new FiledataJOBJ();
-        Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
-
-        data.setKomponent(komponenter);
-        data.setPath(path);
-
-        data.setOnSucceeded(this::succeded);
-        data.setOnFailed(this::failed);
-
-        tableView.setDisable(true);
-        btnLeggTil.setDisable(true);
-        btnFjern.setDisable(true);
-        btnRediger.setDisable(true);
-        btnTilbake.setDisable(true);
-
-        Thread tr = new Thread(data);
-        tr.start();
-
-        try {
-            tr.sleep(1000);
-        } catch (InterruptedException e) {
-            showMessageDialog(null, "Klarte ikke å stoppe tråden");
-        }
-    }
 
     public void saveKomponenter(Komponenter newKomponenter) {
         FiledataJOBJ data = new FiledataJOBJ();
@@ -533,7 +488,7 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
             Parent Superbruker = loader.load();
 
             Mellom_side_SuperbrukerController controller = loader.getController();
-            controller.initBrukere(Brukere);
+            controller.initBrukere(Brukere, komponenter);
 
             Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -546,7 +501,8 @@ public class Viskomponenter_Superbruker_Controller implements Initializable {
         }
 
     }
-    public void setBruker(Register brukere){
+    public void setBruker(Register brukere, Komponenter komponenter){
         this.Brukere = brukere;
+        this.komponenter = komponenter;
     }
 }

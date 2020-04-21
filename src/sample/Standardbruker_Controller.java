@@ -31,7 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Standardbruker_Controller implements Initializable {
+public class Standardbruker_Controller{
 
     @FXML
     private ImageView img_Techmet;
@@ -67,15 +67,10 @@ public class Standardbruker_Controller implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loadKomponenter();
-    }
-
-    public void initBruker(Standardbruker bruker, Register brukere) {
+    public void initBruker(Standardbruker bruker, Register brukere, Komponenter komponenter) {
         this.bruker = bruker;
         this.brukere = brukere;
-
+        this.komponenter = komponenter;
     }
 
     public void loadKomponenter() {
