@@ -8,19 +8,19 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0"
-            prefWidth="447.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1"
+            prefWidth="447.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Controller">
     <children>
-        <Label layoutX="61.0" layoutY="153.0" prefHeight="33.0" prefWidth="325.0"
+        <Label layoutX="62.0" layoutY="153.0" prefHeight="33.0" prefWidth="325.0"
                text="Du har nå laget en bruker, vil du nå?">
             <font>
-                <Font name="Futura Medium" size="19.0"/>
+                <Font name="Helvetica Bold" size="18.0"/>
             </font>
         </Label>
         <Button layoutX="61.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker"
                 prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
             <font>
-                <Font name="Candara Light" size="14.0"/>
+                <Font name="Helvetica" size="13.0"/>
             </font>
         </Button>
         <Button layoutX="250.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn"
@@ -34,10 +34,5 @@
                 <Image url="@../img/logo1.png"/>
             </image>
         </ImageView>
-        <Label layoutX="204.0" layoutY="216.0" prefHeight="23.0" prefWidth="45.0" text="Eller">
-            <font>
-                <Font name="Comic Sans MS" size="15.0"/>
-            </font>
-        </Label>
     </children>
 </AnchorPane>
