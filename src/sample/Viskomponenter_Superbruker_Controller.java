@@ -91,7 +91,6 @@ public class Viskomponenter_Superbruker_Controller {
     }
 
 
-
     public void saveKomponenter(Komponenter newKomponenter) {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
@@ -501,7 +500,8 @@ public class Viskomponenter_Superbruker_Controller {
         }
 
     }
-    public void setBruker(Register brukere, Komponenter komponenter){
+
+    public void setBruker(Register brukere, Komponenter komponenter) {
         this.Brukere = brukere;
         this.komponenter = komponenter;
     }

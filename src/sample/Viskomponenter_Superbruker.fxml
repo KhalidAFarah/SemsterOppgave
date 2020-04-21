@@ -19,7 +19,7 @@
         <Separator layoutY="67.0" prefHeight="3.0" prefWidth="610.0"/>
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="210.0" layoutY="-35.0">
             <image>
-            <Image url="@../img/logo3.png"/>
+                <Image url="@../img/logo3.png"/>
             </image>
         </ImageView>
         <Button fx:id="btnLeggTil" layoutY="68.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter"

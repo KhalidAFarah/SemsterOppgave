@@ -68,7 +68,7 @@ public class LoggInn_Controller implements Initializable {
     }
 
     public void loadKomponenter() {
-        if(komponenter == null) {
+        if (komponenter == null) {
             komponenter = new Komponenter();
             System.out.println("hal");
             FiledataJOBJ data = new FiledataJOBJ();
@@ -100,6 +100,7 @@ public class LoggInn_Controller implements Initializable {
         this.brukere = reg;
         this.komponenter = komponenter;
     }
+
     public void setRegister(Register reg) {
         this.brukere = reg;
     }
@@ -123,7 +124,7 @@ public class LoggInn_Controller implements Initializable {
     }
 
     private void loadBruker() {
-        if(brukere == null) {
+        if (brukere == null) {
             brukere = new Register();
             FiledataTxt lese = new FiledataTxt();
             Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
@@ -165,7 +166,6 @@ public class LoggInn_Controller implements Initializable {
 
                 System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
-
 
 
                     try {
@@ -237,7 +237,7 @@ public class LoggInn_Controller implements Initializable {
 
     }
 
-    //Får å gå ut fra applikasjonen
+    //For å gå ut fra applikasjonen
     @FXML
     void onClick_btn_Avslutt(ActionEvent event) {
         Platform.exit();

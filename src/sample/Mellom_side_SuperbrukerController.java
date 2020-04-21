@@ -92,8 +92,9 @@ public class Mellom_side_SuperbrukerController {
         }
 
     }
-    public void initBrukere(Register brukere, Komponenter komponenter){
-        this.brukere= brukere;
+
+    public void initBrukere(Register brukere, Komponenter komponenter) {
+        this.brukere = brukere;
         this.komponenter = komponenter;
     }
 

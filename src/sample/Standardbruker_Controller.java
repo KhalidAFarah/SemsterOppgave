@@ -31,7 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Standardbruker_Controller{
+public class Standardbruker_Controller {
 
     @FXML
     private ImageView img_Techmet;
@@ -108,7 +108,7 @@ public class Standardbruker_Controller{
     private void visVarer(String type) {
         pane.getChildren().clear();
         int y = 50;
-        ArrayList<Integer> ints = new ArrayList<>(komponenter.getMainArray().size()-1);
+        ArrayList<Integer> ints = new ArrayList<>(komponenter.getMainArray().size() - 1);
         for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
             //ImageView img = new ImageView();
 
@@ -122,16 +122,15 @@ public class Standardbruker_Controller{
 
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent event){
-                        for(int j = 0; j < komponenter.getMainArray().size(); j++){
-                            if(komponenter.getMainArray().get(j).getNavn().equals(label.getText())){
+                    public void handle(ActionEvent event) {
+                        for (int j = 0; j < komponenter.getMainArray().size(); j++) {
+                            if (komponenter.getMainArray().get(j).getNavn().equals(label.getText())) {
                                 bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
                                 save();
                             }
                         }
                     }
                 });
-
 
 
                 pane.getChildren().add(label);
@@ -155,8 +154,8 @@ public class Standardbruker_Controller{
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        for(int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++){
-                            if(bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())){
+                        for (int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++) {
+                            if (bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())) {
                                 bruker.getHandelskurv().getMainArray().remove(j);
                             }
                         }
@@ -191,8 +190,8 @@ public class Standardbruker_Controller{
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        for(int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++){
-                            if(bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())){
+                        for (int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++) {
+                            if (bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())) {
                                 bruker.getHandelskurv().getMainArray().remove(j);
                             }
                         }
