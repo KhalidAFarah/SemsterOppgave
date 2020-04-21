@@ -408,116 +408,84 @@ public class Visbruker_Superbruker_Controller {
     @FXML
     void On_Click_BtnVisKomponenterTilBrukeren(ActionEvent event) {
         if (!showLeggTil) {
-            LeggTilKomponent_sub.setVisible(true);
             LeggTilKomponent_pane.setVisible(true);
+            LeggTilKomponent_sub.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(420);
-
+            Scene_4.setHeight(550);
             LeggTilKomponent_pane.getChildren().clear();
 
-            ChoiceBox choice = new ChoiceBox(FXCollections.observableArrayList(
-                    "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm"
-            ));
+            Label labelNavn = new Label("Søk produktnavn");
+            TextField txtSøk = new TextField();
+            TableView tableSøk = new TableView();
 
+            LeggTilKomponent_pane.getChildren().add(labelNavn);
+            LeggTilKomponent_pane.getChildren().add(txtSøk);
+            LeggTilKomponent_pane.getChildren().add(tableSøk);
 
-        /*String[] typer = {"Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm"};
+            labelNavn.setLayoutX(15);
+            labelNavn.setLayoutY(15);
 
-        for( String type : typer){
-            choice.set
-        }*/
-            Label label = new Label("Velg type");
-            label.setLayoutY(20);
-            label.setLayoutX(10);
-            LeggTilKomponent_pane.getChildren().add(label);
-            choice.setLayoutX(90);
-            choice.setLayoutY(15);
+            txtSøk.setLayoutX(175);
+            txtSøk.setLayoutY(15);
 
-            LeggTilKomponent_pane.getChildren().add(choice);
-            choice.setOnAction(new EventHandler<ActionEvent>() {
+            Label labelError = new Label();
+
+            tableSøk.setLayoutX(15);
+            tableSøk.setLayoutY(80);
+            tableSøk.setPrefHeight(275);
+            tableSøk.setPrefWidth(575);
+
+            Button btnVisKomponenter = new Button("Vis komponenter");
+
+            btnVisKomponenter.setLayoutY(15);
+            btnVisKomponenter.setLayoutX(300);
+
+            søk(txtSøk, tableSøk, false, labelError);
+
+            btnVisKomponenter.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    //senere i egen fil
-                    //produkt navn
-                    Label labelNavn = new Label("Produkt navn");
-                    labelNavn.setLayoutX(250);
-                    labelNavn.setLayoutY(20);
-                    LeggTilKomponent_pane.getChildren().add(labelNavn);
+                    String ID = showInputDialog("Vennligst skriv inn brukerens ID");
+                    int valgtBruker;
+                    try{
+                        valgtBruker = Integer.parseInt(ID);
+                    }catch (Exception e){
+                        valgtBruker = -1;
+                    }
 
-                    TextField txtNavn = new TextField();
-                    txtNavn.setLayoutX(350);
-                    txtNavn.setLayoutY(15);
-                    LeggTilKomponent_pane.getChildren().add(txtNavn);
+                    if(valgtBruker >= 0 &&
+                            brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
+                            valgtBruker < brukere.getArray().size()){
 
-                    //produkt pris
+                        tableSøk.getColumns().clear();
 
-                    Label labelPris = new Label("Produkt pris");
-                    labelPris.setLayoutX(250);
-                    labelPris.setLayoutY(70);
-                    LeggTilKomponent_pane.getChildren().add(labelPris);
+                        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
+                        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+                        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+                        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
 
-                    TextField txtPris = new TextField();
-                    txtPris.setLayoutX(350);
-                    txtPris.setLayoutY(65);
-                    LeggTilKomponent_pane.getChildren().add(txtPris);
+                        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+                        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
 
-                    //produktets specs
-                    Label labelSpecs = new Label("Fyll inn specs");//for nå husk å bytt den til noe bedre senere
-                    labelSpecs.setLayoutX(250);
-                    labelSpecs.setLayoutY(120);
-                    LeggTilKomponent_pane.getChildren().add(labelSpecs);
-
-                    TextArea txtSpecs = new TextArea();
-                    txtSpecs.setLayoutX(250);
-                    txtSpecs.setLayoutY(150);
-                    txtSpecs.setMaxHeight(100);
-                    txtSpecs.setMaxWidth(300);
-                    LeggTilKomponent_pane.getChildren().add(txtSpecs);
-
-                    //knapp for å submit informasjonen og opprett det nye komponent
-                    Button btnAdd = new Button("Legg til komponent");
-                    btnAdd.setLayoutX(50);
-                    btnAdd.setLayoutY(150);
-                    LeggTilKomponent_pane.getChildren().add(btnAdd);
-
-                    //spesifikke attributter for typer komponenter legges til her
-
-                    btnAdd.setOnAction(new EventHandler<ActionEvent>() {
-
-                        @Override
-                        public void handle(ActionEvent event) {
-                            String[] specs = txtSpecs.getText().split("\n");
-                            double pris;
-                            try {
-                                pris = Double.parseDouble(txtPris.getText());
-                            } catch (Exception e) {
-                                pris = 0;
-                            }
-                            if (choice.getValue().equals("Prosessor")) {//spesifikke attributter går inn i if eller else if setningene
-                                Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
-                                if (komponenter.add(pro)) {
-                                    System.out.println("funker");
-                                } else {
-                                    System.out.println("Noe er galt");
-                                }
-                            } else if (choice.getValue().equals("Skjermkort")) {
-                                komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
-                            } else if (choice.getValue().equals("Minne")) {
-                                komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
-                            } else if (choice.getValue().equals("Harddisk")) {
-                                komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
-                            } else if (choice.getValue().equals("Tastatur")) {
-                                komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
-                            } else if (choice.getValue().equals("Mus")) {
-                                komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
-                            } else if (choice.getValue().equals("Skjerm")) {
-                                komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                            }
-                            //deretter lagre Komponenter
-                            //saveKomponenter(komponenter);
-                        }
-                    });
+                        tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+                        tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
+                                .getHandelskurv().getMainArray());
+                    }else if(valgtBruker >= brukere.getArray().size()){
+                        showMessageDialog(null, "Vennligst velg en bruker som eksisterer");
+                    }else if(!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)){
+                        showMessageDialog(null, "Vennligst velg en kunde");
+                    }else if(valgtBruker < 0){
+                        showMessageDialog(null, "Vennlist skriv inn en gyldig ID");
+                    }
                 }
             });
+
+            LeggTilKomponent_pane.getChildren().add(btnVisKomponenter);
+
             showLeggTil = true;
             showRediger = false;
             showFjern = false;
@@ -542,12 +510,10 @@ public class Visbruker_Superbruker_Controller {
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
-            Button btnVisSpecs = new Button("Rediger varens beskrivelser");
 
             LeggTilKomponent_pane.getChildren().add(labelNavn);
             LeggTilKomponent_pane.getChildren().add(txtSøk);
             LeggTilKomponent_pane.getChildren().add(tableSøk);
-            //LeggTilKomponent_pane.getChildren().add(btnVisSpecs);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -555,65 +521,6 @@ public class Visbruker_Superbruker_Controller {
             txtSøk.setLayoutX(175);
             txtSøk.setLayoutY(15);
 
-            //btnVisSpecs.setLayoutY(15);
-            //btnVisSpecs.setLayoutX(350);
-
-            //Button btnSkjulSpecs = new Button("Tilbake");
-            //btnSkjulSpecs.setLayoutY(15);
-            //btnSkjulSpecs.setLayoutX(350);
-
-            //LeggTilKomponent_pane.getChildren().add(btnSkjulSpecs);
-            //btnSkjulSpecs.setVisible(false);
-
-            /*btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    String strID = showInputDialog("Skriv inn varens id");
-                    int ID;
-                    try {
-                        ID = Integer.parseInt(strID);
-                    } catch (Exception e) {
-                        ID = -1;
-                    }
-                    if (ID >= 0) {
-                        tableSøk.setVisible(false);
-                        ListView<String> list = new ListView<>();
-                        list.setVisible(true);
-                        list.setItems(komponenter.getMainArray().get(ID).getSpecs());
-                        IDs = ID;
-                        list.setLayoutX(15);
-                        list.setLayoutY(75);
-
-                        list.setMaxHeight(200);
-                        list.setEditable(true);
-
-                        list.setCellFactory(TextFieldListCell.forListView());
-
-                        list.setOnEditCommit(new EventHandler<ListView.EditEvent<String>>() {
-                            @Override
-                            public void handle(ListView.EditEvent<String> event) {
-                                komponenter.getMainArray().get(IDs).getSpecs().remove(event.getIndex());
-                                komponenter.getMainArray().get(IDs).getSpecs().add(event.getIndex(), event.getNewValue());
-                                saveKomponenter(komponenter);
-                            }
-                        });
-
-                        LeggTilKomponent_pane.getChildren().add(list);
-                        btnVisSpecs.setVisible(false);
-                        btnSkjulSpecs.setVisible(true);
-
-                        btnSkjulSpecs.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                list.setVisible(false);
-                                tableSøk.setVisible(true);
-                                btnSkjulSpecs.setVisible(false);
-                                btnVisSpecs.setVisible(true);
-                            }
-                        });
-                    }
-                }
-            });*/
 
             Label labelError = new Label();
 
