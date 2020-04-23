@@ -4,17 +4,13 @@ import Brukere.Register;
 import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldListCell;
@@ -22,28 +18,21 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import komponenter.*;
 
 import static javax.swing.JOptionPane.*;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Observable;
-import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Viskomponenter_Superbruker_Controller {
 
     @FXML
-    private SubScene LeggTilKomponent_sub;
-
-    @FXML
-    private AnchorPane LeggTilKomponent_pane;
+    private AnchorPane pane;
 
     @FXML
     private TableView tableView;
@@ -68,13 +57,37 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     private Button btnTilbake;
 
+    @FXML
+    private Label labelError;
+
 
     private boolean showLeggTil = false;
     private boolean showFjern = false;
     private boolean showRediger = false;
 
     public void start() {
-        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+        tableView = new TableView();
+        tableView.setLayoutY(86);
+        tableView.setPrefWidth(518);
+        tableView.setPrefHeight(286);
+        pane.getChildren().add(tableView);
+
+        Label labelSøk = new Label("søk");
+        TextField txtSøk = new TextField();
+
+        pane.getChildren().add(labelSøk);
+        pane.getChildren().add(txtSøk);
+
+        txtSøk.setLayoutX(200);
+        txtSøk.setLayoutY(25);
+
+        labelSøk.setLayoutY(30);
+        labelSøk.setLayoutX(100);
+
+        søk(txtSøk, tableView, false, labelError);
+
+
+        /*TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
         TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
         TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
@@ -88,7 +101,7 @@ public class Viskomponenter_Superbruker_Controller {
 
         tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
 
-        tableView.setItems(komponenter.getMainArray());
+        tableView.setItems(komponenter.getMainArray());*/
     }
 
 
@@ -179,20 +192,19 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     void On_Click_BtnFjernKomponenter(ActionEvent event) {
         if (!showFjern) {
-            LeggTilKomponent_pane.setVisible(true);
-            LeggTilKomponent_sub.setVisible(true);
+            pane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(550);
-            LeggTilKomponent_pane.getChildren().clear();
+            pane.getChildren().clear();
 
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
             //Komponenter komp = new Komponenter();
 
-            LeggTilKomponent_pane.getChildren().add(labelNavn);
-            LeggTilKomponent_pane.getChildren().add(txtSøk);
-            LeggTilKomponent_pane.getChildren().add(tableSøk);
+            pane.getChildren().add(labelNavn);
+            pane.getChildren().add(txtSøk);
+            pane.getChildren().add(tableSøk);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -210,7 +222,7 @@ public class Viskomponenter_Superbruker_Controller {
 
             //slette komponenter
             Button btnFjern = new Button("Fjern vare");
-            LeggTilKomponent_pane.getChildren().add(btnFjern);
+            pane.getChildren().add(btnFjern);
             btnFjern.setLayoutX(425);
             btnFjern.setLayoutY(15);
 
@@ -258,8 +270,7 @@ public class Viskomponenter_Superbruker_Controller {
             showRediger = false;
             showLeggTil = false;
         } else if (showFjern) {
-            LeggTilKomponent_pane.setVisible(false);
-            LeggTilKomponent_sub.setVisible(false);
+            pane.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
             showFjern = false;
@@ -269,12 +280,11 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     void On_Click_BtnLeggTilKomponenter(ActionEvent event) {
         if (!showLeggTil) {
-            LeggTilKomponent_sub.setVisible(true);
-            LeggTilKomponent_pane.setVisible(true);
+            pane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
 
-            LeggTilKomponent_pane.getChildren().clear();
+            pane.getChildren().clear();
 
             ChoiceBox choice = new ChoiceBox(FXCollections.observableArrayList(
                     "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm"
@@ -289,11 +299,11 @@ public class Viskomponenter_Superbruker_Controller {
             Label label = new Label("Velg type");
             label.setLayoutY(20);
             label.setLayoutX(10);
-            LeggTilKomponent_pane.getChildren().add(label);
+            pane.getChildren().add(label);
             choice.setLayoutX(90);
             choice.setLayoutY(15);
 
-            LeggTilKomponent_pane.getChildren().add(choice);
+            pane.getChildren().add(choice);
             choice.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -302,43 +312,43 @@ public class Viskomponenter_Superbruker_Controller {
                     Label labelNavn = new Label("Produkt navn");
                     labelNavn.setLayoutX(250);
                     labelNavn.setLayoutY(20);
-                    LeggTilKomponent_pane.getChildren().add(labelNavn);
+                    pane.getChildren().add(labelNavn);
 
                     TextField txtNavn = new TextField();
                     txtNavn.setLayoutX(350);
                     txtNavn.setLayoutY(15);
-                    LeggTilKomponent_pane.getChildren().add(txtNavn);
+                    pane.getChildren().add(txtNavn);
 
                     //produkt pris
 
                     Label labelPris = new Label("Produkt pris");
                     labelPris.setLayoutX(250);
                     labelPris.setLayoutY(70);
-                    LeggTilKomponent_pane.getChildren().add(labelPris);
+                    pane.getChildren().add(labelPris);
 
                     TextField txtPris = new TextField();
                     txtPris.setLayoutX(350);
                     txtPris.setLayoutY(65);
-                    LeggTilKomponent_pane.getChildren().add(txtPris);
+                    pane.getChildren().add(txtPris);
 
                     //produktets specs
                     Label labelSpecs = new Label("Fyll inn specs");//for nå husk å bytt den til noe bedre senere
                     labelSpecs.setLayoutX(250);
                     labelSpecs.setLayoutY(120);
-                    LeggTilKomponent_pane.getChildren().add(labelSpecs);
+                    pane.getChildren().add(labelSpecs);
 
                     TextArea txtSpecs = new TextArea();
                     txtSpecs.setLayoutX(250);
                     txtSpecs.setLayoutY(150);
                     txtSpecs.setMaxHeight(100);
                     txtSpecs.setMaxWidth(300);
-                    LeggTilKomponent_pane.getChildren().add(txtSpecs);
+                    pane.getChildren().add(txtSpecs);
 
                     //knapp for å submit informasjonen og opprett det nye komponent
                     Button btnAdd = new Button("Legg til komponent");
                     btnAdd.setLayoutX(50);
                     btnAdd.setLayoutY(150);
-                    LeggTilKomponent_pane.getChildren().add(btnAdd);
+                    pane.getChildren().add(btnAdd);
 
                     //spesifikke attributter for typer komponenter legges til her
 
@@ -383,8 +393,7 @@ public class Viskomponenter_Superbruker_Controller {
             showRediger = false;
             showFjern = false;
         } else if (showLeggTil) {
-            LeggTilKomponent_pane.setVisible(false);
-            LeggTilKomponent_sub.setVisible(false);
+            pane.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
             showLeggTil = false;
@@ -394,21 +403,20 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     void On_Click_BtnRedigerKomponenter(ActionEvent event) {
         if (!showRediger) {
-            LeggTilKomponent_pane.setVisible(true);
-            LeggTilKomponent_sub.setVisible(true);
+            pane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(550);
-            LeggTilKomponent_pane.getChildren().clear();
+            pane.getChildren().clear();
 
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
             Button btnVisSpecs = new Button("Rediger varens beskrivelser");
 
-            LeggTilKomponent_pane.getChildren().add(labelNavn);
-            LeggTilKomponent_pane.getChildren().add(txtSøk);
-            LeggTilKomponent_pane.getChildren().add(tableSøk);
-            LeggTilKomponent_pane.getChildren().add(btnVisSpecs);
+            pane.getChildren().add(labelNavn);
+            pane.getChildren().add(txtSøk);
+            pane.getChildren().add(tableSøk);
+            pane.getChildren().add(btnVisSpecs);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -423,7 +431,7 @@ public class Viskomponenter_Superbruker_Controller {
             btnSkjulSpecs.setLayoutY(15);
             btnSkjulSpecs.setLayoutX(350);
 
-            LeggTilKomponent_pane.getChildren().add(btnSkjulSpecs);
+            pane.getChildren().add(btnSkjulSpecs);
             btnSkjulSpecs.setVisible(false);
 
             btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
@@ -459,7 +467,7 @@ public class Viskomponenter_Superbruker_Controller {
                             }
                         });
 
-                        LeggTilKomponent_pane.getChildren().add(list);
+                        pane.getChildren().add(list);
                         btnVisSpecs.setVisible(false);
                         btnSkjulSpecs.setVisible(true);
 
@@ -488,8 +496,7 @@ public class Viskomponenter_Superbruker_Controller {
             showLeggTil = false;
             showFjern = false;
         } else if (showRediger) {
-            LeggTilKomponent_pane.setVisible(false);
-            LeggTilKomponent_sub.setVisible(false);
+            pane.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
             showRediger = false;
@@ -521,5 +528,11 @@ public class Viskomponenter_Superbruker_Controller {
     public void setBruker(Register brukere, Komponenter komponenter){
         this.Brukere = brukere;
         this.komponenter = komponenter;
+    }
+
+    public void On_Click_BtnFjernSpesifikasjoner(ActionEvent event) {
+    }
+
+    public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
     }
 }
