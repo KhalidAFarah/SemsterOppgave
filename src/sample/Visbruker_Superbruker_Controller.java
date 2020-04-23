@@ -80,7 +80,7 @@ public class Visbruker_Superbruker_Controller {
     private Register brukere2 = new Register();
 
     public void start() {
-        if (brukere != null) {
+        if(brukere != null) {
 
             TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
             TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
@@ -94,6 +94,8 @@ public class Visbruker_Superbruker_Controller {
             passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
             tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
             emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
+            PropertyValueFactory<? extends Bruker, Boolean> sd = new PropertyValueFactory<>("ADMIN");
+            //adminKolonne.setCellValueFactory(sd);
             adminKolonne.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bruker, Boolean>, ObservableValue<Boolean>>() {
                 @Override
                 public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Bruker, Boolean> param) {
@@ -104,7 +106,7 @@ public class Visbruker_Superbruker_Controller {
             tableView.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, tlfKolonne, emailKolonne, adminKolonne);
             //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
-        } else if (this.brukere == null) {
+        }else if(this.brukere == null){
             showMessageDialog(null, "brukere er null");
         }
     }
@@ -153,7 +155,7 @@ public class Visbruker_Superbruker_Controller {
         }
     }*/
 
-    public void saveBrukere() {
+    public void saveBrukere(){
         FiledataTxt data = new FiledataTxt();
         Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
@@ -342,7 +344,7 @@ public class Visbruker_Superbruker_Controller {
                     }
                     IDs = valgtBruker;
 
-                    if (brukere.getArray().get(valgtBruker) instanceof Standardbruker) {
+                    if(brukere.getArray().get(valgtBruker) instanceof Standardbruker){
 
                         tableSøk.getColumns().clear();
 
@@ -370,21 +372,21 @@ public class Visbruker_Superbruker_Controller {
                             public void handle(ActionEvent event) {
                                 String id = showInputDialog("Skiv inn varens ID");
                                 int valgtKomponent;
-                                try {
+                                try{
                                     valgtKomponent = Integer.parseInt(id);
-                                } catch (Exception e) {
+                                }catch (Exception e){
                                     showMessageDialog(null, "venligst skriv inn et gyldig tall");
                                     valgtKomponent = -1;
                                 }
 
-                                if (valgtKomponent >= 0) {
+                                if(valgtKomponent >= 0){
                                     ((Standardbruker) brukere.getArray().get(IDs)).getHandelskurv().remove(valgtKomponent);
                                     saveBrukere();
                                 }
                             }
                         });
 
-                    } else {
+                    }else{
                         showMessageDialog(null, "denne brukeren er ikke en kunde! \n Og" +
                                 " derfor har ikke en handelskurv der varer kan fjernes");
                     }
@@ -444,7 +446,7 @@ public class Visbruker_Superbruker_Controller {
                 @Override
                 public void handle(ActionEvent event) {
                     String ID = showInputDialog("Vennligst skriv inn brukerens ID");
-                    int valgtBruker = -1;
+                    int valgtBruker;
                     try{
                         valgtBruker = Integer.parseInt(ID);
                     }catch (Exception e){
@@ -454,7 +456,7 @@ public class Visbruker_Superbruker_Controller {
                     if(valgtBruker >= 0 &&
                             brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
                             valgtBruker < brukere.getArray().size()){
-                        System.out.println("sdds");
+
                         tableSøk.getColumns().clear();
 
                         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
@@ -471,7 +473,7 @@ public class Visbruker_Superbruker_Controller {
 
                         tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
                         tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
-                                    .getHandelskurv().getMainArray());
+                                .getHandelskurv().getMainArray());
                     }else if(valgtBruker >= brukere.getArray().size()){
                         showMessageDialog(null, "Vennligst velg en bruker som eksisterer");
                     }else if(!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)){
@@ -508,18 +510,17 @@ public class Visbruker_Superbruker_Controller {
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
-            Button btnVisSpecs = new Button("Rediger varens beskrivelser");
 
             LeggTilKomponent_pane.getChildren().add(labelNavn);
             LeggTilKomponent_pane.getChildren().add(txtSøk);
             LeggTilKomponent_pane.getChildren().add(tableSøk);
-            //LeggTilKomponent_pane.getChildren().add(btnVisSpecs);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
 
             txtSøk.setLayoutX(175);
             txtSøk.setLayoutY(15);
+
 
             Label labelError = new Label();
 
@@ -563,8 +564,7 @@ public class Visbruker_Superbruker_Controller {
         }
 
     }
-
-    public void initBrukere(Register brukere, Komponenter komponenter) {
+    public void initBrukere(Register brukere, Komponenter komponenter){
         this.brukere = brukere;
         this.komponenter = komponenter;
     }

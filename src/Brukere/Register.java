@@ -32,9 +32,9 @@ public class Register {
         return true;
     }
 
-    public void remove(int index) {
+    public void remove(int index){
         brukere.remove(index);
-        for (int i = 0; i < brukere.size(); i++) {
+        for(int i = 0; i < brukere.size(); i++){
             brukere.get(i).setID(i);
         }
     }

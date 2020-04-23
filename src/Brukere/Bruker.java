@@ -11,7 +11,7 @@ public abstract class Bruker {
     private SimpleStringProperty email;
     private SimpleStringProperty tlf;
 
-    public Bruker() {
+    public Bruker (){
         ID = new SimpleIntegerProperty();
         brukernavn = new SimpleStringProperty();
         passord = new SimpleStringProperty();
@@ -39,9 +39,7 @@ public abstract class Bruker {
         return false;
     }
 
-    public int getID() {
-        return ID.getValue();
-    }
+    public int getID(){return ID.getValue();}
 
     public void setBrukernavn(String brukernavn) {
         this.brukernavn.setValue(brukernavn);
@@ -59,9 +57,7 @@ public abstract class Bruker {
         this.tlf.setValue(tlf);
     }
 
-    public void setID(int ID) {
-        this.ID.setValue(ID);
-    }
+    public void setID(int ID){this.ID.setValue(ID);}
 
 
     public String toStringFormat() {

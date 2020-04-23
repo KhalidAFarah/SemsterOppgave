@@ -9,7 +9,7 @@ public class Prosessor extends Komponent {
 
     @Override
     public String toString() {
-        return "Navn: " + super.getNavn();
+        return "Navns: " + super.getNavn();
     }
 
     @Override
