@@ -1,6 +1,7 @@
 package sample;
 
 import Brukere.Register;
+import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -225,6 +226,22 @@ public class Viskomponenter_Superbruker_Controller {
                         valgtKomponent = -1;
                     }
                     if (valgtKomponent != -1) {
+
+                        for(int i = 0; i < Brukere.getArray().size(); i++){
+                            if(Brukere.getArray().get(i) instanceof Standardbruker){
+                                for(int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
+                                        .getHandelskurv().getMainArray().size(); j++) {
+
+                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
+                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
+                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
+                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
+                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
+                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
+                                        }
+                                }
+                            }
+                        }
 
                         komponenter.remove(valgtKomponent);
                         komp.setMainArray(komponenter.getMainArray());
