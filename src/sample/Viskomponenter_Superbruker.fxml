@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -38,12 +41,6 @@
                 <Font name="Candara Light" size="15.0" />
             </font>
         </Button>
-        <SubScene fx:id="LeggTilKomponent_sub" height="286.0" layoutY="113.0" visible="false" width="610.0">
-            <root>
-                <Region />
-            </root>
-        </SubScene>
-        <AnchorPane fx:id="pane" layoutY="113.0" prefHeight="286.0" prefWidth="610.0" visible="false" />
       <Button fx:id="btnVisSpecs" layoutX="723.0" layoutY="183.0" mnemonicParsing="false" onAction="#On_Click_BtnVisSpesifikasjoner" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Vis en vares spesifikasjoner">
          <font>
             <Font name="Candara Light" size="12.0" />
@@ -54,7 +51,23 @@
             <Font name="Candara Light" size="16.0" />
          </font>
       </Button>
-      <AnchorPane fx:id="pane" layoutX="191.0" layoutY="98.0" prefHeight="371.0" prefWidth="518.0" />
+      <AnchorPane fx:id="pane" layoutX="191.0" layoutY="98.0" prefHeight="371.0" prefWidth="518.0">
+         <children>
+            <TableView fx:id="tableView" layoutY="86.0" prefHeight="286.0" prefWidth="518.0">
+              <columns>
+                <TableColumn fx:id="IDKolonne" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="navnKolonne" prefWidth="150.0" text="Produktnavn" />
+                  <TableColumn fx:id="typeKolonne" prefWidth="150.0" text="Type" />
+                  <TableColumn fx:id="prisKolonne" prefWidth="141.0" text="Pris" />
+              </columns>
+            </TableView>
+            <Label fx:id="labelSøk" layoutX="157.0" layoutY="33.0" text="Søk">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtSøk" layoutX="217.0" layoutY="30.0" promptText="Skriv inn produktnavnet" />
+         </children></AnchorPane>
       <Label fx:id="LabelError" alignment="CENTER" layoutX="250.0" layoutY="512.0" prefHeight="29.0" prefWidth="400.0" text="Error... Eksempel tekst" />
     </children>
 </AnchorPane>
