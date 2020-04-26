@@ -309,12 +309,12 @@ public class Visbruker_Superbruker_Controller {
             btnFjernBruker.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    String melding = showInputDialog(null, "Skriv varens ID");
+                    String melding = showInputDialog(null, "Skriv brukerens ID");
                     int valgtBruker;
                     try {
                         valgtBruker = Integer.parseInt(melding);
                     } catch (Exception e) {
-                        showMessageDialog(null, "Vennligst skriv inn riktig varens ID");
+                        showMessageDialog(null, "Vennligst skriv inn riktig brukers ID");
                         valgtBruker = -1;
                     }
                     if (valgtBruker != -1) {
