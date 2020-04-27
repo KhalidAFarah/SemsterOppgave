@@ -39,7 +39,8 @@ public abstract class Bruker {
         return false;
     }
 
-    public int getID(){return ID.getValue();}
+    public int getID()
+    {return ID.getValue();}
 
     public void setBrukernavn(String brukernavn) {
         this.brukernavn.setValue(brukernavn);
@@ -58,7 +59,8 @@ public abstract class Bruker {
 
     }
 
-    
+
+
     public void setTlf(String tlf)throws InvalidStringException {
         if (Validering.tlf(tlf)){
             this.tlf.setValue(tlf);
@@ -66,8 +68,9 @@ public abstract class Bruker {
 
             throw new InvalidStringException("ugyldig verdi, skriv inn på nytt");
         }
+
     }
-    public void setID(int ID){this.ID.setValue(ID);}
+
     public void setID(int ID) {
         this.ID.setValue(ID);
     }
