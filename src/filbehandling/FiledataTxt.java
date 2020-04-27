@@ -79,8 +79,18 @@ public class FiledataTxt extends Task<Void> {
 
                     bruker.setBrukernavn(strings[0]);
                     bruker.setPassord(strings[1]);
-                    bruker.setEmail(strings[2]);
-                    bruker.setTlf(strings[3]);
+
+                    try {
+                        bruker.setEmail(strings[2]);
+                    }catch(InvalidStringException e){
+                        showMessageDialog(null, e.getMessage());
+                    }
+                    try{
+                        bruker.setTlf(strings[3]);
+                    }catch(InvalidStringException e){
+                        showMessageDialog(null, e.getMessage());
+                    }
+
 
 
                     if (Admin) {
