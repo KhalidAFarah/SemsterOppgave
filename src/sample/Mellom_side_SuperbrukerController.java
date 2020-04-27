@@ -1,5 +1,5 @@
 package sample;
-
+//
 
 import Brukere.Register;
 import javafx.event.ActionEvent;

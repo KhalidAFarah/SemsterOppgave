@@ -169,8 +169,16 @@ public class Registrering_Controller implements Initializable {
                     b = new Superbruker();
                     b.setBrukernavn(txtBrukernavn.getText());
                     b.setPassord(txtPassord.getText());
-                    b.setTlf(txtTelefonnummer.getText());
-                    b.setEmail(txtEmail.getText());
+                    try {
+                        b.setTlf(txtTelefonnummer.getText());
+                    }catch(InvalidStringException e){
+                        showMessageDialog(null,e.getMessage());
+                    }
+                    try {
+                        b.setEmail(txtEmail.getText());
+                    }catch(InvalidStringException e){
+                        showMessageDialog(null, e.getMessage());
+                        }
 
                     brukere.add(b);
 
@@ -193,8 +201,17 @@ public class Registrering_Controller implements Initializable {
                     b = new Standardbruker();
                     b.setBrukernavn(txtBrukernavn.getText());
                     b.setPassord(txtPassord.getText());
-                    b.setTlf(txtTelefonnummer.getText());
-                    b.setEmail(txtEmail.getText());
+                    try {
+                        b.setTlf(txtTelefonnummer.getText());
+                    }catch(InvalidStringException e){
+                        showMessageDialog(null, e.getMessage());
+                    }
+                    try{
+                        b.setEmail(txtEmail.getText());
+                    }catch(InvalidStringException e){
+                        showMessageDialog(null, e.getMessage());
+                    }
+
                     //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
                     brukere.add(b);
 
