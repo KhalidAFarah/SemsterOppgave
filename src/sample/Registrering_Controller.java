@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
-public class Registrering_Controller implements Initializable {
+public class Registrering_Controller {
 
     @FXML
     private TextField txtBrukernavn;
@@ -55,7 +55,7 @@ public class Registrering_Controller implements Initializable {
     private Button btnAvbryt;
 
     @FXML
-    private Label txtError;
+    private Label labelError;
 
     private Register brukere;
     private FiledataTxt lagreTxt;
@@ -66,7 +66,7 @@ public class Registrering_Controller implements Initializable {
         try {
             lagreTxt.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
-            txtError.setText(e.getMessage());
+            labelError.setText(e.getMessage());
         }
     }
 
@@ -169,13 +169,13 @@ public class Registrering_Controller implements Initializable {
                     b = new Superbruker();
                     b.setBrukernavn(txtBrukernavn.getText());
                     b.setPassord(txtPassord.getText());
-                    try {
+                    //try {
                         b.setTlf(txtTelefonnummer.getText());
-                    }catch(InvalidStringException e){
-                        txtTelefonnummer.setText("");
-                        txtTelefonnummer.setPromptText(e.getMessage());
-                        sjekk = false;
-                    }
+                    //}catch(InvalidStringException e){
+                        //txtTelefonnummer.setText("");
+                        //txtTelefonnummer.setPromptText(e.getMessage());
+                        //sjekk = false;
+                    //}
                     try {
                         b.setEmail(txtEmail.getText());
                     }catch(InvalidStringException e){
@@ -194,7 +194,7 @@ public class Registrering_Controller implements Initializable {
                         try {
                             Registering_ny_Admin = loader.load();
                         }catch (IOException e){
-                            showMessageDialog(null, "Klarte ikke å bytte side");
+                            labelError.setText("Klarte ikke å bytte side");
                             Registering_ny_Admin = null;
                             lasteinn = false;
                         }
@@ -220,13 +220,15 @@ public class Registrering_Controller implements Initializable {
                     try {
                         b.setTlf(txtTelefonnummer.getText());
                     }catch(InvalidStringException e){
-                        showMessageDialog(null, e.getMessage());
+                        txtTelefonnummer.setText("");
+                        txtTelefonnummer.setPromptText(e.getMessage());
                         sjekk = false;
                     }
                     try{
                         b.setEmail(txtEmail.getText());
                     }catch(InvalidStringException e){
-                        showMessageDialog(null, e.getMessage());
+                        txtEmail.setText("");
+                        txtEmail.setPromptText(e.getMessage());
                         sjekk = false;
                     }
 
@@ -241,7 +243,7 @@ public class Registrering_Controller implements Initializable {
                         try {
                             Registering_ny_Standarbruker = loader.load();
                         }catch (IOException e){
-                            showMessageDialog(null, "klarer ikke å byttt side");
+                            labelError.setText("Klarte ikke å bytte side");
                             Registering_ny_Standarbruker  = null;
                             lasteinn = false;
                         }
@@ -261,18 +263,13 @@ public class Registrering_Controller implements Initializable {
                     }
 
                 } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
-                    txtError.setText("Vennligst kryss av en av boksene");
+                    labelError.setText("Vennligst kryss av en av boksene");
                 }
 
 
         } else if (brukere == null) {
-            showMessageDialog(null, "registeret er ikke initialisert!");
+            labelError.setText("Registeret er ikke initialisert!");
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //load();
     }
 }
 
