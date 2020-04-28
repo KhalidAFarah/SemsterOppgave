@@ -11,7 +11,7 @@ public abstract class Bruker {
     private SimpleStringProperty email;
     private SimpleStringProperty tlf;
 
-    public Bruker (){
+    public Bruker() {
         ID = new SimpleIntegerProperty();
         brukernavn = new SimpleStringProperty();
         passord = new SimpleStringProperty();
@@ -39,8 +39,9 @@ public abstract class Bruker {
         return false;
     }
 
-    public int getID()
-    {return ID.getValue();}
+    public int getID() {
+        return ID.getValue();
+    }
 
     public void setBrukernavn(String brukernavn) {
         this.brukernavn.setValue(brukernavn);
@@ -50,19 +51,18 @@ public abstract class Bruker {
         this.passord.setValue(passord);
     }
 
-    public void setEmail(String email)throws InvalidStringException {
-        if(Validering.Email(email)){
+    public void setEmail(String email) throws InvalidStringException {
+        if (Validering.epost(email)) {
             this.email.setValue(email);
-        }else{
+        } else {
             throw new InvalidStringException("Ugyldig verdi, skriv inn på nytt");
         }
 
     }
 
 
-
-    public void setTlf(String tlf)throws InvalidStringException {
-        if (Validering.tlf(tlf)){
+    public void setTlf(String tlf) throws InvalidStringException {
+        if (Validering.tlf(tlf)) {
             this.tlf.setValue(tlf);
         } else {
 

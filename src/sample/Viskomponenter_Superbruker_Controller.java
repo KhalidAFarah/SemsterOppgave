@@ -164,7 +164,6 @@ public class Viskomponenter_Superbruker_Controller {
     }
 
 
-
     public void saveKomponenter() {
         FiledataJOBJ data = new FiledataJOBJ();
         Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
@@ -178,11 +177,11 @@ public class Viskomponenter_Superbruker_Controller {
 
     @FXML
     void On_Click_BtnFjernKomponenter(ActionEvent event) {
-       // if (!showFjern) {
-            //slette komponenter
+        // if (!showFjern) {
+        //slette komponenter
         btnRediger.setText("Rediger komponenter");
         btnf.setVisible(false);
-        if(!showSpecs) {
+        if (!showSpecs) {
             btnf.setText("Fjern vare");
             leggtilPane.setVisible(false);
             leggtilPane.getChildren().clear();
@@ -285,28 +284,28 @@ public class Viskomponenter_Superbruker_Controller {
                 btnf.setLayoutY(30);
 
             }
-        }else if(showSpecs){
+        } else if (showSpecs) {
             String spec = showInputDialog("skriv inn spesifikasjonens id");
             int specID;
-            if(spec != null) {
+            if (spec != null) {
                 try {
                     specID = Integer.parseInt(spec);
                 } catch (Exception e) {
                     labelError.setText("Skriv inn en gyldig id");
                     specID = -1;
                 }
-            }else{
+            } else {
                 labelError.setText("Skriv inn en gyldig id");
                 specID = -1;
             }
 
-            if(specID >= 0){
+            if (specID >= 0) {
                 komponenter.getMainArray().get(IDs).getSpecs().remove(specID);
                 tableView.getItems().remove(specID);
 
                 ObservableList<Spesifikasjon> ny = FXCollections.observableArrayList();
 
-                for(int i = 0; i < spesifikasjoner.size(); i++){
+                for (int i = 0; i < spesifikasjoner.size(); i++) {
                     spesifikasjoner.get(i).setID2(i);
                 }
                 tableView.refresh();
@@ -315,10 +314,10 @@ public class Viskomponenter_Superbruker_Controller {
         }
 
 
-            //showFjern = true;
+        //showFjern = true;
         //} else if (showFjern) {
 
-       //     showFjern = false;
+        //     showFjern = false;
         //}
     }
 
@@ -330,7 +329,7 @@ public class Viskomponenter_Superbruker_Controller {
         leggtilPane.getChildren().clear();
         btnf.setVisible(false);
 
-        if(!showSpecs) {
+        if (!showSpecs) {
             leggtilPane.setVisible(true);
             if (!showLeggTil) {
 
@@ -453,7 +452,7 @@ public class Viskomponenter_Superbruker_Controller {
                 leggtilPane.getChildren().clear();
                 showLeggTil = false;
             }
-        }else if(showSpecs){
+        } else if (showSpecs) {
             String spec = showInputDialog("Skriv inn spesifikasjonen til komponenten");
             Spesifikasjon spesifikasjon = new Spesifikasjon(spec, tableView.getItems().size());
             tableView.getItems().add(spesifikasjon);
@@ -471,7 +470,7 @@ public class Viskomponenter_Superbruker_Controller {
         btnf.setVisible(false);
         tableView.setEditable(true);
         tableView.setVisible(true);
-        if(!showSpecs) {
+        if (!showSpecs) {
             if (!showRediger) {
                 DoubleStringConverter doubleString = new DoubleStringConverter();
 
@@ -518,8 +517,8 @@ public class Viskomponenter_Superbruker_Controller {
                 tableView.setEditable(false);
                 showRediger = false;
             }
-        }else if(showSpecs){
-            if(!showRediger) {
+        } else if (showSpecs) {
+            if (!showRediger) {
                 specNavnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
                 specNavnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Spesifikasjon, String>>() {
                     @Override
@@ -528,7 +527,7 @@ public class Viskomponenter_Superbruker_Controller {
                         komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID2(),
                                 event.getNewValue());
 
-                        for(String s : komponenter.getMainArray().get(IDs).getSpecs()){
+                        for (String s : komponenter.getMainArray().get(IDs).getSpecs()) {
                             System.out.println(s);
                         }
 
@@ -539,7 +538,7 @@ public class Viskomponenter_Superbruker_Controller {
                 });
                 btnRediger.setText("Stop redigering");
                 showRediger = true;
-            }else if(showRediger){
+            } else if (showRediger) {
                 tableView.setEditable(false);
                 btnRediger.setText("Rediger Spesifikasjoner");
             }
@@ -568,7 +567,8 @@ public class Viskomponenter_Superbruker_Controller {
         }
 
     }
-    public void setBruker(Register brukere, Komponenter komponenter){
+
+    public void setBruker(Register brukere, Komponenter komponenter) {
         this.Brukere = brukere;
         this.komponenter = komponenter;
     }
@@ -632,7 +632,7 @@ public class Viskomponenter_Superbruker_Controller {
 
         String str = showInputDialog("Skriv inn komponentens id");
         int ID;
-        if(str != null) {
+        if (str != null) {
 
             try {
                 ID = Integer.parseInt(str);
@@ -640,20 +640,20 @@ public class Viskomponenter_Superbruker_Controller {
                 labelError.setText("Vennlighst Skriv inn riktig verdi");
                 ID = -1;
             }
-        }else{
+        } else {
             labelError.setText("Vennlighst Skriv inn riktig verdi");
             ID = -1;
         }
 
 
-        if(ID >= 0 && ID < komponenter.getMainArray().size()){
+        if (ID >= 0 && ID < komponenter.getMainArray().size()) {
             tableView.getColumns().clear();
             txtSøk.setPromptText("Skriv inn spesifikasjon");
 
             spesifikasjoner = FXCollections.observableArrayList();
             IDs = ID;
 
-            for(int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i++){
+            for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i++) {
                 Spesifikasjon t = new Spesifikasjon(komponenter.getMainArray().get(ID).getSpecs().get(i), i);
                 spesifikasjoner.add(t);
             }

@@ -80,7 +80,7 @@ public class Visbruker_Superbruker_Controller {
     private Register brukere2 = new Register();
 
     public void start() {
-        if(brukere != null) {
+        if (brukere != null) {
 
             TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
             TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
@@ -106,7 +106,7 @@ public class Visbruker_Superbruker_Controller {
             tableView.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, tlfKolonne, emailKolonne, adminKolonne);
             //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
-        }else if(this.brukere == null){
+        } else if (this.brukere == null) {
             showMessageDialog(null, "brukere er null");
         }
     }
@@ -155,7 +155,7 @@ public class Visbruker_Superbruker_Controller {
         }
     }*/
 
-    public void saveBrukere(){
+    public void saveBrukere() {
         FiledataTxt data = new FiledataTxt();
         Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
@@ -344,7 +344,7 @@ public class Visbruker_Superbruker_Controller {
                     }
                     IDs = valgtBruker;
 
-                    if(brukere.getArray().get(valgtBruker) instanceof Standardbruker){
+                    if (brukere.getArray().get(valgtBruker) instanceof Standardbruker) {
 
                         tableSøk.getColumns().clear();
 
@@ -372,21 +372,21 @@ public class Visbruker_Superbruker_Controller {
                             public void handle(ActionEvent event) {
                                 String id = showInputDialog("Skiv inn varens ID");
                                 int valgtKomponent;
-                                try{
+                                try {
                                     valgtKomponent = Integer.parseInt(id);
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     showMessageDialog(null, "venligst skriv inn et gyldig tall");
                                     valgtKomponent = -1;
                                 }
 
-                                if(valgtKomponent >= 0){
+                                if (valgtKomponent >= 0) {
                                     ((Standardbruker) brukere.getArray().get(IDs)).getHandelskurv().remove(valgtKomponent);
                                     saveBrukere();
                                 }
                             }
                         });
 
-                    }else{
+                    } else {
                         showMessageDialog(null, "denne brukeren er ikke en kunde! \n Og" +
                                 " derfor har ikke en handelskurv der varer kan fjernes");
                     }
@@ -447,15 +447,15 @@ public class Visbruker_Superbruker_Controller {
                 public void handle(ActionEvent event) {
                     String ID = showInputDialog("Vennligst skriv inn brukerens ID");
                     int valgtBruker;
-                    try{
+                    try {
                         valgtBruker = Integer.parseInt(ID);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         valgtBruker = -1;
                     }
 
-                    if(valgtBruker >= 0 &&
+                    if (valgtBruker >= 0 &&
                             brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
-                            valgtBruker < brukere.getArray().size()){
+                            valgtBruker < brukere.getArray().size()) {
 
                         tableSøk.getColumns().clear();
 
@@ -474,11 +474,11 @@ public class Visbruker_Superbruker_Controller {
                         tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
                         tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
                                 .getHandelskurv().getMainArray());
-                    }else if(valgtBruker >= brukere.getArray().size()){
+                    } else if (valgtBruker >= brukere.getArray().size()) {
                         showMessageDialog(null, "Vennligst velg en bruker som eksisterer");
-                    }else if(!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)){
+                    } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
                         showMessageDialog(null, "Vennligst velg en kunde");
-                    }else if(valgtBruker < 0){
+                    } else if (valgtBruker < 0) {
                         showMessageDialog(null, "Vennlist skriv inn en gyldig ID");
                     }
                 }
@@ -564,7 +564,8 @@ public class Visbruker_Superbruker_Controller {
         }
 
     }
-    public void initBrukere(Register brukere, Komponenter komponenter){
+
+    public void initBrukere(Register brukere, Komponenter komponenter) {
         this.brukere = brukere;
         this.komponenter = komponenter;
     }

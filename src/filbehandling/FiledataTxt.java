@@ -82,15 +82,14 @@ public class FiledataTxt extends Task<Void> {
 
                     try {
                         bruker.setEmail(strings[2]);
-                    }catch(InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         showMessageDialog(null, e.getMessage());
                     }
-                    try{
+                    try {
                         bruker.setTlf(strings[3]);
-                    }catch(InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         showMessageDialog(null, e.getMessage());
                     }
-
 
 
                     if (Admin) {

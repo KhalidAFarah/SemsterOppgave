@@ -171,14 +171,14 @@ public class Registrering_Controller implements Initializable {
                     b.setPassord(txtPassord.getText());
                     try {
                         b.setTlf(txtTelefonnummer.getText());
-                    }catch(InvalidStringException e){
-                        showMessageDialog(null,e.getMessage());
+                    } catch (InvalidStringException e) {
+                        showMessageDialog(null, e.getMessage());
                     }
                     try {
                         b.setEmail(txtEmail.getText());
-                    }catch(InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         showMessageDialog(null, e.getMessage());
-                        }
+                    }
 
                     brukere.add(b);
 
@@ -203,12 +203,12 @@ public class Registrering_Controller implements Initializable {
                     b.setPassord(txtPassord.getText());
                     try {
                         b.setTlf(txtTelefonnummer.getText());
-                    }catch(InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         showMessageDialog(null, e.getMessage());
                     }
-                    try{
+                    try {
                         b.setEmail(txtEmail.getText());
-                    }catch(InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         showMessageDialog(null, e.getMessage());
                     }
 

@@ -11,7 +11,7 @@ public class Spesifikasjon {
     private int ID;
     private String navn;
 
-    public Spesifikasjon(String navn, int ID){
+    public Spesifikasjon(String navn, int ID) {
         navn2 = new SimpleStringProperty(navn);
         ID2 = new SimpleIntegerProperty(ID);
 
@@ -19,17 +19,19 @@ public class Spesifikasjon {
         ID = getID2();
     }
 
-    public void setNavn2(String navn){
+    public void setNavn2(String navn) {
         this.navn2.setValue(navn);
     }
-    public void setID2(int ID){
+
+    public void setID2(int ID) {
         this.ID2.setValue(ID);
     }
 
-    public String getNavn2(){
+    public String getNavn2() {
         return navn2.getValue();
     }
-    public Integer getID2(){
+
+    public Integer getID2() {
         return ID2.getValue();
     }
 }
