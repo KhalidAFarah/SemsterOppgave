@@ -11,11 +11,6 @@
             prefWidth="447.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Controller">
     <children>
-        <ImageView fitHeight="294.0" fitWidth="447.0">
-            <image>
-                <Image url="@../img/background.jpg"/>
-            </image>
-        </ImageView>
         <Label layoutX="62.0" layoutY="153.0" prefHeight="33.0" prefWidth="325.0"
                text="Du har nå laget en bruker, vil du nå?">
             <font>

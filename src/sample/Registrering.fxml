@@ -13,11 +13,6 @@
             prefWidth="596.0" style="-fx-background-color: #F2F2F2e;" xmlns="http://javafx.com/javafx/8.0.171"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
     <children>
-        <ImageView fitHeight="465.0" fitWidth="604.0" layoutX="-6.0" layoutY="-6.0">
-            <image>
-                <Image url="@../img/background.jpg"/>
-            </image>
-        </ImageView>
         <TextField fx:id="txtBrukernavn" layoutX="194.0" layoutY="136.0" prefHeight="30.0" prefWidth="170.0"
                    promptText="Brukernavn">
             <font>
@@ -68,7 +63,7 @@
                 <Font name="Helvetica Bold" size="12.0"/>
             </font>
         </CheckBox>
-        <CheckBox fx:id="chxStandarbruker" layoutX="279.0" layoutY="369.0" mnemonicParsing="false"
+        <CheckBox fx:id="chxStandarbruker" layoutX="279.0" layoutY="368.0" mnemonicParsing="false"
                   text="Standardbruker">
             <font>
                 <Font name="Helvetica Bold" size="12.0"/>
