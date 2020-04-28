@@ -30,7 +30,7 @@ class BrukerTest {
     void setEmailTrue3() {
         Bruker b = new Standardbruker();
         b.setEmail("example@example.com");
-        assertEquals("example@example.como", b.getEmail());
+        assertEquals("example@example.com", b.getEmail());
     }
 
     @org.junit.jupiter.api.Test
