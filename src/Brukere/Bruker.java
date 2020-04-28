@@ -49,12 +49,24 @@ public abstract class Bruker {
         this.passord.setValue(passord);
     }
 
-    public void setEmail(String email) {
-        this.email.setValue(email);
+    public void setEmail(String email)throws InvalidStringException {
+        if(Validering.Email(email)){
+            this.email.setValue(email);
+        }else{
+            throw new InvalidStringException("Ugyldig epost");
+        }
+
     }
 
-    public void setTlf(String tlf) {
-        this.tlf.setValue(tlf);
+
+
+    public void setTlf(String tlf)throws InvalidStringException {
+        if (Validering.tlf(tlf)){
+            this.tlf.setValue(tlf);
+        } else {
+            throw new InvalidStringException("ugyldig telefonnummer");
+        }
+
     }
 
     public void setID(int ID){this.ID.setValue(ID);}
