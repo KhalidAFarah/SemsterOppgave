@@ -14,9 +14,14 @@
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sample.Viskomponenter_Superbruker_Controller">
     <children>
+        <ImageView fitHeight="400.0" fitWidth="610.0">
+            <image>
+                <Image url="@../img/background.jpg"/>
+            </image>
+        </ImageView>
         <TableView fx:id="tableView" editable="true" layoutY="114.0" prefHeight="286.0" prefWidth="609.0"
                    tableMenuButtonVisible="true"/>
-        <Separator layoutY="67.0" prefHeight="3.0" prefWidth="610.0"/>
+        <Separator layoutY="65.0" prefHeight="3.0" prefWidth="610.0" style="-fx-background-color: black;"/>
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="210.0" layoutY="-37.0">
             <image>
                 <Image url="@../img/logo3.png"/>
@@ -35,7 +40,7 @@
                 <Font name="Helvetica" size="15.0"/>
             </font>
         </Button>
-        <Button fx:id="btnRediger" layoutX="436.0" layoutY="68.0" mnemonicParsing="false"
+        <Button fx:id="btnRediger" layoutX="437.0" layoutY="68.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="173.0"
                 style="-fx-background-color: #3daee4;" text="Rediger komponenter">
             <font>
