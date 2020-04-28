@@ -169,13 +169,13 @@ public class Registrering_Controller {
                     b = new Superbruker();
                     b.setBrukernavn(txtBrukernavn.getText());
                     b.setPassord(txtPassord.getText());
-                    //try {
+                    try {
                         b.setTlf(txtTelefonnummer.getText());
-                    //}catch(InvalidStringException e){
-                        //txtTelefonnummer.setText("");
-                        //txtTelefonnummer.setPromptText(e.getMessage());
-                        //sjekk = false;
-                    //}
+                    }catch(InvalidStringException e){
+                        txtTelefonnummer.setText("");
+                        txtTelefonnummer.setPromptText(e.getMessage());
+                        sjekk = false;
+                    }
                     try {
                         b.setEmail(txtEmail.getText());
                     }catch(InvalidStringException e){
