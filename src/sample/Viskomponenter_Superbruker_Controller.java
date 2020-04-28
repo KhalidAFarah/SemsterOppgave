@@ -98,7 +98,7 @@ public class Viskomponenter_Superbruker_Controller {
         try {
             data.save(newKomponenter, path);
         } catch (IOException e) {
-            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
+            showMessageDialog(null, "Klarte ikke å laste inn data");// for nå
         }
     }
 
@@ -215,12 +215,12 @@ public class Viskomponenter_Superbruker_Controller {
             btnFjern.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    String melding = showInputDialog(null, "Skriv varens ID");
+                    String melding = showInputDialog(null, "Skriv varens ID:");
                     int valgtKomponent;
                     try {
                         valgtKomponent = Integer.parseInt(melding);
                     } catch (Exception e) {
-                        showMessageDialog(null, "Vennligst skriv inn riktig varens ID");
+                        showMessageDialog(null, "Vennligst skriv inn varens ID riktig:");
                         valgtKomponent = -1;
                     }
                     if (valgtKomponent != -1) {
@@ -280,8 +280,9 @@ public class Viskomponenter_Superbruker_Controller {
                 @Override
                 public void handle(ActionEvent event) {
                     //senere i egen fil
+
                     //produkt navn
-                    Label labelNavn = new Label("Produkt navn");
+                    Label labelNavn = new Label("Produktnavn:");
                     labelNavn.setLayoutX(250);
                     labelNavn.setLayoutY(20);
                     LeggTilKomponent_pane.getChildren().add(labelNavn);
@@ -292,8 +293,7 @@ public class Viskomponenter_Superbruker_Controller {
                     LeggTilKomponent_pane.getChildren().add(txtNavn);
 
                     //produkt pris
-
-                    Label labelPris = new Label("Produkt pris");
+                    Label labelPris = new Label("Produktpris:");
                     labelPris.setLayoutX(250);
                     labelPris.setLayoutY(70);
                     LeggTilKomponent_pane.getChildren().add(labelPris);
@@ -304,7 +304,7 @@ public class Viskomponenter_Superbruker_Controller {
                     LeggTilKomponent_pane.getChildren().add(txtPris);
 
                     //produktets specs
-                    Label labelSpecs = new Label("Fyll inn specs");//for nå husk å bytt den til noe bedre senere
+                    Label labelSpecs = new Label("Fyll inn spesifikasjoner:");
                     labelSpecs.setLayoutX(250);
                     labelSpecs.setLayoutY(120);
                     LeggTilKomponent_pane.getChildren().add(labelSpecs);
@@ -316,8 +316,8 @@ public class Viskomponenter_Superbruker_Controller {
                     txtSpecs.setMaxWidth(300);
                     LeggTilKomponent_pane.getChildren().add(txtSpecs);
 
-                    //knapp for å submit informasjonen og opprett det nye komponent
-                    Button btnAdd = new Button("Legg til komponent");
+                    //knapp for å submit informasjonen og opprett et nytt komponent
+                    Button btnAdd = new Button("Legg til komponent:");
                     btnAdd.setLayoutX(50);
                     btnAdd.setLayoutY(150);
                     LeggTilKomponent_pane.getChildren().add(btnAdd);
@@ -343,17 +343,47 @@ public class Viskomponenter_Superbruker_Controller {
                                     System.out.println("Noe er galt");
                                 }
                             } else if (choice.getValue().equals("Skjermkort")) {
-                                komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
+                                Skjermkort skjkort = new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs);
+                                if (komponenter.add(skjkort)) {
+                                    System.out.println("funker");
+                                } else {
+                                    System.out.println("Noe er galt");
+                                }
                             } else if (choice.getValue().equals("Minne")) {
-                                komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
+                                Minne ram = new Minne(txtNavn.getText(), pris, "Minne", specs);
+                                if (komponenter.add(ram)) {
+                                    System.out.println("funker");
+                                } else {
+                                    System.out.println("Noe er galt");
+                                }
                             } else if (choice.getValue().equals("Harddisk")) {
-                                komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
+                                Harddisk hdd = new Harddisk(txtNavn.getText(), pris, "Harddisk", specs);
+                                if (komponenter.add(hdd)) {
+                                    System.out.println("funker");
+                                } else {
+                                    System.out.println("Noe er galt");
+                                }
                             } else if (choice.getValue().equals("Tastatur")) {
-                                komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
+                                Tastatur tas = new Tastatur(txtNavn.getText(), pris, "Tastatur", specs);
+                                if (komponenter.add(tas)) {
+                                    System.out.println("funker");
+                                } else {
+                                    System.out.println("Noe er galt");
+                                }
                             } else if (choice.getValue().equals("Mus")) {
-                                komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
+                                Mus mus = new Mus(txtNavn.getText(), pris, "Mus", specs);
+                                if (komponenter.add(mus)) {
+                                    System.out.println("funker");
+                                } else {
+                                    System.out.println("Noe er galt");
+                                }
                             } else if (choice.getValue().equals("Skjerm")) {
-                                komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
+                                Skjerm skj = new Skjerm(txtNavn.getText(), pris, "Skjerm", specs);
+                                if (komponenter.add(skj)) {
+                                    System.out.println("funker");
+                                } else {
+                                    System.out.println("Noe er galt");
+                                }
                             }
                             //deretter lagre Komponenter
                             saveKomponenter(komponenter);
@@ -382,10 +412,10 @@ public class Viskomponenter_Superbruker_Controller {
             Scene_4.setHeight(550);
             LeggTilKomponent_pane.getChildren().clear();
 
-            Label labelNavn = new Label("Søk produktnavn");
+            Label labelNavn = new Label("Søk produktnavn:");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
-            Button btnVisSpecs = new Button("Rediger varens beskrivelser");
+            Button btnVisSpecs = new Button("Rediger varens beskrivelser:");
 
             LeggTilKomponent_pane.getChildren().add(labelNavn);
             LeggTilKomponent_pane.getChildren().add(txtSøk);
@@ -411,7 +441,7 @@ public class Viskomponenter_Superbruker_Controller {
             btnVisSpecs.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    String strID = showInputDialog("Skriv inn varens id");
+                    String strID = showInputDialog("Skriv inn varens ID:");
                     int ID;
                     try {
                         ID = Integer.parseInt(strID);

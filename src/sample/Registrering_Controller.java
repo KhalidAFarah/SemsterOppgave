@@ -154,7 +154,7 @@ public class Registrering_Controller implements Initializable {
             Scene_1.show();
 
         } catch (IOException e) {
-            showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
         }
 
 
@@ -214,14 +214,14 @@ public class Registrering_Controller implements Initializable {
                     save();
 
                 } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
-                    txtError.setText("Vennligst kryss av en av boksene");
+                    txtError.setText("Vennligst kryss av en av boksene.");
                 }
 
             } catch (IOException e) {
-                showMessageDialog(null, e.getMessage());
+                System.out.println(e.getMessage());
             }
         } else if (brukere == null) {
-            showMessageDialog(null, "registeret er ikke initialisert!");
+            System.out.println("Registeret er ikke initialisert.");
         }
     }
 

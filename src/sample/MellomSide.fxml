@@ -26,7 +26,7 @@
         <Button layoutX="250.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn"
                 prefHeight="58.0" prefWidth="127.0" style="-fx-background-color: #3daee4;" text="Logg inn">
             <font>
-                <Font name="Candara Light" size="14.0"/>
+                <Font name="Helvetica" size="14.0"/>
             </font>
         </Button>
         <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="12.0">

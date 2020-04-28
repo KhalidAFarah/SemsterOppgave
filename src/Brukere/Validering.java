@@ -12,12 +12,12 @@ public class Validering {
     }
 
     public static boolean navn(String navn) {
-        String regex = "";//regexen er forskjellige for navn, email, tlf og eventuelle andre
+        String regex = ""; //regexen er forskjellige for navn, email, tlf og eventuelle andre
         boolean sjekk = !navn.isEmpty() && Regex(navn, regex);
         return sjekk;
     }
 
-    public static boolean passord(String passord) { // kanskje dropp validering for passord
+    public static boolean passord(String passord) { //kanskje dropp validering for passord
         String regex = "";
         boolean sjekk = !passord.isEmpty() && Regex(passord, regex);
         return sjekk;

@@ -33,14 +33,14 @@
                 onAction="#On_Click_BtnFjernBruker" prefHeight="46.0" prefWidth="177.0"
                 style="-fx-background-color: #3daee4;" text="Fjern bruker">
             <font>
-                <Font name="Candara Light" size="15.0"/>
+                <Font name="Helvetica" size="15.0"/>
             </font>
         </Button>
         <Button fx:id="btnRediger" layoutX="423.0" layoutY="68.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnRedigerBruker" prefHeight="46.0" prefWidth="177.0"
                 style="-fx-background-color: #3daee4;" text="Rediger bruker">
             <font>
-                <Font name="Candara Light" size="15.0"/>
+                <Font name="Helvetica" size="15.0"/>
             </font>
         </Button>
         <Button fx:id="btnTilbake" layoutX="534.0" layoutY="11.0" mnemonicParsing="false"
