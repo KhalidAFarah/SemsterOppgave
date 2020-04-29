@@ -168,27 +168,26 @@ public class LoggInn_Controller implements Initializable {
         System.out.println(brukere.toStringTxt());
 
         for (int i = 0; i < brukere.getArray().size(); i++) {
+            boolean verdi = true;
             if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
                 login_sucessfull = true;
 
                 System.out.println(brukere.getArray().get(i).isAdmin());
-                if (brukere.getArray().get(i).isAdmin()){
+                if (brukere.getArray().get(i).isAdmin()) {
 
 
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
                     Parent Logg_inn;
-                    boolean value_5 = true;
-
                     try {
                         Logg_inn = loader.load();
                     } catch (IOException e) {
                         lblError.setText("Klarer ikke å bytte side");
                         Logg_inn = null;
-                        value_5 = false;
+                        verdi = false;
                     }
-                    if (value_5){
+                    if (verdi) {
 
                         Mellom_side_SuperbrukerController controller = loader.getController();
                         controller.initBrukere(brukere, komponenter);
@@ -200,38 +199,37 @@ public class LoggInn_Controller implements Initializable {
                         Scene_5.setWidth(580);
                         Scene_5.show();
                     }
-                    }
-
                 } else {
 
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("Standardbruker.fxml"));
-                        Parent Logg_inn;
-                        boolean verdi = true;
-                        try {
-                            Logg_inn = loader.load();
-                        } catch(IOException e){
-                            lblError.setText("Klarer ikke å bytte side");
-                            Logg_inn = null;
-                            verdi= false;
-
-                        if(verdi){
-                            //paserer inn data i standardBruker_Controller
-                            Standardbruker_Controller controller = loader.getController();
-                            controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
-
-                            Scene Standarbruker = new Scene(Logg_inn);
-                            Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene_5.setScene(Standarbruker);
-                            Scene_5.setHeight(448);
-                            Scene_5.setWidth(618);
-
-                            Scene_5.show();
-                        }
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Standardbruker.fxml"));
+                    Parent Logg_inn;
+                    try {
+                        Logg_inn = loader.load();
+                    } catch (IOException e) {
+                        lblError.setText("Klarer ikke å bytte side");
+                        Logg_inn = null;
+                        verdi = false;
                     }
 
+                    if (verdi) {
+                        //paserer inn data i standardBruker_Controller
+                        Standardbruker_Controller controller = loader.getController();
+                        controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
+
+                        Scene Standarbruker = new Scene(Logg_inn);
+                        Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setHeight(448);
+                        Scene_5.setWidth(618);
+
+                        Scene_5.show();
+                    }
                 }
+
             }
+        }
+
 
         if(!login_sucessfull) {
             showMessageDialog(null, "Ugyldig brukernavn eller passord");
