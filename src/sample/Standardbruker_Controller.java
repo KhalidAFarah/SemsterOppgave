@@ -47,6 +47,12 @@ public class Standardbruker_Controller {
     @FXML
     private ScrollPane pane;
 
+    @FXML
+    private DialogPane infoDialog;
+
+    @FXML
+    private AnchorPane info;
+
     private Standardbruker bruker;
 
     private Komponenter komponenter = new Komponenter();
@@ -106,6 +112,8 @@ public class Standardbruker_Controller {
 
     private void visVarer(String type) {
         AnchorPane APane = new AnchorPane();
+        info.getChildren().clear();
+        info.setVisible(false);
         int y = 50;
         ScrollBar sb = new ScrollBar();
         sb.setLayoutX(50);
@@ -117,17 +125,26 @@ public class Standardbruker_Controller {
 
             if (komponenter.getMainArray().get(i).getType().equals(type)) {
 
-                Label label = new Label(komponenter.getMainArray().get(i).getNavn());
-                label.setLayoutY(y);
-                Button btn = new Button("Velg");
-                btn.setLayoutY(y + 25);
-                y += 50;
+                Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
+                labelNavn.setLayoutY(y);
+                labelNavn.setLayoutX(10);
+                Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
+                labelPris.setLayoutY(y);
+                labelPris.setLayoutX(110);
+                Button btnVelg = new Button("Velg");
+                btnVelg.setLayoutY(y + 30);
+                btnVelg.setLayoutX(10);
+                Button btnVisMer = new Button("Vis mer");
+                btnVisMer.setLayoutY(y + 30);
+                btnVisMer.setLayoutX(85);
 
-                btn.setOnAction(new EventHandler<ActionEvent>() {
+                y += 100;
+
+                btnVelg.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
                         for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                            if (komponenter.getMainArray().get(j).getNavn().equals(label.getText())) {
+                            if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
                                 bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
                                 save();
                             }
@@ -135,9 +152,57 @@ public class Standardbruker_Controller {
                     }
                 });
 
+                btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        for (int j = 0; j < komponenter.getMainArray().size(); j++) {
+                            if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
+                                String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\t"
+                                        + komponenter.getMainArray().get(j).getPris() + "\n\n";
+                                String spesifikasjonerText = "";
+                                for(String s : komponenter.getMainArray().get(j).getSpecs()){
+                                    spesifikasjonerText += s + "\n";
+                                }
 
-                APane.getChildren().add(label);
-                APane.getChildren().add(btn);
+                                Label labelInfoHeader = new Label(spesifikasjonerHeader);
+                                Label labelInfoText = new Label(spesifikasjonerText);
+
+                                //infoDialog.setHeaderText(spesifikasjonerHeader);
+                                //infoDialog.setContentText(spesifikasjonerText);
+                                //infoDialog.setVisible(true);
+                                //SubScene sub = new SubScene(info.getParent(), 100, 100);
+                                //info.getChildren().add(sub);
+                                //info.getChildren().add(labelInfo);
+
+                                APane.getChildren().clear();
+                                APane.getChildren().add(labelInfoHeader);
+                                labelInfoText.setLayoutY(75);
+                                labelInfoHeader.setStyle("-fx-font-size: 25");
+                                APane.getChildren().add(labelInfoText);
+
+                                Button btnHide = new Button("Skjul spesifikasjoner");
+
+                                btnHide.setOnAction(new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent event) {
+                                        visVarer(type);
+                                    }
+                                });
+                                btnHide.setLayoutY(45);
+                                APane.getChildren().add(btnHide);
+
+
+
+                            }
+                        }
+                    }
+                });
+
+
+                APane.getChildren().add(labelNavn);
+                APane.getChildren().add(labelPris);
+                APane.getChildren().add(btnVelg);
+                APane.getChildren().add(btnVisMer);
             }
         }
     }
