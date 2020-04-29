@@ -6,34 +6,28 @@ import filbehandling.FiledataTxt;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.BooleanStringConverter;
-import javafx.util.converter.DoubleStringConverter;
 import komponenter.*;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -60,7 +54,7 @@ public class Visbruker_Superbruker_Controller {
     private int IDs;
 
     @FXML
-    private Button btnLeggTil;
+    private Button btnVisKomponenter;
 
     @FXML
     private Button btnFjern;
@@ -113,7 +107,7 @@ public class Visbruker_Superbruker_Controller {
 
     private void succeded(WorkerStateEvent event) {
         tableView.setDisable(false);
-        btnLeggTil.setDisable(false);
+        btnVisKomponenter.setDisable(false);
         btnFjern.setDisable(false);
         btnRediger.setDisable(false);
         btnTilbake.setDisable(false);
@@ -121,7 +115,7 @@ public class Visbruker_Superbruker_Controller {
 
     private void failed(WorkerStateEvent event) {
         tableView.setDisable(false);
-        btnLeggTil.setDisable(false);
+        btnVisKomponenter.setDisable(false);
         btnFjern.setDisable(false);
         btnRediger.setDisable(false);
         btnTilbake.setDisable(false);
@@ -568,5 +562,8 @@ public class Visbruker_Superbruker_Controller {
     public void initBrukere(Register brukere, Komponenter komponenter) {
         this.brukere = brukere;
         this.komponenter = komponenter;
+    }
+
+    public void On_Click_BtnFjernKomponenter(ActionEvent actionEvent) {
     }
 }
