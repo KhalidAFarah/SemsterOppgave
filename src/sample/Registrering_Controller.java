@@ -132,29 +132,38 @@ public class Registrering_Controller {
             //for nå
             showMessageDialog(null, "klarte ikke å laste inn data");
         }
-    }*/
+    }
+    //Done fxml scenes
+     */
 
 
     @FXML
     void onClick_btn_Avbryt(ActionEvent event) {
 
-        try {
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("LoggInn.fxml"));
-            Parent Registrering = loader.load();
+            Parent Avbryt_registrering;
+            boolean value_1 = true;
+            try {
+                Avbryt_registrering = loader.load();
+            }catch(IOException e){
+                    labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
+                    Avbryt_registrering = null;
+                    value_1=false;
+                }
+            if(value_1){
 
             LoggInn_Controller controller = loader.getController();
             controller.setRegister(brukere);
 
-            Scene Avbryt = new Scene(Registrering);
+            Scene Avbryt_Registrering = new Scene(Avbryt_registrering);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_1.setScene(Avbryt);
+            Scene_1.setScene(Avbryt_Registrering);
             Scene_1.setHeight(480);
             Scene_1.setWidth(440);
             Scene_1.show();
 
-        } catch (IOException e) {
-            showMessageDialog(null, e.getMessage());
         }
 
 
