@@ -230,7 +230,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Minnebrikke(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(900);
+        Scene_3.setWidth(800);
 
         visVarer("Minne");
     }
@@ -246,7 +246,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Prosessor(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(900);
+        Scene_3.setWidth(818);
 
         visVarer("Prosessor");
     }
