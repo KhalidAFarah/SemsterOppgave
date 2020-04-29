@@ -51,8 +51,8 @@ public class Mellom_side_SuperbrukerController {
                 Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
                 Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene_12.setScene(VisBruker_Super);
-                Scene_12.setHeight(420);
-                Scene_12.setWidth(625);
+                Scene_12.setHeight(630);
+                Scene_12.setWidth(914);
                 Scene_12.show();
             }
     }
