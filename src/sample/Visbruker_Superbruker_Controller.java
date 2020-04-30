@@ -357,7 +357,7 @@ public class Visbruker_Superbruker_Controller {
                         tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
 
                         tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker)).
-                                getHandelskurv().getMainArray());
+                                getHandlekurv().getMainArray());
                         btnFjernVare.setVisible(false);
                         btnFjernVare2.setVisible(true);
 
@@ -374,7 +374,7 @@ public class Visbruker_Superbruker_Controller {
                                 }
 
                                 if (valgtKomponent >= 0) {
-                                    ((Standardbruker) brukere.getArray().get(IDs)).getHandelskurv().remove(valgtKomponent);
+                                    ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
                                     saveBrukere();
                                 }
                             }
@@ -467,7 +467,7 @@ public class Visbruker_Superbruker_Controller {
 
                         tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
                         tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
-                                .getHandelskurv().getMainArray());
+                                .getHandlekurv().getMainArray());
                     } else if (valgtBruker >= brukere.getArray().size()) {
                         showMessageDialog(null, "Vennligst velg en bruker som eksisterer");
                     } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {

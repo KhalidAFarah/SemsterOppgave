@@ -6,12 +6,12 @@ import komponenter.*;
 
 public class Standardbruker extends Bruker {
     private SimpleDoubleProperty sum;
-    private Komponenter handelskurv;
+    private Komponenter handlekurv;
     private static final SimpleBooleanProperty ADMIN = new SimpleBooleanProperty(false);
 
     public Standardbruker() {
         sum = new SimpleDoubleProperty(0);
-        handelskurv = new Komponenter();
+        handlekurv = new Komponenter();
     }
 
     public String getBrukernavn() {
@@ -26,8 +26,8 @@ public class Standardbruker extends Bruker {
         return super.getEmail();
     }
 
-    public Komponenter getHandelskurv() {
-        return handelskurv;
+    public Komponenter getHandlekurv() {
+        return handlekurv;
     }
 
     public String getTlf() {
@@ -46,12 +46,12 @@ public class Standardbruker extends Bruker {
         super.setPassord(passord);
     }
 
-    public void setEmail(String email) throws InvalidStringException{
+    public void setEmail(String email) throws InvalidStringException {
         super.setEmail(email);
     }
-    
-    public void setHandelskurv(Komponenter handelskurv) {
-        this.handelskurv = handelskurv;
+
+    public void setHandlekurv(Komponenter handlekurv) {
+        this.handlekurv = handlekurv;
     }
 
     public void setTlf(String tlf) throws InvalidStringException {
@@ -62,8 +62,8 @@ public class Standardbruker extends Bruker {
     public void setSum() {
         this.sum.setValue(0);
         double sum2 = 0;
-        for (int i = 0; i < handelskurv.getMainArray().size(); i++) {
-            sum2 += handelskurv.getMainArray().get(i).getPris();
+        for (int i = 0; i < handlekurv.getMainArray().size(); i++) {
+            sum2 += handlekurv.getMainArray().get(i).getPris();
         }
         this.sum.setValue(sum2);
     }
@@ -71,23 +71,23 @@ public class Standardbruker extends Bruker {
     public <T extends Komponent> void leggTilHandlekurv(T elem) {
         boolean sjekk = true;
         //tester om det samme komponent type eksisterer dersom den finnes fjernes den gamle og legger til den nye
-        for (int i = 0; i < handelskurv.getMainArray().size(); i++) {
-            if (handelskurv.getMainArray().get(i).getType().equals(elem.getType())) {
-                handelskurv.remove(i);
-                handelskurv.add(elem);
+        for (int i = 0; i < handlekurv.getMainArray().size(); i++) {
+            if (handlekurv.getMainArray().get(i).getType().equals(elem.getType())) {
+                handlekurv.remove(i);
+                handlekurv.add(elem);
                 sjekk = false;
 
                 setSum();//ny sum av all varer
             }
         }
         if (sjekk) {
-            handelskurv.add(elem);
+            handlekurv.add(elem);
 
             setSum();//ny sum av alle varer
         }
     }
 
     public String toStringFormat() {
-        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";" + handelskurv.getMainArray().size() + ";" + handelskurv.toStringTxt();
+        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";" + handlekurv.getMainArray().size() + ";" + handlekurv.toStringTxt();
     }
 }
