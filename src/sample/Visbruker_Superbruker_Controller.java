@@ -36,15 +36,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Visbruker_Superbruker_Controller {
 
-    @FXML
-    private SubScene LeggTilKomponent_sub;
-
-    @FXML
-    private AnchorPane LeggTilKomponent_pane;
-
-    @FXML
-    private TableView tableView;
-
     private String KomponentType;
 
     private Komponenter komponenter = new Komponenter();
@@ -52,6 +43,8 @@ public class Visbruker_Superbruker_Controller {
     private Komponenter komp = new Komponenter();
 
     private int IDs;
+
+    private Button btnf = new Button();
 
     @FXML
     private Button btnVisKomponenter;
@@ -65,6 +58,24 @@ public class Visbruker_Superbruker_Controller {
     @FXML
     private Button btnTilbake;
 
+    @FXML
+    private Button btnFjernKomponenter;
+
+    @FXML
+    private AnchorPane pane;
+
+    @FXML
+    private TableView tableView;
+
+    @FXML
+    private Label labelSøk;
+
+    @FXML
+    private TextField txtSøk;
+
+    @FXML
+    private Label LabelError;
+
 
     private boolean showLeggTil = false;
 
@@ -75,6 +86,7 @@ public class Visbruker_Superbruker_Controller {
     private Register brukere;
     private Register brukere2 = new Register();
 
+    private AnchorPane leggtilPane = new AnchorPane();
 
     @FXML
     private TableColumn<Bruker, Integer> IDKolonne;
@@ -96,7 +108,11 @@ public class Visbruker_Superbruker_Controller {
 
     public void start() {
         if (brukere != null) {
-
+            pane.getChildren().add(leggtilPane);
+            pane.getChildren().add(btnf);
+            btnf.setVisible(false);
+            System.out.println(btnRediger.getStyle());
+            leggtilPane.setVisible(false);
 
             IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
             brukerKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
@@ -270,20 +286,19 @@ public class Visbruker_Superbruker_Controller {
     @FXML
     void On_Click_BtnFjernBruker(ActionEvent event) {
         if (!showFjern) {
-            LeggTilKomponent_pane.setVisible(true);
-            LeggTilKomponent_sub.setVisible(true);
+            leggtilPane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(550);
-            LeggTilKomponent_pane.getChildren().clear();
+            leggtilPane.getChildren().clear();
 
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
             //Komponenter komp = new Komponenter();
 
-            LeggTilKomponent_pane.getChildren().add(labelNavn);
-            LeggTilKomponent_pane.getChildren().add(txtSøk);
-            LeggTilKomponent_pane.getChildren().add(tableSøk);
+            leggtilPane.getChildren().add(labelNavn);
+            leggtilPane.getChildren().add(txtSøk);
+            leggtilPane.getChildren().add(tableSøk);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -297,16 +312,15 @@ public class Visbruker_Superbruker_Controller {
             tableSøk.setPrefWidth(575);
 
 
-
             søk(txtSøk, tableSøk, false, new Label());
 
             //slette komponenter
             Button btnFjernBruker = new Button("Fjern bruker");
             Button btnFjernVare = new Button("Fjern en brukers vare");
             Button btnFjernVare2 = new Button("Fjern en brukerens vare");
-            LeggTilKomponent_pane.getChildren().add(btnFjernBruker);
-            LeggTilKomponent_pane.getChildren().add(btnFjernVare);
-            LeggTilKomponent_pane.getChildren().add(btnFjernVare2);
+            leggtilPane.getChildren().add(btnFjernBruker);
+            leggtilPane.getChildren().add(btnFjernVare);
+            leggtilPane.getChildren().add(btnFjernVare2);
             btnFjernBruker.setLayoutX(425);
             btnFjernBruker.setLayoutY(15);
             btnFjernVare.setLayoutX(425);
@@ -407,8 +421,7 @@ public class Visbruker_Superbruker_Controller {
             showRediger = false;
             showLeggTil = false;
         } else if (showFjern) {
-            LeggTilKomponent_pane.setVisible(false);
-            LeggTilKomponent_sub.setVisible(false);
+            leggtilPane.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
             showFjern = false;
@@ -418,19 +431,18 @@ public class Visbruker_Superbruker_Controller {
     @FXML
     void On_Click_BtnVisKomponenterTilBrukeren(ActionEvent event) {
         if (!showLeggTil) {
-            LeggTilKomponent_pane.setVisible(true);
-            LeggTilKomponent_sub.setVisible(true);
+            leggtilPane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(550);
-            LeggTilKomponent_pane.getChildren().clear();
+            leggtilPane.getChildren().clear();
 
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
 
-            LeggTilKomponent_pane.getChildren().add(labelNavn);
-            LeggTilKomponent_pane.getChildren().add(txtSøk);
-            LeggTilKomponent_pane.getChildren().add(tableSøk);
+            leggtilPane.getChildren().add(labelNavn);
+            leggtilPane.getChildren().add(txtSøk);
+            leggtilPane.getChildren().add(tableSøk);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -494,14 +506,13 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
 
-            LeggTilKomponent_pane.getChildren().add(btnVisKomponenter);
+            leggtilPane.getChildren().add(btnVisKomponenter);
 
             showLeggTil = true;
             showRediger = false;
             showFjern = false;
         } else if (showLeggTil) {
-            LeggTilKomponent_pane.setVisible(false);
-            LeggTilKomponent_sub.setVisible(false);
+            leggtilPane.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
             showLeggTil = false;
@@ -511,19 +522,18 @@ public class Visbruker_Superbruker_Controller {
     @FXML
     void On_Click_BtnRedigerBruker(ActionEvent event) {
         if (!showRediger) {
-            LeggTilKomponent_pane.setVisible(true);
-            LeggTilKomponent_sub.setVisible(true);
+            leggtilPane.setVisible(true);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(550);
-            LeggTilKomponent_pane.getChildren().clear();
+            leggtilPane.getChildren().clear();
 
             Label labelNavn = new Label("Søk produktnavn");
             TextField txtSøk = new TextField();
             TableView tableSøk = new TableView();
 
-            LeggTilKomponent_pane.getChildren().add(labelNavn);
-            LeggTilKomponent_pane.getChildren().add(txtSøk);
-            LeggTilKomponent_pane.getChildren().add(tableSøk);
+            leggtilPane.getChildren().add(labelNavn);
+            leggtilPane.getChildren().add(txtSøk);
+            leggtilPane.getChildren().add(tableSøk);
 
             labelNavn.setLayoutX(15);
             labelNavn.setLayoutY(15);
@@ -544,14 +554,12 @@ public class Visbruker_Superbruker_Controller {
             showLeggTil = false;
             showFjern = false;
         } else if (showRediger) {
-            LeggTilKomponent_pane.setVisible(false);
-            LeggTilKomponent_sub.setVisible(false);
+            leggtilPane.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
             showRediger = false;
         }
     }
-
 
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
@@ -572,7 +580,6 @@ public class Visbruker_Superbruker_Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void initBrukere(Register brukere, Komponenter komponenter) {
@@ -581,5 +588,6 @@ public class Visbruker_Superbruker_Controller {
     }
 
     public void On_Click_BtnFjernKomponenter(ActionEvent actionEvent) {
+
     }
 }
