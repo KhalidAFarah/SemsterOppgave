@@ -79,7 +79,6 @@ public class LoggInn_Controller implements Initializable {
     public void loadKomponenter() {
         if (komponenter == null) {
             komponenter = new Komponenter();
-            System.out.println("hal");
             FiledataJOBJ data = new FiledataJOBJ();
             Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
