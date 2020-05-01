@@ -67,27 +67,42 @@ public class Visbruker_Superbruker_Controller {
 
 
     private boolean showLeggTil = false;
+
     private boolean showFjern = false;
+
     private boolean showRediger = false;
 
     private Register brukere;
     private Register brukere2 = new Register();
 
+
+    @FXML
+    private TableColumn<Bruker, Integer> IDKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> brukerKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> passordKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> tlfKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> mailKolonne;
+
+    @FXML
+    private TableColumn<Bruker, Boolean> adminKolonne;
+
     public void start() {
         if (brukere != null) {
 
-            TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
-            TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
-            TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
-            TableColumn<Bruker, String> tlfKolonne = new TableColumn<>("tlf");
-            TableColumn<Bruker, String> emailKolonne = new TableColumn<>("email");
-            TableColumn<Bruker, Boolean> adminKolonne = new TableColumn<>("Admin");
 
             IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
-            brukernavnKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
+            brukerKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
             passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
             tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
-            emailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
+            mailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
             PropertyValueFactory<? extends Bruker, Boolean> sd = new PropertyValueFactory<>("ADMIN");
             //adminKolonne.setCellValueFactory(sd);
             adminKolonne.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bruker, Boolean>, ObservableValue<Boolean>>() {
@@ -97,7 +112,7 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
 
-            tableView.getColumns().addAll(IDKolonne, brukernavnKolonne, passordKolonne, tlfKolonne, emailKolonne, adminKolonne);
+            tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne, tlfKolonne, mailKolonne, adminKolonne);
             //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
         } else if (this.brukere == null) {
@@ -280,6 +295,7 @@ public class Visbruker_Superbruker_Controller {
             tableSøk.setLayoutY(80);
             tableSøk.setPrefHeight(275);
             tableSøk.setPrefWidth(575);
+
 
 
             søk(txtSøk, tableSøk, false, new Label());

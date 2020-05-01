@@ -9,69 +9,82 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_Controller">
     <children>
         <ImageView fitHeight="409.0" fitWidth="617.0" layoutX="-9.0" layoutY="-8.0">
             <image>
-                <Image url="@../img/background.jpg" />
+                <Image url="@../img/background.jpg"/>
             </image>
         </ImageView>
-        <Button fx:id="btnTilbake" layoutX="460.0" layoutY="297.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
+        <Button fx:id="btnTilbake" layoutX="460.0" layoutY="297.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnTilbake" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;"
+                text="Tilbake" textFill="WHITE">
             <font>
-                <Font name="Helvetica Bold" size="11.0" />
+                <Font name="Helvetica Bold" size="11.0"/>
             </font>
         </Button>
         <Label layoutX="22.0" layoutY="57.0" prefHeight="18.0" prefWidth="98.0" text="Velg maskin:">
             <font>
-                <Font name="Helvetica Bold" size="14.0" />
+                <Font name="Helvetica Bold" size="14.0"/>
             </font>
         </Label>
-        <TextField fx:id="txtMaskin" layoutX="22.0" layoutY="82.0" prefHeight="26.0" prefWidth="137.0" />
-        <Button layoutX="193.0" layoutY="96.0" mnemonicParsing="false" onAction="#On_Click_Btn_Prosessor" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Prosessor (CPU)">
+        <TextField fx:id="txtMaskin" layoutX="22.0" layoutY="82.0" prefHeight="26.0" prefWidth="137.0"/>
+        <Button layoutX="193.0" layoutY="96.0" mnemonicParsing="false" onAction="#On_Click_Btn_Prosessor"
+                prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Prosessor (CPU)">
             <font>
-                <Font name="Helvetica" size="12.0" />
+                <Font name="Helvetica" size="12.0"/>
             </font>
         </Button>
-        <Button layoutX="328.0" layoutY="96.0" mnemonicParsing="false" onAction="#On_Click_Btn_Grafikkort" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Grafikkort">
+        <Button layoutX="328.0" layoutY="96.0" mnemonicParsing="false" onAction="#On_Click_Btn_Grafikkort"
+                prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Grafikkort">
             <font>
-                <Font name="Helvetica" size="12.0" />
+                <Font name="Helvetica" size="12.0"/>
             </font>
         </Button>
-        <Button layoutX="328.0" layoutY="279.0" mnemonicParsing="false" onAction="#On_Click_Btn_Minnebrikke" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="RAM minnebrikke">
+        <Button layoutX="328.0" layoutY="279.0" mnemonicParsing="false" onAction="#On_Click_Btn_Minnebrikke"
+                prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="RAM minnebrikke">
             <font>
-                <Font name="Helvetica" size="11.0" />
+                <Font name="Helvetica" size="11.0"/>
             </font>
         </Button>
-        <Button layoutX="193.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Harddisk" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Harddisk">
+        <Button layoutX="193.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Harddisk"
+                prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Harddisk">
             <font>
-                <Font name="Helvetica" size="12.0" />
+                <Font name="Helvetica" size="12.0"/>
             </font>
         </Button>
-        <Button layoutX="328.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Tastatur" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Tastatur">
+        <Button layoutX="328.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Tastatur"
+                prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Tastatur">
             <font>
-                <Font name="Helvetica" size="12.0" />
+                <Font name="Helvetica" size="12.0"/>
             </font>
         </Button>
-        <Button layoutX="453.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Mus" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Mus">
+        <Button layoutX="453.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_Btn_Mus" prefHeight="60.0"
+                prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Mus">
             <font>
-                <Font name="Helvetica" size="12.0" />
+                <Font name="Helvetica" size="12.0"/>
             </font>
         </Button>
-        <Button layoutX="453.0" layoutY="96.0" mnemonicParsing="false" onAction="#On_Click_Btn_Skjerm" prefHeight="60.0" prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Skjerm">
+        <Button layoutX="453.0" layoutY="96.0" mnemonicParsing="false" onAction="#On_Click_Btn_Skjerm" prefHeight="60.0"
+                prefWidth="112.0" style="-fx-background-color: #3daee4;" text="Skjerm">
             <font>
-                <Font name="Helvetica" size="12.0" />
+                <Font name="Helvetica" size="12.0"/>
             </font>
         </Button>
         <ImageView fx:id="img_Techmet" fitHeight="149.0" fitWidth="198.0" layoutX="285.0" layoutY="-21.0">
             <image>
-                <Image url="@../img/logo3.png" />
+                <Image url="@../img/logo3.png"/>
             </image>
         </ImageView>
-        <Button fx:id="btnKurv" layoutX="200.0" layoutY="296.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;" text="Din handlekurv" textFill="WHITE">
+        <Button fx:id="btnKurv" layoutX="200.0" layoutY="296.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv"
+                prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: black;" text="Din handlekurv"
+                textFill="WHITE">
             <font>
-                <Font name="Helvetica Bold" size="11.0" />
+                <Font name="Helvetica Bold" size="11.0"/>
             </font>
         </Button>
-      <ScrollPane fx:id="pane" layoutX="600.0" layoutY="-7.0" prefHeight="409.0" prefWidth="200.0" />
+        <ScrollPane fx:id="pane" layoutX="600.0" layoutY="-7.0" prefHeight="409.0" prefWidth="200.0"/>
     </children>
 </AnchorPane>
