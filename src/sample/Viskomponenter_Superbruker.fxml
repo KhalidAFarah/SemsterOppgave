@@ -59,7 +59,7 @@
                 style="-fx-background-color: #3daee4;" text="Vis en komponents&#10;spesifikasjoner"
                 textAlignment="CENTER">
             <font>
-                <Font name="Helveticat" size="15.0"/>
+                <Font name="Helvetica" size="15.0"/>
             </font>
         </Button>
         <Button fx:id="btnViskomponenter" layoutX="723.0" layoutY="303.0" mnemonicParsing="false"

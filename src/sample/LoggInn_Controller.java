@@ -23,6 +23,7 @@ import komponenter.Komponenter;
 
 import static javax.swing.JOptionPane.*;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -128,7 +129,7 @@ public class LoggInn_Controller implements Initializable {
         btnRegistrer.setDisable(false);
         btnAvslutt.setDisable(false);
 
-        showMessageDialog(null, "Klarte ikke laste inn lagert data");
+        showMessageDialog(null, "Klarte ikke laste inn lagret data");
     }
 
     private void loadBruker() {
@@ -163,7 +164,7 @@ public class LoggInn_Controller implements Initializable {
     @FXML
     void onClick_btn_LoggInn(ActionEvent event) {
         //load();
-        boolean login_sucessfull = false;
+        boolean login_successful = false;
 
         System.out.println(brukere.toStringTxt());
 
@@ -171,7 +172,7 @@ public class LoggInn_Controller implements Initializable {
             boolean verdi = true;
             if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
-                login_sucessfull = true;
+                login_successful = true;
 
                 System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
@@ -192,9 +193,9 @@ public class LoggInn_Controller implements Initializable {
                         Mellom_side_SuperbrukerController controller = loader.getController();
                         controller.initBrukere(brukere, komponenter);
 
-                        Scene Standarbruker = new Scene(Logg_inn);
+                        Scene Standardbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setScene(Standardbruker);
                         Scene_5.setHeight(360);
                         Scene_5.setWidth(580);
                         Scene_5.show();
@@ -229,9 +230,7 @@ public class LoggInn_Controller implements Initializable {
 
             }
         }
-
-
-        if(!login_sucessfull) {
+        if (!login_successful) {
             showMessageDialog(null, "Ugyldig brukernavn eller passord");
         }
     }
@@ -266,7 +265,7 @@ public class LoggInn_Controller implements Initializable {
 
 
 
-    //Får å gå ut fra applikasjonen
+    //For å gå ut fra applikasjonen
     @FXML
     void onClick_btn_Avslutt(ActionEvent event) {
         Platform.exit();

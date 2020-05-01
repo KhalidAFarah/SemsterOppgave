@@ -2,10 +2,10 @@ package Brukere;
 
 public class Validering {
 
-    public static boolean Regex(String regex, String... strings){
-        for(String str : strings){
+    public static boolean Regex(String regex, String... strings) {
+        for (String str : strings) {
 
-            if(!str.matches(regex) || str.isEmpty()){
+            if (!str.matches(regex) || str.isEmpty()) {
                 return false;
             }
         }
@@ -39,7 +39,7 @@ public class Validering {
         String regex = "[+()\\s\\-0-9][\\s+()\\-0-9][\\s+()\\-0-9]{8,15}+";
         String regex2 = "[+()\\s\\-0-9]{8,15}+";
         boolean sjekk = !tlf.isEmpty() && Regex(regex, tlf);
-        if(!sjekk) {
+        if (!sjekk) {
             sjekk = !tlf.isEmpty() && Regex(regex2, tlf);
         }
         return sjekk;
