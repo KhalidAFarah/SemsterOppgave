@@ -207,11 +207,12 @@ public class Standardbruker_Controller {
         pane.setContent(APane);
         int y = 10;
         if (bruker != null || komponenter != null) {
+            Label labelTotalPris = new Label("Totale pris er " + bruker.getSum() + " Kr");
             for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
-                Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
+                Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
                 labelNavn.setLayoutX(10);
-                Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
+                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " Kr");
                 labelPris.setLayoutY(y);
                 labelPris.setLayoutX(110);
                 Button btnFjern = new Button("Fjern");
@@ -221,6 +222,8 @@ public class Standardbruker_Controller {
                 btnVisMer.setLayoutY(y + 30);
                 btnVisMer.setLayoutX(85);
 
+
+
                 y += 80;
 
                 btnFjern.setOnAction(new EventHandler<ActionEvent>() {
@@ -228,24 +231,26 @@ public class Standardbruker_Controller {
                     public void handle(ActionEvent event) {
                         for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
                             if (bruker.getHandlekurv().getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                bruker.getHandlekurv().getMainArray().remove(j);
+                                bruker.getHandlekurv().remove(j);
                             }
                         }
                         updateVarer();
                         save();
+                        labelTotalPris.setText("Totale pris er " + bruker.getSum() + " Kr");
                     }
                 });
                 btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                            if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\nPris "
-                                        + komponenter.getMainArray().get(j).getPris();
+                        for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
+                            if (bruker.getHandlekurv().getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
+                                String spesifikasjonerHeader = bruker.getHandlekurv().getMainArray().get(j).getNavn() + "\nPris "
+                                        + bruker.getHandlekurv().getMainArray().get(j).getPris();
                                 String spesifikasjonerText = "";
-                                for(String s : komponenter.getMainArray().get(j).getSpecs()){
+                                for(String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()){
                                     spesifikasjonerText += s + "\n";
                                 }
+
 
                                 Label labelInfoHeader = new Label(spesifikasjonerHeader);
                                 Label labelInfoText = new Label(spesifikasjonerText);
@@ -282,12 +287,12 @@ public class Standardbruker_Controller {
                 APane.getChildren().add(btnFjern);
                 APane.getChildren().add(labelPris);
                 APane.getChildren().add(btnVisMer);
-            }
 
-            Label labelTotalPris = new Label("Totale pris er " + bruker.getSum() + " Kr");
+            }
             labelTotalPris.setLayoutY(y-10);
             labelTotalPris.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelTotalPris);
+
         } else if (bruker == null) {
             showMessageDialog(null, "Klarte ikke å laste inn brukeren");
         }
@@ -300,7 +305,7 @@ public class Standardbruker_Controller {
         //AnchorPane APane = new AnchorPane();
         //pane.setContent(APane);
         int y = 50;
-        if (bruker != null) {
+        if (bruker != null || komponenter != null) {
             updateVarer();/*
             for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
                 Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
