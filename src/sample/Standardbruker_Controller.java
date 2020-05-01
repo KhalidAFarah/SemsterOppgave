@@ -76,6 +76,29 @@ public class Standardbruker_Controller {
         this.bruker = bruker;
         this.brukere = brukere;
         this.komponenter = komponenter;
+
+        String fjernet = "Følgende varer ble fjernet fra din handlekurv: \n";
+
+        boolean fantNoe = false;
+
+        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++){
+            boolean funnet = false;
+            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
+                if(bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())){
+                    funnet = true;
+
+                }
+            }
+            if(!funnet){
+                fjernet += bruker.getHandlekurv().getMainArray().get(i).getNavn() + "\n";
+                bruker.getHandlekurv().remove(i);
+                fantNoe = true;
+            }
+        }
+        if(fantNoe) {
+            save();
+            showMessageDialog(null, fjernet);
+        }
     }
 
     public void loadKomponenter() {
@@ -205,6 +228,7 @@ public class Standardbruker_Controller {
     private void updateVarer() {
         AnchorPane APane = new AnchorPane();
         pane.setContent(APane);
+        //System.out.println(bruker.toStringFormat());
         int y = 10;
         if (bruker != null || komponenter != null) {
             Label labelTotalPris = new Label("Totale pris er " + bruker.getSum() + " Kr");
@@ -234,9 +258,9 @@ public class Standardbruker_Controller {
                                 bruker.getHandlekurv().remove(j);
                             }
                         }
+                        bruker.setSum();
                         updateVarer();
                         save();
-                        labelTotalPris.setText("Totale pris er " + bruker.getSum() + " Kr");
                     }
                 });
                 btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
