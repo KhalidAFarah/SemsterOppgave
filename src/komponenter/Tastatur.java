@@ -9,7 +9,7 @@ public class Tastatur extends Komponent {
 
     @Override
     public String toString() {
-        return null;
+        return "Navn: " + super.getNavn();
     }
 
     @Override

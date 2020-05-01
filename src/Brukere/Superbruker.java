@@ -38,11 +38,11 @@ public class Superbruker extends Bruker {
         super.setPassord(passord);
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws InvalidStringException {
         super.setEmail(email);
     }
 
-    public void setTlf(String tlf) {
+    public void setTlf(String tlf) throws InvalidStringException {
         super.setTlf(tlf);
     }
 

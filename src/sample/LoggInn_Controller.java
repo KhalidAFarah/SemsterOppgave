@@ -16,17 +16,20 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import komponenter.Komponenter;
 
 import static javax.swing.JOptionPane.*;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+//Done try and catch with fxml scenes
 
 public class LoggInn_Controller implements Initializable {
 
@@ -43,11 +46,17 @@ public class LoggInn_Controller implements Initializable {
     private Button btnRegistrer;
 
     @FXML
+    private Label lblError;
+
+    @FXML
     private Button btnAvslutt;
 
     private Register brukere;
 
     private Komponenter komponenter;
+
+
+
 
     private void succededKomponenter(WorkerStateEvent event) {
         txtBrukernavn.setDisable(false);
@@ -70,7 +79,6 @@ public class LoggInn_Controller implements Initializable {
     public void loadKomponenter() {
         if (komponenter == null) {
             komponenter = new Komponenter();
-            System.out.println("hal");
             FiledataJOBJ data = new FiledataJOBJ();
             Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
 
@@ -155,43 +163,56 @@ public class LoggInn_Controller implements Initializable {
     @FXML
     void onClick_btn_LoggInn(ActionEvent event) {
         //load();
-        boolean login_sucessfull = false;
+        boolean login_successful = false;
 
         System.out.println(brukere.toStringTxt());
 
         for (int i = 0; i < brukere.getArray().size(); i++) {
+            boolean verdi = true;
             if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
-                login_sucessfull = true;
+                login_successful = true;
 
                 System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
 
 
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
+                    Parent Logg_inn;
                     try {
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
-                        Parent Logg_inn = loader.load();
+                        Logg_inn = loader.load();
+                    } catch (IOException e) {
+                        lblError.setText("Klarer ikke å bytte side");
+                        Logg_inn = null;
+                        verdi = false;
+                    }
+                    if (verdi) {
 
                         Mellom_side_SuperbrukerController controller = loader.getController();
                         controller.initBrukere(brukere, komponenter);
 
-                        Scene Standarbruker = new Scene(Logg_inn);
+                        Scene Standardbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setScene(Standardbruker);
                         Scene_5.setHeight(360);
                         Scene_5.setWidth(580);
                         Scene_5.show();
+                    }
+                } else {
+
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("Standardbruker.fxml"));
+                    Parent Logg_inn;
+                    try {
+                        Logg_inn = loader.load();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        lblError.setText("Klarer ikke å bytte side");
+                        Logg_inn = null;
+                        verdi = false;
                     }
 
-                } else {
-                    try {
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("Standardbruker.fxml"));
-                        Parent Logg_inn = loader.load();
-
+                    if (verdi) {
                         //paserer inn data i standardBruker_Controller
                         Standardbruker_Controller controller = loader.getController();
                         controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
@@ -199,29 +220,35 @@ public class LoggInn_Controller implements Initializable {
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
-                        Scene_5.setHeight(480);
-                        Scene_5.setWidth(620);
+                        Scene_5.setHeight(448);
+                        Scene_5.setWidth(618);
 
                         Scene_5.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
-
                 }
+
             }
         }
-        if (!login_sucessfull) {
+        if (!login_successful) {
             showMessageDialog(null, "Ugyldig brukernavn eller passord");
         }
     }
 
     @FXML
     void onClick_btn_RegistrerNyBruker(ActionEvent event) {
-        try {
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Registrering.fxml"));
-            Parent Logg_inn = loader.load();
+            Parent Logg_inn;
+            boolean value_7 = true;
+            try {
+                Logg_inn = loader.load();
+            }catch(IOException e) {
+                lblError.setText("klarte ikke å bytte side");
+                Logg_inn = null;
+                value_7 = false;
 
+            }if(value_7){
             Registrering_Controller controller = loader.getController();
             controller.initRegister(brukere);
             Scene Register_ny_bruker = new Scene(Logg_inn);
@@ -230,12 +257,12 @@ public class LoggInn_Controller implements Initializable {
             Scene_2.setHeight(480);
             Scene_2.setWidth(600);
             Scene_2.show();
-        } catch (IOException e) {
-            e.printStackTrace(); //trace the exception..
+        }
+
         }
 
 
-    }
+
 
     //For å gå ut fra applikasjonen
     @FXML

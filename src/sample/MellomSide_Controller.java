@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -15,6 +16,10 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import java.io.IOException;
 
 public class MellomSide_Controller {
+
+
+    @FXML
+    private Label lblError;
 
     private Register brukere;
 
@@ -25,11 +30,19 @@ public class MellomSide_Controller {
     @FXML
     void On_Click_BtnLoggInn(ActionEvent event) {
         if (brukere != null) {
-            try {
+
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("LoggInn.fxml"));
-                Parent MellomSide = loader.load();
+                Parent MellomSide;
+                boolean value_8 = true;
 
+                try {
+                    MellomSide = loader.load();
+                }catch(IOException e) {
+                    lblError.setText("Klarte ikke å bytte side");
+                    MellomSide = null;
+                    value_8 = false;
+                }if(value_8){
                 LoggInn_Controller controller = loader.getController();
                 controller.setRegister(brukere);
 
@@ -39,9 +52,8 @@ public class MellomSide_Controller {
                 Scene_8.setHeight(480);
                 Scene_8.setWidth(440);
                 Scene_8.show();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+
         } else {
             showMessageDialog(null, "Mangel på data");
         }
@@ -51,10 +63,19 @@ public class MellomSide_Controller {
     @FXML
     void On_Click_BtnNyBruker(ActionEvent event) {
 
-        try {
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Registrering.fxml"));
-            Parent MellomSide = loader.load();
+            Parent MellomSide;
+            boolean value_9 = true;
+            try {
+                MellomSide = loader.load();
+            }catch(IOException e){
+                lblError.setText("Klarte ikke å bytte side");
+                MellomSide = null;
+                value_9 = false;
+
+            }if(value_9){
 
             Registrering_Controller controller = loader.getController();
             controller.initRegister(brukere);
@@ -64,8 +85,6 @@ public class MellomSide_Controller {
             Scene_9.setHeight(480);
             Scene_9.setWidth(600);
             Scene_9.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }

@@ -5,18 +5,14 @@ import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -25,11 +21,8 @@ import komponenter.Komponenter;
 import static javax.swing.JOptionPane.*;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class Standardbruker_Controller {
 
@@ -46,7 +39,7 @@ public class Standardbruker_Controller {
     private SubScene subScene;
 
     @FXML
-    private AnchorPane pane;
+    private ScrollPane pane;
 
     private Standardbruker bruker;
 
@@ -106,9 +99,13 @@ public class Standardbruker_Controller {
     }
 
     private void visVarer(String type) {
-        pane.getChildren().clear();
+        AnchorPane APane = new AnchorPane();
         int y = 50;
-        ArrayList<Integer> ints = new ArrayList<>(komponenter.getMainArray().size() - 1);
+        ScrollBar sb = new ScrollBar();
+        sb.setLayoutX(50);
+        pane.setContent(APane);
+
+
         for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
             //ImageView img = new ImageView();
 
@@ -133,18 +130,19 @@ public class Standardbruker_Controller {
                 });
 
 
-                pane.getChildren().add(label);
-                pane.getChildren().add(btn);
+                APane.getChildren().add(label);
+                APane.getChildren().add(btn);
             }
         }
     }
 
     private void updateVarer() {
-        pane.getChildren().clear();
+        AnchorPane APane = new AnchorPane();
+        pane.setContent(APane);
         int y = 50;
         if (bruker != null) {
-            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
-                Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
+            for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
+                Label label = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 label.setLayoutY(y);
                 Button btn = new Button("Fjern");
                 btn.setLayoutY(y + 25);
@@ -154,17 +152,17 @@ public class Standardbruker_Controller {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        for (int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++) {
-                            if (bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())) {
-                                bruker.getHandelskurv().getMainArray().remove(j);
+                        for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
+                            if (bruker.getHandlekurv().getMainArray().get(j).getNavn().equals(label.getText())) {
+                                bruker.getHandlekurv().getMainArray().remove(j);
                             }
                         }
                         updateVarer();
                         save();
                     }
                 });
-                pane.getChildren().add(label);
-                pane.getChildren().add(btn);
+                APane.getChildren().add(label);
+                APane.getChildren().add(btn);
             }
         } else if (bruker == null) {
             showMessageDialog(null, "Klarte ikke å laste inn brukeren");
@@ -175,12 +173,12 @@ public class Standardbruker_Controller {
     void On_Click_BtnKurv(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(900);
-
-        pane.getChildren().clear();
+        AnchorPane APane = new AnchorPane();
+        pane.setContent(APane);
         int y = 50;
         if (bruker != null) {
-            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
-                Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
+            for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
+                Label label = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 label.setLayoutY(y);
                 Button btn = new Button("Fjern");
                 btn.setLayoutY(y + 25);
@@ -190,17 +188,17 @@ public class Standardbruker_Controller {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        for (int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++) {
-                            if (bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())) {
-                                bruker.getHandelskurv().getMainArray().remove(j);
+                        for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
+                            if (bruker.getHandlekurv().getMainArray().get(j).getNavn().equals(label.getText())) {
+                                bruker.getHandlekurv().getMainArray().remove(j);
                             }
                         }
                         updateVarer();
                         save();
                     }
                 });
-                pane.getChildren().add(label);
-                pane.getChildren().add(btn);
+                APane.getChildren().add(label);
+                APane.getChildren().add(btn);
             }
         } else if (bruker == null) {
             showMessageDialog(null, "Klarte ikke å laste inn brukeren");
@@ -226,7 +224,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Minnebrikke(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(900);
+        Scene_3.setWidth(800);
 
         visVarer("Minne");
     }
@@ -242,7 +240,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Prosessor(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(900);
+        Scene_3.setWidth(818);
 
         visVarer("Prosessor");
     }

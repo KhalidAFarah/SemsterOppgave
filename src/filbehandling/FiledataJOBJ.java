@@ -17,7 +17,6 @@ public class FiledataJOBJ extends Task<Void> {
              ObjectOutputStream out = new ObjectOutputStream(os)) {
             komp.writeObject(out);
         }
-
     }
 
     public void load(Komponenter komp, Path path) throws IOException, Exception {// for nå siden der er ikke er forskjeller mellom komponentene
