@@ -41,11 +41,11 @@ public class Viskomponenter_Superbruker_Controller {
 
     private Komponenter komponenter = new Komponenter();
 
-    private Komponenter komp = new Komponenter();
+    private final Komponenter komp = new Komponenter();
 
     private int IDs;
 
-    private Button btnf = new Button();
+    private final Button btnf = new Button();
 
     @FXML
     private Button btnLeggTil;
@@ -80,8 +80,8 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     private TableColumn<Komponent, Double> prisKolonne;
 
-    private TableColumn<Spesifikasjon, Integer> idSpecKolonne = new TableColumn<>("ID");
-    private TableColumn<Spesifikasjon, String> specNavnKolonne = new TableColumn<>("Spesifikasjoner");
+    private final TableColumn<Spesifikasjon, Integer> idSpecKolonne = new TableColumn<>("ID");
+    private final TableColumn<Spesifikasjon, String> specNavnKolonne = new TableColumn<>("Spesifikasjoner");
 
     @FXML
     private Label labelSøk;
@@ -94,7 +94,7 @@ public class Viskomponenter_Superbruker_Controller {
     private boolean showFjern = false;
     private boolean showSpecs = false;
     private boolean showRediger = false;
-    private AnchorPane leggtilPane = new AnchorPane();
+    private final AnchorPane leggtilPane = new AnchorPane();
 
     private ObservableList<Spesifikasjon> spesifikasjoner = FXCollections.observableArrayList();
     private ObservableList<Spesifikasjon> spesifikasjonerSøk = FXCollections.observableArrayList();

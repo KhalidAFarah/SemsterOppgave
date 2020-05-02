@@ -59,7 +59,7 @@ public class Registrering_Controller {
 
     private Register brukere;
     private FiledataTxt lagreTxt;
-    private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+    private final Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
     private void save() {
         lagreTxt = new FiledataTxt();
