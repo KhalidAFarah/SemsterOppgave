@@ -316,8 +316,11 @@ public class Standardbruker_Controller {
     void On_Click_BtnKurv(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(818);
-
-        updateVarer();
+        if(bruker.getHandlekurv().getMainArray().size() > 0) {
+            updateVarer();
+        }else{
+            labelError.setText("din handle kurv er tom");
+        }
 
     }
 
