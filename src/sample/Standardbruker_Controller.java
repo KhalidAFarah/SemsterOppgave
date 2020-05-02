@@ -36,22 +36,10 @@ public class Standardbruker_Controller {
     private ImageView img_Techmet;
 
     @FXML
-    private TextField txtMaskin;
-
-    @FXML
-    private TextField txtHandlekurve;
-
-    @FXML
-    private SubScene subScene;
-
-    @FXML
     private ScrollPane pane;
 
     @FXML
-    private DialogPane infoDialog;
-
-    @FXML
-    private AnchorPane info;
+    private Label labelError;
 
     private Standardbruker bruker;
 
@@ -68,7 +56,7 @@ public class Standardbruker_Controller {
             lagreTxt.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
             //txtError.setText(e.getMessage());
-            showMessageDialog(null, e.getMessage());
+           labelError.setText(e.getMessage());
         }
     }
 
@@ -108,7 +96,7 @@ public class Standardbruker_Controller {
         try {
             filedata.load(komponenter, path);
         } catch (Exception e) {
-            showMessageDialog(null, e.getMessage());
+            labelError.setText(e.getMessage());
         }
 
         /*FXMLLoader loader = new FXMLLoader();
@@ -139,89 +127,91 @@ public class Standardbruker_Controller {
         ScrollBar sb = new ScrollBar();
         sb.setLayoutX(50);
         pane.setContent(APane);
+        if(komponenter != null ||bruker != null) {
 
+            for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
+                //ImageView img = new ImageView();
 
-        for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
-            //ImageView img = new ImageView();
+                if (komponenter.getMainArray().get(i).getType().equals(type)) {
 
-            if (komponenter.getMainArray().get(i).getType().equals(type)) {
+                    Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
+                    labelNavn.setLayoutY(y);
+                    labelNavn.setLayoutX(10);
+                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
+                    labelPris.setLayoutY(y);
+                    labelPris.setLayoutX(110);
+                    Button btnVelg = new Button("Velg");
+                    btnVelg.setLayoutY(y + 30);
+                    btnVelg.setLayoutX(10);
+                    Button btnVisMer = new Button("Vis mer");
+                    btnVisMer.setLayoutY(y + 30);
+                    btnVisMer.setLayoutX(85);
 
-                Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
-                labelNavn.setLayoutY(y);
-                labelNavn.setLayoutX(10);
-                Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
-                labelPris.setLayoutY(y);
-                labelPris.setLayoutX(110);
-                Button btnVelg = new Button("Velg");
-                btnVelg.setLayoutY(y + 30);
-                btnVelg.setLayoutX(10);
-                Button btnVisMer = new Button("Vis mer");
-                btnVisMer.setLayoutY(y + 30);
-                btnVisMer.setLayoutX(85);
+                    y += 100;
 
-                y += 100;
-
-                btnVelg.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                            if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
-                                save();
-                            }
-                        }
-                    }
-                });
-
-                btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                            if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\nPris "
-                                        + komponenter.getMainArray().get(j).getPris();
-                                String spesifikasjonerText = "";
-                                for(String s : komponenter.getMainArray().get(j).getSpecs()){
-                                    spesifikasjonerText += s + "\n";
+                    btnVelg.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
+                                if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
+                                    bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
+                                    save();
                                 }
-
-                                Label labelInfoHeader = new Label(spesifikasjonerHeader);
-                                Label labelInfoText = new Label(spesifikasjonerText);
-
-                                APane.getChildren().clear();
-                                APane.getChildren().add(labelInfoHeader);
-                                labelInfoText.setLayoutY(110);
-                                labelInfoText.setLayoutX(10);
-                                labelInfoHeader.setStyle("-fx-font-size: 20");
-                                labelInfoHeader.setLayoutY(10);
-                                labelInfoHeader.setLayoutX(10);
-                                APane.getChildren().add(labelInfoText);
-
-                                Button btnHide = new Button("Skjul spesifikasjoner");
-
-                                btnHide.setOnAction(new EventHandler<ActionEvent>() {
-                                    @Override
-                                    public void handle(ActionEvent event) {
-                                        visVarer(type);
-                                    }
-                                });
-                                btnHide.setLayoutY(70);
-                                btnHide.setLayoutX(25);
-                                APane.getChildren().add(btnHide);
-
-
-
                             }
                         }
-                    }
-                });
+                    });
+
+                    btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
+                                if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
+                                    String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\nPris "
+                                            + komponenter.getMainArray().get(j).getPris();
+                                    String spesifikasjonerText = "";
+                                    for (String s : komponenter.getMainArray().get(j).getSpecs()) {
+                                        spesifikasjonerText += s + "\n";
+                                    }
+
+                                    Label labelInfoHeader = new Label(spesifikasjonerHeader);
+                                    Label labelInfoText = new Label(spesifikasjonerText);
+
+                                    APane.getChildren().clear();
+                                    APane.getChildren().add(labelInfoHeader);
+                                    labelInfoText.setLayoutY(110);
+                                    labelInfoText.setLayoutX(10);
+                                    labelInfoHeader.setStyle("-fx-font-size: 20");
+                                    labelInfoHeader.setLayoutY(10);
+                                    labelInfoHeader.setLayoutX(10);
+                                    APane.getChildren().add(labelInfoText);
+
+                                    Button btnHide = new Button("Skjul spesifikasjoner");
+
+                                    btnHide.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+                                            visVarer(type);
+                                        }
+                                    });
+                                    btnHide.setLayoutY(70);
+                                    btnHide.setLayoutX(25);
+                                    APane.getChildren().add(btnHide);
 
 
-                APane.getChildren().add(labelNavn);
-                APane.getChildren().add(labelPris);
-                APane.getChildren().add(btnVelg);
-                APane.getChildren().add(btnVisMer);
+                                }
+                            }
+                        }
+                    });
+
+
+                    APane.getChildren().add(labelNavn);
+                    APane.getChildren().add(labelPris);
+                    APane.getChildren().add(btnVelg);
+                    APane.getChildren().add(btnVisMer);
+                }
             }
+        }else if(komponenter == null || bruker == null){
+            labelError.setText("Klarte ikke å laste inn komponenter eller brukeren");
         }
     }
 
@@ -317,8 +307,8 @@ public class Standardbruker_Controller {
             labelTotalPris.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelTotalPris);
 
-        } else if (bruker == null) {
-            showMessageDialog(null, "Klarte ikke å laste inn brukeren");
+        } else if (bruker == null || komponenter == null) {
+            labelError.setText("Klarte ikke å laste inn brukeren eller komponenter");
         }
     }
 
@@ -326,37 +316,12 @@ public class Standardbruker_Controller {
     void On_Click_BtnKurv(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(818);
-        //AnchorPane APane = new AnchorPane();
-        //pane.setContent(APane);
-        int y = 50;
-        if (bruker != null || komponenter != null) {
-            updateVarer();/*
-            for (int i = 0; i < bruker.getHandelskurv().getMainArray().size(); i++) {
-                Label label = new Label(bruker.getHandelskurv().getMainArray().get(i).getNavn());
-                label.setLayoutY(y);
-                Button btn = new Button("Fjern");
-                btn.setLayoutY(y + 25);
-                y += 50;
-
-                kompNr = i;
-                btn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        for (int j = 0; j < bruker.getHandelskurv().getMainArray().size(); j++) {
-                            if (bruker.getHandelskurv().getMainArray().get(j).getNavn().equals(label.getText())) {
-                                bruker.getHandelskurv().getMainArray().remove(j);
-                            }
-                        }
-                        updateVarer();
-                        save();
-                    }
-                });
-                APane.getChildren().add(label);
-                APane.getChildren().add(btn);
-            }*/
-        } else if (bruker == null) {
-            showMessageDialog(null, "Klarte ikke å laste inn brukeren");
+        if(bruker.getHandlekurv().getMainArray().size() > 0) {
+            updateVarer();
+        }else{
+            labelError.setText("din handle kurv er tom");
         }
+
     }
 
     @FXML
