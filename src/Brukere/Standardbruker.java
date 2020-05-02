@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import komponenter.*;
 
 public class Standardbruker extends Bruker {
-    private final SimpleDoubleProperty sum;
+    private SimpleDoubleProperty sum;
     private Komponenter handlekurv;
     private static final SimpleBooleanProperty ADMIN = new SimpleBooleanProperty(false);
 

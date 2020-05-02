@@ -64,7 +64,7 @@ public class FiledataTxt extends Task<Void> {
         }
     }
 
-    public Register loadBruker(Register brukere, Path path) throws Exception {
+    public Register loadBruker(Register brukere, Path path) throws Exception, InvalidDataLoadedException {
         try (BufferedReader Reader = Files.newBufferedReader(path)) {
             String line = "";
             while ((line = Reader.readLine()) != null) {

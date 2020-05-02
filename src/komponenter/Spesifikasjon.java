@@ -5,8 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Spesifikasjon {
-    private final SimpleStringProperty navn2;
-    private final SimpleIntegerProperty ID2;
+    private SimpleStringProperty navn2;
+    private SimpleIntegerProperty ID2;
 
     private int ID;
     private String navn;

@@ -5,11 +5,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Bruker {
-    private final SimpleIntegerProperty ID;
-    private final SimpleStringProperty brukernavn;
-    private final SimpleStringProperty passord;
-    private final SimpleStringProperty email;
-    private final SimpleStringProperty tlf;
+    private SimpleIntegerProperty ID;
+    private SimpleStringProperty brukernavn;
+    private SimpleStringProperty passord;
+    private SimpleStringProperty email;
+    private SimpleStringProperty tlf;
 
     public Bruker() {
         ID = new SimpleIntegerProperty();

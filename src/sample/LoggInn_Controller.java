@@ -97,7 +97,7 @@ public class LoggInn_Controller implements Initializable {
             tr.start();
 
             try {
-                Thread.sleep(1000);
+                tr.sleep(1000);
             } catch (InterruptedException e) {
                 showMessageDialog(null, "Klarte ikke å stoppe tråden");
             }
@@ -153,7 +153,7 @@ public class LoggInn_Controller implements Initializable {
             tr.start();
 
             try {
-                Thread.sleep(1000);
+                tr.sleep(1000);
             } catch (InterruptedException e) {
                 showMessageDialog(null, "Klarte ikke å stoppen tråden");
             }
