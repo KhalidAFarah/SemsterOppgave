@@ -82,7 +82,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
                 sjekk = true;
             }
         }*/
-        return (T) (main.get(index));
+        return main.get(index);
     }
 
 
@@ -98,15 +98,11 @@ public class Komponenter {//lager en main liste for alle typer komponenter
             }
             stream.writeUTF(str);
 
-            if (i == main.size() - 1) {
-                stream.writeBoolean(false);
-            } else {
-                stream.writeBoolean(true);
-            }
+            stream.writeBoolean(i != main.size() - 1);
         }
     }
 
-    public void readObject(ObjectInputStream stream) throws IOException, Exception {
+    public void readObject(ObjectInputStream stream) throws Exception {
         boolean fortsett = true;
         while (fortsett) {
             String navn = stream.readUTF();

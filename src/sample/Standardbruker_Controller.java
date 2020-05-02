@@ -48,7 +48,7 @@ public class Standardbruker_Controller {
     private int kompNr;
     private Register brukere;
     private FiledataTxt lagreTxt;
-    private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+    private final Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
     private void save() {
         lagreTxt = new FiledataTxt();

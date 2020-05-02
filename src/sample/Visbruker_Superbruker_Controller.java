@@ -40,11 +40,11 @@ public class Visbruker_Superbruker_Controller {
 
     private Komponenter komponenter = new Komponenter();
 
-    private Komponenter komp = new Komponenter();
+    private final Komponenter komp = new Komponenter();
 
     private int IDs;
 
-    private Button btnf = new Button();
+    private final Button btnf = new Button();
 
     @FXML
     private Button btnVisKomponenter;
@@ -86,9 +86,9 @@ public class Visbruker_Superbruker_Controller {
     private boolean showKomponenter = false;
 
     private Register brukere;
-    private Register brukere2 = new Register();
+    private final Register brukere2 = new Register();
 
-    private AnchorPane leggtilPane = new AnchorPane();
+    private final AnchorPane leggtilPane = new AnchorPane();
 
     @FXML
     private TableColumn<Bruker, Integer> IDKolonne;
