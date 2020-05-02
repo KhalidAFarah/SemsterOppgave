@@ -61,12 +61,12 @@
                         <TableColumn fx:id="adminKolonne" prefWidth="71.2000732421875" text="Admin" />
                     </columns>
                 </TableView>
-                <Label fx:id="labelSøk" layoutX="188.0" layoutY="34.0" text="Søk">
+                <Label fx:id="labelSøk" layoutX="180.0" layoutY="34.0" text="Søk">
                     <font>
                         <Font name="Rockwell" size="15.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtSøk" layoutX="230.0" layoutY="31.0" promptText="Skriv inn brukernavn">
+                <TextField fx:id="txtSøk" layoutX="223.0" layoutY="31.0" promptText="Skriv inn brukernavn">
                <font>
                   <Font name="Rockwell" size="12.0" />
                </font></TextField>
