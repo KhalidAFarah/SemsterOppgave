@@ -15,46 +15,46 @@
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sample.Visbruker_Superbruker_Controller">
     <children>
-        <ImageView fitHeight="598.0" fitWidth="907.0" layoutX="-6.0" layoutY="-7.0">
+        <ImageView fitHeight="598.0" fitWidth="914.0" layoutX="-6.0" layoutY="-7.0">
             <image>
                 <Image url="@../img/background.jpg"/>
             </image>
         </ImageView>
         <Separator layoutY="67.0" prefHeight="3.0" prefWidth="900.0" style="-fx-background-color: black;"/>
-        <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="351.0" layoutY="-35.0">
+        <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="356.0" layoutY="-35.0">
             <image>
                 <Image url="@../img/logo3.png"/>
             </image>
         </ImageView>
-        <Button fx:id="btnVisKomponenter" layoutX="15.0" layoutY="184.0" mnemonicParsing="false"
+        <Button fx:id="btnVisKomponenter" layoutX="12.0" layoutY="185.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnVisKomponenterTilBrukeren" prefHeight="46.0" prefWidth="161.0"
                 style="-fx-background-color: #3daee4;" text="Vis komponenter til brukeren">
             <font>
                 <Font name="Helvetica" size="11.0"/>
             </font>
         </Button>
-        <Button fx:id="btnFjern" layoutX="14.0" layoutY="342.0" mnemonicParsing="false"
+        <Button fx:id="btnFjern" layoutX="12.0" layoutY="342.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnFjernBruker" prefHeight="46.0" prefWidth="162.0"
                 style="-fx-background-color: #3daee4;" text="Fjern bruker">
             <font>
                 <Font name="Helvetica" size="15.0"/>
             </font>
         </Button>
-        <Button fx:id="btnRediger" layoutX="14.0" layoutY="260.0" mnemonicParsing="false"
+        <Button fx:id="btnRediger" layoutX="12.0" layoutY="260.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnRedigerBruker" prefHeight="46.0" prefWidth="162.0"
                 style="-fx-background-color: #3daee4;" text="Rediger bruker">
             <font>
                 <Font name="Helvetica" size="14.0"/>
             </font>
         </Button>
-        <Button fx:id="btnTilbake" layoutX="407.0" layoutY="548.0" mnemonicParsing="false"
+        <Button fx:id="btnTilbake" layoutX="412.0" layoutY="536.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnTilbake" prefHeight="29.0" prefWidth="88.0" style="-fx-background-color: black;"
                 text="Tilbake" textFill="WHITE">
             <font>
                 <Font name="Helvetica" size="15.0"/>
             </font>
         </Button>
-        <Button fx:id="btnFjernkomponenter" layoutX="14.0" layoutY="424.0" mnemonicParsing="false"
+        <Button fx:id="btnFjernKomponenter" layoutX="12.0" layoutY="424.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0"
                 style="-fx-background-color: #3daee4;" text="Fjern en brukers &#10;komponenter" textAlignment="CENTER">
             <font>
@@ -63,14 +63,14 @@
         </Button>
         <AnchorPane fx:id="pane" layoutX="180.0" layoutY="96.0" prefHeight="374.0" prefWidth="689.0">
             <children>
-                <TableView fx:id="tableView" layoutX="2.0" layoutY="88.0" prefHeight="286.0" prefWidth="704.0">
+                <TableView fx:id="tableView" layoutX="9.0" layoutY="88.0" prefHeight="286.0" prefWidth="704.0">
                     <columns>
-                        <TableColumn fx:id="IDKolonne" prefWidth="50.0" text="ID"/>
-                        <TableColumn fx:id="brukerKolonne" prefWidth="125.0" text="Brukernavn"/>
+                        <TableColumn fx:id="IDKolonne" prefWidth="44.800048828125" text="ID"/>
+                        <TableColumn fx:id="brukerKolonne" prefWidth="131.19993591308594" text="Brukernavn"/>
                         <TableColumn fx:id="passordKolonne" prefWidth="125.0" text="Passord"/>
-                        <TableColumn fx:id="tlfKolonne" prefWidth="140.0" text="Telefonnummer"/>
-                        <TableColumn fx:id="mailKolonne" prefWidth="150.0" text="Epostadresse"/>
-                        <TableColumn fx:id="adminKolonne" prefWidth="100.0" text="Admin"/>
+                        <TableColumn fx:id="tlfKolonne" prefWidth="132.0" text="Telefonnummer"/>
+                        <TableColumn fx:id="mailKolonne" prefWidth="199.199951171875" text="Epostadresse"/>
+                        <TableColumn fx:id="adminKolonne" prefWidth="71.2000732421875" text="Admin"/>
                     </columns>
                 </TableView>
                 <Label fx:id="labelSøk" layoutX="168.0" layoutY="35.0" text="Søk">
@@ -78,15 +78,15 @@
                         <Font name="Helvetica Bold" size="14.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="txtSøk" layoutX="212.0" layoutY="31.0" promptText="Skriv inn produktnavnet"/>
-                <ImageView fitHeight="27.0" fitWidth="23.0" layoutX="174.0" layoutY="31.0">
+                <TextField fx:id="txtSøk" layoutX="230.0" layoutY="31.0" promptText="Skriv inn brukernavn"/>
+                <ImageView fitHeight="27.0" fitWidth="24.0" layoutX="200.0" layoutY="31.0">
                     <image>
                         <Image url="@../img/search.png"/>
                     </image>
                 </ImageView>
             </children>
         </AnchorPane>
-        <Label fx:id="LabelError" alignment="CENTER" layoutX="251.0" layoutY="495.0" prefHeight="29.0" prefWidth="400.0"
-               text="Error... Eksempel tekst" textAlignment="CENTER"/>
+        <Label fx:id="LabelError" alignment="CENTER" layoutX="285.0" layoutY="493.0" prefHeight="29.0" prefWidth="400.0"
+               textAlignment="CENTER"/>
     </children>
 </AnchorPane>

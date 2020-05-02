@@ -83,6 +83,8 @@ public class Visbruker_Superbruker_Controller {
 
     private boolean showRediger = false;
 
+    private boolean showKomponenter = false;
+
     private Register brukere;
     private Register brukere2 = new Register();
 
@@ -111,7 +113,9 @@ public class Visbruker_Superbruker_Controller {
             pane.getChildren().add(leggtilPane);
             pane.getChildren().add(btnf);
             btnf.setVisible(false);
-            System.out.println(btnRediger.getStyle());
+
+            tableView.setEditable(false);
+
             leggtilPane.setVisible(false);
 
             IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
@@ -128,7 +132,54 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
 
-            tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne, tlfKolonne, mailKolonne, adminKolonne);
+            /*brukerKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            passordKolonne.setCellFactory(TextFieldTableCell.forTableColumn());*/
+            tlfKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+            mailKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+
+            /*brukerKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    event.getRowValue().setBrukernavn(event.getNewValue());
+                    saveBrukere();
+                    brukerKolonne.getTableView().refresh();
+                }
+            });
+            passordKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    event.getRowValue().setPassord(event.getNewValue());
+                    saveBrukere();
+                    passordKolonne.getTableView().refresh();
+                }
+            });*/
+            tlfKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    try {
+                        event.getRowValue().setTlf(event.getNewValue());
+                    }catch (InvalidStringException e){
+                        LabelError.setText(e.getMessage());
+                    }
+                    saveBrukere();
+                    tlfKolonne.getTableView().refresh();
+                }
+            });
+            mailKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
+                @Override
+                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
+                    try {
+                        event.getRowValue().setEmail(event.getNewValue());
+                    }catch (InvalidStringException e){
+                        LabelError.setText(e.getMessage());
+                    }
+                    saveBrukere();
+                    mailKolonne.getTableView().refresh();
+                }
+            });
+
+
+            //tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne, tlfKolonne, mailKolonne, adminKolonne);
             //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
         } else if (this.brukere == null) {
@@ -191,7 +242,7 @@ public class Visbruker_Superbruker_Controller {
         }
     }
 
-    private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError) {
+    /*private void søk(TextField txtSøk, TableView tableSøk, boolean setEditAble, Label labelError) {
         TableColumn<Bruker, Integer> IDKolonne = new TableColumn<>("ID");
         TableColumn<Bruker, String> brukernavnKolonne = new TableColumn<>("brukernavn");
         TableColumn<Bruker, String> passordKolonne = new TableColumn<>("passord");
@@ -281,141 +332,29 @@ public class Visbruker_Superbruker_Controller {
             });
 
         }
-    }
+    }*/
 
     @FXML
     void On_Click_BtnFjernBruker(ActionEvent event) {
         if (!showFjern) {
-            leggtilPane.setVisible(true);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(550);
-            leggtilPane.getChildren().clear();
 
-            Label labelNavn = new Label("Søk produktnavn");
-            TextField txtSøk = new TextField();
-            TableView tableSøk = new TableView();
-            //Komponenter komp = new Komponenter();
+            String melding = showInputDialog(null, "Skriv brukerens ID");
+            int valgtBruker;
+            try {
+                valgtBruker = Integer.parseInt(melding);
+            } catch (Exception e) {
+                showMessageDialog(null, "Vennligst skriv inn riktig brukers ID");
+                valgtBruker = -1;
+            }
+            if (valgtBruker != -1) {
 
-            leggtilPane.getChildren().add(labelNavn);
-            leggtilPane.getChildren().add(txtSøk);
-            leggtilPane.getChildren().add(tableSøk);
+                brukere.remove(valgtBruker);
+                brukere2.setArray(brukere.getArray());
 
-            labelNavn.setLayoutX(15);
-            labelNavn.setLayoutY(15);
+                tableView.setItems(brukere.getArray());
 
-            txtSøk.setLayoutX(150);
-            txtSøk.setLayoutY(15);
-
-            tableSøk.setLayoutX(15);
-            tableSøk.setLayoutY(80);
-            tableSøk.setPrefHeight(275);
-            tableSøk.setPrefWidth(575);
-
-
-            søk(txtSøk, tableSøk, false, new Label());
-
-            //slette komponenter
-            Button btnFjernBruker = new Button("Fjern bruker");
-            Button btnFjernVare = new Button("Fjern en brukers vare");
-            Button btnFjernVare2 = new Button("Fjern en brukerens vare");
-            leggtilPane.getChildren().add(btnFjernBruker);
-            leggtilPane.getChildren().add(btnFjernVare);
-            leggtilPane.getChildren().add(btnFjernVare2);
-            btnFjernBruker.setLayoutX(425);
-            btnFjernBruker.setLayoutY(15);
-            btnFjernVare.setLayoutX(425);
-            btnFjernVare2.setLayoutX(425);
-            btnFjernVare.setLayoutY(50);
-            btnFjernVare2.setLayoutY(50);
-
-            btnFjernVare2.setVisible(false);
-
-            btnFjernBruker.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    String melding = showInputDialog(null, "Skriv brukerens ID");
-                    int valgtBruker;
-                    try {
-                        valgtBruker = Integer.parseInt(melding);
-                    } catch (Exception e) {
-                        showMessageDialog(null, "Vennligst skriv inn riktig brukers ID");
-                        valgtBruker = -1;
-                    }
-                    if (valgtBruker != -1) {
-
-                        brukere.remove(valgtBruker);
-                        brukere2.setArray(brukere.getArray());
-
-                        tableSøk.setItems(brukere2.getArray());
-                        tableView.setItems(brukere.getArray());
-
-                        saveBrukere();
-
-                    }
-                }
-            });
-
-            btnFjernVare.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    String melding = showInputDialog(null, "Skriv varens ID");
-                    int valgtBruker;
-                    try {
-                        valgtBruker = Integer.parseInt(melding);
-                    } catch (Exception e) {
-                        showMessageDialog(null, "Vennligst skriv inn riktig varens ID");
-                        valgtBruker = -1;
-                    }
-                    IDs = valgtBruker;
-
-                    if (brukere.getArray().get(valgtBruker) instanceof Standardbruker) {
-
-                        tableSøk.getColumns().clear();
-
-                        //senere bruke komponenter sin søk
-
-                        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
-                        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-                        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-
-                        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-
-                        tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
-
-                        tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker)).
-                                getHandlekurv().getMainArray());
-                        btnFjernVare.setVisible(false);
-                        btnFjernVare2.setVisible(true);
-
-                        btnFjernVare2.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                String id = showInputDialog("Skiv inn varens ID");
-                                int valgtKomponent;
-                                try {
-                                    valgtKomponent = Integer.parseInt(id);
-                                } catch (Exception e) {
-                                    showMessageDialog(null, "venligst skriv inn et gyldig tall");
-                                    valgtKomponent = -1;
-                                }
-
-                                if (valgtKomponent >= 0) {
-                                    ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
-                                    saveBrukere();
-                                }
-                            }
-                        });
-
-                    } else {
-                        showMessageDialog(null, "denne brukeren er ikke en kunde! \n Og" +
-                                " derfor har ikke en handelskurv der varer kan fjernes");
-                    }
-                }
-            });
+                saveBrukere();
+            }
 
             showFjern = true;
             showRediger = false;
@@ -430,133 +369,71 @@ public class Visbruker_Superbruker_Controller {
 
     @FXML
     void On_Click_BtnVisKomponenterTilBrukeren(ActionEvent event) {
-        if (!showLeggTil) {
-            leggtilPane.setVisible(true);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(550);
-            leggtilPane.getChildren().clear();
+        tableView.setEditable(false);
+        if (!showKomponenter) {
 
-            Label labelNavn = new Label("Søk produktnavn");
-            TextField txtSøk = new TextField();
-            TableView tableSøk = new TableView();
+            String ID = showInputDialog("Vennligst skriv inn brukerens ID");
+            int valgtBruker;
+            try {
+                valgtBruker = Integer.parseInt(ID);
+            } catch (Exception e) {
+                valgtBruker = -1;
+            }
 
-            leggtilPane.getChildren().add(labelNavn);
-            leggtilPane.getChildren().add(txtSøk);
-            leggtilPane.getChildren().add(tableSøk);
+            if (valgtBruker >= 0 &&
+                    brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
+                    valgtBruker < brukere.getArray().size()) {
 
-            labelNavn.setLayoutX(15);
-            labelNavn.setLayoutY(15);
 
-            txtSøk.setLayoutX(175);
-            txtSøk.setLayoutY(15);
+                TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+                TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
+                TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+                TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+                //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
 
-            Label labelError = new Label();
-
-            tableSøk.setLayoutX(15);
-            tableSøk.setLayoutY(80);
-            tableSøk.setPrefHeight(275);
-            tableSøk.setPrefWidth(575);
-
-            Button btnVisKomponenter = new Button("Vis komponenter");
-
-            btnVisKomponenter.setLayoutY(15);
-            btnVisKomponenter.setLayoutX(300);
-
-            søk(txtSøk, tableSøk, false, labelError);
-
-            btnVisKomponenter.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    String ID = showInputDialog("Vennligst skriv inn brukerens ID");
-                    int valgtBruker;
-                    try {
-                        valgtBruker = Integer.parseInt(ID);
-                    } catch (Exception e) {
-                        valgtBruker = -1;
-                    }
-
-                    if (valgtBruker >= 0 &&
-                            brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
-                            valgtBruker < brukere.getArray().size()) {
-
-                        tableSøk.getColumns().clear();
-
-                        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
-                        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-                        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-                        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
-
-                        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-                        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
-
-                        tableSøk.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
-                        tableSøk.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
-                                .getHandlekurv().getMainArray());
-                    } else if (valgtBruker >= brukere.getArray().size()) {
-                        showMessageDialog(null, "Vennligst velg en bruker som eksisterer");
-                    } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
-                        showMessageDialog(null, "Vennligst velg en kunde");
-                    } else if (valgtBruker < 0) {
-                        showMessageDialog(null, "Vennlist skriv inn en gyldig ID");
-                    }
-                }
-            });
-
-            leggtilPane.getChildren().add(btnVisKomponenter);
-
-            showLeggTil = true;
+                IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+                navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+                typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+                prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+                //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+                tableView.getColumns().clear();
+                tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+                tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
+                        .getHandlekurv().getMainArray());
+            } else if (valgtBruker >= brukere.getArray().size()) {
+                LabelError.setText("Vennligst velg en bruker som eksisterer");
+            } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
+                LabelError.setText("Vennligst velg en kunde");
+            } else if (valgtBruker < 0) {
+                LabelError.setText("Vennlist skriv inn en gyldig ID");
+            }
+            showKomponenter = true;
             showRediger = false;
             showFjern = false;
-        } else if (showLeggTil) {
-            leggtilPane.setVisible(false);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(420);
-            showLeggTil = false;
+            btnVisKomponenter.setText("Vis brukere");
+        }else if (showKomponenter) {
+            showKomponenter = false;
+            tableView.getColumns().clear();
+            tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne,
+                    tlfKolonne, mailKolonne, adminKolonne);
+            btnRediger.setText("Rediger");
+            btnVisKomponenter.setText("Vis en brukers komponenter");
+            tableView.setItems(brukere.getArray());
+
         }
     }
 
     @FXML
     void On_Click_BtnRedigerBruker(ActionEvent event) {
         if (!showRediger) {
-            leggtilPane.setVisible(true);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(550);
-            leggtilPane.getChildren().clear();
-
-            Label labelNavn = new Label("Søk produktnavn");
-            TextField txtSøk = new TextField();
-            TableView tableSøk = new TableView();
-
-            leggtilPane.getChildren().add(labelNavn);
-            leggtilPane.getChildren().add(txtSøk);
-            leggtilPane.getChildren().add(tableSøk);
-
-            labelNavn.setLayoutX(15);
-            labelNavn.setLayoutY(15);
-
-            txtSøk.setLayoutX(175);
-            txtSøk.setLayoutY(15);
-
-
-            Label labelError = new Label();
-
-            tableSøk.setLayoutX(15);
-            tableSøk.setLayoutY(80);
-            tableSøk.setPrefHeight(275);
-            tableSøk.setPrefWidth(575);
-
-            søk(txtSøk, tableSøk, true, labelError);
+            tableView.setEditable(true);
+            btnRediger.setText("Stop redigering");
             showRediger = true;
             showLeggTil = false;
             showFjern = false;
         } else if (showRediger) {
-            leggtilPane.setVisible(false);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(420);
+            tableView.setEditable(false);
+            btnRediger.setText("Redigering");
             showRediger = false;
         }
     }
@@ -578,7 +455,7 @@ public class Visbruker_Superbruker_Controller {
             Scene_4.setWidth(580);
             Scene_4.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            LabelError.setText("Klarte ikke å bytte side");
         }
     }
 
@@ -589,5 +466,33 @@ public class Visbruker_Superbruker_Controller {
 
     public void On_Click_BtnFjernKomponenter(ActionEvent actionEvent) {
 
+        //senere bruke komponenter sin søk
+
+        String idBruker = showInputDialog("Skiv inn brukerens ID");
+        int valgtBruker;
+        try {
+            valgtBruker = Integer.parseInt(idBruker);
+        } catch (Exception e) {
+            LabelError.setText("venligst skriv inn et gyldig tall");
+            valgtBruker = -1;
+        }
+
+        IDs = valgtBruker;
+
+        String id = showInputDialog("Skiv inn varens ID");
+        int valgtKomponent;
+        try {
+            valgtKomponent = Integer.parseInt(id);
+        } catch (Exception e) {
+            LabelError.setText("venligst skriv inn et gyldig tall");
+            valgtKomponent = -1;
+        }
+
+        if (valgtKomponent >= 0 && brukere.getArray().get(IDs) instanceof Standardbruker) {
+            ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
+            saveBrukere();
+        }else{
+            LabelError.setText("Vennligst velg en kunde!");
+        }
     }
 }
