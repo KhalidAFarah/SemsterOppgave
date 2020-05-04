@@ -423,10 +423,14 @@ public class Visbruker_Superbruker_Controller {
             showRediger = false;
             showLeggTil = false;
         } else if (showFjern) {
+<<<<<<< HEAD
             LeggTilKomponent_pane.setVisible(false);
             LeggTilKomponent_sub.setVisible(false);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setHeight(420);
+=======
+            leggtilPane.setVisible(false);
+>>>>>>> master
             showFjern = false;
         }
     }
