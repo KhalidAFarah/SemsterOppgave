@@ -361,8 +361,6 @@ public class Visbruker_Superbruker_Controller {
             showLeggTil = false;
         } else if (showFjern) {
             leggtilPane.setVisible(false);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(420);
             showFjern = false;
         }
     }
