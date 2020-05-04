@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane prefHeight="400.0" prefWidth="609.0" style="-fx-background-color: #F2F2F2;"
             xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="sample.Visbruker_Superbruker_Controller">
@@ -18,10 +19,22 @@
                    tableMenuButtonVisible="true"/>
         <Separator layoutY="67.0" prefHeight="3.0" prefWidth="610.0"/>
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="210.0" layoutY="-35.0">
+=======
+<AnchorPane prefHeight="584.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Visbruker_Superbruker_Controller">
+    <children>
+        <ImageView fitHeight="598.0" fitWidth="914.0" layoutX="-6.0" layoutY="-7.0">
             <image>
-                <Image url="@../img/logo3.png"/>
+                <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
+        <Separator layoutY="67.0" prefHeight="3.0" prefWidth="900.0" style="-fx-background-color: black;" />
+        <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="356.0" layoutY="-35.0">
+>>>>>>> master
+            <image>
+                <Image url="@../img/logo3.png" />
+            </image>
+        </ImageView>
+<<<<<<< HEAD
         <Button fx:id="btnLeggTil" layoutX="14.0" layoutY="68.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnVisKomponenterTilBrukeren" prefHeight="46.0" prefWidth="177.0"
                 style="-fx-background-color: #3daee4;" text="Vis komponenter til brukeren">
@@ -32,10 +45,19 @@
         <Button fx:id="btnFjern" layoutX="222.0" layoutY="68.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnFjernBruker" prefHeight="46.0" prefWidth="177.0"
                 style="-fx-background-color: #3daee4;" text="Fjern bruker">
+=======
+        <Button fx:id="btnVisKomponenter" layoutX="12.0" layoutY="185.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenterTilBrukeren" prefHeight="46.0" prefWidth="161.0" style="-fx-background-color: #3daee4;" text="Vis komponenter &#10;til brukeren" textAlignment="CENTER">
             <font>
-                <Font name="Helvetica" size="15.0"/>
+                <Font name="Rockwell" size="13.0" />
             </font>
         </Button>
+        <Button fx:id="btnFjern" layoutX="12.0" layoutY="342.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernBruker" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Fjern bruker">
+>>>>>>> master
+            <font>
+                <Font name="Rockwell" size="15.0" />
+            </font>
+        </Button>
+<<<<<<< HEAD
         <Button fx:id="btnRediger" layoutX="423.0" layoutY="68.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnRedigerBruker" prefHeight="46.0" prefWidth="177.0"
                 style="-fx-background-color: #3daee4;" text="Rediger bruker">
@@ -45,15 +67,55 @@
         </Button>
         <Button fx:id="btnTilbake" layoutX="534.0" layoutY="11.0" mnemonicParsing="false"
                 onAction="#On_Click_BtnTilbake" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
+=======
+        <Button fx:id="btnRediger" layoutX="12.0" layoutY="260.0" mnemonicParsing="false" onAction="#On_Click_BtnRedigerBruker" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Rediger bruker">
             <font>
-                <Font name="Helvetica" size="14.0"/>
+                <Font name="Rockwell" size="14.0" />
             </font>
         </Button>
+        <Button fx:id="btnTilbake" layoutX="412.0" layoutY="536.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="29.0" prefWidth="88.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
+            <font>
+                <Font name="Rockwell" size="15.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnFjernKomponenter" layoutX="12.0" layoutY="424.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Fjern en brukers &#10;komponenter" textAlignment="CENTER">
+>>>>>>> master
+            <font>
+                <Font name="Rockwell" size="14.0" />
+            </font>
+        </Button>
+<<<<<<< HEAD
         <SubScene fx:id="LeggTilKomponent_sub" height="286.0" layoutY="113.0" visible="false" width="610.0">
             <root>
                 <Region/>
             </root>
         </SubScene>
         <AnchorPane fx:id="LeggTilKomponent_pane" layoutY="113.0" prefHeight="286.0" prefWidth="610.0" visible="false"/>
+=======
+        <AnchorPane fx:id="pane" layoutX="180.0" layoutY="96.0" prefHeight="374.0" prefWidth="689.0">
+            <children>
+                <TableView fx:id="tableView" layoutX="8.0" layoutY="88.0" prefHeight="286.0" prefWidth="699.0" style="-fx-font-family: rockwell;">
+                    <columns>
+                        <TableColumn fx:id="IDKolonne" prefWidth="44.800048828125" text="ID" />
+                        <TableColumn fx:id="brukerKolonne" prefWidth="131.19993591308594" text="Brukernavn" />
+                        <TableColumn fx:id="passordKolonne" prefWidth="125.0" text="Passord" />
+                        <TableColumn fx:id="tlfKolonne" prefWidth="132.0" text="Telefonnummer" />
+                        <TableColumn fx:id="mailKolonne" prefWidth="199.199951171875" text="Epostadresse" />
+                        <TableColumn fx:id="adminKolonne" prefWidth="71.2000732421875" text="Admin" />
+                    </columns>
+                </TableView>
+                <Label fx:id="labelSøk" layoutX="180.0" layoutY="34.0" text="Søk">
+                    <font>
+                        <Font name="Rockwell" size="15.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtSøk" layoutX="223.0" layoutY="31.0" promptText="Skriv inn brukernavn">
+               <font>
+                  <Font name="Rockwell" size="12.0" />
+               </font></TextField>
+            </children>
+        </AnchorPane>
+        <Label fx:id="LabelError" alignment="CENTER" layoutX="285.0" layoutY="493.0" prefHeight="29.0" prefWidth="400.0" textAlignment="CENTER" />
+>>>>>>> master
     </children>
 </AnchorPane>

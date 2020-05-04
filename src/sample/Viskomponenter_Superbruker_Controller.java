@@ -51,10 +51,15 @@ public class Viskomponenter_Superbruker_Controller {
 
     private Komponenter komponenter = new Komponenter();
 
-    private Komponenter komp = new Komponenter();
+    private final Komponenter komp = new Komponenter();
 
     private int IDs;
 
+<<<<<<< HEAD
+=======
+    private final Button btnf = new Button();
+
+>>>>>>> master
     @FXML
     private Button btnLeggTil;
 
@@ -67,10 +72,50 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     private Button btnTilbake;
 
+<<<<<<< HEAD
+=======
+    @FXML
+    private Button btnVisSpecs;
+
+    @FXML
+    private Button btnVisKomponenter;
+
+    @FXML
+    private Label labelError;
+
+    @FXML
+    private TableColumn<Komponent, Integer> IDKolonne;
+
+    @FXML
+    private TableColumn<Komponent, String> navnKolonne;
+
+    @FXML
+    private TableColumn<Komponent, String> typeKolonne;
+
+    @FXML
+    private TableColumn<Komponent, Double> prisKolonne;
+
+    private final TableColumn<Spesifikasjon, Integer> idSpecKolonne = new TableColumn<>("ID");
+    private final TableColumn<Spesifikasjon, String> specNavnKolonne = new TableColumn<>("Spesifikasjoner");
+
+    @FXML
+    private Label labelSøk;
+
+    @FXML
+    private TextField txtSøk;
+
+>>>>>>> master
 
     private boolean showLeggTil = false;
     private boolean showFjern = false;
     private boolean showRediger = false;
+<<<<<<< HEAD
+=======
+    private final AnchorPane leggtilPane = new AnchorPane();
+
+    private ObservableList<Spesifikasjon> spesifikasjoner = FXCollections.observableArrayList();
+    private ObservableList<Spesifikasjon> spesifikasjonerSøk = FXCollections.observableArrayList();
+>>>>>>> master
 
     public void start() {
         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");

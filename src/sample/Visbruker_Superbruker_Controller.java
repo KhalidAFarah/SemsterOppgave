@@ -55,10 +55,15 @@ public class Visbruker_Superbruker_Controller {
 
     private Komponenter komponenter = new Komponenter();
 
-    private Komponenter komp = new Komponenter();
+    private final Komponenter komp = new Komponenter();
 
     private int IDs;
 
+<<<<<<< HEAD
+=======
+    private final Button btnf = new Button();
+
+>>>>>>> master
     @FXML
     private Button btnLeggTil;
 
@@ -77,8 +82,31 @@ public class Visbruker_Superbruker_Controller {
     private boolean showRediger = false;
 
     private Register brukere;
-    private Register brukere2 = new Register();
+    private final Register brukere2 = new Register();
 
+<<<<<<< HEAD
+=======
+    private final AnchorPane leggtilPane = new AnchorPane();
+
+    @FXML
+    private TableColumn<Bruker, Integer> IDKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> brukerKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> passordKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> tlfKolonne;
+
+    @FXML
+    private TableColumn<Bruker, String> mailKolonne;
+
+    @FXML
+    private TableColumn<Bruker, Boolean> adminKolonne;
+
+>>>>>>> master
     public void start() {
         if (brukere != null) {
 
