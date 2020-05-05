@@ -20,7 +20,7 @@
         </ImageView>
         <TextField fx:id="txtBrukernavn" layoutX="125.0" layoutY="190.0" promptText="Brukernavn">
             <font>
-                <Font name="Rockwell" size="16.0" />
+                <Font name="Verdana" size="16.0" />
             </font>
         </TextField>
         <TextField fx:id="txtPassord" layoutX="124.0" layoutY="235.0" promptText="Passord">
@@ -31,27 +31,27 @@
                 <Insets />
             </opaqueInsets>
             <font>
-                <Font name="Rockwell" size="16.0" />
+                <Font name="Verdana" size="16.0" />
             </font>
         </TextField>
         <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="286.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0" style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
             <font>
-                <Font name="Rockwell" size="15.0" />
+                <Font name="Verdana" size="15.0" />
             </font>
         </Button>
         <Button fx:id="btnRegistrer" layoutX="149.0" layoutY="350.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="143.0" text="Registrer ny bruker">
             <font>
-                <Font name="Rockwell" size="13.0" />
+                <Font name="Verdana" size="12.0" />
             </font>
         </Button>
         <Label layoutX="162.0" layoutY="107.0" prefHeight="39.0" prefWidth="124.0" text="Logg inn" textAlignment="CENTER">
             <font>
-                <Font name="Rockwell" size="30.0" />
+                <Font name="Verdana" size="26.0" />
             </font>
         </Label>
         <Button fx:id="btnAvslutt" layoutX="190.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE">
             <font>
-                <Font name="Rockwell" size="11.0" />
+                <Font name="Verdana" size="11.0" />
             </font>
         </Button>
         <ImageView fitHeight="84.0" fitWidth="112.0" layoutX="168.0" layoutY="23.0">

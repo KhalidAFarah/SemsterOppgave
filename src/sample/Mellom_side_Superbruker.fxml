@@ -16,17 +16,17 @@
         </ImageView>
         <Label layoutX="59.0" layoutY="148.0" prefHeight="34.0" prefWidth="452.0" text="Du har nå logget inn som administrator, hvilken side vil du til nå?">
             <font>
-                <Font name="Rockwell" size="15.0" />
+                <Font name="Verdana" size="13.0" />
             </font>
         </Label>
         <Button layoutX="69.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Systemets komponenter">
             <font>
-                <Font name="Rockwell" size="14.0" />
+                <Font name="Verdana" size="13.0" />
             </font>
         </Button>
         <Button layoutX="323.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Brukere">
             <font>
-                <Font name="Rockwell" size="14.0" />
+                <Font name="Verdana" size="14.0" />
             </font>
         </Button>
         <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="196.0" layoutY="15.0">
@@ -36,7 +36,7 @@
         </ImageView>
         <Button layoutX="245.0" layoutY="282.0" mnemonicParsing="false" onAction="#On_Click_BtnReturnerTilStart" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: black;" text="Logg ut" textFill="WHITE">
             <font>
-                <Font name="Rockwell" size="11.0" />
+                <Font name="Verdana" size="11.0" />
             </font>
         </Button>
       <Label fx:id="lblError" layoutX="128.0" layoutY="296.0" prefHeight="18.0" prefWidth="302.0" />
