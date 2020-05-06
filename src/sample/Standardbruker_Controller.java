@@ -221,7 +221,7 @@ public class Standardbruker_Controller {
         //System.out.println(bruker.toStringFormat());
         int y = 10;
         if (bruker != null || komponenter != null) {
-            Label labelTotalPris = new Label("Totale pris er " + bruker.getSum() + " Kr");
+            Label labelTotalPris = new Label("Totalpris er " + bruker.getSum() + " Kr");
             for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
                 Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
@@ -319,7 +319,7 @@ public class Standardbruker_Controller {
         if(bruker.getHandlekurv().getMainArray().size() > 0) {
             updateVarer();
         }else{
-            labelError.setText("din handle kurv er tom");
+            labelError.setText("Din handlekurv er tom.");
         }
 
     }
