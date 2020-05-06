@@ -73,6 +73,8 @@
                <font>
                   <Font name="Rockwell" size="12.0" />
                </font></TextField>
+                <Button fx:id="btnSubmit" layoutX="625.0" layoutY="30.0" mnemonicParsing="false" text="Submit" visible="true" />
+                <TextField fx:id="txtSubmit" layoutX="438.0" layoutY="30.0" visible="true" />
             </children>
         </AnchorPane>
         <Label fx:id="LabelError" alignment="CENTER" layoutX="285.0" layoutY="493.0" prefHeight="29.0" prefWidth="400.0" textAlignment="CENTER" />

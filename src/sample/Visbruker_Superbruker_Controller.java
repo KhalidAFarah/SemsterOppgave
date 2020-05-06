@@ -76,6 +76,12 @@ public class Visbruker_Superbruker_Controller {
     @FXML
     private Label LabelError;
 
+    @FXML
+    private TextField txtSubmit;
+
+    @FXML
+    private Button btnSubmit;
+
 
     private boolean showLeggTil = false;
 
@@ -84,6 +90,8 @@ public class Visbruker_Superbruker_Controller {
     private boolean showRediger = false;
 
     private boolean showKomponenter = false;
+
+    private boolean showFjernK = false;
 
     private Register brukere;
     private final Register brukere2 = new Register();
@@ -338,7 +346,33 @@ public class Visbruker_Superbruker_Controller {
     void On_Click_BtnFjernBruker(ActionEvent event) {
         if (!showFjern) {
 
-            String melding = showInputDialog(null, "Skriv brukerens ID");
+            txtSubmit.setVisible(true);
+            btnSubmit.setVisible(true);
+            btnSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn brukerens ID");
+
+            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int valgtBruker;
+                    try {
+                        valgtBruker = Integer.parseInt(txtSubmit.getText());
+                    } catch (Exception e) {
+                        LabelError.setText("Vennligst skriv inn riktig brukers ID");
+                        valgtBruker = -1;
+                    }
+                    if (valgtBruker != -1) {
+
+                        brukere.remove(valgtBruker);
+                        brukere2.setArray(brukere.getArray());
+
+                        tableView.setItems(brukere.getArray());
+
+                        saveBrukere();
+                    }
+                }
+            });
+            /*String melding = showInputDialog(null, "Skriv brukerens ID");
             int valgtBruker;
             try {
                 valgtBruker = Integer.parseInt(melding);
@@ -354,16 +388,17 @@ public class Visbruker_Superbruker_Controller {
                 tableView.setItems(brukere.getArray());
 
                 saveBrukere();
-            }
+            }*/
 
             showFjern = true;
             showRediger = false;
             showLeggTil = false;
         } else if (showFjern) {
             leggtilPane.setVisible(false);
-            Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_4.setHeight(420);
             showFjern = false;
+            txtSubmit.setVisible(false);
+            btnSubmit.setVisible(false);
+            btnSubmit.setText("");
         }
     }
 
@@ -371,9 +406,53 @@ public class Visbruker_Superbruker_Controller {
     void On_Click_BtnVisKomponenterTilBrukeren(ActionEvent event) {
         tableView.setEditable(false);
         if (!showKomponenter) {
+            txtSubmit.setVisible(true);
+            btnSubmit.setVisible(true);
+            btnSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn brukerens ID");
 
-            String ID = showInputDialog("Vennligst skriv inn brukerens ID");
-            int valgtBruker;
+            //String ID = showInputDialog("Vennligst skriv inn brukerens ID");
+            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int valgtBruker;
+                    try {
+                        valgtBruker = Integer.parseInt(txtSubmit.getText());
+                    } catch (Exception e) {
+                        LabelError.setText("vennligst velg en gyldig id");
+                        valgtBruker = -1;
+                    }
+
+                    if (valgtBruker >= 0 &&
+                            brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
+                            valgtBruker < brukere.getArray().size()) {
+                        IDs = valgtBruker;
+
+                        TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
+                        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+                        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+                        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+
+                        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+                        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+                        tableView.getColumns().clear();
+                        tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+                        tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
+                                .getHandlekurv().getMainArray());
+                    } else if (valgtBruker >= brukere.getArray().size()) {
+                        LabelError.setText("Vennligst velg en bruker som eksisterer");
+                    } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
+                        LabelError.setText("Vennligst velg en kunde");
+                    } else if (valgtBruker < 0) {
+                        LabelError.setText("Vennlist skriv inn en gyldig ID");
+                    }
+                }
+            });
+            /*int valgtBruker;
             try {
                 valgtBruker = Integer.parseInt(ID);
             } catch (Exception e) {
@@ -406,7 +485,7 @@ public class Visbruker_Superbruker_Controller {
                 LabelError.setText("Vennligst velg en kunde");
             } else if (valgtBruker < 0) {
                 LabelError.setText("Vennlist skriv inn en gyldig ID");
-            }
+            }*/
             showKomponenter = true;
             showRediger = false;
             showFjern = false;
@@ -419,6 +498,9 @@ public class Visbruker_Superbruker_Controller {
             btnRediger.setText("Rediger");
             btnVisKomponenter.setText("Vis en brukers komponenter");
             tableView.setItems(brukere.getArray());
+            txtSubmit.setVisible(false);
+            btnSubmit.setVisible(false);
+            btnSubmit.setText("");
 
         }
     }
@@ -468,31 +550,49 @@ public class Visbruker_Superbruker_Controller {
 
         //senere bruke komponenter sin søk
 
-        String idBruker = showInputDialog("Skiv inn brukerens ID");
+        /*String idBruker = showInputDialog("Skiv inn brukerens ID");
         int valgtBruker;
         try {
             valgtBruker = Integer.parseInt(idBruker);
         } catch (Exception e) {
             LabelError.setText("venligst skriv inn et gyldig tall");
             valgtBruker = -1;
-        }
+        }*/
 
-        IDs = valgtBruker;
+        if (showFjernK) {
 
-        String id = showInputDialog("Skiv inn varens ID");
-        int valgtKomponent;
-        try {
-            valgtKomponent = Integer.parseInt(id);
-        } catch (Exception e) {
-            LabelError.setText("venligst skriv inn et gyldig tall");
-            valgtKomponent = -1;
-        }
+            tableView.getColumns().clear();
+            tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne, tlfKolonne, mailKolonne, adminKolonne);
+            tableView.setItems(brukere.getArray());
 
-        if (valgtKomponent >= 0 && brukere.getArray().get(IDs) instanceof Standardbruker) {
-            ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
-            saveBrukere();
+            txtSubmit.setVisible(true);
+            btnSubmit.setVisible(true);
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("Skiv inn varens ID");
+
+            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int valgtKomponent;
+                    try {
+                        valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                    } catch (Exception e) {
+                        LabelError.setText("venligst skriv inn et gyldig tall");
+                        valgtKomponent = -1;
+                    }
+
+                    if (valgtKomponent >= 0 && brukere.getArray().get(IDs) instanceof Standardbruker) {
+                        ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
+                        saveBrukere();
+                    } else {
+                        LabelError.setText("Vennligst velg en kunde!");
+                    }
+                }
+            });
         }else{
-            LabelError.setText("Vennligst velg en kunde!");
+            txtSubmit.setVisible(false);
+            btnSubmit.setVisible(false);
+            btnSubmit.setText("");
         }
     }
 }
