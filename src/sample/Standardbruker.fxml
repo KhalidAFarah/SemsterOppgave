@@ -15,7 +15,7 @@
                 <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="btnTilbake" layoutX="300.0" layoutY="291.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
+        <Button fx:id="btnTilbake" layoutX="300.0" layoutY="332.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
             <font>
                 <Font name="Rockwell" size="11.0" />
             </font>
@@ -60,7 +60,7 @@
                 <Image url="@../img/logo3.png" />
             </image>
         </ImageView>
-        <Button fx:id="btnKurv" layoutX="300.0" layoutY="331.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: black;" text="Din handlekurv" textFill="WHITE">
+        <Button fx:id="btnKurv" layoutX="300.0" layoutY="94.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: black;" text="Din handlekurv" textFill="WHITE">
             <font>
                 <Font name="Rockwell" size="11.0" />
             </font>

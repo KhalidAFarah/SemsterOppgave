@@ -1,14 +1,17 @@
 package sample;
 
 import Brukere.*;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,9 +19,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import komponenter.Komponenter;
 
 import static javax.swing.JOptionPane.*;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
