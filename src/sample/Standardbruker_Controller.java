@@ -139,11 +139,11 @@ public class Standardbruker_Controller {
                     labelNavn.setLayoutX(10);
                     Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
                     labelPris.setLayoutY(y);
-                    labelPris.setLayoutX(110);
+                    labelPris.setLayoutX(400);
                     Button btnVelg = new Button("Velg");
                     btnVelg.setLayoutY(y + 30);
                     btnVelg.setLayoutX(10);
-                    Button btnVisMer = new Button("Vis mer");
+                    Button btnVisMer = new Button("Vis spesifikasjoner");
                     btnVisMer.setLayoutY(y + 30);
                     btnVisMer.setLayoutX(85);
 
@@ -221,20 +221,20 @@ public class Standardbruker_Controller {
         //System.out.println(bruker.toStringFormat());
         int y = 10;
         if (bruker != null || komponenter != null) {
-            Label labelTotalPris = new Label("Totale pris er " + bruker.getSum() + " Kr");
+            Label labelTotalPris = new Label("Din totale pris er " + bruker.getSum() + " Kr");
             for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
                 Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
                 labelNavn.setLayoutX(10);
                 Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " Kr");
                 labelPris.setLayoutY(y);
-                labelPris.setLayoutX(110);
+                labelPris.setLayoutX(400);
                 Button btnFjern = new Button("Fjern");
                 btnFjern.setLayoutY(y + 30);
                 btnFjern.setLayoutX(10);
-                Button btnVisMer = new Button("Vis mer");
+                Button btnVisMer = new Button("Vis spesifikasjoner");
                 btnVisMer.setLayoutY(y + 30);
-                btnVisMer.setLayoutX(85);
+                btnVisMer.setLayoutX(80);
 
 
 
@@ -303,7 +303,8 @@ public class Standardbruker_Controller {
                 APane.getChildren().add(btnVisMer);
 
             }
-            labelTotalPris.setLayoutY(y-10);
+            labelTotalPris.setLayoutY(y+10);
+            labelTotalPris.setLayoutX(200);
             labelTotalPris.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelTotalPris);
 
@@ -315,8 +316,9 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
         if(bruker.getHandlekurv().getMainArray().size() > 0) {
+            labelError.setText("");
             updateVarer();
         }else{
             labelError.setText("din handle kurv er tom");
@@ -327,7 +329,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Grafikkort(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Skjermkort");
     }
@@ -335,7 +337,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Harddisk(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Harddisk");
     }
@@ -343,7 +345,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Minnebrikke(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Minne");
     }
@@ -351,7 +353,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Mus(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Mus");
     }
@@ -359,7 +361,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Prosessor(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Prosessor");
     }
@@ -367,7 +369,7 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Skjerm(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Skjerm");
     }
@@ -375,8 +377,16 @@ public class Standardbruker_Controller {
     @FXML
     void On_Click_Btn_Tastatur(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(818);
+        Scene_3.setWidth(1200);
 
         visVarer("Tastatur");
+    }
+
+    @FXML
+    void On_Click_Btn_Operativsystem(ActionEvent event) {
+        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene_3.setWidth(1200);
+
+        visVarer("operativsystem");
     }
 }

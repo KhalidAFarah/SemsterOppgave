@@ -64,17 +64,17 @@
                         <TableColumn fx:id="prisKolonne" prefWidth="115.0" text="Pris" />
                     </columns>
                 </TableView>
-                <Label fx:id="labelSøk" layoutX="164.0" layoutY="36.0" text="Søk">
+                <Label fx:id="labelSøk" layoutX="114.0" layoutY="36.0" text="Søk">
                     <font>
                         <Font name="Rockwell" size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtSøk" layoutX="200.0" layoutY="32.0" promptText="Skriv inn produktnavnet">
+                <TextField fx:id="txtSøk" layoutX="150.0" layoutY="32.0" promptText="Skriv inn produktnavnet">
                <font>
                   <Font name="Rockwell" size="12.0" />
                </font></TextField>
-                <Button fx:id="btnSubmit" layoutX="625.0" layoutY="30.0" mnemonicParsing="false" text="Submit" visible="true" />
-                <TextField fx:id="txtSubmit" layoutX="438.0" layoutY="30.0" visible="true" />
+                <Button fx:id="btnSubmit" layoutX="575.0" layoutY="30.0" mnemonicParsing="false" text="Submit" visible="false" />
+                <TextField fx:id="txtSubmit" layoutX="384.0" layoutY="30.0" visible="false" />
             </children>
         </AnchorPane>
         <Label fx:id="LabelError" alignment="CENTER" layoutX="285.0" layoutY="493.0" prefHeight="29.0" prefWidth="400.0" textAlignment="CENTER" />
