@@ -271,7 +271,7 @@ public class Registrering_Controller {
                     }
                 }
 
-            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
+            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || !chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
                 labelError.setText("Vennligst kryss av en av boksene");
             }
 
