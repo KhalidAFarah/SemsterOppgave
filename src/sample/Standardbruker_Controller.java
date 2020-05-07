@@ -387,6 +387,6 @@ public class Standardbruker_Controller {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(1200);
 
-        visVarer("operativsystem");
+        visVarer("Operativsystem");
     }
 }
