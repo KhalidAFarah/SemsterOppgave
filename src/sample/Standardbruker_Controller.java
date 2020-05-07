@@ -17,12 +17,15 @@ import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import komponenter.Komponenter;
 import sun.plugin.javascript.navig.Anchor;
 
 import static javax.swing.JOptionPane.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -222,6 +225,30 @@ public class Standardbruker_Controller {
         int y = 10;
         if (bruker != null || komponenter != null) {
             Label labelTotalPris = new Label("Din totale pris er " + bruker.getSum() + " Kr");
+            Button kvittering = new Button("Kvittering");
+            kvittering.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+
+
+                    DirectoryChooser fc = new DirectoryChooser();
+
+                    File f = fc.showDialog(null);
+                    Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering.csv");
+                    String s = f.getAbsolutePath();
+                    System.out.println(path.toAbsolutePath().toString());
+
+                    FiledataTxt save = new FiledataTxt();
+                    bruker.setSum();
+                    String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                    String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotale Sum" + bruker.getSum();
+                    try {
+                        save.save(brukerInfo + komponenter, path);
+                    }catch (IOException e){
+                        labelError.setText(e.getMessage());
+                    }
+                }
+            });
             for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
                 Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
@@ -307,6 +334,11 @@ public class Standardbruker_Controller {
             labelTotalPris.setLayoutX(200);
             labelTotalPris.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelTotalPris);
+
+            kvittering.setLayoutY(y+60);
+            kvittering.setLayoutX(200);
+            kvittering.setStyle("-fx-padding: 10");
+            APane.getChildren().add(kvittering);
 
         } else if (bruker == null || komponenter == null) {
             labelError.setText("Klarte ikke å laste inn brukeren eller komponenter");
