@@ -141,18 +141,18 @@ public class Registrering_Controller {
     void onClick_btn_Avbryt(ActionEvent event) {
 
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("LoggInn.fxml"));
-            Parent Avbryt_registrering;
-            boolean value_1 = true;
-            try {
-                Avbryt_registrering = loader.load();
-            }catch(IOException e){
-                    labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
-                    Avbryt_registrering = null;
-                    value_1=false;
-                }
-            if(value_1){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("LoggInn.fxml"));
+        Parent Avbryt_registrering;
+        boolean value_1 = true;
+        try {
+            Avbryt_registrering = loader.load();
+        } catch (IOException e) {
+            labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
+            Avbryt_registrering = null;
+            value_1 = false;
+        }
+        if (value_1) {
 
             LoggInn_Controller controller = loader.getController();
             controller.setRegister(brukere);

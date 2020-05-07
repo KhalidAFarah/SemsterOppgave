@@ -38,7 +38,7 @@ public class Standardbruker extends Bruker {
         return ADMIN.getValue();
     }
 
-    public double getSum(){
+    public double getSum() {
         return sum.getValue();
     }
 

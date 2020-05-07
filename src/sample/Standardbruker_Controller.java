@@ -56,7 +56,7 @@ public class Standardbruker_Controller {
             lagreTxt.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
             //txtError.setText(e.getMessage());
-           labelError.setText(e.getMessage());
+            labelError.setText(e.getMessage());
         }
     }
 
@@ -69,21 +69,21 @@ public class Standardbruker_Controller {
 
         boolean fantNoe = false;
 
-        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++){
+        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
             boolean funnet = false;
             for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                if(bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())){
+                if (bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())) {
                     funnet = true;
 
                 }
             }
-            if(!funnet){
+            if (!funnet) {
                 fjernet += bruker.getHandlekurv().getMainArray().get(i).getNavn() + "\n";
                 bruker.getHandlekurv().remove(i);
                 fantNoe = true;
             }
         }
-        if(fantNoe) {
+        if (fantNoe) {
             save();
             showMessageDialog(null, fjernet);
         }
@@ -127,7 +127,7 @@ public class Standardbruker_Controller {
         ScrollBar sb = new ScrollBar();
         sb.setLayoutX(50);
         pane.setContent(APane);
-        if(komponenter != null ||bruker != null) {
+        if (komponenter != null || bruker != null) {
 
             for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
                 //ImageView img = new ImageView();
@@ -137,7 +137,7 @@ public class Standardbruker_Controller {
                     Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
                     labelNavn.setLayoutY(y);
                     labelNavn.setLayoutX(10);
-                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
+                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " kr");
                     labelPris.setLayoutY(y);
                     labelPris.setLayoutX(400);
                     Button btnVelg = new Button("Velg");
@@ -210,7 +210,7 @@ public class Standardbruker_Controller {
                     APane.getChildren().add(btnVisMer);
                 }
             }
-        }else if(komponenter == null || bruker == null){
+        } else if (komponenter == null || bruker == null) {
             labelError.setText("Klarte ikke å laste inn komponenter eller brukeren");
         }
     }
@@ -226,7 +226,7 @@ public class Standardbruker_Controller {
                 Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
                 labelNavn.setLayoutX(10);
-                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " Kr");
+                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " kr");
                 labelPris.setLayoutY(y);
                 labelPris.setLayoutX(400);
                 Button btnFjern = new Button("Fjern");
@@ -235,7 +235,6 @@ public class Standardbruker_Controller {
                 Button btnVisMer = new Button("Vis spesifikasjoner");
                 btnVisMer.setLayoutY(y + 30);
                 btnVisMer.setLayoutX(80);
-
 
 
                 y += 80;
@@ -261,7 +260,7 @@ public class Standardbruker_Controller {
                                 String spesifikasjonerHeader = bruker.getHandlekurv().getMainArray().get(j).getNavn() + "\nPris "
                                         + bruker.getHandlekurv().getMainArray().get(j).getPris();
                                 String spesifikasjonerText = "";
-                                for(String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()){
+                                for (String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()) {
                                     spesifikasjonerText += s + "\n";
                                 }
 
@@ -289,7 +288,6 @@ public class Standardbruker_Controller {
                                 btnHide.setLayoutY(70);
                                 btnHide.setLayoutX(25);
                                 APane.getChildren().add(btnHide);
-
 
 
                             }
@@ -320,8 +318,8 @@ public class Standardbruker_Controller {
         if(bruker.getHandlekurv().getMainArray().size() > 0) {
             labelError.setText("");
             updateVarer();
-        }else{
-            labelError.setText("din handle kurv er tom");
+        } else {
+            labelError.setText("Din handlekurv er tom.");
         }
 
     }
