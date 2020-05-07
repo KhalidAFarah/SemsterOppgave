@@ -14,7 +14,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
     private static final Komponent[] typer2 = {new Prosessor("", 0, ""),
             new Skjermkort("", 0, ""), new Minne("", 0, ""),
             new Harddisk("", 0, ""), new Tastatur("", 0, ""),
-            new Mus("", 0, ""), new Skjerm("", 0, "")};
+            new Mus("", 0, ""), new Skjerm("", 0, ""), new operativsystem("", 0, "")};
 
 
     //lag ny arraylist som sorteres etter komponent type med add<T> og get<T> som leter for typer[i-1] og teller dem
@@ -44,7 +44,8 @@ public class Komponenter {//lager en main liste for alle typer komponenter
 
     public void sort() {
         ObservableList<Komponent> newMain = FXCollections.observableArrayList();
-        for (int i = 0; i < TYPER; i++) {
+        System.out.println(toStringTxt() + "\n");
+        for (int i = 0; i < typer2.length; i++) {
             for (int j = 0; j < main.size(); j++) {
                 if (typer2[i].getClass().equals(main.get(j).getClass())) {
                     main.get(j).setID(newMain.size());
@@ -53,6 +54,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
             }
         }
         main = newMain;
+        System.out.println(toStringTxt());
     }
 
     public <T extends Komponent> boolean add(T elem) {
@@ -125,7 +127,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
                 add(new Mus(navn, pris, type, strings));
             } else if (type.equals("Skjerm")){
                 add(new Skjerm(navn, pris, type, strings));
-            } else if (type.equals("operativsystem")) {
+            } else if (type.equals("Operativsystem")) {
                     add(new operativsystem(navn, pris, type, strings));
             } else {
                 throw new Exception("Klarte ikke å laste inn data komponent typen eksisterer ikke i registeret");

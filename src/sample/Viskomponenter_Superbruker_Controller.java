@@ -367,7 +367,7 @@ public class Viskomponenter_Superbruker_Controller {
 
 
                 ChoiceBox choice = new ChoiceBox(FXCollections.observableArrayList(
-                        "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm", "operativsystem"
+                        "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm", "Operativsystem"
                 ));
 
 
@@ -461,8 +461,8 @@ public class Viskomponenter_Superbruker_Controller {
                                     komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
                                 } else if (choice.getValue().equals("Skjerm")){
                                     komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                                }else if (choice.getValue().equals("operativsystem")) {
-                                        komponenter.add(new operativsystem(txtNavn.getText(), pris, "operativsystem", specs));
+                                }else if (choice.getValue().equals("Operativsystem")) {
+                                    komponenter.add(new operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
                                 }
                                 //deretter lagre Komponenter
                                 saveKomponenter();
