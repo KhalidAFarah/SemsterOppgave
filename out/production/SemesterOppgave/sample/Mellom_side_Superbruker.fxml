@@ -7,38 +7,38 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="570.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Mellom_side_SuperbrukerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="562.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Mellom_side_SuperbrukerController">
     <children>
-        <ImageView fitHeight="1089.0" fitWidth="1921.0" layoutY="-10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="328.0" fitWidth="575.0" layoutX="-7.0" layoutY="-6.0">
             <image>
                 <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <Label layoutX="59.0" layoutY="148.0" prefHeight="34.0" prefWidth="452.0" text="Du har nå logget inn som administrator, hvilken side vil du til nå?">
+        <Label layoutX="54.0" layoutY="147.0" prefHeight="34.0" prefWidth="452.0" text="Du har nå logget inn som administrator, hvilken side vil du til nå?">
             <font>
-                <Font name="Verdana" size="13.0" />
+                <Font name="Rockwell" size="15.0" />
             </font>
         </Label>
-        <Button layoutX="69.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Systemets komponenter">
+        <Button layoutX="64.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Systemets komponenter">
             <font>
-                <Font name="Verdana" size="13.0" />
+                <Font name="Rockwell" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="323.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Brukere">
+        <Button layoutX="318.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Brukere">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Rockwell" size="14.0" />
             </font>
         </Button>
-        <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="196.0" layoutY="15.0">
+        <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="191.0" layoutY="14.0">
             <image>
                 <Image url="@../img/logo1.png" />
             </image>
         </ImageView>
-        <Button layoutX="245.0" layoutY="282.0" mnemonicParsing="false" onAction="#On_Click_BtnReturnerTilStart" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: black;" text="Logg ut" textFill="WHITE">
+        <Button layoutX="244.0" layoutY="283.0" mnemonicParsing="false" onAction="#On_Click_BtnReturnerTilStart" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: black;" text="Logg ut" textFill="WHITE">
             <font>
-                <Font name="Verdana" size="11.0" />
+                <Font name="Rockwell" size="11.0" />
             </font>
         </Button>
-      <Label fx:id="lblError" layoutX="128.0" layoutY="296.0" prefHeight="18.0" prefWidth="302.0" />
+      <Label fx:id="lblError" layoutX="124.0" layoutY="294.0" prefHeight="18.0" prefWidth="302.0" />
     </children>
 </AnchorPane>

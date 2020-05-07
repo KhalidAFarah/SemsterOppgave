@@ -31,19 +31,18 @@ public class MellomSide_Controller {
     void On_Click_BtnLoggInn(ActionEvent event) {
         if (brukere != null) {
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("LoggInn.fxml"));
-            Parent MellomSide;
-            boolean value_8 = true;
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("LoggInn.fxml"));
+                Parent MellomSide;
+                boolean value_8 = true;
 
-            try {
-                MellomSide = loader.load();
-            } catch (IOException e) {
-                lblError.setText("Klarte ikke å bytte side");
-                MellomSide = null;
-                value_8 = false;
-            }
-            if (value_8) {
+                try {
+                    MellomSide = loader.load();
+                }catch(IOException e) {
+                    lblError.setText("Klarte ikke å bytte side");
+                    MellomSide = null;
+                    value_8 = false;
+                }if(value_8){
                 LoggInn_Controller controller = loader.getController();
                 controller.setRegister(brukere);
 
@@ -65,19 +64,18 @@ public class MellomSide_Controller {
     void On_Click_BtnNyBruker(ActionEvent event) {
 
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Registrering.fxml"));
-        Parent MellomSide;
-        boolean value_9 = true;
-        try {
-            MellomSide = loader.load();
-        } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte side");
-            MellomSide = null;
-            value_9 = false;
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Registrering.fxml"));
+            Parent MellomSide;
+            boolean value_9 = true;
+            try {
+                MellomSide = loader.load();
+            }catch(IOException e){
+                lblError.setText("Klarte ikke å bytte side");
+                MellomSide = null;
+                value_9 = false;
 
-        }
-        if (value_9) {
+            }if(value_9){
 
             Registrering_Controller controller = loader.getController();
             controller.initRegister(brukere);

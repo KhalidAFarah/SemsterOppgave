@@ -11,76 +11,65 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0"
-            prefWidth="447.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="420.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
     <children>
-        <ImageView fitHeight="1089.0" fitWidth="1921.0" layoutX="-8.0" layoutY="-8.0" AnchorPane.bottomAnchor="-9.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="465.0" fitWidth="435.0" layoutX="-8.0" layoutY="-8.0">
             <image>
-                <Image url="@../img/background.jpg"/>
+                <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <TextField fx:id="txtBrukernavn" layoutX="114.0" layoutY="190.0" promptText="Brukernavn">
+        <TextField fx:id="txtBrukernavn" layoutX="120.0" layoutY="191.0" promptText="Brukernavn">
             <font>
-                <Font name="Verdana" size="16.0"/>
+                <Font name="Rockwell" size="16.0" />
             </font>
         </TextField>
-        <TextField fx:id="txtPassord" layoutX="113.0" layoutY="235.0" promptText="Passord">
+        <TextField fx:id="txtPassord" layoutX="119.0" layoutY="236.0" promptText="Passord">
             <cursor>
-                <Cursor fx:constant="DEFAULT"/>
+                <Cursor fx:constant="DEFAULT" />
             </cursor>
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
             <font>
-                <Font name="Verdana" size="16.0"/>
+                <Font name="Rockwell" size="16.0" />
             </font>
         </TextField>
-        <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="155.0" layoutY="286.0"
-                mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0"
-                style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
+        <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0" style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
             <font>
-                <Font name="Verdana" size="15.0"/>
+                <Font name="Rockwell" size="15.0" />
             </font>
         </Button>
-        <Button fx:id="btnRegistrer" layoutX="138.0" layoutY="350.0" mnemonicParsing="false"
-                onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="143.0"
-                text="Registrer ny bruker">
+        <Button fx:id="btnRegistrer" layoutX="144.0" layoutY="351.0" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="143.0" text="Registrer ny bruker">
             <font>
-                <Font name="Verdana" size="12.0"/>
+                <Font name="Rockwell" size="13.0" />
             </font>
         </Button>
-        <Label layoutX="151.0" layoutY="107.0" prefHeight="39.0" prefWidth="124.0" text="Logg inn"
-               textAlignment="CENTER">
+        <Label layoutX="154.0" layoutY="108.0" prefHeight="39.0" prefWidth="131.0" text="Logg inn" textAlignment="CENTER">
             <font>
-                <Font name="Verdana" size="26.0"/>
+                <Font name="Rockwell" size="30.0" />
             </font>
         </Label>
-        <Button fx:id="btnAvslutt" layoutX="179.0" layoutY="404.0" mnemonicParsing="false"
-                onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;"
-                text="Avslutt" textFill="WHITE">
+        <Button fx:id="btnAvslutt" layoutX="185.0" layoutY="415.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE">
             <font>
-                <Font name="Verdana" size="11.0"/>
+                <Font name="Rockwell" size="11.0" />
             </font>
         </Button>
-        <ImageView fitHeight="84.0" fitWidth="112.0" layoutX="157.0" layoutY="23.0">
+        <ImageView fitHeight="84.0" fitWidth="112.0" layoutX="163.0" layoutY="24.0">
             <image>
-                <Image url="@../img/logo2.png"/>
+                <Image url="@../img/logo2.png" />
             </image>
         </ImageView>
-        <Line endX="35.0" layoutX="212.0" layoutY="162.0" startX="-35.0" stroke="#3daee4" strokeLineCap="ROUND"
-              strokeLineJoin="ROUND" strokeWidth="5.0"/>
-        <ImageView fitHeight="45.0" fitWidth="42.0" layoutX="55.0" layoutY="182.0">
+        <Line endX="35.0" layoutX="218.0" layoutY="163.0" startX="-35.0" stroke="#3daee4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
+        <ImageView fitHeight="45.0" fitWidth="42.0" layoutX="61.0" layoutY="183.0">
             <image>
-                <Image url="@../img/bruker.png"/>
+                <Image url="@../img/bruker.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="55.0" layoutY="232.0">
+        <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="61.0" layoutY="233.0">
             <image>
-                <Image url="@../img/passord.png"/>
+                <Image url="@../img/passord.png" />
             </image>
         </ImageView>
-        <Label fx:id="lblError" layoutX="87.0" layoutY="434.0" prefHeight="18.0" prefWidth="275.0"/>
+      <Label fx:id="lblError" layoutX="91.0" layoutY="427.0" prefHeight="18.0" prefWidth="275.0" />
     </children>
 </AnchorPane>

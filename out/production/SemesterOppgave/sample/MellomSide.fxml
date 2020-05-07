@@ -7,29 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="307.0" prefWidth="461.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="447.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Controller">
     <children>
-        <ImageView fitHeight="1089.0" fitWidth="1921.0" layoutX="-7.0" layoutY="-6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="306.0" fitWidth="461.0" layoutX="-7.0" layoutY="-6.0">
             <image>
                 <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <Label layoutX="80.0" layoutY="152.0" prefHeight="33.0" prefWidth="307.0" text="Du har nå laget en bruker, vil du nå?">
+        <Label layoutX="70.0" layoutY="150.0" prefHeight="33.0" prefWidth="307.0" text="Du har nå laget en bruker, vil du nå?">
             <font>
-                <Font name="Verdana" size="16.0" />
+                <Font name="Rockwell" size="18.0" />
             </font>
         </Label>
-        <Button layoutX="75.0" layoutY="201.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
+        <Button layoutX="65.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
             <font>
-                <Font name="Verdana" size="13.0" />
+                <Font name="Rockwell" size="13.0" />
             </font>
         </Button>
-        <Button layoutX="248.0" layoutY="201.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Logg inn">
+        <Button layoutX="238.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Logg inn">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Rockwell" size="14.0" />
             </font>
         </Button>
-        <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="144.0" layoutY="14.0">
+        <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="12.0">
             <image>
                 <Image url="@../img/logo1.png" />
             </image>

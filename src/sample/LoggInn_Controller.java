@@ -56,6 +56,8 @@ public class LoggInn_Controller implements Initializable {
     private Komponenter komponenter;
 
 
+
+
     private void succededKomponenter(WorkerStateEvent event) {
         txtBrukernavn.setDisable(false);
         txtPassord.setDisable(false);
@@ -235,19 +237,18 @@ public class LoggInn_Controller implements Initializable {
     @FXML
     void onClick_btn_RegistrerNyBruker(ActionEvent event) {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Registrering.fxml"));
-        Parent Logg_inn;
-        boolean value_7 = true;
-        try {
-            Logg_inn = loader.load();
-        } catch (IOException e) {
-            lblError.setText("klarte ikke å bytte side");
-            Logg_inn = null;
-            value_7 = false;
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("Registrering.fxml"));
+            Parent Logg_inn;
+            boolean value_7 = true;
+            try {
+                Logg_inn = loader.load();
+            }catch(IOException e) {
+                lblError.setText("klarte ikke å bytte side");
+                Logg_inn = null;
+                value_7 = false;
 
-        }
-        if (value_7) {
+            }if(value_7){
             Registrering_Controller controller = loader.getController();
             controller.initRegister(brukere);
             Scene Register_ny_bruker = new Scene(Logg_inn);
@@ -258,7 +259,9 @@ public class LoggInn_Controller implements Initializable {
             Scene_2.show();
         }
 
-    }
+        }
+
+
 
 
     //For å gå ut fra applikasjonen
