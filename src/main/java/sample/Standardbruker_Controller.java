@@ -114,7 +114,7 @@ public class Standardbruker_Controller {
     void On_Click_BtnTilbake(ActionEvent event) {
 
         try {
-            Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Parent Standardbruker = FXMLLoader.load(getClass().getResource("/LoggInn.fxml"));
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);

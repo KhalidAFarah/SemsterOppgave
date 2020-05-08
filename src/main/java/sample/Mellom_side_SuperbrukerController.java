@@ -32,7 +32,7 @@ public class Mellom_side_SuperbrukerController {
     void On_Click_BtnVisBrukere(ActionEvent event) {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("Visbruker_Superbruker.fxml"));
+            loader.setLocation(getClass().getResource("/Visbruker_Superbruker.fxml"));
             Parent Mellom_side_superbruker;
             boolean value_2 = true;
             try{
@@ -62,7 +62,7 @@ public class Mellom_side_SuperbrukerController {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+        loader.setLocation(getClass().getResource("/Viskomponenter_Superbruker.fxml"));
         Parent Mellom_side_Superbruker;
         boolean value_4 = true;
         try {
@@ -95,7 +95,7 @@ public class Mellom_side_SuperbrukerController {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("LoggInn.fxml"));
+        loader.setLocation(getClass().getResource("/LoggInn.fxml"));
         Parent Superbruker;
         boolean value_3 = true;
         try {

@@ -142,7 +142,7 @@ public class Registrering_Controller {
 
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("LoggInn.fxml"));
+            loader.setLocation(getClass().getResource("/LoggInn.fxml"));
             Parent Avbryt_registrering;
             boolean value_1 = true;
             try {
@@ -197,7 +197,7 @@ public class Registrering_Controller {
                     brukere.add(b);
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("MellomSide.fxml"));
+                    loader.setLocation(getClass().getResource("/MellomSide.fxml"));
                     Parent Registering_ny_Admin;
                     boolean lasteinn = true;
                     try {
@@ -246,7 +246,7 @@ public class Registrering_Controller {
                     brukere.add(b);
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("MellomSide.fxml"));
+                    loader.setLocation(getClass().getResource("/MellomSide.fxml"));
                     Parent Registering_ny_Standarbruker;
                     boolean lasteinn = true;
                     try {

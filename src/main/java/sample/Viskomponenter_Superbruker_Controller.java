@@ -600,7 +600,7 @@ public class Viskomponenter_Superbruker_Controller {
     void On_Click_BtnTilbake(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
+            loader.setLocation(getClass().getResource("/Mellom_side_Superbruker.fxml"));
             Parent Superbruker = loader.load();
 
             Mellom_side_SuperbrukerController controller = loader.getController();
@@ -695,11 +695,11 @@ public class Viskomponenter_Superbruker_Controller {
                     try {
                         ID = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        labelError.setText("Vennlighst Skriv inn riktig verdi");
+                        labelError.setText("Vennligst Skriv inn riktig verdi");
                         ID = -1;
                     }
                 } else {
-                    labelError.setText("Vennlighst Skriv inn riktig verdi");
+                    labelError.setText("Vennligst Skriv inn riktig verdi");
                     ID = -1;
                 }
 

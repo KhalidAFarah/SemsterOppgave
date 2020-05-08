@@ -32,7 +32,7 @@ public class MellomSide_Controller {
         if (brukere != null) {
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("LoggInn.fxml"));
+                loader.setLocation(getClass().getResource("/LoggInn.fxml"));
                 Parent MellomSide;
                 boolean value_8 = true;
 
@@ -65,7 +65,7 @@ public class MellomSide_Controller {
 
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("Registrering.fxml"));
+            loader.setLocation(getClass().getResource("/Registrering.fxml"));
             Parent MellomSide;
             boolean value_9 = true;
             try {
