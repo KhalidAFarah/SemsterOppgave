@@ -2,12 +2,9 @@ package sample;
 
 import Brukere.*;
 import filbehandling.FiledataTxt;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,15 +13,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import komponenter.Komponent;
-import komponenter.Prosessor;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -46,7 +38,7 @@ public class Registrering_Controller {
     private CheckBox chxAdmin;
 
     @FXML
-    private CheckBox chxStandarbruker;
+    private CheckBox chxStandardbruker;
 
     @FXML
     private Button btnRegistrer;
@@ -174,7 +166,7 @@ public class Registrering_Controller {
         if (brukere != null) {
             boolean sjekk = true;
             Bruker b;
-            if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
+            if (chxAdmin.isSelected() && !chxStandardbruker.isSelected()) {
                 b = new Superbruker();
                 b.setBrukernavn(txtBrukernavn.getText());
                 b.setPassord(txtPassord.getText());
@@ -222,7 +214,7 @@ public class Registrering_Controller {
                     }
                 }
 
-            } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
+            } else if (chxStandardbruker.isSelected() && !chxAdmin.isSelected()) {
                 b = new Standardbruker();
                 b.setBrukernavn(txtBrukernavn.getText());
                 b.setPassord(txtPassord.getText());
@@ -247,13 +239,13 @@ public class Registrering_Controller {
 
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/MellomSide.fxml"));
-                    Parent Registering_ny_Standarbruker;
+                    Parent Registering_ny_Standardbruker;
                     boolean lasteinn = true;
                     try {
-                        Registering_ny_Standarbruker = loader.load();
+                        Registering_ny_Standardbruker = loader.load();
                     } catch (IOException e) {
                         labelError.setText("Klarte ikke å bytte side");
-                        Registering_ny_Standarbruker = null;
+                        Registering_ny_Standardbruker = null;
                         lasteinn = false;
                     }
 
@@ -261,7 +253,7 @@ public class Registrering_Controller {
                         MellomSide_Controller controller = loader.getController();
                         controller.initRegister(brukere);
 
-                        Scene MellomSide = new Scene(Registering_ny_Standarbruker);
+                        Scene MellomSide = new Scene(Registering_ny_Standardbruker);
                         Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_10.setScene(MellomSide);
                         Scene_10.setHeight(380);
@@ -271,8 +263,8 @@ public class Registrering_Controller {
                     }
                 }
 
-            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || !chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
-                labelError.setText("Vennligst kryss av en av boksene");
+            } else if (chxStandardbruker.isSelected() && chxAdmin.isSelected() || !chxStandardbruker.isSelected() && !chxAdmin.isSelected()) {
+                labelError.setText("Vennligst kryss av en av boksene.");
             }
 
 

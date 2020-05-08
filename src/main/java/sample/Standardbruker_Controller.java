@@ -2,38 +2,32 @@ package sample;
 
 import Brukere.Register;
 import Brukere.Standardbruker;
-import com.sun.javafx.scene.control.skin.LabeledText;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import komponenter.Komponent;
 import komponenter.Komponenter;
-import sun.plugin.javascript.navig.Anchor;
-
-import static javax.swing.JOptionPane.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Standardbruker_Controller {
 
@@ -226,14 +220,14 @@ public class Standardbruker_Controller {
         //System.out.println(bruker.toStringFormat());
         int y = 10;
         if (bruker != null || komponenter != null) {
-            Label labelTotalPris = new Label("Din totale pris er " + bruker.getSum() + " Kr");
+            Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
             Button kvittering = new Button("Kjøp varer");
             kvittering.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
 
                     APane.getChildren().clear();
-                    Label labelHeader = new Label("Du har kjøpt følgende varer");
+                    Label labelHeader = new Label("Du har kjøpt følgende varer:");
 
                     Label labelText = new Label();
                     Label labelPris = new Label();
@@ -247,7 +241,7 @@ public class Standardbruker_Controller {
                         y += 60;
                     }
                     bruker.setSum();
-                    s += "\nTotale pris: " + bruker.getSum();
+                    s += "\nTotalpris: " + bruker.getSum();
                     y += 60;
                     labelText.setText(s);
                     labelPris.setText(p);
@@ -275,7 +269,7 @@ public class Standardbruker_Controller {
                             FiledataTxt save = new FiledataTxt();
                             bruker.setSum();
                             String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                            String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotale Sum" + bruker.getSum();
+                            String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotalsum:" + bruker.getSum();
                             try {
                                 save.save(brukerInfo + komponenter, path);
                             }catch (IOException e){
@@ -315,7 +309,7 @@ public class Standardbruker_Controller {
                 Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
                 labelNavn.setLayoutX(10);
-                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " Kr");
+                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " kr.");
                 labelPris.setLayoutY(y);
                 labelPris.setLayoutX(400);
                 Button btnFjern = new Button("Fjern");
@@ -415,7 +409,7 @@ public class Standardbruker_Controller {
             labelError.setText("");
             updateVarer();
         }else{
-            labelError.setText("din handle kurv er tom");
+            labelError.setText("Handlekurven din er tom.");
         }
 
     }

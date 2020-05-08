@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 public class Komponenter {//lager en main liste for alle typer komponenter
 
@@ -14,7 +13,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
     private static final Komponent[] typer2 = {new Prosessor("", 0, ""),
             new Skjermkort("", 0, ""), new Minne("", 0, ""),
             new Harddisk("", 0, ""), new Tastatur("", 0, ""),
-            new Mus("", 0, ""), new Skjerm("", 0, ""), new operativsystem("", 0, "")};
+            new Mus("", 0, ""), new Skjerm("", 0, ""), new Operativsystem("", 0, "")};
 
 
     //lag ny arraylist som sorteres etter komponent type med add<T> og get<T> som leter for typer[i-1] og teller dem
@@ -128,7 +127,7 @@ public class Komponenter {//lager en main liste for alle typer komponenter
             } else if (type.equals("Skjerm")){
                 add(new Skjerm(navn, pris, type, strings));
             } else if (type.equals("Operativsystem")) {
-                    add(new operativsystem(navn, pris, type, strings));
+                    add(new Operativsystem(navn, pris, type, strings));
             } else {
                 throw new Exception("Klarte ikke å laste inn data komponent typen eksisterer ikke i registeret");
             }

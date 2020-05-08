@@ -1,17 +1,15 @@
 package sample;
 
-import Brukere.*;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+import Brukere.Register;
+import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,14 +19,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import komponenter.Komponenter;
 
-import static javax.swing.JOptionPane.*;
-
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 //Done try and catch with fxml scenes
 
 public class LoggInn_Controller implements Initializable {
@@ -155,7 +152,7 @@ public class LoggInn_Controller implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                showMessageDialog(null, "Klarte ikke å stoppen tråden");
+                showMessageDialog(null, "Klarte ikke å stoppe tråden");
             }
         }
     }
@@ -207,19 +204,19 @@ public class LoggInn_Controller implements Initializable {
                     try {
                         Logg_inn = loader.load();
                     } catch (IOException e) {
-                        lblError.setText("Klarer ikke å bytte side");
+                        lblError.setText("Klarte ikke å bytte side");
                         Logg_inn = null;
                         verdi = false;
                     }
 
                     if (verdi) {
-                        //paserer inn data i standardBruker_Controller
+                        //passerer inn data i standardBruker_Controller
                         Standardbruker_Controller controller = loader.getController();
                         controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
 
-                        Scene Standarbruker = new Scene(Logg_inn);
+                        Scene Standardbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        Scene_5.setScene(Standarbruker);
+                        Scene_5.setScene(Standardbruker);
                         Scene_5.setHeight(448);
                         Scene_5.setWidth(618);
 
@@ -244,7 +241,7 @@ public class LoggInn_Controller implements Initializable {
             try {
                 Logg_inn = loader.load();
             }catch(IOException e) {
-                lblError.setText("klarte ikke å bytte side");
+                lblError.setText("Klarte ikke å bytte side");
                 Logg_inn = null;
                 value_7 = false;
 
