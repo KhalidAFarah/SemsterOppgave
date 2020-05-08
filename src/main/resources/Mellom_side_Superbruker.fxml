@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="562.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Mellom_side_SuperbrukerController">
+    <children>
+        <ImageView fitHeight="328.0" fitWidth="575.0" layoutX="-7.0" layoutY="-6.0">
+            <image>
+                <Image url="@img/background.jpg" />
+            </image>
+        </ImageView>
+        <Label layoutX="54.0" layoutY="147.0" prefHeight="34.0" prefWidth="452.0" text="Du har nå logget inn som administrator, hvilken side vil du til nå?">
+            <font>
+                <Font name="Rockwell" size="15.0" />
+            </font>
+        </Label>
+        <Button layoutX="64.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Systemets komponenter">
+            <font>
+                <Font name="Rockwell" size="14.0" />
+            </font>
+        </Button>
+        <Button layoutX="318.0" layoutY="198.0" mnemonicParsing="false" onAction="#On_Click_BtnVisBrukere" prefHeight="58.0" prefWidth="180.0" style="-fx-background-color: #3daee4;" text="Brukere">
+            <font>
+                <Font name="Rockwell" size="14.0" />
+            </font>
+        </Button>
+        <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="191.0" layoutY="14.0">
+            <image>
+                <Image url="@img/logo1.png" />
+            </image>
+        </ImageView>
+        <Button layoutX="244.0" layoutY="283.0" mnemonicParsing="false" onAction="#On_Click_BtnReturnerTilStart" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: black;" text="Logg ut" textFill="WHITE">
+            <font>
+                <Font name="Rockwell" size="11.0" />
+            </font>
+        </Button>
+      <Label fx:id="lblError" layoutX="124.0" layoutY="294.0" prefHeight="18.0" prefWidth="302.0" />
+    </children>
+</AnchorPane>
