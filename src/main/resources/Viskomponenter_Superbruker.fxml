@@ -11,75 +11,96 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="584.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Viskomponenter_Superbruker_Controller">
+<AnchorPane prefHeight="584.0" prefWidth="900.0" style="-fx-background-color: white;"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.Viskomponenter_Superbruker_Controller">
     <children>
         <ImageView fitHeight="598.0" fitWidth="907.0" layoutX="-6.0" layoutY="-7.0">
             <image>
-                <Image url="@img/background.jpg" />
+                <Image url="@img/background.jpg"/>
             </image>
         </ImageView>
-        <Separator layoutY="67.0" prefHeight="3.0" prefWidth="900.0" style="-fx-background-color: black;" />
+        <Separator layoutY="67.0" prefHeight="3.0" prefWidth="900.0" style="-fx-background-color: black;"/>
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="351.0" layoutY="-35.0">
             <image>
-                <Image url="@img/logo3.png" />
+                <Image url="@img/logo3.png"/>
             </image>
         </ImageView>
-        <Button fx:id="btnLeggTil" layoutX="14.0" layoutY="303.0" mnemonicParsing="false" onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Legg til komponenter">
+        <Button fx:id="btnLeggTil" layoutX="14.0" layoutY="303.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnLeggTilKomponenter" prefHeight="46.0" prefWidth="162.0"
+                style="-fx-background-color: #3daee4;" text="Legg til komponenter">
             <font>
-                <Font name="Verdana" size="13.0" />
+                <Font name="Verdana" size="13.0"/>
             </font>
         </Button>
-        <Button fx:id="btnFjern" layoutX="14.0" layoutY="422.0" mnemonicParsing="false" onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Fjern komponenter">
+        <Button fx:id="btnFjern" layoutX="14.0" layoutY="422.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnFjernKomponenter" prefHeight="46.0" prefWidth="162.0"
+                style="-fx-background-color: #3daee4;" text="Fjern komponenter">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Verdana" size="14.0"/>
             </font>
         </Button>
-        <Button fx:id="btnRediger" layoutX="14.0" layoutY="183.0" mnemonicParsing="false" onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Rediger komponenter">
+        <Button fx:id="btnRediger" layoutX="14.0" layoutY="183.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnRedigerKomponenter" prefHeight="46.0" prefWidth="162.0"
+                style="-fx-background-color: #3daee4;" text="Rediger komponenter">
             <font>
-                <Font name="Verdana" size="13.0" />
+                <Font name="Verdana" size="13.0"/>
             </font>
         </Button>
-        <Button fx:id="btnTilbake" layoutX="726.0" layoutY="422.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
+        <Button fx:id="btnTilbake" layoutX="726.0" layoutY="422.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnTilbake" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: black;"
+                text="Tilbake" textFill="WHITE">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Verdana" size="14.0"/>
             </font>
         </Button>
-        <Button fx:id="btnVisSpecs" layoutX="723.0" layoutY="183.0" mnemonicParsing="false" onAction="#On_Click_BtnVisSpesifikasjoner" prefHeight="55.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Vis en komponents&#10;spesifikasjoner" textAlignment="CENTER">
+        <Button fx:id="btnVisSpecs" layoutX="723.0" layoutY="183.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnVisSpesifikasjoner" prefHeight="55.0" prefWidth="162.0"
+                style="-fx-background-color: #3daee4;" text="Vis en komponents&#10;spesifikasjoner"
+                textAlignment="CENTER">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Verdana" size="14.0"/>
             </font>
         </Button>
-        <Button fx:id="btnViskomponenter" layoutX="723.0" layoutY="303.0" mnemonicParsing="false" onAction="#On_Click_BtnVisKomponenter" prefHeight="46.0" prefWidth="162.0" style="-fx-background-color: #3daee4;" text="Vis alle komponenter">
+        <Button fx:id="btnViskomponenter" layoutX="723.0" layoutY="303.0" mnemonicParsing="false"
+                onAction="#On_Click_BtnVisKomponenter" prefHeight="46.0" prefWidth="162.0"
+                style="-fx-background-color: #3daee4;" text="Vis alle komponenter">
             <font>
-                <Font name="Verdana" size="13.0" />
+                <Font name="Verdana" size="13.0"/>
             </font>
         </Button>
         <AnchorPane fx:id="pane" layoutX="191.0" layoutY="98.0" prefHeight="371.0" prefWidth="518.0">
             <children>
-                <TableView fx:id="tableView" layoutY="86.0" prefHeight="286.0" prefWidth="518.0" style="-fx-font-family: Verdana;">
+                <TableView fx:id="tableView" layoutY="86.0" prefHeight="286.0" prefWidth="518.0"
+                           style="-fx-font-family: Verdana;">
                     <columns>
-                        <TableColumn fx:id="IDKolonne" prefWidth="75.0" text="ID" />
-                        <TableColumn fx:id="navnKolonne" prefWidth="190.0" text="Produktnavn" />
-                        <TableColumn fx:id="typeKolonne" prefWidth="136.0" text="Type" />
-                        <TableColumn fx:id="prisKolonne" prefWidth="115.0" text="Pris" />
+                        <TableColumn fx:id="IDKolonne" prefWidth="75.0" text="ID"/>
+                        <TableColumn fx:id="navnKolonne" prefWidth="190.0" text="Produktnavn"/>
+                        <TableColumn fx:id="typeKolonne" prefWidth="136.0" text="Type"/>
+                        <TableColumn fx:id="prisKolonne" prefWidth="115.0" text="Pris"/>
                     </columns>
                 </TableView>
                 <Label fx:id="labelSøk" layoutX="161.0" layoutY="37.0" text="Søk">
                     <font>
-                        <Font name="Verdana" size="14.0" />
+                        <Font name="Verdana" size="14.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="txtSøk" layoutX="197.0" layoutY="35.0" prefHeight="23.0" prefWidth="169.0" promptText="Skriv inn produktnavnet">
-               <font>
-                  <Font name="Verdana" size="12.0" />
-               </font></TextField>
-                <Button fx:id="btnSubmit" layoutX="575.0" layoutY="30.0" mnemonicParsing="false" text="Submit" visible="false" />
-                <TextField fx:id="txtSubmit" layoutX="384.0" layoutY="30.0" visible="false" />
+                <TextField fx:id="txtSøk" layoutX="197.0" layoutY="35.0" prefHeight="23.0" prefWidth="169.0"
+                           promptText="Skriv inn produktnavnet">
+                    <font>
+                        <Font name="Verdana" size="12.0"/>
+                    </font>
+                </TextField>
+                <Button fx:id="btnSubmit" layoutX="575.0" layoutY="30.0" mnemonicParsing="false" text="Submit"
+                        visible="false"/>
+                <TextField fx:id="txtSubmit" layoutX="384.0" layoutY="30.0" visible="false"/>
             </children>
         </AnchorPane>
-        <Label fx:id="LabelError" alignment="CENTER" layoutX="250.0" layoutY="510.0" prefHeight="29.0" prefWidth="400.0" textAlignment="CENTER">
-         <font>
-            <Font name="Verdana" size="12.0" />
-         </font></Label>
+        <Label fx:id="LabelError" alignment="CENTER" layoutX="250.0" layoutY="510.0" prefHeight="29.0" prefWidth="400.0"
+               textAlignment="CENTER">
+            <font>
+                <Font name="Verdana" size="12.0"/>
+            </font>
+        </Label>
     </children>
 </AnchorPane>

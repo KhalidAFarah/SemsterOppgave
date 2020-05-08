@@ -124,10 +124,10 @@ public class Komponenter {//lager en main liste for alle typer komponenter
                 add(new Tastatur(navn, pris, type, strings));
             } else if (type.equals("Mus")) {
                 add(new Mus(navn, pris, type, strings));
-            } else if (type.equals("Skjerm")){
+            } else if (type.equals("Skjerm")) {
                 add(new Skjerm(navn, pris, type, strings));
             } else if (type.equals("Operativsystem")) {
-                    add(new Operativsystem(navn, pris, type, strings));
+                add(new Operativsystem(navn, pris, type, strings));
             } else {
                 throw new Exception("Klarte ikke å laste inn data komponent typen eksisterer ikke i registeret");
             }
