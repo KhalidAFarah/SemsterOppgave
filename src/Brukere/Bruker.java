@@ -5,11 +5,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Bruker {
-    private SimpleIntegerProperty ID;
-    private SimpleStringProperty brukernavn;
-    private SimpleStringProperty passord;
-    private SimpleStringProperty email;
-    private SimpleStringProperty tlf;
+    private final SimpleIntegerProperty ID;
+    private final SimpleStringProperty brukernavn;
+    private final SimpleStringProperty passord;
+    private final SimpleStringProperty email;
+    private final SimpleStringProperty tlf;
 
     public Bruker() {
         ID = new SimpleIntegerProperty();
@@ -51,19 +51,18 @@ public abstract class Bruker {
         this.passord.setValue(passord);
     }
 
-    public void setEmail(String email)throws InvalidStringException {
-        if(Validering.Email(email)){
+    public void setEmail(String email) throws InvalidStringException {
+        if (Validering.Email(email)) {
             this.email.setValue(email);
-        }else{
+        } else {
             throw new InvalidStringException("Ugyldig epost");
         }
 
     }
 
 
-
-    public void setTlf(String tlf)throws InvalidStringException {
-        if (Validering.tlf(tlf)){
+    public void setTlf(String tlf) throws InvalidStringException {
+        if (Validering.tlf(tlf)) {
             this.tlf.setValue(tlf);
         } else {
             throw new InvalidStringException("ugyldig telefonnummer");

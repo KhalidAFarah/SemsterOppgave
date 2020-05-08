@@ -59,7 +59,7 @@ public class Registrering_Controller {
 
     private Register brukere;
     private FiledataTxt lagreTxt;
-    private Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+    private final Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
 
     private void save() {
         lagreTxt = new FiledataTxt();
@@ -132,29 +132,38 @@ public class Registrering_Controller {
             //for nå
             showMessageDialog(null, "klarte ikke å laste inn data");
         }
-    }*/
+    }
+    //Done fxml scenes
+     */
 
 
     @FXML
     void onClick_btn_Avbryt(ActionEvent event) {
 
-        try {
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("LoggInn.fxml"));
-            Parent Registrering = loader.load();
+            Parent Avbryt_registrering;
+            boolean value_1 = true;
+            try {
+                Avbryt_registrering = loader.load();
+            }catch(IOException e){
+                    labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
+                    Avbryt_registrering = null;
+                    value_1=false;
+                }
+            if(value_1){
 
             LoggInn_Controller controller = loader.getController();
             controller.setRegister(brukere);
 
-            Scene Avbryt = new Scene(Registrering);
+            Scene Avbryt_Registrering = new Scene(Avbryt_registrering);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene_1.setScene(Avbryt);
+            Scene_1.setScene(Avbryt_Registrering);
             Scene_1.setHeight(480);
             Scene_1.setWidth(440);
             Scene_1.show();
 
-        } catch (IOException e) {
-            showMessageDialog(null, e.getMessage());
         }
 
 
@@ -164,107 +173,107 @@ public class Registrering_Controller {
     void onClick_btn_Register(ActionEvent event) {
         if (brukere != null) {
             boolean sjekk = true;
-                Bruker b;
-                if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
-                    b = new Superbruker();
-                    b.setBrukernavn(txtBrukernavn.getText());
-                    b.setPassord(txtPassord.getText());
-                    try {
-                        b.setTlf(txtTelefonnummer.getText());
-                    }catch(InvalidStringException e){
-                        txtTelefonnummer.setText("");
-                        txtTelefonnummer.setPromptText(e.getMessage());
-                        sjekk = false;
-                    }
-                    try {
-                        b.setEmail(txtEmail.getText());
-                    }catch(InvalidStringException e){
-                        txtEmail.setText("");
-                        txtEmail.setPromptText(e.getMessage());
-                        sjekk = false;
-                    }
-
-                    if(sjekk) {
-                        brukere.add(b);
-
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("MellomSide.fxml"));
-                        Parent Registering_ny_Admin;
-                        boolean lasteinn = true;
-                        try {
-                            Registering_ny_Admin = loader.load();
-                        }catch (IOException e){
-                            labelError.setText("Klarte ikke å bytte side");
-                            Registering_ny_Admin = null;
-                            lasteinn = false;
-                        }
-
-                        if(lasteinn) {
-                            MellomSide_Controller controller = loader.getController();
-                            controller.initRegister(brukere);
-
-                            Scene MellomSide = new Scene(Registering_ny_Admin);
-                            Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene_9.setScene(MellomSide);
-                            Scene_9.setHeight(380);
-                            Scene_9.setWidth(450);
-                            Scene_9.show();
-                            save(); //se her på problemet med size på fxml vinduet *
-                        }
-                    }
-
-                } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
-                    b = new Standardbruker();
-                    b.setBrukernavn(txtBrukernavn.getText());
-                    b.setPassord(txtPassord.getText());
-                    try {
-                        b.setTlf(txtTelefonnummer.getText());
-                    }catch(InvalidStringException e){
-                        txtTelefonnummer.setText("");
-                        txtTelefonnummer.setPromptText(e.getMessage());
-                        sjekk = false;
-                    }
-                    try{
-                        b.setEmail(txtEmail.getText());
-                    }catch(InvalidStringException e){
-                        txtEmail.setText("");
-                        txtEmail.setPromptText(e.getMessage());
-                        sjekk = false;
-                    }
-
-                    //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
-                    if(sjekk) {
-                        brukere.add(b);
-
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("MellomSide.fxml"));
-                        Parent Registering_ny_Standarbruker;
-                        boolean lasteinn = true;
-                        try {
-                            Registering_ny_Standarbruker = loader.load();
-                        }catch (IOException e){
-                            labelError.setText("Klarte ikke å bytte side");
-                            Registering_ny_Standarbruker  = null;
-                            lasteinn = false;
-                        }
-
-                        if(lasteinn) {
-                            MellomSide_Controller controller = loader.getController();
-                            controller.initRegister(brukere);
-
-                            Scene MellomSide = new Scene(Registering_ny_Standarbruker);
-                            Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Scene_10.setScene(MellomSide);
-                            Scene_10.setHeight(380);
-                            Scene_10.setWidth(450);
-                            Scene_10.show();
-                            save();
-                        }
-                    }
-
-                } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || chxStandarbruker.isSelected() && chxAdmin.isSelected()) {
-                    labelError.setText("Vennligst kryss av en av boksene");
+            Bruker b;
+            if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
+                b = new Superbruker();
+                b.setBrukernavn(txtBrukernavn.getText());
+                b.setPassord(txtPassord.getText());
+                try {
+                    b.setTlf(txtTelefonnummer.getText());
+                } catch (InvalidStringException e) {
+                    txtTelefonnummer.setText("");
+                    txtTelefonnummer.setPromptText(e.getMessage());
+                    sjekk = false;
                 }
+                try {
+                    b.setEmail(txtEmail.getText());
+                } catch (InvalidStringException e) {
+                    txtEmail.setText("");
+                    txtEmail.setPromptText(e.getMessage());
+                    sjekk = false;
+                }
+
+                if (sjekk) {
+                    brukere.add(b);
+
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("MellomSide.fxml"));
+                    Parent Registering_ny_Admin;
+                    boolean lasteinn = true;
+                    try {
+                        Registering_ny_Admin = loader.load();
+                    } catch (IOException e) {
+                        labelError.setText("Klarte ikke å bytte side");
+                        Registering_ny_Admin = null;
+                        lasteinn = false;
+                    }
+
+                    if (lasteinn) {
+                        MellomSide_Controller controller = loader.getController();
+                        controller.initRegister(brukere);
+
+                        Scene MellomSide = new Scene(Registering_ny_Admin);
+                        Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene_9.setScene(MellomSide);
+                        Scene_9.setHeight(380);
+                        Scene_9.setWidth(450);
+                        Scene_9.show();
+                        save(); //se her på problemet med size på fxml vinduet *
+                    }
+                }
+
+            } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
+                b = new Standardbruker();
+                b.setBrukernavn(txtBrukernavn.getText());
+                b.setPassord(txtPassord.getText());
+                try {
+                    b.setTlf(txtTelefonnummer.getText());
+                } catch (InvalidStringException e) {
+                    txtTelefonnummer.setText("");
+                    txtTelefonnummer.setPromptText(e.getMessage());
+                    sjekk = false;
+                }
+                try {
+                    b.setEmail(txtEmail.getText());
+                } catch (InvalidStringException e) {
+                    txtEmail.setText("");
+                    txtEmail.setPromptText(e.getMessage());
+                    sjekk = false;
+                }
+
+                //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
+                if (sjekk) {
+                    brukere.add(b);
+
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("MellomSide.fxml"));
+                    Parent Registering_ny_Standarbruker;
+                    boolean lasteinn = true;
+                    try {
+                        Registering_ny_Standarbruker = loader.load();
+                    } catch (IOException e) {
+                        labelError.setText("Klarte ikke å bytte side");
+                        Registering_ny_Standarbruker = null;
+                        lasteinn = false;
+                    }
+
+                    if (lasteinn) {
+                        MellomSide_Controller controller = loader.getController();
+                        controller.initRegister(brukere);
+
+                        Scene MellomSide = new Scene(Registering_ny_Standarbruker);
+                        Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene_10.setScene(MellomSide);
+                        Scene_10.setHeight(380);
+                        Scene_10.setWidth(450);
+                        Scene_10.show();
+                        save();
+                    }
+                }
+
+            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || !chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
+                labelError.setText("Vennligst kryss av en av boksene");
+            }
 
 
         } else if (brukere == null) {
