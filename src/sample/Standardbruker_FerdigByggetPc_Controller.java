@@ -35,7 +35,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Standardbruker_Controller {
+public class Standardbruker_FerdigByggetPc_Controller {
 
     @FXML
     private ImageView img_Techmet;

@@ -1,17 +1,14 @@
 package sample;
 
 import Brukere.*;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +20,6 @@ import komponenter.Komponenter;
 
 import static javax.swing.JOptionPane.*;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -202,7 +198,7 @@ public class LoggInn_Controller implements Initializable {
                 } else {
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("Standardbruker.fxml"));
+                    loader.setLocation(getClass().getResource("Standardbruker_FerdigByggetPc.fxml"));
                     Parent Logg_inn;
                     try {
                         Logg_inn = loader.load();
@@ -214,7 +210,7 @@ public class LoggInn_Controller implements Initializable {
 
                     if (verdi) {
                         //paserer inn data i standardBruker_Controller
-                        Standardbruker_Controller controller = loader.getController();
+                        Standardbruker_FerdigByggetPc_Controller controller = loader.getController();
                         controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
 
                         Scene Standarbruker = new Scene(Logg_inn);
