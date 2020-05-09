@@ -227,88 +227,95 @@ public class Standardbruker_FerdigByggetPc_Controller {
         int y = 10;
         if (bruker != null || komponenter != null) {
             Label labelTotalPris = new Label("Din totale pris er " + bruker.getSum() + " Kr");
+            Label labelUtAv = new Label(bruker.getHandlekurv().getMainArray().size() + "/8");
+            Label labelMangler = new Label();
             Button kvittering = new Button("Kjøp varer");
             kvittering.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
 
-                    APane.getChildren().clear();
-                    Label labelHeader = new Label("Du har kjøpt følgende varer");
+                    if(bruker.getHandlekurv().getMainArray().size() == 8) {
 
-                    Label labelText = new Label();
-                    Label labelPris = new Label();
+                        APane.getChildren().clear();
+                        Label labelHeader = new Label("Du har kjøpt følgende varer");
 
-                    String s = "";
-                    String p = "";
-                    int y = 10;
-                    for(Komponent k : bruker.getHandlekurv().getMainArray()){
-                        s += k.getNavn() + "\n";
-                        p += k.getPris() + "\n";
+                        Label labelText = new Label();
+                        Label labelPris = new Label();
+
+                        String s = "";
+                        String p = "";
+                        int y = 10;
+                        for (Komponent k : bruker.getHandlekurv().getMainArray()) {
+                            s += k.getNavn() + "\n";
+                            p += k.getPris() + "\n";
+                            y += 60;
+                        }
+                        bruker.setSum();
+                        s += "\nTotale pris: " + bruker.getSum();
                         y += 60;
-                    }
-                    bruker.setSum();
-                    s += "\nTotale pris: " + bruker.getSum();
-                    y += 60;
-                    labelText.setText(s);
-                    labelPris.setText(p);
+                        labelText.setText(s);
+                        labelPris.setText(p);
 
 
-                    Button avbryt = new Button("Avbryt");
-                    avbryt.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            APane.getChildren().clear();
-                            updateVarer();
-                        }
-                    });
-                    Button skrivUt = new Button("Skriv ut kvittering");
-                    skrivUt.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            DirectoryChooser fc = new DirectoryChooser();
-
-                            File f = fc.showDialog(null);
-                            Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering.csv");
-                            String s = f.getAbsolutePath();
-                            System.out.println(path.toAbsolutePath().toString());
-
-                            FiledataTxt save = new FiledataTxt();
-                            bruker.setSum();
-                            String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                            String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotale Sum" + bruker.getSum();
-                            try {
-                                save.save(brukerInfo + komponenter, path);
-                            }catch (IOException e){
-                                labelError.setText(e.getMessage());
+                        Button avbryt = new Button("Avbryt");
+                        avbryt.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                APane.getChildren().clear();
+                                updateVarer();
                             }
-                        }
-                    });
+                        });
+                        Button skrivUt = new Button("Skriv ut kvittering");
+                        skrivUt.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                DirectoryChooser fc = new DirectoryChooser();
 
-                    APane.getChildren().add(labelHeader);
-                    APane.getChildren().add(labelText);
-                    APane.getChildren().add(labelPris);
-                    APane.getChildren().add(skrivUt);
-                    APane.getChildren().add(avbryt);
+                                File f = fc.showDialog(null);
+                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering.csv");
+                                String s = f.getAbsolutePath();
+                                System.out.println(path.toAbsolutePath().toString());
 
-                    labelHeader.setLayoutY(10);
-                    labelHeader.setLayoutX(10);
-                    labelHeader.setStyle("-fx-font-size: 25");
+                                FiledataTxt save = new FiledataTxt();
+                                bruker.setSum();
+                                String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                                String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotale Sum" + bruker.getSum();
+                                try {
+                                    save.save(brukerInfo + komponenter, path);
+                                } catch (IOException e) {
+                                    labelError.setText(e.getMessage());
+                                }
+                            }
+                        });
 
-                    labelText.setLayoutY(60);
-                    labelText.setLayoutX(10);
-                    labelText.setStyle("-fx-font-size: 17");
+                        APane.getChildren().add(labelHeader);
+                        APane.getChildren().add(labelText);
+                        APane.getChildren().add(labelPris);
+                        APane.getChildren().add(skrivUt);
+                        APane.getChildren().add(avbryt);
 
-                    labelPris.setLayoutY(60);
-                    labelPris.setLayoutX(360);
-                    labelPris.setStyle("-fx-font-size: 20; -fx-text-alignment: right");
+                        labelHeader.setLayoutY(10);
+                        labelHeader.setLayoutX(10);
+                        labelHeader.setStyle("-fx-font-size: 25");
 
-                    labelHeader.setPrefWidth(pane.getPrefWidth());
-                    labelText.setPrefWidth(pane.getPrefWidth());
+                        labelText.setLayoutY(60);
+                        labelText.setLayoutX(10);
+                        labelText.setStyle("-fx-font-size: 17");
 
-                    skrivUt.setLayoutY(y);
-                    skrivUt.setLayoutX(100);
-                    avbryt.setLayoutY(y);
-                    avbryt.setLayoutX(10);
+                        labelPris.setLayoutY(60);
+                        labelPris.setLayoutX(360);
+                        labelPris.setStyle("-fx-font-size: 20; -fx-text-alignment: right");
+
+                        labelHeader.setPrefWidth(pane.getPrefWidth());
+                        labelText.setPrefWidth(pane.getPrefWidth());
+
+                        skrivUt.setLayoutY(y);
+                        skrivUt.setLayoutX(100);
+                        avbryt.setLayoutY(y);
+                        avbryt.setLayoutX(10);
+                    }else{
+                        labelError.setText("Du må ha velget en komponent av hver type!");
+                    }
                 }
             });
             for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
@@ -401,6 +408,43 @@ public class Standardbruker_FerdigByggetPc_Controller {
             kvittering.setLayoutX(200);
             kvittering.setStyle("-fx-padding: 10");
             APane.getChildren().add(kvittering);
+
+            labelUtAv.setLayoutY(y+10);
+            labelUtAv.setLayoutX(100);
+            labelUtAv.setStyle("-fx-padding: 10");
+            APane.getChildren().add(labelUtAv);
+
+            String typer = "";
+            boolean first = false;
+            for(int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
+                boolean funnet = false;
+                int komponentNr = 0;
+                for (int i = 0; i < Komponenter.getTyper2().length; i++) {
+                    if(!funnet){
+                        komponentNr = i;
+                    }
+                    if (bruker.getHandlekurv().getMainArray().get(j).getClass().equals(Komponenter
+                            .getTyper2()[i].getClass())) {
+                        funnet = true;
+                    }
+                }
+
+                if(funnet == false && first == false){
+                    typer = "Du mangler følgende typer komponenter:\n";
+                    typer += "En " + bruker.getHandlekurv().getMainArray().get(j).getType();
+                    first = true;
+                }else if(funnet == false && first == true){
+                    typer += ", " + bruker.getHandlekurv().getMainArray().get(j).getType();
+                }
+            }
+
+
+            labelMangler.setText(typer);
+
+            labelMangler.setLayoutY(y+60);
+            labelMangler.setLayoutX(100);
+            labelMangler.setStyle("-fx-padding: 10");
+            APane.getChildren().add(labelMangler);
 
         } else if (bruker == null || komponenter == null) {
             labelError.setText("Klarte ikke å laste inn brukeren eller komponenter");
