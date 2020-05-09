@@ -81,7 +81,7 @@
                 <Font name="Rockwell" size="26.0" />
             </font>
         </Label>
-        <Label fx:id="labelError" layoutX="179.0" layoutY="410.0" prefHeight="18.0" prefWidth="230.0" />
+        <Label fx:id="labelError" layoutX="32.0" layoutY="410.0" prefHeight="18.0" prefWidth="534.0" />
         <ImageView fitHeight="90.0" fitWidth="109.0" layoutX="464.0" layoutY="28.0">
             <image>
                 <Image url="@../img/logo2.png" />
