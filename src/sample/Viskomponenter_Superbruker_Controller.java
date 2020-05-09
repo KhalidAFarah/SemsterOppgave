@@ -747,7 +747,7 @@ public class Viskomponenter_Superbruker_Controller {
             btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");
             On_Click_BtnVisKomponenter(event);
             showSpecs = false;
-        }
+        }//d
 
     }
 }
