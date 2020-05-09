@@ -42,10 +42,6 @@ public class Standardbruker extends Bruker {
         return ADMIN.getValue();
     }
 
-    public double getSum(){
-        return sum.getValue();
-    }
-
     public void setBrukernavn(String brukernavn) {
         super.setBrukernavn(brukernavn);
     }

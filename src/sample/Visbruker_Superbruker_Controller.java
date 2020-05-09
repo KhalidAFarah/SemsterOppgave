@@ -348,8 +348,8 @@ public class Visbruker_Superbruker_Controller {
 
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
-            btnSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn brukerens ID");
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn ID");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -408,8 +408,8 @@ public class Visbruker_Superbruker_Controller {
         if (!showKomponenter) {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
-            btnSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn brukerens ID");
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn ID");
 
             //String ID = showInputDialog("Vennligst skriv inn brukerens ID");
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
@@ -500,7 +500,7 @@ public class Visbruker_Superbruker_Controller {
             tableView.setItems(brukere.getArray());
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
-            btnSubmit.setText("");
+            txtSubmit.setText("");
 
         }
     }
@@ -568,7 +568,7 @@ public class Visbruker_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("Skiv inn varens ID");
+            txtSubmit.setPromptText("Skiv inn ID");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -592,7 +592,7 @@ public class Visbruker_Superbruker_Controller {
         }else{
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
-            btnSubmit.setText("");
+            txtSubmit.setText("");
         }
     }
 }

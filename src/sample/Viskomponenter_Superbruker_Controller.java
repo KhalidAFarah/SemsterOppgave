@@ -189,16 +189,13 @@ public class Viskomponenter_Superbruker_Controller {
 
         txtSubmit.setVisible(true);
         btnSubmit.setVisible(true);
-        btnSubmit.setText("");
-        txtSubmit.setPromptText("skriv inn komponetens ID");
+        txtSubmit.setText("");
+        txtSubmit.setPromptText("skriv inn ID");
 
         if (!showSpecs) {
             btnf.setText("Fjern vare");
             leggtilPane.setVisible(false);
             leggtilPane.getChildren().clear();
-
-            labelSøk.setLayoutX(157.0);
-            txtSøk.setLayoutX(217.0);
 
             if (tableView.isVisible()) {
 
@@ -302,8 +299,8 @@ public class Viskomponenter_Superbruker_Controller {
             }
         } else if (showSpecs) {
             //String spec = showInputDialog("skriv inn spesifikasjonens id");
-
-            txtSubmit.setPromptText("Skriv inn spesifikasjonens id");
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn ID");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -349,13 +346,11 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     void On_Click_BtnLeggTilKomponenter(ActionEvent event) {
         btnRediger.setText("Rediger komponenter");
-        labelSøk.setLayoutX(157.0);
-        txtSøk.setLayoutX(217.0);
         leggtilPane.getChildren().clear();
 
         txtSubmit.setVisible(false);
         btnSubmit.setVisible(false);
-        btnSubmit.setText("");
+        txtSubmit.setText("");
 
         if (!showSpecs) {
             leggtilPane.setVisible(true);
@@ -486,8 +481,8 @@ public class Viskomponenter_Superbruker_Controller {
 
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
-            btnSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn komponentens ID");
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn ID");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -504,8 +499,6 @@ public class Viskomponenter_Superbruker_Controller {
 
     @FXML
     void On_Click_BtnRedigerKomponenter(ActionEvent event) {
-        labelSøk.setLayoutX(157.0);
-        txtSøk.setLayoutX(217.0);
         leggtilPane.setVisible(false);
         leggtilPane.getChildren().clear();
         btnf.setVisible(false);
@@ -514,7 +507,8 @@ public class Viskomponenter_Superbruker_Controller {
 
         txtSubmit.setVisible(false);
         btnSubmit.setVisible(false);
-        btnSubmit.setText("");
+        txtSubmit.setText("");
+        txtSubmit.setPromptText("skriv inn ID");
 
         if (!showSpecs) {
             if (!showRediger) {
@@ -588,7 +582,7 @@ public class Viskomponenter_Superbruker_Controller {
                 tableView.setEditable(false);
                 txtSubmit.setVisible(false);
                 btnSubmit.setVisible(false);
-                btnSubmit.setText("");
+                txtSubmit.setText("");
                 btnRediger.setText("Rediger Spesifikasjoner");
             }
         }
@@ -630,8 +624,6 @@ public class Viskomponenter_Superbruker_Controller {
         leggtilPane.setVisible(false);
         leggtilPane.getChildren().clear();
 
-        labelSøk.setLayoutX(157.0);
-        txtSøk.setLayoutX(217.0);
         btnf.setVisible(false);
 
         tableView.getColumns().clear();
@@ -676,12 +668,9 @@ public class Viskomponenter_Superbruker_Controller {
 
         btnf.setVisible(false);
 
-        labelSøk.setLayoutX(157.0);
-        txtSøk.setLayoutX(217.0);
-
         txtSubmit.setVisible(true);
         btnSubmit.setVisible(true);
-        btnSubmit.setText("");
+        txtSubmit.setText("");
         txtSubmit.setPromptText("skriv inn komponentens ID");
 
         //String str = showInputDialog("Skriv inn komponentens id");
