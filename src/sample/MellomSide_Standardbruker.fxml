@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="558.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Standardbruker_Controller">
+   <children>
+      <Button layoutX="43.0" layoutY="104.0" mnemonicParsing="false" onAction="#click_btn_bygg_egen_pc" prefHeight="70.0" prefWidth="178.0" style="-fx-background-color: #3daee4;" text="Bygg egen pc">
+         <font>
+            <Font name="Constantia Bold" size="14.0" />
+         </font></Button>
+      <Button layoutX="288.0" layoutY="104.0" mnemonicParsing="false" onAction="#click_btn_individuellekomponenter" prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp Individuelle komponenter">
+         <font>
+            <Font name="Constantia Bold" size="14.0" />
+         </font></Button>
+      <Button layoutX="201.0" layoutY="208.0" mnemonicParsing="false" onAction="#click_btn_Tilbake" prefHeight="34.0" prefWidth="83.0" style="-fx-background-color: black;" text="Tilbake" textFill="#dfdada" />
+      <Label layoutX="53.0" layoutY="41.0" prefHeight="34.0" prefWidth="469.0" text="Du har nå logget inn som en standarbruker, hvilken side vil du til nå?">
+         <font>
+            <Font name="Rockwell" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblError" layoutX="160.0" layoutY="262.0" prefHeight="18.0" prefWidth="310.0" />
+   </children>
+</AnchorPane>

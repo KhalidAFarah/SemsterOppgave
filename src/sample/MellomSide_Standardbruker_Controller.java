@@ -15,7 +15,7 @@ import komponenter.Komponenter;
 
 import java.io.IOException;
 
-public class Standardbruker_mellomside_Controller {
+public class MellomSide_Standardbruker_Controller {
 
     private Komponenter komponenter;
 

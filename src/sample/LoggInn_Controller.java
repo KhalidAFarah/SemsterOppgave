@@ -198,7 +198,7 @@ public class LoggInn_Controller implements Initializable {
                 } else {
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("Standardbruker_mellomside.fxml"));
+                    loader.setLocation(getClass().getResource("MellomSide_Standardbruker.fxml"));
                     Parent Logg_inn;
                     try {
                         Logg_inn = loader.load();
@@ -210,7 +210,7 @@ public class LoggInn_Controller implements Initializable {
 
                     if (verdi) {
                         //paserer inn data i standardBruker_Controller
-                        Standardbruker_mellomside_Controller controller = loader.getController();
+                        MellomSide_Standardbruker_Controller controller = loader.getController();
                         controller.setInfo(brukere, komponenter, (Standardbruker) brukere.getArray().get(i));
 
                         Scene Standarbruker = new Scene(Logg_inn);
