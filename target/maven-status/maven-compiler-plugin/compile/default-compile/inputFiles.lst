@@ -5,7 +5,7 @@ C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\filbehandling\File
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\komponenter\Komponenter.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\komponenter\Komponent.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\Brukere\Validering.java
-C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\komponenter\operativsystem.java
+C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\komponenter\Operativsystem.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\Visbruker_Superbruker_Controller.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\MellomSide_Controller.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\komponenter\Tastatur.java
@@ -19,6 +19,7 @@ C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\Main.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\Registrering_Controller.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\Standardbruker_Controller.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\Brukere\InvalidStringException.java
+C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\Standardbruker_mellomside_Controller.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\Brukere\Bruker.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\sample\Viskomponenter_Superbruker_Controller.java
 C:\Users\kisan\Documents\GitHub\SemesterOppgave\src\main\java\komponenter\Prosessor.java
