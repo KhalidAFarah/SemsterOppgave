@@ -618,6 +618,7 @@ public class Viskomponenter_Superbruker_Controller {
 
     public void On_Click_BtnVisKomponenter(ActionEvent event) {
         tableView.setEditable(false);
+        tableView.setVisible(true);
         txtSøk.setVisible(true);
         labelSøk.setVisible(true);
 

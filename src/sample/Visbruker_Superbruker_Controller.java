@@ -190,6 +190,20 @@ public class Visbruker_Superbruker_Controller {
             //tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne, tlfKolonne, mailKolonne, adminKolonne);
             //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
+
+            txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    Predicate<Bruker> Navn = bruker -> {
+                        boolean sjekk = bruker.getBrukernavn().indexOf(txtSøk.getText()) != -1;
+                        return sjekk;
+                    };
+
+                    brukere2.setArray(brukere.getArray().stream().filter(Navn)
+                            .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                    tableView.setItems(brukere2.getArray());
+                }
+            });
         } else if (this.brukere == null) {
             showMessageDialog(null, "brukere er null");
         }
@@ -443,6 +457,23 @@ public class Visbruker_Superbruker_Controller {
                         tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
                         tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
                                 .getHandlekurv().getMainArray());
+
+                        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                            @Override
+                            public void handle(KeyEvent event) {
+                                Predicate<Komponent> Navn = Komponent -> {
+                                    boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                                    return sjekk;
+                                };
+
+                                ((Standardbruker)brukere2.getArray().get(IDs)).getHandlekurv().setMainArray(((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().getMainArray().stream().filter(Navn)
+                                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                                tableView.setItems(((Standardbruker) brukere2.getArray().get(IDs)).getHandlekurv().getMainArray());
+                            }
+                        });
+                        txtSøk.setText("");
+                        txtSøk.setPromptText("Skriv inn produktnavn");
+
                     } else if (valgtBruker >= brukere.getArray().size()) {
                         LabelError.setText("Vennligst velg en bruker som eksisterer");
                     } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
@@ -495,12 +526,28 @@ public class Visbruker_Superbruker_Controller {
             tableView.getColumns().clear();
             tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne,
                     tlfKolonne, mailKolonne, adminKolonne);
+            txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    Predicate<Bruker> Navn = bruker -> {
+                        boolean sjekk = bruker.getBrukernavn().indexOf(txtSøk.getText()) != -1;
+                        return sjekk;
+                    };
+
+                    brukere2.setArray(brukere.getArray().stream().filter(Navn)
+                            .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                    tableView.setItems(brukere2.getArray());
+                }
+            });
             btnRediger.setText("Rediger");
             btnVisKomponenter.setText("Vis en brukers komponenter");
             tableView.setItems(brukere.getArray());
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
             txtSubmit.setText("");
+
+            txtSøk.setText("");
+            txtSøk.setPromptText("Skriv inn brukernavn");
 
         }
     }
