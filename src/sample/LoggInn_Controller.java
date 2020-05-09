@@ -198,7 +198,7 @@ public class LoggInn_Controller implements Initializable {
                 } else {
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("Standardbruker_FerdigByggetPc.fxml"));
+                    loader.setLocation(getClass().getResource("Standardbruker_mellomside.fxml"));
                     Parent Logg_inn;
                     try {
                         Logg_inn = loader.load();
@@ -210,14 +210,14 @@ public class LoggInn_Controller implements Initializable {
 
                     if (verdi) {
                         //paserer inn data i standardBruker_Controller
-                        Standardbruker_FerdigByggetPc_Controller controller = loader.getController();
-                        controller.initBruker((Standardbruker) brukere.getArray().get(i), brukere, komponenter);
+                        Standardbruker_mellomside_Controller controller = loader.getController();
+                        controller.setInfo(brukere, komponenter, (Standardbruker) brukere.getArray().get(i));
 
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
-                        Scene_5.setHeight(448);
-                        Scene_5.setWidth(618);
+                        Scene_5.setHeight(450);
+                        Scene_5.setWidth(600);
 
                         Scene_5.show();
                         //ekstra
