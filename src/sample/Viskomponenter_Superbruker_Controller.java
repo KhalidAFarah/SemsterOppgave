@@ -235,6 +235,7 @@ public class Viskomponenter_Superbruker_Controller {
                             tableView.setItems(komponenter.getMainArray());
 
                             saveKomponenter();
+                            labelError.setText("Et komponent har blitt fjernet!");
                             showRediger = false;
                             showLeggTil = false;
                         }
@@ -285,17 +286,13 @@ public class Viskomponenter_Superbruker_Controller {
                             tableView.setItems(komponenter.getMainArray());
 
                             saveKomponenter();
+                            labelError.setText("Et komponent har blitt fjernet!");
+
                             showRediger = false;
                             showLeggTil = false;
                         }
                     }
                 });
-
-                btnf.setLayoutX(350);
-                labelSøk.setLayoutX(100);
-                txtSøk.setLayoutX(150);
-                btnf.setLayoutY(30);
-
             }
         } else if (showSpecs) {
             //String spec = showInputDialog("skriv inn spesifikasjonens id");
@@ -329,6 +326,7 @@ public class Viskomponenter_Superbruker_Controller {
                         }
                         tableView.refresh();
                         saveKomponenter();
+                        labelError.setText("Et komponent sin spesifikasjon har blitt fjernet!");
                     }
                 }
             });
@@ -460,6 +458,7 @@ public class Viskomponenter_Superbruker_Controller {
                                     komponenter.add(new operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
                                 }
                                 //deretter lagre Komponenter
+                                labelError.setText("En komponent har blitt lagt til!");
                                 saveKomponenter();
                             }
                         });
@@ -491,6 +490,7 @@ public class Viskomponenter_Superbruker_Controller {
                     tableView.getItems().add(spesifikasjon);
                     komponenter.getMainArray().get(IDs).getSpecs().add(txtSubmit.getText());
                     saveKomponenter();
+                    labelError.setText("En spesifikasjon har blitt lagt til!");
                 }
             });
             //String spec = showInputDialog("Skriv inn spesifikasjonen til komponenten");
@@ -621,6 +621,8 @@ public class Viskomponenter_Superbruker_Controller {
         tableView.setVisible(true);
         txtSøk.setVisible(true);
         labelSøk.setVisible(true);
+        txtSubmit.setVisible(false);
+        btnSubmit.setVisible(false);
 
         leggtilPane.setVisible(false);
         leggtilPane.getChildren().clear();
@@ -659,78 +661,89 @@ public class Viskomponenter_Superbruker_Controller {
     }
 
     public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
-        tableView.setVisible(true);
-        tableView.setEditable(false);
-        txtSøk.setVisible(true);
-        labelSøk.setVisible(true);
+        if(showSpecs) {
+            tableView.setVisible(true);
+            tableView.setEditable(false);
+            txtSøk.setVisible(true);
+            labelSøk.setVisible(true);
 
-        leggtilPane.setVisible(false);
-        leggtilPane.getChildren().clear();
+            leggtilPane.setVisible(false);
+            leggtilPane.getChildren().clear();
 
-        btnf.setVisible(false);
+            btnf.setVisible(false);
 
-        txtSubmit.setVisible(true);
-        btnSubmit.setVisible(true);
-        txtSubmit.setText("");
-        txtSubmit.setPromptText("skriv inn komponentens ID");
+            txtSubmit.setVisible(true);
+            btnSubmit.setVisible(true);
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("skriv inn ID");
 
-        //String str = showInputDialog("Skriv inn komponentens id");
-        btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                int ID;
-                if (txtSubmit.getText() != null || !txtSubmit.getText().isEmpty()) {
+            //String str = showInputDialog("Skriv inn komponentens id");
+            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int ID;
+                    if (txtSubmit.getText() != null || !txtSubmit.getText().isEmpty()) {
 
-                    try {
-                        ID = Integer.parseInt(txtSubmit.getText());
-                    } catch (Exception e) {
+                        try {
+                            ID = Integer.parseInt(txtSubmit.getText());
+                        } catch (Exception e) {
+                            labelError.setText("Vennlighst Skriv inn riktig verdi");
+                            ID = -1;
+                        }
+                    } else {
                         labelError.setText("Vennlighst Skriv inn riktig verdi");
                         ID = -1;
                     }
-                } else {
-                    labelError.setText("Vennlighst Skriv inn riktig verdi");
-                    ID = -1;
-                }
 
 
-                if (ID >= 0 && ID < komponenter.getMainArray().size()) {
-                    tableView.getColumns().clear();
-                    txtSøk.setPromptText("Skriv inn spesifikasjon");
+                    if (ID >= 0 && ID < komponenter.getMainArray().size()) {
+                        tableView.getColumns().clear();
+                        txtSøk.setPromptText("Skriv inn spesifikasjon");
 
-                    spesifikasjoner = FXCollections.observableArrayList();
-                    IDs = ID;
+                        spesifikasjoner = FXCollections.observableArrayList();
+                        IDs = ID;
 
-                    for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i++) {
-                        Spesifikasjon t = new Spesifikasjon(komponenter.getMainArray().get(ID).getSpecs().get(i), i);
-                        spesifikasjoner.add(t);
-                    }
-                    idSpecKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, Integer>("ID2"));
-                    specNavnKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, String>("navn2"));
-
-
-                    tableView.getColumns().addAll(idSpecKolonne, specNavnKolonne);
-
-                    tableView.setItems(spesifikasjoner);
-                    showSpecs = true;
-                    showRediger = false;
-                    showFjern = false;
-                    showLeggTil = false;
-
-                    txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
-                        @Override
-                        public void handle(KeyEvent event) {
-                            spesifikasjonerSøk = spesifikasjoner.stream().filter(s -> s.getNavn2().indexOf(txtSøk.getText()) != -1)
-                                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
-                            tableView.setItems(spesifikasjonerSøk);
+                        for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i++) {
+                            Spesifikasjon t = new Spesifikasjon(komponenter.getMainArray().get(ID).getSpecs().get(i), i);
+                            spesifikasjoner.add(t);
                         }
-                    });
-                    btnFjern.setText("Fjern Spesifikasjoner");
-                    btnRediger.setText("Rediger Spesifikasjoner");
-                    btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:13;" + "-fx-font-family: Candara Light");
-                    btnLeggTil.setText("Legg til Spesifikasjoner");
+                        idSpecKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, Integer>("ID2"));
+                        specNavnKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, String>("navn2"));
+
+
+                        tableView.getColumns().addAll(idSpecKolonne, specNavnKolonne);
+
+                        tableView.setItems(spesifikasjoner);
+                        showSpecs = true;
+                        showRediger = false;
+                        showFjern = false;
+                        showLeggTil = false;
+
+                        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                            @Override
+                            public void handle(KeyEvent event) {
+                                spesifikasjonerSøk = spesifikasjoner.stream().filter(s -> s.getNavn2().indexOf(txtSøk.getText()) != -1)
+                                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                                tableView.setItems(spesifikasjonerSøk);
+                            }
+                        });
+                        btnFjern.setText("Fjern Spesifikasjoner");
+                        btnRediger.setText("Rediger Spesifikasjoner");
+                        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:13;" + "-fx-font-family: Candara Light");
+                        btnLeggTil.setText("Legg til Spesifikasjoner");
+
+                        txtSubmit.setVisible(false);
+                        btnSubmit.setVisible(false);
+
+                        btnVisSpecs.setText("Tilbake");
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");
+            On_Click_BtnVisKomponenter(event);
+            showSpecs = false;
+        }
 
     }
 }

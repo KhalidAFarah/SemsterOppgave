@@ -14,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -22,7 +21,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javafx.util.converter.BooleanStringConverter;
 import komponenter.*;
 
 import java.io.IOException;
@@ -74,7 +72,7 @@ public class Visbruker_Superbruker_Controller {
     private TextField txtSøk;
 
     @FXML
-    private Label LabelError;
+    private Label labelError;
 
     @FXML
     private TextField txtSubmit;
@@ -167,7 +165,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         event.getRowValue().setTlf(event.getNewValue());
                     }catch (InvalidStringException e){
-                        LabelError.setText(e.getMessage());
+                        labelError.setText(e.getMessage());
                     }
                     saveBrukere();
                     tlfKolonne.getTableView().refresh();
@@ -179,7 +177,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         event.getRowValue().setEmail(event.getNewValue());
                     }catch (InvalidStringException e){
-                        LabelError.setText(e.getMessage());
+                        labelError.setText(e.getMessage());
                     }
                     saveBrukere();
                     mailKolonne.getTableView().refresh();
@@ -372,7 +370,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         valgtBruker = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        LabelError.setText("Vennligst skriv inn riktig brukers ID");
+                        labelError.setText("Vennligst skriv inn riktig brukers ID");
                         valgtBruker = -1;
                     }
                     if (valgtBruker != -1) {
@@ -381,7 +379,7 @@ public class Visbruker_Superbruker_Controller {
                         brukere2.setArray(brukere.getArray());
 
                         tableView.setItems(brukere.getArray());
-
+                        labelError.setText("En bruker har blitt fjernet!");
                         saveBrukere();
                     }
                 }
@@ -412,7 +410,7 @@ public class Visbruker_Superbruker_Controller {
             showFjern = false;
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
-            btnSubmit.setText("");
+            txtSubmit.setText("");
         }
     }
 
@@ -433,7 +431,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         valgtBruker = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        LabelError.setText("vennligst velg en gyldig id");
+                        labelError.setText("vennligst velg en gyldig id");
                         valgtBruker = -1;
                     }
 
@@ -475,11 +473,11 @@ public class Visbruker_Superbruker_Controller {
                         txtSøk.setPromptText("Skriv inn produktnavn");
 
                     } else if (valgtBruker >= brukere.getArray().size()) {
-                        LabelError.setText("Vennligst velg en bruker som eksisterer");
+                        labelError.setText("Vennligst velg en bruker som eksisterer");
                     } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
-                        LabelError.setText("Vennligst velg en kunde");
+                        labelError.setText("Vennligst velg en kunde");
                     } else if (valgtBruker < 0) {
-                        LabelError.setText("Vennlist skriv inn en gyldig ID");
+                        labelError.setText("Vennlist skriv inn en gyldig ID");
                     }
                 }
             });
@@ -584,7 +582,7 @@ public class Visbruker_Superbruker_Controller {
             Scene_4.setWidth(580);
             Scene_4.show();
         } catch (IOException e) {
-            LabelError.setText("Klarte ikke å bytte side");
+            labelError.setText("Klarte ikke å bytte side");
         }
     }
 
@@ -624,15 +622,16 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         valgtKomponent = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        LabelError.setText("venligst skriv inn et gyldig tall");
+                        labelError.setText("venligst skriv inn et gyldig tall");
                         valgtKomponent = -1;
                     }
 
                     if (valgtKomponent >= 0 && brukere.getArray().get(IDs) instanceof Standardbruker) {
                         ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
                         saveBrukere();
+                        labelError.setText("En brukers komponent har blitt fjernet!");
                     } else {
-                        LabelError.setText("Vennligst velg en kunde!");
+                        labelError.setText("Vennligst velg en kunde!");
                     }
                 }
             });
