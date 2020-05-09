@@ -224,6 +224,7 @@ public class LoggInn_Controller implements Initializable {
                         Scene_5.setWidth(618);
 
                         Scene_5.show();
+                        //ekstra
                     }
                 }
 
