@@ -661,11 +661,13 @@ public class Viskomponenter_Superbruker_Controller {
     }
 
     public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
-        if(showSpecs) {
+        if(!showSpecs) {
             tableView.setVisible(true);
             tableView.setEditable(false);
             txtSøk.setVisible(true);
             labelSøk.setVisible(true);
+
+            btnRediger.setText("Rediger");
 
             leggtilPane.setVisible(false);
             leggtilPane.getChildren().clear();
@@ -740,6 +742,8 @@ public class Viskomponenter_Superbruker_Controller {
                 }
             });
         }else{
+            txtSubmit.setVisible(false);
+            btnSubmit.setVisible(false);
             btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");
             On_Click_BtnVisKomponenter(event);
             showSpecs = false;
