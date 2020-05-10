@@ -220,7 +220,7 @@ public class LoggInn_Controller implements Initializable {
                         Scene_5.setWidth(600);
 
                         Scene_5.show();
-                        //ekstra
+
                     }
                 }
 
