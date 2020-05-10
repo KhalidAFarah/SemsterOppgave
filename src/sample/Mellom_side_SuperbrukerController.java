@@ -19,7 +19,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 //Done try and catch with fxml scenes
 
 
-
 public class Mellom_side_SuperbrukerController {
 
     private Register brukere;
@@ -31,30 +30,31 @@ public class Mellom_side_SuperbrukerController {
     @FXML
     void On_Click_BtnVisBrukere(ActionEvent event) {
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("Visbruker_Superbruker.fxml"));
-            Parent Mellom_side_superbruker;
-            boolean value_2 = true;
-            try{
-                Mellom_side_superbruker = loader.load();
-            }catch(IOException e){
-                lblError.setText("klarte ikke å bytte side");
-                Mellom_side_superbruker = null;
-                value_2 = false;
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Visbruker_Superbruker.fxml"));
+        Parent Mellom_side_superbruker;
+        boolean value_2 = true;
+        try {
+            Mellom_side_superbruker = loader.load();
+        } catch (IOException e) {
+            lblError.setText("Klarte ikke å bytte side");
+            Mellom_side_superbruker = null;
+            value_2 = false;
 
-            }if(value_2){
+        }
+        if (value_2) {
 
-                Visbruker_Superbruker_Controller controller = loader.getController();
-                controller.initBrukere(brukere, komponenter);
-                controller.start();
+            Visbruker_Superbruker_Controller controller = loader.getController();
+            controller.initBrukere(brukere, komponenter);
+            controller.start();
 
-                Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
-                Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene_12.setScene(VisBruker_Super);
-                Scene_12.setHeight(630);
-                Scene_12.setWidth(914);
-                Scene_12.show();
-            }
+            Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
+            Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene_12.setScene(VisBruker_Super);
+            Scene_12.setHeight(630);
+            Scene_12.setWidth(914);
+            Scene_12.show();
+        }
     }
 
     @FXML
@@ -68,26 +68,25 @@ public class Mellom_side_SuperbrukerController {
         try {
             Mellom_side_Superbruker = loader.load();
         } catch (IOException e) {
-            lblError.setText("klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side");
             Mellom_side_Superbruker = null;
             value_4 = false;
 
         }
         if (value_4) {
 
-        Viskomponenter_Superbruker_Controller controller = loader.getController();
-        controller.setBruker(brukere, komponenter);
-        controller.start();
+            Viskomponenter_Superbruker_Controller controller = loader.getController();
+            controller.setBruker(brukere, komponenter);
+            controller.start();
 
-        Scene VisKomponenter_Super = new Scene(Mellom_side_Superbruker);
-        Stage Scene_13 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_13.setScene(VisKomponenter_Super);
-        Scene_13.setHeight(600);
-        Scene_13.setWidth(914);
-        Scene_13.show();
-    }
+            Scene VisKomponenter_Super = new Scene(Mellom_side_Superbruker);
+            Stage Scene_13 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene_13.setScene(VisKomponenter_Super);
+            Scene_13.setHeight(600);
+            Scene_13.setWidth(914);
+            Scene_13.show();
         }
-
+    }
 
 
     @FXML
@@ -101,12 +100,12 @@ public class Mellom_side_SuperbrukerController {
         try {
             Superbruker = loader.load();
         } catch (IOException e) {
-            lblError.setText("klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side");
             Superbruker = null;
             value_3 = false;
 
         }
-        if (value_3){
+        if (value_3) {
 
             LoggInn_Controller controller = loader.getController();
             controller.setRegister(brukere, komponenter);
@@ -119,7 +118,6 @@ public class Mellom_side_SuperbrukerController {
             Scene_4.show();
         }
     }
-
 
 
     public void initBrukere(Register brukere, Komponenter komponenter) {

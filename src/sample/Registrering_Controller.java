@@ -2,12 +2,9 @@ package sample;
 
 import Brukere.*;
 import filbehandling.FiledataTxt;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,15 +13,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import komponenter.Komponent;
-import komponenter.Prosessor;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ResourceBundle;
-import javax.swing.JOptionPane;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -46,7 +38,7 @@ public class Registrering_Controller {
     private CheckBox chxAdmin;
 
     @FXML
-    private CheckBox chxStandarbruker;
+    private CheckBox chxStandardbruker;
 
     @FXML
     private Button btnRegistrer;
@@ -141,18 +133,18 @@ public class Registrering_Controller {
     void onClick_btn_Avbryt(ActionEvent event) {
 
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("LoggInn.fxml"));
-            Parent Avbryt_registrering;
-            boolean value_1 = true;
-            try {
-                Avbryt_registrering = loader.load();
-            }catch(IOException e){
-                    labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
-                    Avbryt_registrering = null;
-                    value_1=false;
-                }
-            if(value_1){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("LoggInn.fxml"));
+        Parent Avbryt_registrering;
+        boolean value_1 = true;
+        try {
+            Avbryt_registrering = loader.load();
+        } catch (IOException e) {
+            labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
+            Avbryt_registrering = null;
+            value_1 = false;
+        }
+        if (value_1) {
 
             LoggInn_Controller controller = loader.getController();
             controller.setRegister(brukere);
@@ -174,7 +166,7 @@ public class Registrering_Controller {
         if (brukere != null) {
             boolean sjekk = true;
             Bruker b;
-            if (chxAdmin.isSelected() && !chxStandarbruker.isSelected()) {
+            if (chxAdmin.isSelected() && !chxStandardbruker.isSelected()) {
                 b = new Superbruker();
                 b.setBrukernavn(txtBrukernavn.getText());
                 b.setPassord(txtPassord.getText());
@@ -222,7 +214,7 @@ public class Registrering_Controller {
                     }
                 }
 
-            } else if (chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
+            } else if (chxStandardbruker.isSelected() && !chxAdmin.isSelected()) {
                 b = new Standardbruker();
                 b.setBrukernavn(txtBrukernavn.getText());
                 b.setPassord(txtPassord.getText());
@@ -271,8 +263,8 @@ public class Registrering_Controller {
                     }
                 }
 
-            } else if (chxStandarbruker.isSelected() && chxAdmin.isSelected() || !chxStandarbruker.isSelected() && !chxAdmin.isSelected()) {
-                labelError.setText("Vennligst registrer brukerinformasjonen din og kryss av på en av boksene");
+            } else if (chxStandardbruker.isSelected() && chxAdmin.isSelected() || !chxStandardbruker.isSelected() && !chxAdmin.isSelected()) {
+                labelError.setText("Vennligst registrer brukerinformasjonen din og kryss av på en av boksene.");
             }
 
 

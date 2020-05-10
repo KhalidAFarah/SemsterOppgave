@@ -34,7 +34,7 @@ public class Standardbruker extends Bruker {
         return super.getTlf();
     }
 
-    public double getSum(){
+    public double getSum() {
         return sum.getValue();
     }
 
