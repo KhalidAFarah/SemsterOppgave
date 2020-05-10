@@ -66,7 +66,7 @@ public class MellomSide_Standardbruker_Controller {
         try {
             Standardbruker_mellomside = loader.load();
         }catch(IOException e){
-            lblError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden");
+            lblError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden.");
             Standardbruker_mellomside = null;
             value_2=false;
         }
@@ -87,7 +87,28 @@ public class MellomSide_Standardbruker_Controller {
 
     @FXML
     void click_btn_individuellekomponenter(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Standardbruker_IndividuelleKomponenter.fxml"));
+        Parent Standardbruker_mellomside;
+        boolean value_3 = true;
+        try {
+            Standardbruker_mellomside = loader.load();
+        } catch (IOException e) {
+            lblError.setText("Klarte ikke å bytte til individuelle komponenter-siden.");
+            Standardbruker_mellomside = null;
+            value_3 = false;
+        }
+        if (value_3) {
 
+            Standardbruker_IndividuelleKomponenter_Controller controller = loader.getController();
+            controller.initBruker(bruker, brukere, komponenter);
+            Scene Standardbruker_IndividuelleKomponenter = new Scene(Standardbruker_mellomside);
+            Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene_1.setScene(Standardbruker_IndividuelleKomponenter);
+            Scene_1.setHeight(448);
+            Scene_1.setWidth(618);
+            Scene_1.show();
+        }
     }
 
     public void setInfo(Register r, Komponenter k, Standardbruker b){
