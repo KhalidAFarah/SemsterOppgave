@@ -35,12 +35,12 @@ public class MellomSide_Standardbruker_Controller {
         boolean value_1 = true;
         try {
             Avbryt_Standarbruker = loader.load();
-        }catch(IOException e){
+        } catch (IOException e) {
             lblError.setText("Klarte ikke å gå tilbake til LoggInn siden");
             Avbryt_Standarbruker = null;
-            value_1=false;
+            value_1 = false;
         }
-        if(value_1){
+        if (value_1) {
 
             Scene LoggInn = new Scene(Avbryt_Standarbruker);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -50,7 +50,6 @@ public class MellomSide_Standardbruker_Controller {
             Scene_1.show();
 
         }
-
 
 
     }
@@ -65,12 +64,12 @@ public class MellomSide_Standardbruker_Controller {
         boolean value_2 = true;
         try {
             Standardbruker_mellomside = loader.load();
-        }catch(IOException e){
+        } catch (IOException e) {
             lblError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden.");
             Standardbruker_mellomside = null;
-            value_2=false;
+            value_2 = false;
         }
-        if(value_2){
+        if (value_2) {
 
             Standardbruker_FerdigByggetPc_Controller controller = loader.getController();
             controller.initBruker(bruker, brukere, komponenter);
@@ -111,7 +110,7 @@ public class MellomSide_Standardbruker_Controller {
         }
     }
 
-    public void setInfo(Register r, Komponenter k, Standardbruker b){
+    public void setInfo(Register r, Komponenter k, Standardbruker b) {
         komponenter = k;
         brukere = r;
         bruker = b;

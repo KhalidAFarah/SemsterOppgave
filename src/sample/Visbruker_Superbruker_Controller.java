@@ -164,7 +164,7 @@ public class Visbruker_Superbruker_Controller {
                 public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
                     try {
                         event.getRowValue().setTlf(event.getNewValue());
-                    }catch (InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         labelError.setText(e.getMessage());
                     }
                     saveBrukere();
@@ -176,7 +176,7 @@ public class Visbruker_Superbruker_Controller {
                 public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
                     try {
                         event.getRowValue().setEmail(event.getNewValue());
-                    }catch (InvalidStringException e){
+                    } catch (InvalidStringException e) {
                         labelError.setText(e.getMessage());
                     }
                     saveBrukere();
@@ -464,7 +464,7 @@ public class Visbruker_Superbruker_Controller {
                                     return sjekk;
                                 };
 
-                                ((Standardbruker)brukere2.getArray().get(IDs)).getHandlekurv().setMainArray(((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().getMainArray().stream().filter(Navn)
+                                ((Standardbruker) brukere2.getArray().get(IDs)).getHandlekurv().setMainArray(((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().getMainArray().stream().filter(Navn)
                                         .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                                 tableView.setItems(((Standardbruker) brukere2.getArray().get(IDs)).getHandlekurv().getMainArray());
                             }
@@ -519,7 +519,7 @@ public class Visbruker_Superbruker_Controller {
             showRediger = false;
             showFjern = false;
             btnVisKomponenter.setText("Vis brukere");
-        }else if (showKomponenter) {
+        } else if (showKomponenter) {
             showKomponenter = false;
             tableView.getColumns().clear();
             tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne,
@@ -635,7 +635,7 @@ public class Visbruker_Superbruker_Controller {
                     }
                 }
             });
-        }else{
+        } else {
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
             txtSubmit.setText("");

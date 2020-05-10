@@ -451,9 +451,9 @@ public class Viskomponenter_Superbruker_Controller {
                                     komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
                                 } else if (choice.getValue().equals("Mus")) {
                                     komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
-                                } else if (choice.getValue().equals("Skjerm")){
+                                } else if (choice.getValue().equals("Skjerm")) {
                                     komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                                }else if (choice.getValue().equals("Operativsystem")) {
+                                } else if (choice.getValue().equals("Operativsystem")) {
                                     komponenter.add(new Operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
                                 }
                                 //deretter lagre Komponenter
@@ -660,7 +660,7 @@ public class Viskomponenter_Superbruker_Controller {
     }
 
     public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
-        if(!showSpecs) {
+        if (!showSpecs) {
             tableView.setVisible(true);
             tableView.setEditable(false);
             txtSøk.setVisible(true);
@@ -740,7 +740,7 @@ public class Viskomponenter_Superbruker_Controller {
                     }
                 }
             });
-        }else{
+        } else {
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
             btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");

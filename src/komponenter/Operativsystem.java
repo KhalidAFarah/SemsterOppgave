@@ -1,6 +1,6 @@
 package komponenter;
 
-public class Operativsystem extends Komponent{
+public class Operativsystem extends Komponent {
 
     public Operativsystem(String navn, double pris, String type, String... strings) {
         super(navn, pris, type, strings);

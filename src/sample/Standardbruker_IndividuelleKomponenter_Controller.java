@@ -68,21 +68,21 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
         boolean fantNoe = false;
 
-        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++){
+        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
             boolean funnet = false;
             for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                if(bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())){
+                if (bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())) {
                     funnet = true;
 
                 }
             }
-            if(!funnet){
+            if (!funnet) {
                 fjernet += bruker.getHandlekurv().getMainArray().get(i).getNavn() + "\n";
                 bruker.getHandlekurv().remove(i);
                 fantNoe = true;
             }
         }
-        if(fantNoe) {
+        if (fantNoe) {
             save();
             showMessageDialog(null, fjernet);
         }
@@ -126,7 +126,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         ScrollBar sb = new ScrollBar();
         sb.setLayoutX(50);
         pane.setContent(APane);
-        if(komponenter != null ||bruker != null) {
+        if (komponenter != null || bruker != null) {
 
             for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
                 //ImageView img = new ImageView();
@@ -209,7 +209,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                     APane.getChildren().add(btnVisMer);
                 }
             }
-        }else if(komponenter == null || bruker == null){
+        } else if (komponenter == null || bruker == null) {
             labelError.setText("Klarte ikke å laste inn komponenter eller brukeren");
         }
     }
@@ -228,7 +228,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                 @Override
                 public void handle(ActionEvent event) {
 
-                    if(bruker.getHandlekurv().getMainArray().size() == 8) {
+                    if (bruker.getHandlekurv().getMainArray().size() == 8) {
 
                         APane.getChildren().clear();
                         Label labelHeader = new Label("Du har kjøpt følgende varer:");
@@ -307,7 +307,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         skrivUt.setLayoutX(100);
                         avbryt.setLayoutY(y);
                         avbryt.setLayoutX(10);
-                    }else{
+                    } else {
                         labelError.setText("Du må velge en komponent av hver type!");
                     }
                 }
@@ -325,7 +325,6 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                 Button btnVisMer = new Button("Vis spesifikasjoner");
                 btnVisMer.setLayoutY(y + 30);
                 btnVisMer.setLayoutX(80);
-
 
 
                 y += 80;
@@ -351,7 +350,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                 String spesifikasjonerHeader = bruker.getHandlekurv().getMainArray().get(j).getNavn() + "\nPris "
                                         + bruker.getHandlekurv().getMainArray().get(j).getPris();
                                 String spesifikasjonerText = "";
-                                for(String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()){
+                                for (String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()) {
                                     spesifikasjonerText += s + "\n";
                                 }
 
@@ -381,7 +380,6 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                 APane.getChildren().add(btnHide);
 
 
-
                             }
                         }
                     }
@@ -393,28 +391,28 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                 APane.getChildren().add(btnVisMer);
 
             }
-            labelTotalPris.setLayoutY(y+10);
+            labelTotalPris.setLayoutY(y + 10);
             labelTotalPris.setLayoutX(200);
             labelTotalPris.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelTotalPris);
 
-            kvittering.setLayoutY(y+60);
+            kvittering.setLayoutY(y + 60);
             kvittering.setLayoutX(200);
             kvittering.setStyle("-fx-padding: 10");
             APane.getChildren().add(kvittering);
 
-            labelUtAv.setLayoutY(y+10);
+            labelUtAv.setLayoutY(y + 10);
             labelUtAv.setLayoutX(100);
             labelUtAv.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelUtAv);
 
             String typer = "";
             boolean first = false;
-            for(int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
+            for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
                 boolean funnet = false;
                 int komponentNr = 0;
                 for (int i = 0; i < Komponenter.getTyper2().length; i++) {
-                    if(!funnet){
+                    if (!funnet) {
                         komponentNr = i;
                     }
                     if (bruker.getHandlekurv().getMainArray().get(j).getClass().equals(Komponenter
@@ -423,11 +421,11 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                     }
                 }
 
-                if(funnet == false && first == false){
+                if (funnet == false && first == false) {
                     typer = "Du mangler følgende typer komponenter:\n";
                     typer += "En " + bruker.getHandlekurv().getMainArray().get(j).getType();
                     first = true;
-                }else if(funnet == false && first == true){
+                } else if (funnet == false && first == true) {
                     typer += ", " + bruker.getHandlekurv().getMainArray().get(j).getType();
                 }
             }
@@ -435,7 +433,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
             labelMangler.setText(typer);
 
-            labelMangler.setLayoutY(y+60);
+            labelMangler.setLayoutY(y + 60);
             labelMangler.setLayoutX(100);
             labelMangler.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelMangler);
@@ -449,10 +447,10 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     void On_Click_BtnKurv(ActionEvent event) {
         Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene_3.setWidth(1200);
-        if(bruker.getHandlekurv().getMainArray().size() > 0) {
+        if (bruker.getHandlekurv().getMainArray().size() > 0) {
             labelError.setText("");
             updateVarer();
-        }else{
+        } else {
             labelError.setText("Handlekurven din er tom.");
         }
 
