@@ -1,9 +1,12 @@
 k;d;Khasdl@gma.cmo;123123311;true;
-kd2;kd;MrRado@fmarad.com;2342323423;false;5628.0;5;
-AMD Ryzen 5 2600X;1790.0;Prosessor;Cache; 16 MB;Antall kjerner; 6 kjerner;Max Turbo-hastighet; 4.2 GHz;Kompatibel prosessorsokkel; Socket AM4;
-Palit GeForce GTX 1650 Super StormX (4 GB);2190.0;Skjermkort;Minne; 4 GB;Klokkefrekvens; 1530 MHz;Grensesnitt; PCI Express 3.0;Vifteløs; Nei;
-Sandstrøm Bluetooth Slim trådløst tastatur;399.0;Tastatur;Trådløs teknologi; Ja;Type trådløs teknologi; Bluetooth;Mekaniske brytere; Nei;Bakgrunnsbelyst tastatur; Nei;Farge; Grå;
-Logitech G305 trådløs gamingmus;649.0;Mus;Trådløs; Ja;Grensesnitt; Bluetooth;Type; Optisk;Antall knapper; 6;Farge; Sort;
+kd2;kd;MrRado@fmarad.com;2342323423;false;23129.0;8;
+Intel Core i9-9900K;5279.0;Prosessor;Cache; 16 MB;Antall kjerner; 8 kjerner;Max Turbo-hastighet; 5 GHz;Kompatibel prosessorsokkel; LGA1151 Socket;
+ASUS GeForce Dual GTX 1660 Ti OC (6 GB);3569.0;Skjermkort;Minne; 6 GB;Klokkefrekvens; 1500 MHz;Grensesnitt; PCI Express 3.0;Vifteløs; Nei;
+G.Skill Trident Z RGB DDR4 RAM (64 GB);6999.0;Minne;Minnetype; DDR4;Minnehastighet; 3600MHz;Lagringskapasitet; 64 GB;
+Kingston A2000 M.2 NVMe SSD (500 GB);1189.0;Harddisk;Tilkoblingstype; Intern;Lagringskapasitet; 500 GB;Formfaktor; M.2;Lesehastighet (maksimalt); 2200 MB/s;Skrivehastighet (maksimalt); 2000 MB/s;
+HyperX Alloy Origins Core tenkeyless gamingtastatur;1495.0;Tastatur;Tilkobling; USB;Trådløs teknologi; Nei;Mekaniske brytere; Ja;Bakgrunnsbelyst tastatur; Ja;RGB-belysning; Ja;Farge; Sort;
+Logitech G502 Hero gamingmus;999.0;Mus;Trådløs; Nei;Grensesnitt; USB;Type; Optisk;Farge; Sort;
+Samsung 27" Curved gamingskjerm C27JG50;2999.0;Skjerm;Skjermstørrelse; 27";Oppløsning; 2560 x 1440;Oppdateringsfrekvens; 144 Hz;Responstid; 4 ms;
 Windows 10;600.0;Operativsystem;
 Miriam;mm;m@hotmail.com;12345678;true;
 m;w;m@m.com;12345677;false;6374.0;4;
