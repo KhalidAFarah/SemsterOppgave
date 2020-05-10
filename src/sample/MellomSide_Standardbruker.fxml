@@ -14,7 +14,7 @@
                 <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <Button layoutX="28.0" layoutY="141.0" mnemonicParsing="false" onAction="#click_btn_bygg_egen_pc" prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp ferdig bygd pc " textAlignment="CENTER">
+        <Button alignment="CENTER" layoutX="28.0" layoutY="141.0" mnemonicParsing="false" onAction="#click_btn_bygg_egen_pc" prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp ferdig bygd pc " textAlignment="CENTER">
             <font>
                 <Font name="Verdana" size="14.0" />
             </font>
@@ -30,7 +30,7 @@
                 <Font name="Verdana Bold" size="12.0" />
             </font>
         </Label>
-        <Label fx:id="lblError" layoutX="74.0" layoutY="267.0" prefHeight="18.0" prefWidth="400.0">
+        <Label fx:id="labelError" layoutX="74.0" layoutY="267.0" prefHeight="18.0" prefWidth="400.0">
             <font>
                 <Font name="Verdana" size="12.0" />
             </font>

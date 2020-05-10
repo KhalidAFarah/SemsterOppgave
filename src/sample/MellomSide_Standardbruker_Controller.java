@@ -22,9 +22,9 @@ public class MellomSide_Standardbruker_Controller {
     private Register brukere;
     private Standardbruker bruker;
 
-
     @FXML
-    private Label lblError;
+    private Label labelError;
+
 
     @FXML
     void click_btn_Tilbake(ActionEvent event) {
@@ -36,7 +36,7 @@ public class MellomSide_Standardbruker_Controller {
         try {
             Avbryt_Standarbruker = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å gå tilbake til LoggInn siden");
+            labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
             Avbryt_Standarbruker = null;
             value_1 = false;
         }
@@ -65,7 +65,7 @@ public class MellomSide_Standardbruker_Controller {
         try {
             Standardbruker_mellomside = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden.");
+            labelError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden.");
             Standardbruker_mellomside = null;
             value_2 = false;
         }
@@ -93,7 +93,7 @@ public class MellomSide_Standardbruker_Controller {
         try {
             Standardbruker_mellomside = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte til individuelle komponenter-siden.");
+            labelError.setText("Klarte ikke å bytte til individuelle komponenter-siden.");
             Standardbruker_mellomside = null;
             value_3 = false;
         }
