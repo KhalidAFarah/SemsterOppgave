@@ -25,6 +25,7 @@ import static javax.swing.JOptionPane.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -147,9 +148,9 @@ public class Viskomponenter_Superbruker_Controller {
         tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);*/
 
         IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("Navn"));
-        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("Type"));
-        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("Pris"));
+        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
 
         tableView.setItems(komponenter.getMainArray());
 
@@ -176,7 +177,7 @@ public class Viskomponenter_Superbruker_Controller {
         try {
             data.save(komponenter, path);
         } catch (IOException e) {
-            showMessageDialog(null, "Klarte ikke å laste inn data");// for nå
+            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
         }
     }
 
@@ -189,7 +190,7 @@ public class Viskomponenter_Superbruker_Controller {
         txtSubmit.setVisible(true);
         btnSubmit.setVisible(true);
         txtSubmit.setText("");
-        txtSubmit.setPromptText("Skriv inn ID");
+        txtSubmit.setPromptText("skriv inn ID");
 
         if (!showSpecs) {
             btnf.setText("Fjern vare");
@@ -205,7 +206,7 @@ public class Viskomponenter_Superbruker_Controller {
                         try {
                             valgtKomponent = Integer.parseInt(txtSubmit.getText());
                         } catch (Exception e) {
-                            labelError.setText("Vennligst skriv inn vare-ID riktig.");
+                            labelError.setText("Vennligst skriv inn riktig varens ID");
                             valgtKomponent = -1;
                         }
                         if (valgtKomponent != -1) {
@@ -234,7 +235,7 @@ public class Viskomponenter_Superbruker_Controller {
                             tableView.setItems(komponenter.getMainArray());
 
                             saveKomponenter();
-                            labelError.setText("En komponent har blitt fjernet!");
+                            labelError.setText("Et komponent har blitt fjernet!");
                             showRediger = false;
                             showLeggTil = false;
                         }
@@ -256,7 +257,7 @@ public class Viskomponenter_Superbruker_Controller {
                         try {
                             valgtKomponent = Integer.parseInt(txtSubmit.getText());
                         } catch (Exception e) {
-                            labelError.setText("Vennligst skriv inn vare-ID riktig.");
+                            labelError.setText("Vennligst skriv inn riktig varens ID");
                             valgtKomponent = -1;
                         }
                         if (valgtKomponent != -1) {
@@ -285,7 +286,7 @@ public class Viskomponenter_Superbruker_Controller {
                             tableView.setItems(komponenter.getMainArray());
 
                             saveKomponenter();
-                            labelError.setText("En komponent har blitt fjernet!");
+                            labelError.setText("Et komponent har blitt fjernet!");
 
                             showRediger = false;
                             showLeggTil = false;
@@ -296,7 +297,7 @@ public class Viskomponenter_Superbruker_Controller {
         } else if (showSpecs) {
             //String spec = showInputDialog("skriv inn spesifikasjonens id");
             txtSubmit.setText("");
-            txtSubmit.setPromptText("Skriv inn ID");
+            txtSubmit.setPromptText("skriv inn ID");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -306,11 +307,11 @@ public class Viskomponenter_Superbruker_Controller {
                         try {
                             specID = Integer.parseInt(txtSubmit.getText());
                         } catch (Exception e) {
-                            labelError.setText("Skriv inn en gyldig ID.");
+                            labelError.setText("Skriv inn en gyldig id");
                             specID = -1;
                         }
                     } else {
-                        labelError.setText("Skriv inn en gyldig ID.");
+                        labelError.setText("Skriv inn en gyldig id");
                         specID = -1;
                     }
 
@@ -325,7 +326,7 @@ public class Viskomponenter_Superbruker_Controller {
                         }
                         tableView.refresh();
                         saveKomponenter();
-                        labelError.setText("En komponent sin spesifikasjon har blitt fjernet!");
+                        labelError.setText("Et komponent sin spesifikasjon har blitt fjernet!");
                     }
                 }
             });
@@ -380,7 +381,7 @@ public class Viskomponenter_Superbruker_Controller {
                     public void handle(ActionEvent event) {
                         //senere i egen fil
                         //produkt navn
-                        Label labelNavn = new Label("Produktnavn");
+                        Label labelNavn = new Label("Produkt navn");
                         labelNavn.setLayoutX(10);
                         labelNavn.setLayoutY(75);
                         leggtilPane.getChildren().add(labelNavn);
@@ -392,7 +393,7 @@ public class Viskomponenter_Superbruker_Controller {
 
                         //produkt pris
 
-                        Label labelPris = new Label("Produktpris");
+                        Label labelPris = new Label("Produkt pris");
                         labelPris.setLayoutX(10);
                         labelPris.setLayoutY(150);
                         leggtilPane.getChildren().add(labelPris);
@@ -437,7 +438,7 @@ public class Viskomponenter_Superbruker_Controller {
                                 if (choice.getValue().equals("Prosessor")) {//spesifikke attributter går inn i if eller else if setningene
                                     Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
                                     if (komponenter.add(pro)) {
-                                        System.out.println("Funker");
+                                        System.out.println("funker");
                                     } else {
                                         System.out.println("Noe er galt");
                                     }
@@ -451,9 +452,9 @@ public class Viskomponenter_Superbruker_Controller {
                                     komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
                                 } else if (choice.getValue().equals("Mus")) {
                                     komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
-                                } else if (choice.getValue().equals("Skjerm")) {
+                                } else if (choice.getValue().equals("Skjerm")){
                                     komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                                } else if (choice.getValue().equals("Operativsystem")) {
+                                }else if (choice.getValue().equals("Operativsystem")) {
                                     komponenter.add(new Operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
                                 }
                                 //deretter lagre Komponenter
@@ -480,7 +481,7 @@ public class Viskomponenter_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("Skriv inn ID");
+            txtSubmit.setPromptText("skriv inn ID");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -507,7 +508,7 @@ public class Viskomponenter_Superbruker_Controller {
         txtSubmit.setVisible(false);
         btnSubmit.setVisible(false);
         txtSubmit.setText("");
-        txtSubmit.setPromptText("Skriv inn ID");
+        txtSubmit.setPromptText("skriv inn ID");
 
         if (!showSpecs) {
             if (!showRediger) {
@@ -547,7 +548,7 @@ public class Viskomponenter_Superbruker_Controller {
 
                 });
 
-                btnRediger.setText("Stopp redigering");
+                btnRediger.setText("Stop redigering");
                 showRediger = true;
                 showLeggTil = false;
                 showFjern = false;
@@ -575,14 +576,14 @@ public class Viskomponenter_Superbruker_Controller {
                         saveKomponenter();
                     }
                 });
-                btnRediger.setText("Stopp redigering");
+                btnRediger.setText("Stop redigering");
                 showRediger = true;
             } else if (showRediger) {
                 tableView.setEditable(false);
                 txtSubmit.setVisible(false);
                 btnSubmit.setVisible(false);
                 txtSubmit.setText("");
-                btnRediger.setText("Rediger spesifikasjoner");
+                btnRediger.setText("Rediger Spesifikasjoner");
             }
         }
     }
@@ -653,14 +654,14 @@ public class Viskomponenter_Superbruker_Controller {
 
         btnFjern.setText("Fjern komponenter");
         btnRediger.setText("Rediger komponenter");
-        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:15;" + "-fx-font-family: Verdana");
+        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:15;" + "-fx-font-family: Candara Light");
 
         btnLeggTil.setText("Legg til komponenter");
         txtSøk.setPromptText("Skriv inn produktnavn");
     }
 
     public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
-        if (!showSpecs) {
+        if(!showSpecs) {
             tableView.setVisible(true);
             tableView.setEditable(false);
             txtSøk.setVisible(true);
@@ -676,7 +677,7 @@ public class Viskomponenter_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("Skriv inn ID");
+            txtSubmit.setPromptText("skriv inn ID");
 
             //String str = showInputDialog("Skriv inn komponentens id");
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
@@ -688,11 +689,11 @@ public class Viskomponenter_Superbruker_Controller {
                         try {
                             ID = Integer.parseInt(txtSubmit.getText());
                         } catch (Exception e) {
-                            labelError.setText("Vennligst skriv inn riktig verdi.");
+                            labelError.setText("Vennlighst Skriv inn riktig verdi");
                             ID = -1;
                         }
                     } else {
-                        labelError.setText("Vennligst skriv inn riktig verdi.");
+                        labelError.setText("Vennlighst Skriv inn riktig verdi");
                         ID = -1;
                     }
 
@@ -728,10 +729,10 @@ public class Viskomponenter_Superbruker_Controller {
                                 tableView.setItems(spesifikasjonerSøk);
                             }
                         });
-                        btnFjern.setText("Fjern spesifikasjoner");
-                        btnRediger.setText("Rediger spesifikasjoner");
-                        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:13;" + "-fx-font-family: Verdana");
-                        btnLeggTil.setText("Legg til spesifikasjoner");
+                        btnFjern.setText("Fjern Spesifikasjoner");
+                        btnRediger.setText("Rediger Spesifikasjoner");
+                        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:13;" + "-fx-font-family: Candara Light");
+                        btnLeggTil.setText("Legg til Spesifikasjoner");
 
                         txtSubmit.setVisible(false);
                         btnSubmit.setVisible(false);
@@ -740,7 +741,7 @@ public class Viskomponenter_Superbruker_Controller {
                     }
                 }
             });
-        } else {
+        }else{
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
             btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");
