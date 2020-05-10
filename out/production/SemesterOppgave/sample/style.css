@@ -5,4 +5,5 @@
 AnchorPane {
     -fx-background-image: url("../img/background.jpg");
     -fx-background-size: stretch;
+    -fx-alignment: baseline-center;
 }

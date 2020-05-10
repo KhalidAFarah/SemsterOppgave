@@ -8,82 +8,119 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
-            prefWidth="420.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn_Controller">
     <children>
-        <ImageView fitHeight="465.0" fitWidth="435.0" layoutX="-8.0" layoutY="-8.0">
-            <image>
-                <Image url="@../img/background.jpg"/>
-            </image>
-        </ImageView>
-        <TextField fx:id="txtBrukernavn" layoutX="120.0" layoutY="191.0" promptText="Brukernavn">
-            <font>
-                <Font name="Verdana" size="16.0"/>
-            </font>
-        </TextField>
-        <TextField fx:id="txtPassord" layoutX="119.0" layoutY="236.0" promptText="Passord">
-            <cursor>
-                <Cursor fx:constant="DEFAULT"/>
-            </cursor>
-            <opaqueInsets>
-                <Insets/>
-            </opaqueInsets>
-            <font>
-                <Font name="Verdana" size="16.0"/>
-            </font>
-        </TextField>
-        <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="284.0"
-                mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="38.0" prefWidth="112.0"
-                style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
-            <font>
-                <Font name="Verdana" size="15.0"/>
-            </font>
-        </Button>
-        <Button fx:id="btnRegistrer" layoutX="146.0" layoutY="340.0" mnemonicParsing="false"
-                onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="143.0"
-                text="Registrer ny bruker">
-            <font>
-                <Font name="Verdana" size="12.0"/>
-            </font>
-        </Button>
-        <Label layoutX="154.0" layoutY="108.0" prefHeight="39.0" prefWidth="131.0" text="Logg inn"
-               textAlignment="CENTER">
-            <font>
-                <Font name="Verdana" size="30.0"/>
-            </font>
-        </Label>
-        <Button fx:id="btnAvslutt" layoutX="187.0" layoutY="396.0" mnemonicParsing="false"
-                onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;"
-                text="Avslutt" textFill="WHITE">
-            <font>
-                <Font name="Verdana" size="11.0"/>
-            </font>
-        </Button>
-        <ImageView fitHeight="84.0" fitWidth="112.0" layoutX="163.0" layoutY="24.0">
-            <image>
-                <Image url="@../img/logo2.png"/>
-            </image>
-        </ImageView>
-        <Line endX="35.0" layoutX="218.0" layoutY="163.0" startX="-35.0" stroke="#3daee4" strokeLineCap="ROUND"
-              strokeLineJoin="ROUND" strokeWidth="5.0"/>
-        <ImageView fitHeight="45.0" fitWidth="42.0" layoutX="61.0" layoutY="183.0">
-            <image>
-                <Image url="@../img/bruker.png"/>
-            </image>
-        </ImageView>
-        <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="61.0" layoutY="233.0">
-            <image>
-                <Image url="@../img/passord.png"/>
-            </image>
-        </ImageView>
-        <Label fx:id="lblError" layoutX="82.0" layoutY="427.0" prefHeight="18.0" prefWidth="275.0">
-            <font>
-                <Font name="Verdana" size="12.0"/>
-            </font>
-        </Label>
+      <BorderPane layoutX="-3.0" layoutY="14.0" prefHeight="152.0" prefWidth="420.0" AnchorPane.bottomAnchor="284.0">
+         <top>
+              <ImageView fitHeight="84.0" fitWidth="112.0" BorderPane.alignment="CENTER">
+                  <image>
+                      <Image url="@../img/logo2.png" />
+                  </image>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+              </ImageView>
+         </top>
+         <center>
+              <Label prefHeight="39.0" prefWidth="131.0" text="Logg inn" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                  <font>
+                      <Font name="Verdana" size="30.0" />
+                  </font>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
+              </Label>
+         </center>
+         <bottom>
+              <Line endX="35.0" startX="-35.0" stroke="#3daee4" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+      <GridPane layoutX="51.0" layoutY="183.0" prefHeight="103.0" prefWidth="318.0" AnchorPane.bottomAnchor="164.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="60.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="258.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <ImageView fitHeight="45.0" fitWidth="42.0">
+                  <image>
+                      <Image url="@../img/bruker.png" />
+                  </image>
+              </ImageView>
+              <TextField fx:id="txtBrukernavn" promptText="Brukernavn" GridPane.columnIndex="1">
+                  <font>
+                      <Font name="Verdana" size="16.0" />
+                  </font>
+              </TextField>
+              <TextField fx:id="txtPassord" promptText="Passord" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <cursor>
+                      <Cursor fx:constant="DEFAULT" />
+                  </cursor>
+                  <opaqueInsets>
+                      <Insets />
+                  </opaqueInsets>
+                  <font>
+                      <Font name="Verdana" size="16.0" />
+                  </font>
+              </TextField>
+              <ImageView fitHeight="38.0" fitWidth="42.0" GridPane.rowIndex="1">
+                  <image>
+                      <Image url="@../img/passord.png" />
+                  </image>
+              </ImageView>
+         </children>
+      </GridPane>
+      <GridPane layoutX="-2.0" layoutY="290.0" prefHeight="146.0" prefWidth="420.0" AnchorPane.bottomAnchor="14.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="37.0" minHeight="5.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="26.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <Button fx:id="btnLogginn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClick_btn_LoggInn" prefHeight="34.0" prefWidth="146.0" style="-fx-border-color: black; -fx-background-color: #3daee4;" text="Logg inn">
+                  <font>
+                      <Font name="Verdana" size="15.0" />
+                  </font>
+               <GridPane.margin>
+                  <Insets left="150.0" />
+               </GridPane.margin>
+              </Button>
+              <Button fx:id="btnRegistrer" mnemonicParsing="false" onAction="#onClick_btn_RegistrerNyBruker" prefHeight="38.0" prefWidth="146.0" text="Registrer ny bruker" GridPane.rowIndex="1">
+                  <font>
+                      <Font name="Verdana" size="12.0" />
+                  </font>
+               <GridPane.margin>
+                  <Insets left="150.0" />
+               </GridPane.margin>
+              </Button>
+              <Button fx:id="btnAvslutt" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE" GridPane.rowIndex="2">
+                  <font>
+                      <Font name="Verdana" size="11.0" />
+                  </font>
+               <GridPane.margin>
+                  <Insets left="190.0" />
+               </GridPane.margin>
+              </Button>
+              <Label fx:id="lblError" prefHeight="45.0" prefWidth="420.0" GridPane.rowIndex="3">
+                  <font>
+                      <Font name="Verdana" size="12.0" />
+                  </font>
+              </Label>
+         </children>
+      </GridPane>
     </children>
 </AnchorPane>
