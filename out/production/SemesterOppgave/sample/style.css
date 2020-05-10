@@ -1,0 +1,8 @@
+* {
+    -fx-font-family: Verdana;
+}
+
+AnchorPane {
+    -fx-background-image: url("../img/background.jpg");
+    -fx-background-size: stretch;
+}
