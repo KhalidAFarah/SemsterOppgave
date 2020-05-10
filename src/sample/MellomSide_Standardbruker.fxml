@@ -7,37 +7,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Standardbruker_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0"
+            prefWidth="557.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Standardbruker_Controller">
     <children>
-        <ImageView fitHeight="310.0" fitWidth="566.0" layoutX="-8.0" layoutY="-7.0">
-            <image>
-                <Image url="@../img/background.jpg" />
-            </image>
-        </ImageView>
-        <Button layoutX="28.0" layoutY="141.0" mnemonicParsing="false" onAction="#click_btn_bygg_egen_pc" prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp ferdig bygd pc " textAlignment="CENTER">
+        <Button layoutX="28.0" layoutY="141.0" mnemonicParsing="false" onAction="#click_btn_bygg_egen_pc"
+                prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp ferdig bygd pc "
+                textAlignment="CENTER">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Verdana" size="14.0"/>
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="287.0" layoutY="141.0" mnemonicParsing="false" onAction="#click_btn_individuellekomponenter" prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp&#10;individuelle komponenter" textAlignment="CENTER">
+        <Button alignment="CENTER" layoutX="287.0" layoutY="141.0" mnemonicParsing="false"
+                onAction="#click_btn_individuellekomponenter" prefHeight="70.0" prefWidth="234.0"
+                style="-fx-background-color: #3daee4;" text="Kjøp&#10;individuelle komponenter" textAlignment="CENTER">
             <font>
-                <Font name="Verdana" size="14.0" />
+                <Font name="Verdana" size="14.0"/>
             </font>
         </Button>
-        <Button layoutX="231.0" layoutY="233.0" mnemonicParsing="false" onAction="#click_btn_Tilbake" prefHeight="26.0" prefWidth="88.0" style="-fx-background-color: black;" text="Logg ut" textFill="#dfdada" />
-        <Label layoutX="37.0" layoutY="93.0" prefHeight="34.0" prefWidth="484.0" text="Du har nå logget inn som en standardbruker, hvilken side vil du til nå?">
+        <Button layoutX="231.0" layoutY="233.0" mnemonicParsing="false" onAction="#click_btn_Tilbake" prefHeight="26.0"
+                prefWidth="88.0" style="-fx-background-color: black;" text="Logg ut" textFill="#dfdada"/>
+        <Label layoutX="37.0" layoutY="93.0" prefHeight="34.0" prefWidth="484.0"
+               text="Du har nå logget inn som en standardbruker, hvilken side vil du til nå?">
             <font>
-                <Font name="Verdana Bold" size="12.0" />
+                <Font name="Verdana Bold" size="12.0"/>
             </font>
         </Label>
         <Label fx:id="lblError" layoutX="74.0" layoutY="267.0" prefHeight="18.0" prefWidth="400.0">
             <font>
-                <Font name="Verdana" size="12.0" />
+                <Font name="Verdana" size="12.0"/>
             </font>
         </Label>
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="179.0" layoutY="-14.0">
             <image>
-                <Image url="@../img/logo3.png" />
+                <Image url="@../img/logo3.png"/>
             </image>
         </ImageView>
     </children>

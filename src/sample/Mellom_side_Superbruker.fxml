@@ -8,14 +8,10 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0"
-            prefWidth="562.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Mellom_side_SuperbrukerController">
+            prefWidth="562.0" style="-fx-background-color: #F2F2F2;" stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.Mellom_side_SuperbrukerController">
     <children>
-        <ImageView fitHeight="328.0" fitWidth="575.0" layoutX="-7.0" layoutY="-6.0">
-            <image>
-                <Image url="@../img/background.jpg"/>
-            </image>
-        </ImageView>
         <Label layoutX="55.0" layoutY="143.0" prefHeight="34.0" prefWidth="452.0"
                text="Du har nå logget inn som administrator, hvilken side vil du til nå?">
             <font>
