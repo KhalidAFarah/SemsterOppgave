@@ -114,12 +114,12 @@ public class Standardbruker_FerdigByggetPc_Controller {
     void On_Click_BtnTilbake(ActionEvent event) {
 
         try {
-            Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Parent Standardbruker = FXMLLoader.load(getClass().getResource("MellomSide_Standardbruker.fxml"));
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(480);
-            Scene_3.setWidth(440);
+            Scene_3.setHeight(350);
+            Scene_3.setWidth(566);
             Scene_3.show();
         } catch (IOException e) {
             e.printStackTrace();
