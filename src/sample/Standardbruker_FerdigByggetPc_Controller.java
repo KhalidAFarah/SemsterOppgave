@@ -226,7 +226,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
         //System.out.println(bruker.toStringFormat());
         int y = 10;
         if (bruker != null || komponenter != null) {
-            Label labelTotalPris = new Label("Din totale pris er " + bruker.getSum() + " Kr");
+            Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
             Label labelUtAv = new Label(bruker.getHandlekurv().getMainArray().size() + "/8");
             Label labelMangler = new Label();
             Button kvittering = new Button("Kjøp varer");
@@ -237,7 +237,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                     if(bruker.getHandlekurv().getMainArray().size() == 8) {
 
                         APane.getChildren().clear();
-                        Label labelHeader = new Label("Du har kjøpt følgende varer");
+                        Label labelHeader = new Label("Du har kjøpt følgende varer:");
 
                         Label labelText = new Label();
                         Label labelPris = new Label();
@@ -251,7 +251,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                             y += 60;
                         }
                         bruker.setSum();
-                        s += "\nTotale pris: " + bruker.getSum();
+                        s += "\nTotalpris: " + bruker.getSum();
                         y += 60;
                         labelText.setText(s);
                         labelPris.setText(p);
@@ -279,7 +279,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                 FiledataTxt save = new FiledataTxt();
                                 bruker.setSum();
                                 String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                                String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotale Sum" + bruker.getSum();
+                                String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotalsum" + bruker.getSum();
                                 try {
                                     save.save(brukerInfo + komponenter, path);
                                 } catch (IOException e) {
@@ -314,7 +314,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         avbryt.setLayoutY(y);
                         avbryt.setLayoutX(10);
                     }else{
-                        labelError.setText("Du må ha velget en komponent av hver type!");
+                        labelError.setText("Du må velge en komponent av hver type!");
                     }
                 }
             });
@@ -322,7 +322,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                 Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
                 labelNavn.setLayoutY(y);
                 labelNavn.setLayoutX(10);
-                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " Kr");
+                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " kr");
                 labelPris.setLayoutY(y);
                 labelPris.setLayoutX(400);
                 Button btnFjern = new Button("Fjern");
@@ -459,7 +459,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
             labelError.setText("");
             updateVarer();
         }else{
-            labelError.setText("din handle kurv er tom");
+            labelError.setText("Handlekurven din er tom.");
         }
 
     }

@@ -14,19 +14,19 @@
                 <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <Label layoutX="70.0" layoutY="150.0" prefHeight="33.0" prefWidth="307.0" text="Du har nå laget en bruker, vil du nå?">
+        <Label layoutX="77.0" layoutY="147.0" prefHeight="33.0" prefWidth="294.0" text="Du har nå laget en bruker, vil du nå?">
             <font>
-                <Font name="Rockwell" size="18.0" />
+                <Font name="Verdana Bold" size="14.0" />
             </font>
         </Label>
-        <Button layoutX="65.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
+        <Button layoutX="65.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
             <font>
-                <Font name="Rockwell" size="13.0" />
+                <Font name="Verdana" size="13.0" />
             </font>
         </Button>
-        <Button layoutX="238.0" layoutY="199.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Logg inn">
+        <Button layoutX="245.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Logg inn">
             <font>
-                <Font name="Rockwell" size="14.0" />
+                <Font name="Verdana" size="14.0" />
             </font>
         </Button>
         <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="12.0">
@@ -34,6 +34,9 @@
                 <Image url="@../img/logo1.png" />
             </image>
         </ImageView>
-      <Label fx:id="lblError" layoutX="109.0" layoutY="271.0" prefHeight="18.0" prefWidth="221.0" />
+      <Label fx:id="lblError" layoutX="113.0" layoutY="271.0" prefHeight="18.0" prefWidth="221.0">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
     </children>
 </AnchorPane>

@@ -125,10 +125,10 @@ public class Visbruker_Superbruker_Controller {
             leggtilPane.setVisible(false);
 
             IDKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, Integer>("ID"));
-            brukerKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("brukernavn"));
-            passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
-            tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
-            mailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
+            brukerKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("Brukernavn"));
+            passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("Passord"));
+            tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("Tlf"));
+            mailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("E-post"));
             PropertyValueFactory<? extends Bruker, Boolean> sd = new PropertyValueFactory<>("ADMIN");
             //adminKolonne.setCellValueFactory(sd);
             adminKolonne.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bruker, Boolean>, ObservableValue<Boolean>>() {
@@ -203,7 +203,7 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
         } else if (this.brukere == null) {
-            showMessageDialog(null, "brukere er null");
+            showMessageDialog(null, "Brukere er null.");
         }
     }
 
@@ -258,7 +258,7 @@ public class Visbruker_Superbruker_Controller {
         try {
             data.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
-            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
+            showMessageDialog(null, "Klarte ikke å laste inn data");// for nå
         }
     }
 
@@ -361,7 +361,7 @@ public class Visbruker_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn ID");
+            txtSubmit.setPromptText("Skriv inn ID.");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -370,7 +370,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         valgtBruker = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        labelError.setText("Vennligst skriv inn riktig brukers ID");
+                        labelError.setText("Vennligst skriv inn bruker-ID riktig.");
                         valgtBruker = -1;
                     }
                     if (valgtBruker != -1) {
@@ -421,7 +421,7 @@ public class Visbruker_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn ID");
+            txtSubmit.setPromptText("Skriv inn ID.");
 
             //String ID = showInputDialog("Vennligst skriv inn brukerens ID");
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
@@ -431,7 +431,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         valgtBruker = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        labelError.setText("vennligst velg en gyldig id");
+                        labelError.setText("Vennligst velg en gyldig ID.");
                         valgtBruker = -1;
                     }
 
@@ -441,15 +441,15 @@ public class Visbruker_Superbruker_Controller {
                         IDs = valgtBruker;
 
                         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
+                        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produktnavn");
                         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
                         TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
                         //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
 
                         IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+                        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("Navn"));
+                        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("Type"));
+                        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("Pris"));
                         //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
                         tableView.getColumns().clear();
                         tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
@@ -470,14 +470,14 @@ public class Visbruker_Superbruker_Controller {
                             }
                         });
                         txtSøk.setText("");
-                        txtSøk.setPromptText("Skriv inn produktnavn");
+                        txtSøk.setPromptText("Skriv inn produktnavn.");
 
                     } else if (valgtBruker >= brukere.getArray().size()) {
-                        labelError.setText("Vennligst velg en bruker som eksisterer");
+                        labelError.setText("Vennligst velg en bruker som eksisterer.");
                     } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
-                        labelError.setText("Vennligst velg en kunde");
+                        labelError.setText("Vennligst velg en kunde.");
                     } else if (valgtBruker < 0) {
-                        labelError.setText("Vennlist skriv inn en gyldig ID");
+                        labelError.setText("Vennlist skriv inn en gyldig ID.");
                     }
                 }
             });
@@ -545,7 +545,7 @@ public class Visbruker_Superbruker_Controller {
             txtSubmit.setText("");
 
             txtSøk.setText("");
-            txtSøk.setPromptText("Skriv inn brukernavn");
+            txtSøk.setPromptText("Skriv inn brukernavn.");
 
         }
     }
@@ -554,7 +554,7 @@ public class Visbruker_Superbruker_Controller {
     void On_Click_BtnRedigerBruker(ActionEvent event) {
         if (!showRediger) {
             tableView.setEditable(true);
-            btnRediger.setText("Stop redigering");
+            btnRediger.setText("Stopp redigering");
             showRediger = true;
             showLeggTil = false;
             showFjern = false;
@@ -613,7 +613,7 @@ public class Visbruker_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("Skiv inn ID");
+            txtSubmit.setPromptText("Skriv inn ID.");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -622,7 +622,7 @@ public class Visbruker_Superbruker_Controller {
                     try {
                         valgtKomponent = Integer.parseInt(txtSubmit.getText());
                     } catch (Exception e) {
-                        labelError.setText("venligst skriv inn et gyldig tall");
+                        labelError.setText("Vennligst skriv inn et gyldig tall.");
                         valgtKomponent = -1;
                     }
 
