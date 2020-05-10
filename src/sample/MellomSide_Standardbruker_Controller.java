@@ -62,7 +62,6 @@ public class MellomSide_Standardbruker_Controller {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Standardbruker_FerdigByggetPc.fxml"));
         Parent Standardbruker_mellomside;
-
         boolean value_2 = true;
         try {
             Standardbruker_mellomside = loader.load();
