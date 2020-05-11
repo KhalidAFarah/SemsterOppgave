@@ -51,7 +51,7 @@ public class Standardbruker extends Bruker {
     public double getIndividuellevarerSum(){
         double s = 0;
         for(int i = 0; i < individuelleVarer.getMainArray().size(); i++){
-            s += individuelleVarer.getMainArray().get(i).getPris();
+            s += individuelleVarer.getMainArray().get(i).getPris()*individuelleVarer.getMainArray().get(i).getAntall();
         }
         return s;
     }

@@ -102,18 +102,29 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     private boolean showKurv = false;
     private boolean showSpecs = false;
+    private boolean showLeggTil = false;
 
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
         if (!showKurv){
             defualt(false);
             showKurv = true;
+            showSpecs = false;
+            showLeggTil = false;
             btnVisKurv.setText("Tilbake");
+            btnLeggTil.setText("Fjern komponent");
+            btnVisSpecs.setText("Vis spesifikasjoner");
             labelViser.setText("Viser varene i din handlekurv");
+
+            btnSubmit.setVisible(false);
+            txtSubmit.setVisible(false);
+
+            txtSubmit.setText("");
         }else{
             btnVisKurv.setText("Vis handlekurv");
             showKurv = false;
             defualt(true);
+            btnLeggTil.setText("Legg til komponent");
             labelViser.setText("Viser varer");
         }
 
@@ -121,7 +132,90 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     @FXML
     void On_Click_BtnLeggTil(ActionEvent event) {
+        btnSubmit.setVisible(true);
+        txtSubmit.setVisible(true);
+        txtSubmit.setText("");
+        showSpecs = false;
+        btnLeggTil.setText("Tilbake");
 
+        if(!showKurv) {
+            if(!showLeggTil) {
+                showLeggTil = true;
+                txtSubmit.setPromptText("Velg komponent. (ID)");
+                labelError.setText("Husk å velge antall ved å dobbel klikke på varens antall kolonne!");
+
+                defualt(true);
+
+                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        int valgtkomponent;
+
+                        try {
+                            valgtkomponent = Integer.parseInt(txtSubmit.getText());
+                        } catch (Exception e) {
+                            labelError.setText("Vennligst skriv inn en gyldig ID");
+                            valgtkomponent = -1;
+                        }
+
+                        if (valgtkomponent >= 0) {
+                            if (komponenter.getMainArray().get(valgtkomponent).getAntall() > 0) {
+                                boolean funnet = false;
+                                for (int i = 0; i < bruker.getIndividuelleVarer().getMainArray().size(); i++) {
+                                    if (bruker.getIndividuelleVarer().getMainArray().get(i).getNavn().
+                                            equals(komponenter.getMainArray().get(valgtkomponent).getNavn())) {
+                                        funnet = true;
+                                    }
+                                }
+                                if (!funnet) {
+                                    bruker.getIndividuelleVarer().add(komponenter.getMainArray().get(valgtkomponent));
+                                    labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+                                    labelError.setText("Varen har blitt lagt til.");
+                                } else {
+                                    labelError.setText("Kan ikke legge til samme vare flere ganger. vennligst endre antall.");
+                                }
+                            } else {
+                                labelError.setText("Du har ikke valgt et antall av varen!");
+                            }
+                        }
+                    }
+                });
+            }else{
+                showLeggTil = false;
+                btnLeggTil.setText("Legg til handlekurv");
+                btnSubmit.setVisible(false);
+                txtSubmit.setVisible(false);
+            }
+        }else {
+            if (!showLeggTil) {
+                showLeggTil = true;
+                txtSubmit.setPromptText("Velg komponent. (ID)");
+                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        int valgtkomponent;
+                        try {
+                            valgtkomponent = Integer.parseInt(txtSubmit.getText());
+                        } catch (Exception e) {
+                            labelError.setText("Vennligst skriv inn en gyldig ID");
+                            valgtkomponent = -1;
+                        }
+
+                        if (valgtkomponent >= 0) {
+                            bruker.getIndividuelleVarer().remove(valgtkomponent);
+                            labelError.setText("En brukers komponent har blitt fjernet");
+                            labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+                        }
+                    }
+                });
+            }else{
+                showLeggTil = false;
+                btnLeggTil.setText("Fjern en komponent");
+                txtSubmit.setVisible(false);
+                btnSubmit.setVisible(false);
+
+            }
+        }
     }
 
     @FXML
@@ -131,10 +225,16 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     public void visSpesifikasjoner(){
         if (!showSpecs) {
+
+            defualt(true);
             btnSubmit.setVisible(true);
             txtSubmit.setVisible(true);
             showSpecs = true;
+            showKurv = false;
             btnVisSpecs.setText("Tilbake");
+            btnLeggTil.setText("Legg til komponent");
+            btnVisKurv.setText("Vis handldekurv");
+
 
             txtSubmit.setText("");
             txtSubmit.setPromptText("Velg komponent. (ID)");
@@ -196,7 +296,11 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         }else{
             defualt(true);
             choice.setDisable(false);
+            btnVisSpecs.setText("Vis spesifikasjoner");
+            showSpecs = false;
 
+            btnSubmit.setVisible(false);
+            txtSubmit.setVisible(false);
         }
     }
 
@@ -262,6 +366,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             public void handle(TableColumn.CellEditEvent<Komponent, Integer> event) {
                 if(event.getNewValue() > 0){
                     event.getRowValue().setAntall(event.getNewValue());
+                    labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
                 }
             }
         });
