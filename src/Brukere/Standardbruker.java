@@ -7,11 +7,14 @@ import komponenter.*;
 public class Standardbruker extends Bruker {
     private final SimpleDoubleProperty sum;
     private Komponenter handlekurv;
+    private Komponenter individuelleVarer;
     private static final SimpleBooleanProperty ADMIN = new SimpleBooleanProperty(false);
+    private int antallKjøp;
 
     public Standardbruker() {
         sum = new SimpleDoubleProperty(0);
         handlekurv = new Komponenter();
+        individuelleVarer = new Komponenter();
     }
 
     public String getBrukernavn() {
@@ -30,12 +33,27 @@ public class Standardbruker extends Bruker {
         return handlekurv;
     }
 
+    public Komponenter getIndividuelleVarer() {
+        return individuelleVarer;
+    }
+
+    public int getAntallKjøp(){
+        return antallKjøp;
+    }
     public String getTlf() {
         return super.getTlf();
     }
 
     public double getSum() {
         return sum.getValue();
+    }
+
+    public double getIndividuellevarerSum(){
+        double s = 0;
+        for(int i = 0; i < individuelleVarer.getMainArray().size(); i++){
+            s += individuelleVarer.getMainArray().get(i).getPris();
+        }
+        return s;
     }
 
     public boolean isAdmin() {
@@ -54,8 +72,16 @@ public class Standardbruker extends Bruker {
         super.setEmail(email);
     }
 
+    public void setAntallKjøp(int antallKjøp){
+        this.antallKjøp = antallKjøp;
+    }
+
     public void setHandlekurv(Komponenter handlekurv) {
         this.handlekurv = handlekurv;
+    }
+
+    public void setIndividuelleVarer(Komponenter individuelleVarer) {
+        this.individuelleVarer = individuelleVarer;
     }
 
     public void setTlf(String tlf) throws InvalidStringException {
@@ -92,6 +118,8 @@ public class Standardbruker extends Bruker {
     }
 
     public String toStringFormat() {
-        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";" + handlekurv.getMainArray().size() + ";" + handlekurv.toStringTxt();
+        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";" + antallKjøp + ";" + handlekurv.getMainArray().size() + ";" + handlekurv.toStringTxt();
     }
+
+
 }

@@ -73,6 +73,7 @@ public class FiledataTxt extends Task<Void> {
                 if (!line.isEmpty()) {
                     String[] strings = line.split(";");
                     if (intervaler == 0) {
+                        boolean sjekk = true;
                         boolean Admin = Boolean.parseBoolean(strings[4]);
                         if (Admin) {
                             bruker = new Superbruker();
@@ -87,11 +88,13 @@ public class FiledataTxt extends Task<Void> {
                             bruker.setEmail(strings[2]);
                         } catch (InvalidStringException e) {
                             showMessageDialog(null, e.getMessage());
+                            sjekk = false;
                         }
                         try {
                             bruker.setTlf(strings[3]);
                         } catch (InvalidStringException e) {
                             showMessageDialog(null, e.getMessage());
+                            sjekk = false;
                         }
 
 
@@ -99,18 +102,28 @@ public class FiledataTxt extends Task<Void> {
                             brukere.add(bruker);
                         } else if (!Admin) {
                             //String[5] er sum som ikke trengs for set før brukes
+
+                            int ant;
+
+                            try{
+                                ant = Integer.parseInt(strings[6]);
+                            }catch (Exception e){
+                                ant = -1;
+                                sjekk = false;
+                            }
+
                             try {
-                                intervaler = Integer.parseInt(strings[6]);
+                                intervaler = Integer.parseInt(strings[7]);
                             } catch (Exception e) {
-                                intervaler = 0;
+                                intervaler = -1;
+                                sjekk = false;
                                 //throw new InvalidDataLoadedException("Ugyldig data lagret");
                             }
 
-                            if (intervaler == 0) {
+                            if (intervaler == 0 && sjekk) {
+                                ((Standardbruker)bruker).setAntallKjøp(ant);
                                 brukere.add(bruker);
                             }
-                        } else {
-                            //throw new InvalidDataLoadedException("Ugyldig data lagret");
                         }
                     } else if (intervaler > 0) {
 

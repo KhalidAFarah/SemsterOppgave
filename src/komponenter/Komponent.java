@@ -14,6 +14,7 @@ import java.util.List;
 
 public abstract class Komponent {
     private transient SimpleIntegerProperty ID;
+    private transient SimpleIntegerProperty antall;
     private transient SimpleStringProperty navn;
     private transient SimpleDoubleProperty pris;
     private transient ObservableList<String> specs;
@@ -23,6 +24,7 @@ public abstract class Komponent {
         setNavn(navn);
         setPris(pris);
         setType(type);
+        antall = new SimpleIntegerProperty(0);
 
         specs = FXCollections.observableArrayList();
         for (String s : strings) {
@@ -58,6 +60,10 @@ public abstract class Komponent {
         return ID.getValue();
     }
 
+    public int getAntall() {
+        return antall.getValue();
+    }
+
     public void setNavn(String navn) {
         this.navn = new SimpleStringProperty(navn);
     }
@@ -86,6 +92,10 @@ public abstract class Komponent {
 
     public void setID(int ID) {
         this.ID = new SimpleIntegerProperty(ID);
+    }
+
+    public void setAntall(int antall) {
+        this.antall.setValue(antall);
     }
 
     public abstract String toString();

@@ -2,8 +2,8 @@ package sample;
 
 import Brukere.Register;
 import Brukere.Standardbruker;
-import filbehandling.FiledataJOBJ;
-import filbehandling.FiledataTxt;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,511 +12,316 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import komponenter.Komponent;
 import komponenter.Komponenter;
+import komponenter.Spesifikasjon;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static javax.swing.JOptionPane.showMessageDialog;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Standardbruker_IndividuelleKomponenter_Controller {
+
+    @FXML
+    private AnchorPane mainPane;
+
+    @FXML
+    private TableView tableView;
+
+    @FXML
+    private TableColumn<Komponent, Integer> IDKolonne;
+
+    @FXML
+    private TableColumn<Komponent, String> typeKolonne;
+
+    @FXML
+    private TableColumn<Komponent, Double> prisKolonne;
+
+    @FXML
+    private TableColumn<Komponent, String> navnKolonne;
+
+    @FXML
+    private TableColumn<Komponent, Integer> antallKolonne;
 
     @FXML
     private ImageView img_Techmet;
 
     @FXML
-    private ScrollPane pane;
+    private ImageView img_Background;
 
     @FXML
     private Label labelError;
 
+    @FXML
+    private Button btnVisKurv;
+
+    @FXML
+    private Button btnVisSpecs;
+
+    @FXML
+    private ChoiceBox<String> choice;
+
+    @FXML
+    private TextField txtSøk;
+
+    @FXML
+    private Button btnLeggTil;
+
+    @FXML
+    private Button btnTilbake;
+
+    @FXML
+    private Label labelTotaleSum;
+
+    @FXML
+    private Label labelViser;
+
+    @FXML
+    private TextField txtSubmit;
+
+    @FXML
+    private Button btnSubmit;
+
     private Standardbruker bruker;
-
-    private Komponenter komponenter = new Komponenter();
-
-    private int kompNr;
+    private Standardbruker bruker2 = new Standardbruker();
     private Register brukere;
-    private FiledataTxt lagreTxt;
-    private final Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
+    private Komponenter komponenter;
+    private Komponenter komponenter2 = new Komponenter();
 
-    private void save() {
-        lagreTxt = new FiledataTxt();
-        try {
-            lagreTxt.save(brukere.toStringTxt(), path);
-        } catch (IOException e) {
-            //txtError.setText(e.getMessage());
-            labelError.setText(e.getMessage());
+    private boolean showKurv = false;
+    private boolean showSpecs = false;
+
+    @FXML
+    void On_Click_BtnKurv(ActionEvent event) {
+        if (!showKurv){
+            defualt(false);
+            showKurv = true;
+            btnVisKurv.setText("Tilbake");
+            labelViser.setText("Viser varene i din handlekurv");
+        }else{
+            btnVisKurv.setText("Vis handlekurv");
+            showKurv = false;
+            defualt(true);
+            labelViser.setText("Viser varer");
         }
+
     }
 
-    public void initBruker(Standardbruker bruker, Register brukere, Komponenter komponenter) {
-        this.bruker = bruker;
-        this.brukere = brukere;
-        this.komponenter = komponenter;
+    @FXML
+    void On_Click_BtnLeggTil(ActionEvent event) {
 
-        String fjernet = "Følgende varer ble fjernet fra din handlekurv: \n";
+    }
 
-        boolean fantNoe = false;
+    @FXML
+    void On_Click_BtnSpecs(ActionEvent event) {
+        visSpesifikasjoner();
+    }
 
-        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
-            boolean funnet = false;
-            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                if (bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())) {
-                    funnet = true;
+    public void visSpesifikasjoner(){
+        if (!showSpecs) {
+            btnSubmit.setVisible(true);
+            txtSubmit.setVisible(true);
+            showSpecs = true;
+            btnVisSpecs.setText("Tilbake");
 
+            txtSubmit.setText("");
+            txtSubmit.setPromptText("Velg komponent. (ID)");
+
+            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    int valgtKomponent;
+                    try {
+                        valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                    } catch (Exception e) {
+                        labelError.setText("Vennligst skriv inn en gyldig ID!");
+                        valgtKomponent = -1;
+                    }
+
+                    if (valgtKomponent >= 0) {
+                        labelViser.setText("Viser spesifikasjoner for varen");
+                        tableView.getColumns().clear();
+
+                        TableColumn<Spesifikasjon, String> spesifikasjonKolonne = new TableColumn<>();
+                        spesifikasjonKolonne.setCellValueFactory(new PropertyValueFactory<>("navn2"));
+                        spesifikasjonKolonne.setPrefWidth(tableView.getPrefWidth());
+                        spesifikasjonKolonne.setMinWidth(tableView.getMinWidth());
+                        spesifikasjonKolonne.setMaxWidth(tableView.getMaxWidth());
+
+                        ObservableList<Spesifikasjon> spesifikasjoner = FXCollections.observableArrayList();
+                        ObservableList<Spesifikasjon> spesifikasjoner2 = FXCollections.observableArrayList();
+                        int teller = 0;
+                        for (String s : komponenter.getMainArray().get(valgtKomponent).getSpecs()) {
+                            spesifikasjoner.add(new Spesifikasjon(s, teller));
+                            teller++;
+                        }
+
+                        tableView.getColumns().add(spesifikasjonKolonne);
+                        tableView.setItems(spesifikasjoner);
+
+                        txtSøk.setText("");
+                        txtSøk.setPromptText("søk inn spesifikasjon");
+
+                        choice.setDisable(true);
+
+                        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                            @Override
+                            public void handle(KeyEvent event) {
+                                Predicate<Spesifikasjon> Navn = Spesifikasjon -> {
+                                    boolean sjekk = Spesifikasjon.getNavn2().indexOf(txtSøk.getText()) != -1;
+                                    return sjekk;
+                                };
+
+                                spesifikasjoner2.clear();
+                                spesifikasjoner2.addAll(spesifikasjoner.stream().filter(Navn).collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                                tableView.setItems(spesifikasjoner2);
+                            }
+                        });
+
+                    }
                 }
-            }
-            if (!funnet) {
-                fjernet += bruker.getHandlekurv().getMainArray().get(i).getNavn() + "\n";
-                bruker.getHandlekurv().remove(i);
-                fantNoe = true;
-            }
-        }
-        if (fantNoe) {
-            save();
-            showMessageDialog(null, fjernet);
-        }
-    }
+            });
+        }else{
+            defualt(true);
+            choice.setDisable(false);
 
-    public void loadKomponenter() {
-        FiledataJOBJ filedata = new FiledataJOBJ();
-        Path path = Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
-
-        try {
-            filedata.load(komponenter, path);
-        } catch (Exception e) {
-            labelError.setText(e.getMessage());
         }
-
-        /*FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
-        Viskomponenter_Superbruker_Controller controller = loader.getController();
-        controller.loadKomponenter();*/
     }
 
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
-
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("MellomSide_Standardbruker.fxml"));
+        Parent Standardbruker;
+        boolean value = true;
         try {
-            Parent Standardbruker = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Standardbruker = loader.load();
+        }catch (IOException e) {
+            labelError.setText("Klart ikke å bytte side");
+            Standardbruker = null;
+            value = false;
+        }
+        if(value){
+            MellomSide_Standardbruker_Controller controller = loader.getController();
+            controller.setInfo(brukere, komponenter, bruker);
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(480);
-            Scene_3.setWidth(440);
+            Scene_3.setHeight(350);
+            Scene_3.setWidth(566);
             Scene_3.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-    private void visVarer(String type) {
-        AnchorPane APane = new AnchorPane();
-        int y = 50;
-        ScrollBar sb = new ScrollBar();
-        sb.setLayoutX(50);
-        pane.setContent(APane);
-        if (komponenter != null || bruker != null) {
+    public void start(Standardbruker bruker, Register brukere, Komponenter komponenter){
+        this.bruker = bruker;
+        this.brukere = brukere;
+        this.komponenter = komponenter;
 
-            for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
-                //ImageView img = new ImageView();
-
-                if (komponenter.getMainArray().get(i).getType().equals(type)) {
-
-                    Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
-                    labelNavn.setLayoutY(y);
-                    labelNavn.setLayoutX(10);
-                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
-                    labelPris.setLayoutY(y);
-                    labelPris.setLayoutX(400);
-                    Button btnVelg = new Button("Velg");
-                    btnVelg.setLayoutY(y + 30);
-                    btnVelg.setLayoutX(10);
-                    Button btnVisMer = new Button("Vis spesifikasjoner");
-                    btnVisMer.setLayoutY(y + 30);
-                    btnVisMer.setLayoutX(85);
-
-                    y += 100;
-
-                    btnVelg.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                                if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                    bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
-                                    save();
-                                }
-                            }
-                        }
-                    });
-
-                    btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                                if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                    String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\nPris "
-                                            + komponenter.getMainArray().get(j).getPris();
-                                    String spesifikasjonerText = "";
-                                    for (String s : komponenter.getMainArray().get(j).getSpecs()) {
-                                        spesifikasjonerText += s + "\n";
-                                    }
-
-                                    Label labelInfoHeader = new Label(spesifikasjonerHeader);
-                                    Label labelInfoText = new Label(spesifikasjonerText);
-
-                                    APane.getChildren().clear();
-                                    APane.getChildren().add(labelInfoHeader);
-                                    labelInfoText.setLayoutY(110);
-                                    labelInfoText.setLayoutX(10);
-                                    labelInfoHeader.setStyle("-fx-font-size: 20");
-                                    labelInfoHeader.setLayoutY(10);
-                                    labelInfoHeader.setLayoutX(10);
-                                    APane.getChildren().add(labelInfoText);
-
-                                    Button btnHide = new Button("Skjul spesifikasjoner");
-
-                                    btnHide.setOnAction(new EventHandler<ActionEvent>() {
-                                        @Override
-                                        public void handle(ActionEvent event) {
-                                            visVarer(type);
-                                        }
-                                    });
-                                    btnHide.setLayoutY(70);
-                                    btnHide.setLayoutX(25);
-                                    APane.getChildren().add(btnHide);
+        //sette backgrounden til samme width og height som scenen
 
 
-                                }
-                            }
-                        }
-                    });
+        ObservableList<String> choices = FXCollections.observableArrayList(FXCollections.observableArrayList(
+                "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm", "Operativsystem", "Alle"));
 
+        choice.setItems(choices);
+        //choice.setValue("Velg type");
 
-                    APane.getChildren().add(labelNavn);
-                    APane.getChildren().add(labelPris);
-                    APane.getChildren().add(btnVelg);
-                    APane.getChildren().add(btnVisMer);
+        labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+
+        defualt(true);
+    }
+
+    private void defualt(boolean view){
+        choice.setDisable(false);
+        tableView.setEditable(true);
+
+        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+        antallKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("antall"));
+
+        IntegerStringConverter intStr = new IntegerStringConverter();
+        antallKolonne.setCellFactory(TextFieldTableCell.forTableColumn(intStr));
+
+        antallKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Komponent, Integer> event) {
+                if(event.getNewValue() > 0){
+                    event.getRowValue().setAntall(event.getNewValue());
                 }
             }
-        } else if (komponenter == null || bruker == null) {
-            labelError.setText("Klarte ikke å laste inn komponenter eller brukeren");
+        });
+        tableView.getColumns().clear();
+        tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne, antallKolonne);
+
+        if(view) {
+            tableView.setItems(komponenter.getMainArray());
+        }else{
+            tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
         }
-    }
 
-    private void updateVarer() {
-        AnchorPane APane = new AnchorPane();
-        pane.setContent(APane);
-        //System.out.println(bruker.toStringFormat());
-        int y = 10;
-        if (bruker != null || komponenter != null) {
-            Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
-            Label labelUtAv = new Label(bruker.getHandlekurv().getMainArray().size() + "/8");
-            Label labelMangler = new Label();
-            Button kvittering = new Button("Kjøp varer");
-            kvittering.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
+        choice.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(!choice.getValue().equals("Alle")) {
+                    Predicate<Komponent> type = Komponent -> {
+                        boolean sjekk = Komponent.getType().equals(choice.getValue());
+                        return sjekk;
+                    };
 
-                    if (bruker.getHandlekurv().getMainArray().size() == 8) {
-
-                        APane.getChildren().clear();
-                        Label labelHeader = new Label("Du har kjøpt følgende varer:");
-
-                        Label labelText = new Label();
-                        Label labelPris = new Label();
-
-                        String s = "";
-                        String p = "";
-                        int y = 10;
-                        for (Komponent k : bruker.getHandlekurv().getMainArray()) {
-                            s += k.getNavn() + "\n";
-                            p += k.getPris() + "\n";
-                            y += 60;
-                        }
-                        bruker.setSum();
-                        s += "\nTotalpris: " + bruker.getSum();
-                        y += 60;
-                        labelText.setText(s);
-                        labelPris.setText(p);
-
-
-                        Button avbryt = new Button("Avbryt");
-                        avbryt.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                APane.getChildren().clear();
-                                updateVarer();
-                            }
-                        });
-                        Button skrivUt = new Button("Skriv ut kvittering");
-                        skrivUt.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                DirectoryChooser fc = new DirectoryChooser();
-
-                                File f = fc.showDialog(null);
-                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering.csv");
-                                String s = f.getAbsolutePath();
-                                System.out.println(path.toAbsolutePath().toString());
-
-                                FiledataTxt save = new FiledataTxt();
-                                bruker.setSum();
-                                String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                                String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotalsum" + bruker.getSum();
-                                try {
-                                    save.save(brukerInfo + komponenter, path);
-                                } catch (IOException e) {
-                                    labelError.setText(e.getMessage());
-                                }
-                            }
-                        });
-
-                        APane.getChildren().add(labelHeader);
-                        APane.getChildren().add(labelText);
-                        APane.getChildren().add(labelPris);
-                        APane.getChildren().add(skrivUt);
-                        APane.getChildren().add(avbryt);
-
-                        labelHeader.setLayoutY(10);
-                        labelHeader.setLayoutX(10);
-                        labelHeader.setStyle("-fx-font-size: 25");
-
-                        labelText.setLayoutY(60);
-                        labelText.setLayoutX(10);
-                        labelText.setStyle("-fx-font-size: 17");
-
-                        labelPris.setLayoutY(60);
-                        labelPris.setLayoutX(360);
-                        labelPris.setStyle("-fx-font-size: 20; -fx-text-alignment: right");
-
-                        labelHeader.setPrefWidth(pane.getPrefWidth());
-                        labelText.setPrefWidth(pane.getPrefWidth());
-
-                        skrivUt.setLayoutY(y);
-                        skrivUt.setLayoutX(100);
-                        avbryt.setLayoutY(y);
-                        avbryt.setLayoutX(10);
+                    if (view) {
+                        komponenter2.setMainArray(komponenter.getMainArray().stream().filter(type)
+                                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                        tableView.setItems(komponenter2.getMainArray());
                     } else {
-                        labelError.setText("Du må velge en komponent av hver type!");
+                        bruker2.getIndividuelleVarer().setMainArray(bruker.getHandlekurv().getMainArray().stream().filter(type)
+                                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                        tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
                     }
-                }
-            });
-            for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
-                Label labelNavn = new Label(bruker.getHandlekurv().getMainArray().get(i).getNavn());
-                labelNavn.setLayoutY(y);
-                labelNavn.setLayoutX(10);
-                Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " kr");
-                labelPris.setLayoutY(y);
-                labelPris.setLayoutX(400);
-                Button btnFjern = new Button("Fjern");
-                btnFjern.setLayoutY(y + 30);
-                btnFjern.setLayoutX(10);
-                Button btnVisMer = new Button("Vis spesifikasjoner");
-                btnVisMer.setLayoutY(y + 30);
-                btnVisMer.setLayoutX(80);
-
-
-                y += 80;
-
-                btnFjern.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
-                            if (bruker.getHandlekurv().getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                bruker.getHandlekurv().remove(j);
-                            }
-                        }
-                        bruker.setSum();
-                        updateVarer();
-                        save();
-                    }
-                });
-                btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
-                            if (bruker.getHandlekurv().getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
-                                String spesifikasjonerHeader = bruker.getHandlekurv().getMainArray().get(j).getNavn() + "\nPris "
-                                        + bruker.getHandlekurv().getMainArray().get(j).getPris();
-                                String spesifikasjonerText = "";
-                                for (String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()) {
-                                    spesifikasjonerText += s + "\n";
-                                }
-
-
-                                Label labelInfoHeader = new Label(spesifikasjonerHeader);
-                                Label labelInfoText = new Label(spesifikasjonerText);
-
-                                APane.getChildren().clear();
-                                APane.getChildren().add(labelInfoHeader);
-                                labelInfoText.setLayoutY(110);
-                                labelInfoText.setLayoutX(10);
-                                labelInfoHeader.setStyle("-fx-font-size: 20");
-                                labelInfoHeader.setLayoutY(10);
-                                labelInfoHeader.setLayoutX(10);
-                                APane.getChildren().add(labelInfoText);
-
-                                Button btnHide = new Button("Skjul spesifikasjoner");
-
-                                btnHide.setOnAction(new EventHandler<ActionEvent>() {
-                                    @Override
-                                    public void handle(ActionEvent event) {
-                                        updateVarer();
-                                    }
-                                });
-                                btnHide.setLayoutY(70);
-                                btnHide.setLayoutX(25);
-                                APane.getChildren().add(btnHide);
-
-
-                            }
-                        }
-                    }
-                });
-
-                APane.getChildren().add(labelNavn);
-                APane.getChildren().add(btnFjern);
-                APane.getChildren().add(labelPris);
-                APane.getChildren().add(btnVisMer);
-
-            }
-            labelTotalPris.setLayoutY(y + 10);
-            labelTotalPris.setLayoutX(200);
-            labelTotalPris.setStyle("-fx-padding: 10");
-            APane.getChildren().add(labelTotalPris);
-
-            kvittering.setLayoutY(y + 60);
-            kvittering.setLayoutX(200);
-            kvittering.setStyle("-fx-padding: 10");
-            APane.getChildren().add(kvittering);
-
-            labelUtAv.setLayoutY(y + 10);
-            labelUtAv.setLayoutX(100);
-            labelUtAv.setStyle("-fx-padding: 10");
-            APane.getChildren().add(labelUtAv);
-
-            String typer = "";
-            boolean first = false;
-            for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
-                boolean funnet = false;
-                int komponentNr = 0;
-                for (int i = 0; i < Komponenter.getTyper2().length; i++) {
-                    if (!funnet) {
-                        komponentNr = i;
-                    }
-                    if (bruker.getHandlekurv().getMainArray().get(j).getClass().equals(Komponenter
-                            .getTyper2()[i].getClass())) {
-                        funnet = true;
-                    }
-                }
-
-                if (funnet == false && first == false) {
-                    typer = "Du mangler følgende typer komponenter:\n";
-                    typer += "En " + bruker.getHandlekurv().getMainArray().get(j).getType();
-                    first = true;
-                } else if (funnet == false && first == true) {
-                    typer += ", " + bruker.getHandlekurv().getMainArray().get(j).getType();
                 }
             }
+        });
 
-
-            labelMangler.setText(typer);
-
-            labelMangler.setLayoutY(y + 60);
-            labelMangler.setLayoutX(100);
-            labelMangler.setStyle("-fx-padding: 10");
-            APane.getChildren().add(labelMangler);
-
-        } else if (bruker == null || komponenter == null) {
-            labelError.setText("Klarte ikke å laste inn brukeren eller komponenter");
-        }
+        søk(view);
     }
 
-    @FXML
-    void On_Click_BtnKurv(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-        if (bruker.getHandlekurv().getMainArray().size() > 0) {
-            labelError.setText("");
-            updateVarer();
-        } else {
-            labelError.setText("Handlekurven din er tom.");
-        }
-
-    }
-
-    @FXML
-    void On_Click_Btn_Grafikkort(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Skjermkort");
-    }
-
-    @FXML
-    void On_Click_Btn_Harddisk(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Harddisk");
-    }
-
-    @FXML
-    void On_Click_Btn_Minnebrikke(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Minne");
-    }
-
-    @FXML
-    void On_Click_Btn_Mus(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Mus");
-    }
-
-    @FXML
-    void On_Click_Btn_Prosessor(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Prosessor");
-    }
-
-    @FXML
-    void On_Click_Btn_Skjerm(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Skjerm");
-    }
-
-    @FXML
-    void On_Click_Btn_Tastatur(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Tastatur");
-    }
-
-    @FXML
-    void On_Click_Btn_Operativsystem(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
-        visVarer("Operativsystem");
+    public void søk(boolean view){
+        txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                Predicate<Komponent> Navn = Komponent -> {
+                    if (!choice.getValue().equals("Velg type") || choice.getValue() == null) {
+                        boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1
+                                && choice.getValue().equals(Komponent.getType());
+                        return sjekk;
+                    }
+                    boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                    return sjekk;
+                };
+                if(view) {
+                    komponenter2.setMainArray(komponenter.getMainArray().stream().filter(Navn)
+                            .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                    tableView.setItems(komponenter2.getMainArray());
+                }else{
+                    bruker2.getIndividuelleVarer().setMainArray(bruker.getHandlekurv().getMainArray().stream().filter(Navn)
+                            .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                    tableView.setItems(bruker2.getIndividuelleVarer().getMainArray());
+                }
+            }
+        });
     }
 }
