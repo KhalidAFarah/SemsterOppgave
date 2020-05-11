@@ -113,16 +113,26 @@ public class Standardbruker_FerdigByggetPc_Controller {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("MellomSide_Standardbruker.fxml"));
+        Parent Standardbruker;
+        boolean value = true;
         try {
-            Parent Standardbruker = FXMLLoader.load(getClass().getResource("MellomSide_Standardbruker.fxml"));
+            Standardbruker = loader.load();
+        }catch (IOException e) {
+            labelError.setText("Klart ikke å bytte side");
+            Standardbruker = null;
+            value = false;
+        }
+        if(value){
+            MellomSide_Standardbruker_Controller controller = loader.getController();
+            controller.setInfo(brukere, komponenter, bruker);
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
             Scene_3.setHeight(350);
             Scene_3.setWidth(566);
             Scene_3.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -221,6 +231,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
     }
 
     private void updateVarer() {
+        labelError.setText("Du må velge en vare fra hver komponent type for å kunne kjøpe pc-en");
         AnchorPane APane = new AnchorPane();
         pane.setContent(APane);
         //System.out.println(bruker.toStringFormat());
@@ -314,7 +325,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         avbryt.setLayoutY(y);
                         avbryt.setLayoutX(10);
                     } else {
-                        labelError.setText("Du må velge en komponent av hver type!");
+                        labelError.setText("Du har ennå ikke valgt en type av hver komponent og kan derfor ikke fullføre kjøpet!");
                     }
                 }
             });

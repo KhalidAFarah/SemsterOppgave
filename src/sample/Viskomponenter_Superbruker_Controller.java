@@ -25,7 +25,6 @@ import static javax.swing.JOptionPane.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -430,36 +429,42 @@ public class Viskomponenter_Superbruker_Controller {
                             public void handle(ActionEvent event) {
                                 String[] specs = txtSpecs.getText().split("\n");
                                 double pris;
+                                boolean sjekk = true;
                                 try {
                                     pris = Double.parseDouble(txtPris.getText());
                                 } catch (Exception e) {
                                     pris = 0;
+                                    sjekk = false;
+                                    txtPris.setText("");
+                                    txtPris.setPromptText("Vennligst skriv inn gyldige verdier!");
                                 }
-                                if (choice.getValue().equals("Prosessor")) {//spesifikke attributter går inn i if eller else if setningene
-                                    Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
-                                    if (komponenter.add(pro)) {
-                                        System.out.println("funker");
-                                    } else {
-                                        System.out.println("Noe er galt");
+                                if (sjekk){
+                                    if (choice.getValue().equals("Prosessor")){//spesifikke attributter går inn i if eller else if setningene
+                                        Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
+                                        if (komponenter.add(pro)){
+                                            System.out.println("funker");
+                                        } else {
+                                            System.out.println("Noe er galt");
+                                        }
+                                    } else if (choice.getValue().equals("Skjermkort")){
+                                        komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
+                                    } else if (choice.getValue().equals("Minne")){
+                                        komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
+                                    } else if (choice.getValue().equals("Harddisk")){
+                                        komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
+                                    } else if (choice.getValue().equals("Tastatur")){
+                                        komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
+                                    } else if (choice.getValue().equals("Mus")){
+                                        komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
+                                    } else if (choice.getValue().equals("Skjerm")){
+                                        komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
+                                    } else if (choice.getValue().equals("Operativsystem")){
+                                        komponenter.add(new Operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
                                     }
-                                } else if (choice.getValue().equals("Skjermkort")) {
-                                    komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
-                                } else if (choice.getValue().equals("Minne")) {
-                                    komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
-                                } else if (choice.getValue().equals("Harddisk")) {
-                                    komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
-                                } else if (choice.getValue().equals("Tastatur")) {
-                                    komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
-                                } else if (choice.getValue().equals("Mus")) {
-                                    komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
-                                } else if (choice.getValue().equals("Skjerm")){
-                                    komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                                }else if (choice.getValue().equals("Operativsystem")) {
-                                    komponenter.add(new Operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
+                                    //deretter lagre Komponenter
+                                    labelError.setText("En komponent har blitt lagt til!");
+                                    saveKomponenter();
                                 }
-                                //deretter lagre Komponenter
-                                labelError.setText("En komponent har blitt lagt til!");
-                                saveKomponenter();
                             }
                         });
                     }

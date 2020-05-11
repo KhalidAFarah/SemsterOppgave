@@ -9,90 +9,75 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0"
-            prefWidth="687.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_FerdigByggetPc_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="687.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_FerdigByggetPc_Controller">
     <children>
         <ImageView fitHeight="410.0" fitWidth="694.0" layoutX="-9.0" layoutY="-8.0">
             <image>
-                <Image url="@../img/background.jpg"/>
+                <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="btnTilbake" layoutX="246.0" layoutY="332.0" mnemonicParsing="false"
-                onAction="#On_Click_BtnTilbake" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: black;"
-                text="Tilbake" textFill="WHITE">
+        <Button fx:id="btnTilbake" layoutX="246.0" layoutY="332.0" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE">
             <font>
-                <Font name="Verdana Bold" size="14.0"/>
+                <Font name="Verdana Bold" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="56.0" layoutY="74.0" mnemonicParsing="false" onAction="#On_Click_Btn_Prosessor"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Prosessor (CPU)">
+        <Button layoutX="56.0" layoutY="74.0" mnemonicParsing="false" onAction="#On_Click_Btn_Prosessor" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Prosessor (CPU)">
             <font>
-                <Font name="Verdana Bold" size="11.0"/>
+                <Font name="Verdana Bold" size="11.0" />
             </font>
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
         </Button>
-        <Button layoutX="226.0" layoutY="74.0" mnemonicParsing="false" onAction="#On_Click_Btn_Grafikkort"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Grafikkort">
+        <Button layoutX="226.0" layoutY="74.0" mnemonicParsing="false" onAction="#On_Click_Btn_Grafikkort" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Grafikkort">
             <font>
-                <Font name="Verdana Bold" size="14.0"/>
+                <Font name="Verdana Bold" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="56.0" layoutY="250.0" mnemonicParsing="false" onAction="#On_Click_Btn_Minnebrikke"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="RAM&#10;minnebrikke"
-                textAlignment="CENTER">
+        <Button layoutX="56.0" layoutY="250.0" mnemonicParsing="false" onAction="#On_Click_Btn_Minnebrikke" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="RAM&#10;minnebrikke" textAlignment="CENTER">
             <font>
-                <Font name="Verdana Bold" size="12.0"/>
+                <Font name="Verdana Bold" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="56.0" layoutY="165.0" mnemonicParsing="false" onAction="#On_Click_Btn_Harddisk"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Harddisk">
+        <Button layoutX="56.0" layoutY="165.0" mnemonicParsing="false" onAction="#On_Click_Btn_Harddisk" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Harddisk">
             <font>
-                <Font name="Verdana Bold" size="14.0"/>
+                <Font name="Verdana Bold" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="398.0" layoutY="74.0" mnemonicParsing="false" onAction="#On_Click_Btn_Tastatur"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Tastatur">
+        <Button layoutX="398.0" layoutY="74.0" mnemonicParsing="false" onAction="#On_Click_Btn_Tastatur" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Tastatur">
             <font>
-                <Font name="Verdana Bold" size="14.0"/>
+                <Font name="Verdana Bold" size="14.0" />
             </font>
         </Button>
-        <Button layoutX="398.0" layoutY="165.0" mnemonicParsing="false" onAction="#On_Click_Btn_Mus" prefHeight="63.0"
-                prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Mus">
+        <Button layoutX="398.0" layoutY="165.0" mnemonicParsing="false" onAction="#On_Click_Btn_Mus" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Mus">
             <font>
-                <Font name="Verdana Bold" size="17.0"/>
+                <Font name="Verdana Bold" size="17.0" />
             </font>
         </Button>
-        <Button layoutX="225.0" layoutY="165.0" mnemonicParsing="false" onAction="#On_Click_Btn_Skjerm"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Skjerm">
+        <Button layoutX="225.0" layoutY="165.0" mnemonicParsing="false" onAction="#On_Click_Btn_Skjerm" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Skjerm">
             <font>
-                <Font name="Verdana Bold" size="14.0"/>
+                <Font name="Verdana Bold" size="14.0" />
             </font>
         </Button>
         <ImageView fx:id="img_Techmet" fitHeight="152.0" fitWidth="237.0" layoutX="168.0" layoutY="-37.0">
             <image>
-                <Image url="@../img/logo3.png"/>
+                <Image url="@../img/logo3.png" />
             </image>
         </ImageView>
-        <Button fx:id="btnKurv" layoutX="398.0" layoutY="250.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Din handlekurv"
-                textFill="WHITE">
+        <Button fx:id="btnKurv" layoutX="398.0" layoutY="250.0" mnemonicParsing="false" onAction="#On_Click_BtnKurv" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Din handlekurv" textFill="WHITE">
             <font>
-                <Font name="Verdana Bold" size="12.0"/>
+                <Font name="Verdana Bold" size="12.0" />
             </font>
         </Button>
-        <ScrollPane fx:id="pane" layoutX="685.0" layoutY="-15.0" prefHeight="418.0" prefWidth="484.0"/>
-        <Label fx:id="labelError" alignment="CENTER" layoutX="63.0" layoutY="368.0" prefHeight="18.0" prefWidth="474.0">
+        <ScrollPane fx:id="pane" layoutX="685.0" layoutY="-15.0" prefHeight="418.0" prefWidth="484.0" />
+        <Label fx:id="labelError" alignment="CENTER" layoutX="5.0" layoutY="368.0" prefHeight="18.0" prefWidth="582.0" text="Du kan kun velge en vare fra hver type komponent">
             <font>
-                <Font name="Verdana" size="12.0"/>
+                <Font name="Verdana" size="12.0" />
             </font>
         </Label>
-        <Button layoutX="225.0" layoutY="250.0" mnemonicParsing="false" onAction="#On_Click_Btn_Operativsystem"
-                prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Operativsystem">
+        <Button layoutX="225.0" layoutY="250.0" mnemonicParsing="false" onAction="#On_Click_Btn_Operativsystem" prefHeight="63.0" prefWidth="122.0" style="-fx-background-color: #3daee4;" text="Operativsystem">
             <font>
-                <Font name="Verdana Bold" size="11.0"/>
+                <Font name="Verdana Bold" size="11.0" />
             </font>
         </Button>
     </children>

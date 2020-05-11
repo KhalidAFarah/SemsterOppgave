@@ -59,6 +59,8 @@ public class FiledataTxt extends Task<Void> {
                     komp.add(new Mus(navn, pris, type, specs));
                 } else if (type.equals("Skjerm")) {
                     komp.add(new Skjerm(navn, pris, type, specs));
+                }else if (type.equals("Operativsystem")) {
+                    komp.add(new Operativsystem(navn, pris, type, specs));
                 }
             }
         }
@@ -146,6 +148,8 @@ public class FiledataTxt extends Task<Void> {
                                 ((Standardbruker) bruker).leggTilHandlekurv(new Mus(navn, pris, type, specs));
                             } else if (type.equals("Skjerm")) {
                                 ((Standardbruker) bruker).leggTilHandlekurv(new Skjerm(navn, pris, type, specs));
+                            }else if (type.equals("Operativsystem")) {
+                                ((Standardbruker) bruker).leggTilHandlekurv(new Operativsystem(navn, pris, type, specs));
                             }
                             intervaler--;
                             if (intervaler == 0) {
