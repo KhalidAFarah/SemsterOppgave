@@ -104,8 +104,8 @@ public class MellomSide_Standardbruker_Controller {
             Scene Standardbruker_IndividuelleKomponenter = new Scene(Standardbruker_mellomside);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Standardbruker_IndividuelleKomponenter);
-            Scene_1.setHeight(659);
-            Scene_1.setWidth(933);
+            Scene_1.setHeight(710);
+            Scene_1.setWidth(1000);
             Scene_1.show();
         }
     }
