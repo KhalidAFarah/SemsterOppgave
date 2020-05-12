@@ -2,6 +2,7 @@ package sample;
 
 import Brukere.Register;
 import Brukere.Standardbruker;
+import filbehandling.FiledataTxt;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,13 +23,17 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import komponenter.Komponent;
 import komponenter.Komponenter;
 import komponenter.Spesifikasjon;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -216,6 +221,8 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
             }
         }
+
+
     }
 
     @FXML
@@ -338,7 +345,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
 
         ObservableList<String> choices = FXCollections.observableArrayList(FXCollections.observableArrayList(
-                "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm", "Operativsystem", "Alle"));
+                "Alle", "Prosessor", "Skjermkort", "Minne", "Harddisk", "Tastatur", "Mus", "Skjerm", "Operativsystem"));
 
         choice.setItems(choices);
         //choice.setValue("Velg type");
@@ -429,4 +436,6 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             }
         });
     }
+
+
 }

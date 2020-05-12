@@ -240,7 +240,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
             Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
             Label labelUtAv = new Label(bruker.getHandlekurv().getMainArray().size() + "/8");
             Label labelMangler = new Label();
-            Button kvittering = new Button("Kjøp varer");
+            Button kvittering = new Button("Kjøp ferdig konfigurert pc");
             kvittering.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
