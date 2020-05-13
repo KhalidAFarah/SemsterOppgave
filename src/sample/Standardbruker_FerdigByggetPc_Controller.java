@@ -134,7 +134,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(350);
+            Scene_3.setHeight(610);
             Scene_3.setWidth(566);
             Scene_3.show();
         }
