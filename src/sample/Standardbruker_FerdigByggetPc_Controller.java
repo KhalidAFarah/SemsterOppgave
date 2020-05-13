@@ -92,6 +92,8 @@ public class Standardbruker_FerdigByggetPc_Controller {
             save();
             showMessageDialog(null, fjernet);
         }
+
+        visVarer("alle varer");
     }
 
     public void loadKomponenter() {
@@ -142,12 +144,16 @@ public class Standardbruker_FerdigByggetPc_Controller {
         ScrollBar sb = new ScrollBar();
         sb.setLayoutX(50);
         pane.setContent(APane);
+        Label labelViser = new Label("Viser " + type.toLowerCase());
+        labelViser.setLayoutY(10);
+        labelViser.setLayoutX(150);
+        APane.getChildren().add(labelViser);
         if (komponenter != null || bruker != null) {
 
             for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
                 //ImageView img = new ImageView();
 
-                if (komponenter.getMainArray().get(i).getType().equals(type)) {
+                if (komponenter.getMainArray().get(i).getType().equals(type) || type.equals("alle varer")) {
 
                     Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
                     labelNavn.setLayoutY(y);
@@ -238,7 +244,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
         int y = 10;
         if (bruker != null || komponenter != null) {
             Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
-            Label labelUtAv = new Label(bruker.getHandlekurv().getMainArray().size() + "/8");
             Label labelMangler = new Label();
             Button kvittering = new Button("Kjøp varer");
             kvittering.setOnAction(new EventHandler<ActionEvent>() {
@@ -320,9 +325,9 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         labelHeader.setPrefWidth(pane.getPrefWidth());
                         labelText.setPrefWidth(pane.getPrefWidth());
 
-                        skrivUt.setLayoutY(y);
+                        skrivUt.setLayoutY(y - 200);
                         skrivUt.setLayoutX(100);
-                        avbryt.setLayoutY(y);
+                        avbryt.setLayoutY(y - 200);
                         avbryt.setLayoutX(10);
                     } else {
                         labelError.setText("Du har ennå ikke valgt en type av hver komponent og kan derfor ikke fullføre kjøpet!");
@@ -344,7 +349,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                 btnVisMer.setLayoutX(80);
 
 
-                y += 80;
+                y += 100;
 
                 btnFjern.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -409,51 +414,45 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
             }
             labelTotalPris.setLayoutY(y + 10);
-            labelTotalPris.setLayoutX(200);
+            labelTotalPris.setLayoutX(10);
             labelTotalPris.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelTotalPris);
 
-            kvittering.setLayoutY(y + 60);
-            kvittering.setLayoutX(200);
-            kvittering.setStyle("-fx-padding: 10");
-            APane.getChildren().add(kvittering);
-
-            labelUtAv.setLayoutY(y + 10);
-            labelUtAv.setLayoutX(100);
-            labelUtAv.setStyle("-fx-padding: 10");
-            APane.getChildren().add(labelUtAv);
-
             String typer = "";
             boolean first = false;
-            for (int j = 0; j < bruker.getHandlekurv().getMainArray().size(); j++) {
-                boolean funnet = false;
-                int komponentNr = 0;
-                for (int i = 0; i < Komponenter.getTyper2().length; i++) {
-                    if (!funnet) {
-                        komponentNr = i;
-                    }
-                    if (bruker.getHandlekurv().getMainArray().get(j).getClass().equals(Komponenter
-                            .getTyper2()[i].getClass())) {
-                        funnet = true;
+            for (int j = 0; j < Komponenter.getTyper().length; j++) {
+                boolean funnet2 = false;
+                for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
+                    if (bruker.getHandlekurv().getMainArray().get(i).getType().equals(Komponenter
+                            .getTyper()[j])) {
+                        funnet2 = true;
+                        i = bruker.getHandlekurv().getMainArray().size();
                     }
                 }
 
-                if (funnet == false && first == false) {
-                    typer = "Du mangler følgende typer komponenter:\n";
-                    typer += "En " + bruker.getHandlekurv().getMainArray().get(j).getType();
+                if (funnet2 == false && first == false) {
+                    System.out.println("funker");
+                    typer = "Du mangler " + bruker.getHandlekurv().getMainArray().size() + " ut av 8 følgende typer komponenter:\n";
+                    typer += "En " + Komponenter.getTyper()[j];
                     first = true;
-                } else if (funnet == false && first == true) {
-                    typer += ", " + bruker.getHandlekurv().getMainArray().get(j).getType();
+                    y += 60;
+                } else if (funnet2 == false && first == true) {
+                    typer += ", " + Komponenter.getTyper()[j];
                 }
             }
 
 
             labelMangler.setText(typer);
 
-            labelMangler.setLayoutY(y + 60);
-            labelMangler.setLayoutX(100);
+            labelMangler.setLayoutY(y);
+            labelMangler.setLayoutX(10);
             labelMangler.setStyle("-fx-padding: 10");
             APane.getChildren().add(labelMangler);
+
+            kvittering.setLayoutY(y + 60);
+            kvittering.setLayoutX(200);
+            kvittering.setStyle("-fx-padding: 10");
+            APane.getChildren().add(kvittering);
 
         } else if (bruker == null || komponenter == null) {
             labelError.setText("Klarte ikke å laste inn brukeren eller komponenter");
@@ -462,8 +461,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
         if (bruker.getHandlekurv().getMainArray().size() > 0) {
             labelError.setText("");
             updateVarer();
@@ -475,65 +472,41 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
     @FXML
     void On_Click_Btn_Grafikkort(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Skjermkort");
     }
 
     @FXML
     void On_Click_Btn_Harddisk(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Harddisk");
     }
 
     @FXML
     void On_Click_Btn_Minnebrikke(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Minne");
     }
 
     @FXML
     void On_Click_Btn_Mus(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Mus");
     }
 
     @FXML
     void On_Click_Btn_Prosessor(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Prosessor");
     }
 
     @FXML
     void On_Click_Btn_Skjerm(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Skjerm");
     }
 
     @FXML
     void On_Click_Btn_Tastatur(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Tastatur");
     }
 
     @FXML
     void On_Click_Btn_Operativsystem(ActionEvent event) {
-        Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene_3.setWidth(1200);
-
         visVarer("Operativsystem");
     }
 }

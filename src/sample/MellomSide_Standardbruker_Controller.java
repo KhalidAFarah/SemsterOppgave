@@ -76,8 +76,8 @@ public class MellomSide_Standardbruker_Controller {
             Scene Standardbruker_ByggDinEgenPc = new Scene(Standardbruker_mellomside);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Standardbruker_ByggDinEgenPc);
-            Scene_1.setHeight(448);
-            Scene_1.setWidth(618);
+            Scene_1.setHeight(531);
+            Scene_1.setWidth(1200);
             Scene_1.show();
 
         }
