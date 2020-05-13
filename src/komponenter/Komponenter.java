@@ -9,7 +9,9 @@ import java.io.ObjectOutputStream;
 
 public class Komponenter {//lager en main liste for alle typer komponenter
 
-    private static final int TYPER = 7;
+    private static final  String[] typer = {"Prosessor", "Skjermkort", "Minne", "Harddisk"
+            , "Tastatur", "Mus", "Skjerm", "Operativsystem"};
+
     private static final Komponent[] typer2 = {new Prosessor("", 0, ""),
             new Skjermkort("", 0, ""), new Minne("", 0, ""),
             new Harddisk("", 0, ""), new Tastatur("", 0, ""),
@@ -20,6 +22,9 @@ public class Komponenter {//lager en main liste for alle typer komponenter
     //add metoden sorterer dem hver gang
     ObservableList<Komponent> main = FXCollections.observableArrayList();
 
+    public static String[] getTyper() {
+        return typer;
+    }
     public static Komponent[] getTyper2() {
         return typer2;
     }
