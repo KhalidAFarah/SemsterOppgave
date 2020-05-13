@@ -14,63 +14,84 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_IndividuelleKomponenter_Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="692.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.Standardbruker_IndividuelleKomponenter_Controller">
     <children>
-        <TableView fx:id="tableView" layoutX="218.0" layoutY="104.0" minWidth="618.0" prefHeight="539.0" prefWidth="726.0" style="-fx-font-family: Verdana;" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="104.0">
+        <TableView fx:id="tableView" layoutX="218.0" layoutY="104.0" minWidth="618.0" prefHeight="539.0"
+                   prefWidth="726.0" style="-fx-font-family: Verdana;" AnchorPane.bottomAnchor="49.0"
+                   AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="104.0">
             <columns>
-                <TableColumn fx:id="IDKolonne" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="typeKolonne" minWidth="0.0" prefWidth="112.00006103515625" text="Type" />
-                <TableColumn fx:id="prisKolonne" prefWidth="116.7999267578125" text="Pris" />
-                <TableColumn fx:id="navnKolonne" prefWidth="348.79998779296875" text="Produktnavn" />
-            <TableColumn fx:id="antallKolonne" prefWidth="93.60009765625" text="Antall" />
+                <TableColumn fx:id="IDKolonne" prefWidth="75.0" text="ID"/>
+                <TableColumn fx:id="typeKolonne" minWidth="0.0" prefWidth="112.00006103515625" text="Type"/>
+                <TableColumn fx:id="prisKolonne" prefWidth="116.7999267578125" text="Pris"/>
+                <TableColumn fx:id="navnKolonne" prefWidth="348.79998779296875" text="Produktnavn"/>
+                <TableColumn fx:id="antallKolonne" prefWidth="93.60009765625" text="Antall"/>
             </columns>
         </TableView>
-        <ImageView fx:id="img_Techmet" fitHeight="152.0" fitWidth="237.0" layoutX="414.0" layoutY="-29.0" AnchorPane.bottomAnchor="518.0" AnchorPane.leftAnchor="414.0" AnchorPane.rightAnchor="246.0" AnchorPane.topAnchor="-29.0">
+        <ImageView fx:id="img_Techmet" fitHeight="152.0" fitWidth="237.0" layoutX="414.0" layoutY="-29.0"
+                   AnchorPane.bottomAnchor="518.0" AnchorPane.leftAnchor="414.0" AnchorPane.rightAnchor="246.0"
+                   AnchorPane.topAnchor="-29.0">
             <image>
-                <Image url="@../img/logo3.png" />
+                <Image url="@../img/logo3.png"/>
             </image>
         </ImageView>
-        <Label fx:id="labelError" alignment="CENTER" layoutX="125.0" layoutY="626.0" prefHeight="18.0" prefWidth="726.0">
+        <Label fx:id="labelError" alignment="CENTER" layoutX="125.0" layoutY="626.0" prefHeight="18.0"
+               prefWidth="726.0">
             <font>
-                <Font name="Verdana" size="12.0" />
+                <Font name="Verdana" size="12.0"/>
             </font>
         </Label>
-      <GridPane layoutY="145.0" prefHeight="398.0" prefWidth="217.0" AnchorPane.bottomAnchor="116.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="145.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button fx:id="btnVisKurv" mnemonicParsing="false" onAction="#On_Click_BtnKurv" prefHeight="26.0" prefWidth="190.0" text="Vis handlekurv" />
-            <Button fx:id="btnVisSpecs" mnemonicParsing="false" onAction="#On_Click_BtnSpecs" prefHeight="26.0" prefWidth="190.0" text="vis spesifikasjoner" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Søk" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <ChoiceBox fx:id="choice" prefHeight="26.0" prefWidth="190.0" GridPane.rowIndex="6" />
-            <Button fx:id="btnLeggTil" mnemonicParsing="false" onAction="#On_Click_BtnLeggTil" prefHeight="26.0" prefWidth="190.0" text="Legg til handlekurv" GridPane.rowIndex="2" />
-              <Button fx:id="btnTilbake" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE" GridPane.rowIndex="9">
-                  <font>
-                      <Font name="Verdana Bold" size="14.0" />
-                  </font>
-              </Button>
-            <Label fx:id="labelTotaleSum" prefHeight="18.0" prefWidth="190.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-            <TextField fx:id="txtSubmit" maxWidth="190.0" minWidth="190.0" prefHeight="26.0" prefWidth="190.0" visible="false" GridPane.rowIndex="3" />
-            <Button fx:id="btnSubmit" mnemonicParsing="false" prefHeight="26.0" prefWidth="190.0" text="Submit" visible="false" GridPane.rowIndex="4" />
-            <TextField fx:id="txtSøk" maxWidth="190.0" minWidth="190.0" prefHeight="26.0" prefWidth="190.0" promptText="Skriv inn produkt navn" GridPane.rowIndex="7" />
-         </children>
-      </GridPane>
-      <Label fx:id="labelViser" layoutX="488.0" layoutY="66.0" text="Viser varer" AnchorPane.leftAnchor="488.0" AnchorPane.topAnchor="66.0">
-         <font>
-            <Font size="19.0" />
-         </font></Label>
+        <GridPane layoutY="145.0" prefHeight="398.0" prefWidth="217.0" AnchorPane.bottomAnchor="116.0"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="145.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Button fx:id="btnVisKurv" mnemonicParsing="false" onAction="#On_Click_BtnKurv" prefHeight="26.0"
+                        prefWidth="190.0" text="Vis handlekurv"/>
+                <Button fx:id="btnVisSpecs" mnemonicParsing="false" onAction="#On_Click_BtnSpecs" prefHeight="26.0"
+                        prefWidth="190.0" text="vis spesifikasjoner" GridPane.rowIndex="1"/>
+                <Label alignment="CENTER" contentDisplay="CENTER" text="Søk" GridPane.halignment="CENTER"
+                       GridPane.rowIndex="5"/>
+                <ChoiceBox fx:id="choice" prefHeight="26.0" prefWidth="190.0" GridPane.rowIndex="6"/>
+                <Button fx:id="btnLeggTil" mnemonicParsing="false" onAction="#On_Click_BtnLeggTil" prefHeight="26.0"
+                        prefWidth="190.0" text="Legg til handlekurv" GridPane.rowIndex="2"/>
+                <Button fx:id="btnTilbake" mnemonicParsing="false" onAction="#On_Click_BtnTilbake" prefHeight="30.0"
+                        prefWidth="190.0" style="-fx-background-color: black;" text="Tilbake" textFill="WHITE"
+                        GridPane.rowIndex="9">
+                    <font>
+                        <Font name="Verdana Bold" size="14.0"/>
+                    </font>
+                </Button>
+                <Label fx:id="labelTotaleSum" prefHeight="18.0" prefWidth="190.0" GridPane.halignment="CENTER"
+                       GridPane.rowIndex="8"/>
+                <TextField fx:id="txtSubmit" maxWidth="190.0" minWidth="190.0" prefHeight="26.0" prefWidth="190.0"
+                           visible="false" GridPane.rowIndex="3"/>
+                <Button fx:id="btnSubmit" mnemonicParsing="false" prefHeight="26.0" prefWidth="190.0" text="Submit"
+                        visible="false" GridPane.rowIndex="4"/>
+                <TextField fx:id="txtSøk" maxWidth="190.0" minWidth="190.0" prefHeight="26.0" prefWidth="190.0"
+                           promptText="Skriv inn produkt navn" GridPane.rowIndex="7"/>
+            </children>
+        </GridPane>
+        <Label fx:id="labelViser" layoutX="488.0" layoutY="66.0" text="Viser varer" AnchorPane.leftAnchor="488.0"
+               AnchorPane.topAnchor="66.0">
+            <font>
+                <Font size="19.0"/>
+            </font>
+        </Label>
     </children>
 </AnchorPane>
