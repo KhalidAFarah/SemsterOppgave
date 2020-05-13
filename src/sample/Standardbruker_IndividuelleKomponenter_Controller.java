@@ -447,4 +447,6 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     }
 
 
+    public void On_Click_BtnKjøp(ActionEvent event) {
+    }
 }
