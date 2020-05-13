@@ -45,6 +45,13 @@ public class Komponenter {//lager en main liste for alle typer komponenter
         }
         return ut;
     }
+    public String toStringTxtMedAntall() {
+        String ut = "";
+        for (int i = 0; i < main.size(); i++) {
+            ut += "\n" + main.get(i).toStringTxtMedAntall();
+        }
+        return ut;
+    }
 
     public void sort() {
         ObservableList<Komponent> newMain = FXCollections.observableArrayList();

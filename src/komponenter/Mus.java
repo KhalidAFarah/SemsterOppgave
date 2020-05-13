@@ -20,4 +20,12 @@ public class Mus extends Komponent {
         }
         return ut;
     }
+    @Override
+    public String toStringTxtMedAntall() {
+        String ut = getNavn() + ";" + getPris() + ";" + getType() + ";" + getAntall() + ";";
+        for (int i = 0; i < getSpecs().size(); i++) {
+            ut += getSpecs().get(i) + ";";
+        }
+        return ut;
+    }
 }

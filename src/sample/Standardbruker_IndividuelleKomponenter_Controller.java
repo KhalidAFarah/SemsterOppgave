@@ -1,5 +1,7 @@
 package sample;
 
+import Brukere.InvalidDataGivenException;
+import Brukere.InvalidNumberException;
 import Brukere.Register;
 import Brukere.Standardbruker;
 import filbehandling.FiledataTxt;
@@ -26,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import jdk.internal.org.objectweb.asm.Handle;
 import komponenter.Komponent;
 import komponenter.Komponenter;
 import komponenter.Spesifikasjon;
@@ -70,6 +73,9 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     private Label labelError;
 
     @FXML
+    private Button btnKvittering;
+
+    @FXML
     private Button btnVisKurv;
 
     @FXML
@@ -99,6 +105,9 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     @FXML
     private Button btnSubmit;
 
+    @FXML
+    private Button btnKjøp;
+
     private Standardbruker bruker;
     private Standardbruker bruker2 = new Standardbruker();
     private Register brukere;
@@ -113,6 +122,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     void On_Click_BtnKurv(ActionEvent event) {
         if (!showKurv){
             defualt(false);
+
             showKurv = true;
             showSpecs = false;
             showLeggTil = false;
@@ -123,6 +133,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
             btnSubmit.setVisible(false);
             txtSubmit.setVisible(false);
+            btnKjøp.setVisible(true);
 
             txtSubmit.setText("");
         }else{
@@ -144,6 +155,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         btnLeggTil.setText("Tilbake");
 
         if(!showKurv) {
+            btnKjøp.setVisible(false);
             if(!showLeggTil) {
                 showLeggTil = true;
                 txtSubmit.setPromptText("Velg komponent. (ID)");
@@ -231,8 +243,10 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     }
 
     public void visSpesifikasjoner(){
-        if (!showSpecs) {
+        btnKvittering.setVisible(false);
+        btnKjøp.setVisible(false);
 
+        if (!showSpecs) {
             defualt(true);
             btnSubmit.setVisible(true);
             txtSubmit.setVisible(true);
@@ -357,8 +371,10 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     private void defualt(boolean view){
 
+        btnKvittering.setVisible(false);
         choice.setDisable(false);
         tableView.setEditable(true);
+        btnKjøp.setVisible(false);
 
         IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
         navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
@@ -372,10 +388,25 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         antallKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, Integer>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Komponent, Integer> event) {
-                if(event.getNewValue() > 0){
+                boolean sjekk = true;
+                int antall ;
+                try{
+                    antall= event.getNewValue();
+                }catch (InvalidNumberException e){
+                    labelError.setText("Vennligst skriv inn gyldig antall");
+                    sjekk = false;
+                }
+                try{
                     event.getRowValue().setAntall(event.getNewValue());
+                }catch (InvalidNumberException e){
+                    labelError.setText(e.getMessage());
+                    sjekk = false;
+                }
+
+                if(sjekk){
                     labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
                 }
+
             }
         });
         tableView.getColumns().clear();
@@ -448,5 +479,37 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
 
     public void On_Click_BtnKjøp(ActionEvent event) {
+        if(bruker.getIndividuelleVarer().getMainArray().size()>0){
+            btnKvittering.setVisible(true);
+            labelViser.setText("Ditt kjøp er fullført");
+            btnKjøp.setText("Avbryt");
+            btnKvittering.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    DirectoryChooser fc = new DirectoryChooser();
+                    bruker.setAntallKjøp(bruker.getAntallKjøp() +1);
+
+                    File f = fc.showDialog(null);
+                    Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering("+bruker.getAntallKjøp()+").csv");
+                    String s = f.getAbsolutePath();
+
+                    FiledataTxt save = new FiledataTxt();
+                    String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                    String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum" + bruker.getIndividuellevarerSum();
+                    bruker.getIndividuelleVarer().getMainArray().clear();
+
+                    try {
+                        save.save(brukerInfo + komponenter, path);
+                    } catch (IOException e) {
+                        labelError.setText(e.getMessage());
+                    }
+
+                }
+            });
+
+
+        }else{
+            labelError.setText("Du må ha minst en vare for å foreta kjøpet");
+        }
     }
 }
