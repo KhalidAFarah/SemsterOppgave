@@ -5,40 +5,55 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0"
-            prefWidth="447.0" style="-fx-background-color: #F2F2F2;" stylesheets="@style.css"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.MellomSide_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="447.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Controller">
     <children>
-        <Label layoutX="77.0" layoutY="147.0" prefHeight="33.0" prefWidth="294.0"
-               text="Du har nå laget en bruker, vil du nå?">
-            <font>
-                <Font name="Verdana Bold" size="14.0"/>
-            </font>
-        </Label>
-        <Button layoutX="65.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_BtnNyBruker"
-                prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker">
-            <font>
-                <Font name="Verdana" size="13.0"/>
-            </font>
-        </Button>
-        <Button layoutX="245.0" layoutY="190.0" mnemonicParsing="false" onAction="#On_Click_BtnLoggInn"
-                prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Logg inn">
-            <font>
-                <Font name="Verdana" size="14.0"/>
-            </font>
-        </Button>
-        <ImageView fitHeight="141.0" fitWidth="180.0" layoutX="134.0" layoutY="12.0">
+        <ImageView fitHeight="503.0" fitWidth="461.0" layoutX="-7.0" layoutY="-6.0">
             <image>
-                <Image url="@../img/logo1.png"/>
+                <Image url="@../img/background.jpg" />
             </image>
         </ImageView>
         <Label fx:id="lblError" layoutX="113.0" layoutY="271.0" prefHeight="18.0" prefWidth="221.0">
             <font>
-                <Font name="Verdana" size="12.0"/>
+                <Font name="Verdana" size="12.0" />
             </font>
         </Label>
+      <GridPane layoutX="78.0" layoutY="-2.0" prefHeight="350.0" prefWidth="296.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="73.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <ImageView fitHeight="141.0" fitWidth="180.0" GridPane.halignment="CENTER">
+                  <image>
+                      <Image url="@../img/logo1.png" />
+                  </image>
+              </ImageView>
+              <Label prefHeight="30.0" prefWidth="348.0" text="Du har nå laget en bruker, vil du nå?" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <font>
+                      <Font name="Verdana Bold" size="14.0" />
+                  </font>
+              </Label>
+              <Button mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <font>
+                      <Font name="Verdana" size="13.0" />
+                  </font>
+              </Button>
+              <Button mnemonicParsing="false" onAction="#On_Click_BtnLoggInn" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #3daee4;" text="Logg inn" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <font>
+                      <Font name="Verdana" size="14.0" />
+                  </font>
+              </Button>
+         </children>
+      </GridPane>
     </children>
 </AnchorPane>

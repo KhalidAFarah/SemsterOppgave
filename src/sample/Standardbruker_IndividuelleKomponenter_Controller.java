@@ -356,6 +356,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     }
 
     private void defualt(boolean view){
+
         choice.setDisable(false);
         tableView.setEditable(true);
 
@@ -381,6 +382,11 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne, antallKolonne);
 
         if(view) {
+            Komponenter k = new Komponenter();
+            for(int i = 0; i < komponenter.getMainArray().size(); i++){
+                k.add(komponenter.getMainArray().get(i));
+            }
+            komponenter = k;
             tableView.setItems(komponenter.getMainArray());
         }else{
             tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
@@ -395,6 +401,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         return sjekk;
                     };
 
+
                     if (view) {
                         komponenter2.setMainArray(komponenter.getMainArray().stream().filter(type)
                                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));
@@ -404,6 +411,8 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                         tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
                     }
+                }else{
+                    tableView.setItems(komponenter.getMainArray());
                 }
             }
         });
