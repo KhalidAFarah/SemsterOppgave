@@ -548,6 +548,7 @@ public class Viskomponenter_Superbruker_Controller {
             Scene_4.setScene(Mellom_side);
             Scene_4.setHeight(650);
             Scene_4.setWidth(580);
+            Scene_4.centerOnScreen();
             Scene_4.show();
         } catch (IOException e) {
             labelError.setText("Klarte ikke å bytte side");

@@ -112,6 +112,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     private boolean showKurv = false;
     private boolean showSpecs = false;
     private boolean showLeggTil = false;
+    private boolean showFullført = false;
 
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
@@ -147,6 +148,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         txtSubmit.setVisible(true);
         txtSubmit.setText("");
         showSpecs = false;
+        showFullført = false;
         btnLeggTil.setText("Tilbake");
 
         if(!showKurv) {
@@ -247,6 +249,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             txtSubmit.setVisible(true);
             showSpecs = true;
             showKurv = false;
+            showFullført = false;
             btnVisSpecs.setText("Tilbake");
             btnLeggTil.setText("Legg til komponent");
             btnVisKurv.setText("Vis handldekurv");
@@ -341,6 +344,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             Scene_3.setScene(LoggInn);
             Scene_3.setHeight(610);
             Scene_3.setWidth(566);
+            Scene_3.centerOnScreen();
             Scene_3.show();
         }
     }
@@ -475,34 +479,39 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     public void On_Click_BtnKjøp(ActionEvent event) {
         if(bruker.getIndividuelleVarer().getMainArray().size()>0){
-            btnKvittering.setVisible(true);
-            labelViser.setText("Ditt kjøp er fullført");
-            btnKjøp.setText("Avbryt");
-            btnKvittering.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    DirectoryChooser fc = new DirectoryChooser();
-                    bruker.setAntallKjøp(bruker.getAntallKjøp() +1);
+            if(!showFullført) {
+                showFullført = true;
+                btnKvittering.setVisible(true);
+                labelViser.setText("Ditt kjøp er fullført");
+                btnKjøp.setText("Avbryt");
+                btnKvittering.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        DirectoryChooser fc = new DirectoryChooser();
+                        bruker.setAntallKjøp(bruker.getAntallKjøp() + 1);
 
-                    File f = fc.showDialog(null);
-                    Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering("+bruker.getAntallKjøp()+").csv");
-                    String s = f.getAbsolutePath();
+                        File f = fc.showDialog(null);
+                        Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering(" + bruker.getAntallKjøp() + ").csv");
+                        String s = f.getAbsolutePath();
 
-                    FiledataTxt save = new FiledataTxt();
-                    String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                    String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum;" + bruker.getIndividuellevarerSum();
-                    bruker.getIndividuelleVarer().getMainArray().clear();
+                        FiledataTxt save = new FiledataTxt();
+                        String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                        String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum;" + bruker.getIndividuellevarerSum();
+                        bruker.getIndividuelleVarer().getMainArray().clear();
 
-                    try {
-                        save.save(brukerInfo + komponenter, path);
-                    } catch (IOException e) {
-                        labelError.setText(e.getMessage());
+                        try {
+                            save.save(brukerInfo + komponenter, path);
+                        } catch (IOException e) {
+                            labelError.setText(e.getMessage());
+                        }
+
                     }
+                });
 
-                }
-            });
-
-
+            }else{
+                showFullført = false;
+                btnKjøp.setText("Fullfør kjøp");
+            }
         }else{
             labelError.setText("Du må ha minst en vare for å foreta kjøpet");
         }

@@ -136,6 +136,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
             Scene_3.setScene(LoggInn);
             Scene_3.setHeight(610);
             Scene_3.setWidth(566);
+            Scene_3.centerOnScreen();
             Scene_3.show();
         }
     }
@@ -148,8 +149,11 @@ public class Standardbruker_FerdigByggetPc_Controller {
         pane.setContent(APane);
         Label labelViser = new Label("Viser " + type.toLowerCase());
         labelViser.setLayoutY(10);
-        labelViser.setLayoutX(150);
+        labelViser.setLayoutX(200);
+        labelViser.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
         APane.getChildren().add(labelViser);
+
+
         if (komponenter != null || bruker != null) {
 
             for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
@@ -160,14 +164,20 @@ public class Standardbruker_FerdigByggetPc_Controller {
                     Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
                     labelNavn.setLayoutY(y);
                     labelNavn.setLayoutX(10);
+
+                    labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
                     labelPris.setLayoutY(y);
                     labelPris.setLayoutX(400);
+                    labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Button btnVelg = new Button("Velg");
                     btnVelg.setLayoutY(y + 30);
                     btnVelg.setLayoutX(10);
+
+
                     Button btnVisMer = new Button("Vis spesifikasjoner");
                     btnVisMer.setLayoutY(y + 30);
+
                     btnVisMer.setLayoutX(85);
 
                     y += 100;

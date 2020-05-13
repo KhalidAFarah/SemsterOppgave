@@ -52,11 +52,12 @@ public class MellomSide_Controller {
                 Scene_8.setScene(LoggInn);
                 Scene_8.setHeight(480);
                 Scene_8.setWidth(440);
+                Scene_8.centerOnScreen();
                 Scene_8.show();
             }
 
         } else {
-            showMessageDialog(null, "Mangel på data");
+            lblError.setText("Mangel på data");
         }
 
     }
@@ -86,6 +87,7 @@ public class MellomSide_Controller {
             Scene_9.setScene(Register_ny_bruker);
             Scene_9.setHeight(480);
             Scene_9.setWidth(600);
+            Scene_9.centerOnScreen();
             Scene_9.show();
         }
 
