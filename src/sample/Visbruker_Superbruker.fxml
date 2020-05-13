@@ -16,13 +16,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="584.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Visbruker_Superbruker_Controller">
+<AnchorPane prefHeight="584.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Visbruker_Superbruker_Controller">
     <children>
-        <ImageView fitHeight="598.0" fitWidth="914.0" layoutX="-6.0" layoutY="-7.0">
-            <image>
-                <Image url="@../img/background.jpg" />
-            </image>
-        </ImageView>
         <Separator layoutY="67.0" prefHeight="2.0" prefWidth="908.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.39999999999997726" AnchorPane.topAnchor="67.0" />
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="351.0" layoutY="-35.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="350.20000000000005" AnchorPane.topAnchor="-35.0">
             <image>

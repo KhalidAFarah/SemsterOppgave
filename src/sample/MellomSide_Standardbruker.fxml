@@ -10,13 +10,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="557.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Standardbruker_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="557.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MellomSide_Standardbruker_Controller">
     <children>
-        <ImageView fitHeight="610.0" fitWidth="566.0" layoutX="-8.0" layoutY="2.0">
-            <image>
-                <Image url="@../img/background.jpg" />
-            </image>
-        </ImageView>
         <Label fx:id="labelError" layoutX="74.0" layoutY="267.0" prefHeight="18.0" prefWidth="400.0">
             <font>
                 <Font name="Verdana" size="12.0" />

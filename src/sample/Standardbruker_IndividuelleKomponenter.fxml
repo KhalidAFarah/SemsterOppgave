@@ -14,13 +14,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1000.0" style="-fx-background-color: #F2F2F2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_IndividuelleKomponenter_Controller">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_IndividuelleKomponenter_Controller">
     <children>
-        <ImageView fx:id="img_Background" fitHeight="700.0" fitWidth="1002.0" layoutX="-1.0" layoutY="-6.0">
-            <image>
-                <Image url="@../img/background.jpg" />
-            </image>
-        </ImageView>
         <TableView fx:id="tableView" layoutX="218.0" layoutY="104.0" minWidth="618.0" prefHeight="539.0" prefWidth="726.0" style="-fx-font-family: Verdana;" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="104.0">
             <columns>
                 <TableColumn fx:id="IDKolonne" prefWidth="75.0" text="ID" />
