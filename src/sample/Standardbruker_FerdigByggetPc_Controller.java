@@ -2,6 +2,7 @@ package sample;
 
 import Brukere.Register;
 import Brukere.Standardbruker;
+import com.sun.deploy.util.UpdateCheck;
 import com.sun.javafx.scene.control.skin.LabeledText;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.URIParameter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -286,9 +288,10 @@ public class Standardbruker_FerdigByggetPc_Controller {
                             @Override
                             public void handle(ActionEvent event) {
                                 DirectoryChooser fc = new DirectoryChooser();
+                                bruker.setAntallKjøp(bruker.getAntallKjøp() +1);
 
                                 File f = fc.showDialog(null);
-                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering.csv");
+                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering("+bruker.getAntallKjøp()+").csv");
                                 String s = f.getAbsolutePath();
                                 System.out.println(path.toAbsolutePath().toString());
 
@@ -296,6 +299,8 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                 bruker.setSum();
                                 String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
                                 String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotalsum" + bruker.getSum();
+                                bruker.getHandlekurv().getMainArray().clear();
+                                updateVarer();
                                 try {
                                     save.save(brukerInfo + komponenter, path);
                                 } catch (IOException e) {
