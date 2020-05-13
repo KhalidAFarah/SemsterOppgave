@@ -176,165 +176,163 @@ public class Viskomponenter_Superbruker_Controller {
 
     @FXML
     void On_Click_BtnFjernKomponenter(ActionEvent event) {
-        // if (!showFjern) {
-        //slette komponenter
-        System.out.println("fjen");
-        btnRediger.setText("Rediger komponenter");
 
-        txtSubmit.setVisible(true);
-        btnSubmit.setVisible(true);
-        txtSubmit.setText("");
-        txtSubmit.setPromptText("skriv inn ID");
+            btnRediger.setText("Rediger komponenter");
 
-        if (!showSpecs) {
-            btnf.setText("Fjern vare");
-            leggTilKomponenterGrid.setVisible(false);
-
-            if (tableView.isVisible()) {
-
-                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        int valgtKomponent;
-                        try {
-                            valgtKomponent = Integer.parseInt(txtSubmit.getText());
-                        } catch (Exception e) {
-                            labelError.setText("Vennligst skriv inn riktig varens ID");
-                            valgtKomponent = -1;
-                        }
-                        if (valgtKomponent != -1) {
-
-                        /*for(int i = 0; i < Brukere.getArray().size(); i++) {
-                            if (Brukere.getArray().get(i) instanceof Standardbruker) {
-                                for (int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
-                                        .getHandelskurv().getMainArray().size(); j++) {
-
-                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
-                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
-                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
-                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
-                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
-                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
-                                    }
-                                }
-                            }
-                        }*/
-
-
-                            komponenter.remove(valgtKomponent);
-                            komp.setMainArray(komponenter.getMainArray());
-
-                            //tableSøk.setItems(komp.getMainArray());
-                            tableView.setItems(komponenter.getMainArray());
-
-                            saveKomponenter();
-                            labelError.setText("Et komponent har blitt fjernet!");
-                            showRediger = false;
-                            showLeggTil = false;
-                            btnSubmit.setVisible(false);
-                            txtSubmit.setVisible(false);
-
-                        }
-                    }
-                });
-
-                //String melding = showInputDialog(null, "Skriv varens ID");
-            } else {
-                tableView.setVisible(true);
-                labelSøk.setVisible(true);
-                txtSøk.setVisible(true);
-
-                //btnf.setVisible(true);
-                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        //String melding = showInputDialog(null, "Skriv varens ID");
-                        int valgtKomponent;
-                        try {
-                            valgtKomponent = Integer.parseInt(txtSubmit.getText());
-                        } catch (Exception e) {
-                            labelError.setText("Vennligst skriv inn riktig varens ID");
-                            valgtKomponent = -1;
-                        }
-                        if (valgtKomponent != -1) {
-
-                        /*for(int i = 0; i < Brukere.getArray().size(); i++) {
-                            if (Brukere.getArray().get(i) instanceof Standardbruker) {
-                                for (int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
-                                        .getHandelskurv().getMainArray().size(); j++) {
-
-                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
-                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
-                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
-                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
-                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
-                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
-                                    }
-                                }
-                            }
-                        }*/
-
-
-                            komponenter.remove(valgtKomponent);
-                            komp.setMainArray(komponenter.getMainArray());
-
-                            //tableSøk.setItems(komp.getMainArray());
-                            tableView.setItems(komponenter.getMainArray());
-
-                            saveKomponenter();
-                            labelError.setText("Et komponent har blitt fjernet!");
-
-                            showRediger = false;
-                            showLeggTil = false;
-                        }
-                    }
-                });
-            }
-        } else if (showSpecs) {
-            //String spec = showInputDialog("skriv inn spesifikasjonens id");
+            txtSubmit.setVisible(true);
+            btnSubmit.setVisible(true);
             txtSubmit.setText("");
             txtSubmit.setPromptText("skriv inn ID");
+            showRediger = false;
+            showLeggTil = false;
+            btnLeggTil.setText("Legg til komponenter");
+            btnFjern.setText("Tilbake");
 
-            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    int specID;
-                    if (txtSubmit.getText() != null) {
-                        try {
-                            specID = Integer.parseInt(txtSubmit.getText());
-                        } catch (Exception e) {
+            if (!showSpecs) {
+
+
+                    leggTilKomponenterGrid.setVisible(false);
+
+                    if (tableView.isVisible()) {
+
+                        btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                int valgtKomponent;
+                                try {
+                                    valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                                } catch (Exception e) {
+                                    labelError.setText("Vennligst skriv inn riktig varens ID");
+                                    valgtKomponent = -1;
+                                }
+                                if (valgtKomponent != -1) {
+
+                        /*for(int i = 0; i < Brukere.getArray().size(); i++) {
+                            if (Brukere.getArray().get(i) instanceof Standardbruker) {
+                                for (int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
+                                        .getHandelskurv().getMainArray().size(); j++) {
+
+                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
+                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
+                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
+                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
+                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
+                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
+                                    }
+                                }
+                            }
+                        }*/
+
+
+                                    komponenter.remove(valgtKomponent);
+                                    komp.setMainArray(komponenter.getMainArray());
+
+                                    //tableSøk.setItems(komp.getMainArray());
+                                    tableView.setItems(komponenter.getMainArray());
+
+                                    saveKomponenter();
+                                    labelError.setText("Et komponent har blitt fjernet!");
+
+                                    btnSubmit.setVisible(false);
+                                    txtSubmit.setVisible(false);
+
+                                }
+                            }
+                        });
+
+
+                    //String melding = showInputDialog(null, "Skriv varens ID");
+                } else {
+
+                    tableView.setVisible(true);
+                    labelSøk.setVisible(true);
+                    txtSøk.setVisible(true);
+
+                    //btnf.setVisible(true);
+                    btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            //String melding = showInputDialog(null, "Skriv varens ID");
+                            int valgtKomponent;
+                            try {
+                                valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                            } catch (Exception e) {
+                                labelError.setText("Vennligst skriv inn riktig varens ID");
+                                valgtKomponent = -1;
+                            }
+                            if (valgtKomponent != -1) {
+
+                        /*for(int i = 0; i < Brukere.getArray().size(); i++) {
+                            if (Brukere.getArray().get(i) instanceof Standardbruker) {
+                                for (int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
+                                        .getHandelskurv().getMainArray().size(); j++) {
+
+                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
+                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
+                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
+                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
+                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
+                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
+                                    }
+                                }
+                            }
+                        }*/
+
+
+                                komponenter.remove(valgtKomponent);
+                                komp.setMainArray(komponenter.getMainArray());
+
+                                //tableSøk.setItems(komp.getMainArray());
+                                tableView.setItems(komponenter.getMainArray());
+
+                                saveKomponenter();
+                                labelError.setText("Et komponent har blitt fjernet!");
+
+                                showRediger = false;
+                                showLeggTil = false;
+
+                            }
+                        }
+                    });
+                }
+            } else if (showSpecs) {
+                //String spec = showInputDialog("skriv inn spesifikasjonens id");
+                txtSubmit.setText("");
+                txtSubmit.setPromptText("skriv inn ID");
+
+                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        int specID;
+                        if (txtSubmit.getText() != null) {
+                            try {
+                                specID = Integer.parseInt(txtSubmit.getText());
+                            } catch (Exception e) {
+                                labelError.setText("Skriv inn en gyldig id");
+                                specID = -1;
+                            }
+                        } else {
                             labelError.setText("Skriv inn en gyldig id");
                             specID = -1;
                         }
-                    } else {
-                        labelError.setText("Skriv inn en gyldig id");
-                        specID = -1;
-                    }
 
-                    if (specID >= 0) {
-                        komponenter.getMainArray().get(IDs).getSpecs().remove(specID);
-                        tableView.getItems().remove(specID);
+                        if (specID >= 0) {
+                            komponenter.getMainArray().get(IDs).getSpecs().remove(specID);
+                            tableView.getItems().remove(specID);
 
-                        ObservableList<Spesifikasjon> ny = FXCollections.observableArrayList();
+                            ObservableList<Spesifikasjon> ny = FXCollections.observableArrayList();
 
-                        for (int i = 0; i < spesifikasjoner.size(); i++) {
-                            spesifikasjoner.get(i).setID2(i);
+                            for (int i = 0; i < spesifikasjoner.size(); i++) {
+                                spesifikasjoner.get(i).setID2(i);
+                            }
+                            tableView.refresh();
+                            saveKomponenter();
+                            labelError.setText("Et komponent sin spesifikasjon har blitt fjernet!");
                         }
-                        tableView.refresh();
-                        saveKomponenter();
-                        labelError.setText("Et komponent sin spesifikasjon har blitt fjernet!");
                     }
-                }
-            });
+                });
 
-        }
-
-
-        //showFjern = true;
-        //} else if (showFjern) {
-
-        //     showFjern = false;
-        //}
+            }
     }
 
     @FXML
@@ -418,7 +416,7 @@ public class Viskomponenter_Superbruker_Controller {
                 tableView.setVisible(true);
                 labelSøk.setVisible(true);
                 txtSøk.setVisible(true);
-
+                btnLeggTil.setText("Legg til komponenter");
 
                 leggTilKomponenterGrid.setVisible(false);
                 showLeggTil = false;

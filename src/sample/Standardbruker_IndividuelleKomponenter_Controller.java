@@ -14,12 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
@@ -82,7 +77,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     private Button btnVisSpecs;
 
     @FXML
-    private ChoiceBox<String> choice;
+    private ComboBox choice;
 
     @FXML
     private TextField txtSøk;
@@ -495,7 +490,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
                     FiledataTxt save = new FiledataTxt();
                     String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                    String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum" + bruker.getIndividuellevarerSum();
+                    String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum;" + bruker.getIndividuellevarerSum();
                     bruker.getIndividuelleVarer().getMainArray().clear();
 
                     try {
