@@ -159,7 +159,7 @@ public class LoggInn_Controller implements Initializable {
         //load();
         boolean login_successful = false;
 
-        System.out.println(brukere.toStringTxt());
+        //System.out.println(brukere.toStringTxt());
 
         for (int i = 0; i < brukere.getArray().size(); i++) {
             boolean verdi = true;
@@ -167,7 +167,7 @@ public class LoggInn_Controller implements Initializable {
                     && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
                 login_successful = true;
 
-                System.out.println(brukere.getArray().get(i).isAdmin());
+                //System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
 
 

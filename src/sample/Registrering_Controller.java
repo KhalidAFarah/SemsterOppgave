@@ -58,7 +58,7 @@ public class Registrering_Controller {
         try {
             lagreTxt.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
-            labelError.setText(e.getMessage());
+            labelError.setText("Klarte ikke å lagre data");
         }
     }
 
