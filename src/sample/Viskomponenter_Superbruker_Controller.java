@@ -658,8 +658,9 @@ public class Viskomponenter_Superbruker_Controller {
                             , komponenter.getMainArray().get(ID).getSpecs().get(i+1));
                             spesifikasjoner.add(t);
                         }
-                        idSpecKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, Integer>("ID2"));
-                        specNavnKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, String>("navn2"));
+                        idSpecKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, Integer>("ID"));
+                        specNavnKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, String>("navn"));
+                        specVerdiKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, String>("verdi"));
 
 
                         tableView.getColumns().addAll(idSpecKolonne, specNavnKolonne, specVerdiKolonne);
