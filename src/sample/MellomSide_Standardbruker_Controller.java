@@ -30,7 +30,7 @@ public class MellomSide_Standardbruker_Controller {
     void click_btn_Tilbake(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("LoggInn.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/LoggInn.fxml"));
         Parent Avbryt_Standarbruker;
         boolean value_1 = true;
         try {
@@ -56,7 +56,7 @@ public class MellomSide_Standardbruker_Controller {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Standardbruker_FerdigByggetPc.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/Standardbruker_FerdigByggetPc.fxml"));
         Parent Standardbruker_mellomside;
         boolean value_2 = true;
         try {
@@ -83,7 +83,7 @@ public class MellomSide_Standardbruker_Controller {
     @FXML
     void click_btn_individuellekomponenter(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Standardbruker_IndividuelleKomponenter.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/Standardbruker_IndividuelleKomponenter.fxml"));
         Parent Standardbruker_mellomside;
         boolean value_3 = true;
         try {

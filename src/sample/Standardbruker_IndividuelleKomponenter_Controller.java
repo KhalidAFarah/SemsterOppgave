@@ -349,7 +349,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     @FXML
     void On_Click_BtnTilbake(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("MellomSide_Standardbruker.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/MellomSide_Standardbruker.fxml"));
         Parent Standardbruker;
         boolean value = true;
         try {
