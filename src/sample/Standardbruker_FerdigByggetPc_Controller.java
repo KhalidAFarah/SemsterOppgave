@@ -134,8 +134,8 @@ public class Standardbruker_FerdigByggetPc_Controller {
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(610);
-            Scene_3.setWidth(566);
+            Scene_3.setHeight(700);
+            Scene_3.setWidth(420);
             Scene_3.centerOnScreen();
             Scene_3.show();
         }
@@ -168,7 +168,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                     labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
                     labelPris.setLayoutY(y);
-                    labelPris.setLayoutX(400);
+                    labelPris.setLayoutX(500);
                     labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Button btnVelg = new Button("Velg");
                     btnVelg.setLayoutY(y + 30);
@@ -257,6 +257,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
         int y = 10;
         if (bruker != null || komponenter != null) {
             Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
+
             Label labelMangler = new Label();
             Button kvittering = new Button("Kjøp ferdig konfigurert pc");
             kvittering.setOnAction(new EventHandler<ActionEvent>() {
@@ -271,19 +272,22 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         Label labelText = new Label();
                         Label labelPris = new Label();
 
+
                         String s = "";
                         String p = "";
                         int y = 10;
                         for (Komponent k : bruker.getHandlekurv().getMainArray()) {
-                            s += k.getNavn() + "\n";
-                            p += k.getPris() + "\n";
-                            y += 60;
+                            s += k.getNavn() + "\n\n";
+                            p += k.getPris() + "\n\n";
+                            y += 80;
                         }
                         bruker.setSum();
                         s += "\nTotalpris: " + bruker.getSum();
                         y += 60;
                         labelText.setText(s);
                         labelPris.setText(p);
+
+
 
 
                         Button avbryt = new Button("Avbryt");
@@ -328,15 +332,15 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
                         labelHeader.setLayoutY(10);
                         labelHeader.setLayoutX(10);
-                        labelHeader.setStyle("-fx-font-size: 25");
+                        labelHeader.setStyle("-fx-font-size: 20;  -fx-font-family: Verdana");
 
-                        labelText.setLayoutY(60);
+                        labelText.setLayoutY(80);
                         labelText.setLayoutX(10);
-                        labelText.setStyle("-fx-font-size: 17");
+                        labelText.setStyle("-fx-font-size: 16; -fx-font-family: Verdana");
 
                         labelPris.setLayoutY(60);
-                        labelPris.setLayoutX(360);
-                        labelPris.setStyle("-fx-font-size: 20; -fx-text-alignment: right");
+                        labelPris.setLayoutX(500);
+                        labelPris.setStyle("-fx-font-size: 16; -fx-text-alignment: right;  -fx-font-family: Verdana");
 
                         labelHeader.setPrefWidth(pane.getPrefWidth());
                         labelText.setPrefWidth(pane.getPrefWidth());
@@ -346,7 +350,8 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         avbryt.setLayoutY(y - 200);
                         avbryt.setLayoutX(10);
                     } else {
-                        labelError.setText("Du har ennå ikke valgt en type av hver komponent og kan derfor ikke fullføre kjøpet!");
+                        labelError.setText("Du har ennå ikke valgt en type av hver komponent og " + "\n" + " kan derfor ikke fullføre kjøpet!");
+
                     }
                 }
             });
@@ -356,7 +361,10 @@ public class Standardbruker_FerdigByggetPc_Controller {
                 labelNavn.setLayoutX(10);
                 Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " kr");
                 labelPris.setLayoutY(y);
-                labelPris.setLayoutX(400);
+                labelPris.setLayoutX(450);
+                labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
+                labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
+
                 Button btnFjern = new Button("Fjern");
                 btnFjern.setLayoutY(y + 30);
                 btnFjern.setLayoutX(10);
@@ -429,10 +437,13 @@ public class Standardbruker_FerdigByggetPc_Controller {
                 APane.getChildren().add(labelPris);
                 APane.getChildren().add(btnVisMer);
 
+                labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
+                labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
+
             }
             labelTotalPris.setLayoutY(y + 10);
             labelTotalPris.setLayoutX(10);
-            labelTotalPris.setStyle("-fx-padding: 10");
+            labelTotalPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
             APane.getChildren().add(labelTotalPris);
 
             String typer = "";
@@ -463,7 +474,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
             labelMangler.setLayoutY(y);
             labelMangler.setLayoutX(10);
-            labelMangler.setStyle("-fx-padding: 10");
+            labelMangler.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
             APane.getChildren().add(labelMangler);
 
             kvittering.setLayoutY(y + 60);

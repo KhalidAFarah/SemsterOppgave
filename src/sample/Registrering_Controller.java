@@ -89,8 +89,8 @@ public class Registrering_Controller {
             Scene Avbryt_Registrering = new Scene(Avbryt_registrering);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Avbryt_Registrering);
-            Scene_1.setHeight(480);
-            Scene_1.setWidth(440);
+            Scene_1.setHeight(700);
+            Scene_1.setWidth(420);
             Scene_1.centerOnScreen();
             Scene_1.show();
 
@@ -145,8 +145,8 @@ public class Registrering_Controller {
                         Scene MellomSide = new Scene(Registering_ny_Admin);
                         Stage Scene_9 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_9.setScene(MellomSide);
-                        Scene_9.setHeight(380);
-                        Scene_9.setWidth(450);
+                        Scene_9.setHeight(700);
+                        Scene_9.setWidth(420);
                         Scene_9.centerOnScreen();
                         Scene_9.show();
 
@@ -196,8 +196,8 @@ public class Registrering_Controller {
                         Scene MellomSide = new Scene(Registering_ny_Standarbruker);
                         Stage Scene_10 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_10.setScene(MellomSide);
-                        Scene_10.setHeight(380);
-                        Scene_10.setWidth(450);
+                        Scene_10.setHeight(700);
+                        Scene_10.setWidth(420);
                         Scene_10.centerOnScreen();
                         Scene_10.show();
                         save();
