@@ -93,7 +93,7 @@ public class LoggInn_Controller implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                showMessageDialog(null, "Klarte ikke å stoppe tråden");
+                showMessageDialog(null, "Klarte ikke å stoppe tråden!");
             }
         }
     }
@@ -122,7 +122,7 @@ public class LoggInn_Controller implements Initializable {
         btnRegistrer.setDisable(false);
         btnAvslutt.setDisable(false);
 
-        showMessageDialog(null, "Klarte ikke laste inn lagret data");
+        showMessageDialog(null, "Klarte ikke laste inn lagret data!");
     }
 
     private void loadBruker() {
@@ -149,7 +149,7 @@ public class LoggInn_Controller implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                showMessageDialog(null, "Klarte ikke å stoppen tråden");
+                showMessageDialog(null, "Klarte ikke å stoppe tråden!");
             }
         }
     }
@@ -191,6 +191,7 @@ public class LoggInn_Controller implements Initializable {
                         Scene_5.setScene(Standardbruker);
                         Scene_5.setHeight(650);
                         Scene_5.setWidth(580);
+                        Scene_5.centerOnScreen();
                         Scene_5.show();
                     }
                 } else {
@@ -201,13 +202,13 @@ public class LoggInn_Controller implements Initializable {
                     try {
                         Logg_inn = loader.load();
                     } catch (IOException e) {
-                        lblError.setText("Klarer ikke å bytte side");
+                        lblError.setText("Klarer ikke å bytte side!");
                         Logg_inn = null;
                         verdi = false;
                     }
 
                     if (verdi) {
-                        //paserer inn data i standardBruker_Controller
+                        //passerer inn data i standardBruker_Controller
                         MellomSide_Standardbruker_Controller controller = loader.getController();
                         controller.setInfo(brukere, komponenter, (Standardbruker) brukere.getArray().get(i));
 
@@ -216,7 +217,7 @@ public class LoggInn_Controller implements Initializable {
                         Scene_5.setScene(Standarbruker);
                         Scene_5.setHeight(610);
                         Scene_5.setWidth(566);
-
+                        Scene_5.centerOnScreen();
                         Scene_5.show();
 
                     }
@@ -239,7 +240,7 @@ public class LoggInn_Controller implements Initializable {
         try {
             Logg_inn = loader.load();
         } catch (IOException e) {
-            lblError.setText("klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side!");
             Logg_inn = null;
             value_7 = false;
 
@@ -252,6 +253,7 @@ public class LoggInn_Controller implements Initializable {
             Scene_2.setScene(Register_ny_bruker);
             Scene_2.setHeight(610);
             Scene_2.setWidth(600);
+            Scene_2.centerOnScreen();
             Scene_2.show();
         }
 

@@ -36,7 +36,7 @@
                 </Label>
                 <Button mnemonicParsing="false" onAction="#On_Click_BtnNyBruker" prefHeight="74.0" prefWidth="207.0" style="-fx-background-color: #3daee4;" text="Lage en ny bruker" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                     <font>
-                        <Font name="Verdana" size="13.0" />
+                        <Font name="Verdana" size="14.0" />
                     </font>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#On_Click_BtnLoggInn" prefHeight="74.0" prefWidth="210.0" style="-fx-background-color: #3daee4;" text="Logg inn" GridPane.halignment="CENTER" GridPane.rowIndex="2">
@@ -44,9 +44,9 @@
                         <Font name="Verdana" size="14.0" />
                     </font>
                 </Button>
-              <Label fx:id="lblError" alignment="CENTER" prefHeight="18.0" prefWidth="446.0" GridPane.rowIndex="4">
+              <Label fx:id="lblError" alignment="CENTER" prefHeight="35.0" prefWidth="446.0" GridPane.rowIndex="4">
                   <font>
-                      <Font name="Verdana Bold" size="12.0" />
+                      <Font name="Verdana Bold" size="14.0" />
                   </font>
               </Label>
             </children>
