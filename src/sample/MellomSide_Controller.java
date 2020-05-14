@@ -39,7 +39,7 @@ public class MellomSide_Controller {
             try {
                 MellomSide = loader.load();
             } catch (IOException e) {
-                lblError.setText("Klarte ikke å bytte side");
+                lblError.setText("Klarte ikke å bytte side!");
                 MellomSide = null;
                 value_8 = false;
             }
@@ -58,7 +58,6 @@ public class MellomSide_Controller {
         } else {
             showMessageDialog(null, "Mangel på data");
         }
-
     }
 
     @FXML
@@ -72,13 +71,11 @@ public class MellomSide_Controller {
         try {
             MellomSide = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side!");
             MellomSide = null;
             value_9 = false;
-
         }
         if (value_9) {
-
             Registrering_Controller controller = loader.getController();
             controller.initRegister(brukere);
             Scene Register_ny_bruker = new Scene(MellomSide);
@@ -88,6 +85,5 @@ public class MellomSide_Controller {
             Scene_9.setWidth(600);
             Scene_9.show();
         }
-
     }
 }

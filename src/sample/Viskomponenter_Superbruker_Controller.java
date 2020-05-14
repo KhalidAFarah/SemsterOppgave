@@ -30,8 +30,13 @@ import java.util.stream.Collectors;
 
 public class Viskomponenter_Superbruker_Controller {
 
+<<<<<<< Updated upstream
     @FXML
     private AnchorPane pane;
+=======
+    //@FXML
+    // private AnchorPane pane;
+>>>>>>> Stashed changes
 
     @FXML
     private TableView tableView;
@@ -186,15 +191,32 @@ public class Viskomponenter_Superbruker_Controller {
         //slette komponenter
         btnRediger.setText("Rediger komponenter");
 
+<<<<<<< Updated upstream
+=======
+        btnRediger.setText("Rediger komponenter");
+
+>>>>>>> Stashed changes
         txtSubmit.setVisible(true);
         btnSubmit.setVisible(true);
         txtSubmit.setText("");
         txtSubmit.setPromptText("skriv inn ID");
+<<<<<<< Updated upstream
 
         if (!showSpecs) {
             btnf.setText("Fjern vare");
             leggtilPane.setVisible(false);
             leggtilPane.getChildren().clear();
+=======
+        showRediger = false;
+        showLeggTil = false;
+        btnLeggTil.setText("Legg til komponenter");
+        btnFjern.setText("Tilbake");
+
+        if (!showSpecs) {
+
+
+            leggTilKomponenterGrid.setVisible(false);
+>>>>>>> Stashed changes
 
             if (tableView.isVisible()) {
 
@@ -229,6 +251,7 @@ public class Viskomponenter_Superbruker_Controller {
 
                             komponenter.remove(valgtKomponent);
                             komp.setMainArray(komponenter.getMainArray());
+<<<<<<< Updated upstream
 
                             //tableSøk.setItems(komp.getMainArray());
                             tableView.setItems(komponenter.getMainArray());
@@ -237,6 +260,18 @@ public class Viskomponenter_Superbruker_Controller {
                             labelError.setText("Et komponent har blitt fjernet!");
                             showRediger = false;
                             showLeggTil = false;
+=======
+
+                            //tableSøk.setItems(komp.getMainArray());
+                            tableView.setItems(komponenter.getMainArray());
+
+                            saveKomponenter();
+                            labelError.setText("Et komponent har blitt fjernet!");
+
+                            btnSubmit.setVisible(false);
+                            txtSubmit.setVisible(false);
+
+>>>>>>> Stashed changes
                         }
                     }
                 });
@@ -247,6 +282,16 @@ public class Viskomponenter_Superbruker_Controller {
                 labelSøk.setVisible(true);
                 txtSøk.setVisible(true);
 
+<<<<<<< Updated upstream
+=======
+                //String melding = showInputDialog(null, "Skriv varens ID");
+            } else {
+
+                tableView.setVisible(true);
+                labelSøk.setVisible(true);
+                txtSøk.setVisible(true);
+
+>>>>>>> Stashed changes
                 //btnf.setVisible(true);
                 btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -280,6 +325,7 @@ public class Viskomponenter_Superbruker_Controller {
 
                             komponenter.remove(valgtKomponent);
                             komp.setMainArray(komponenter.getMainArray());
+<<<<<<< Updated upstream
 
                             //tableSøk.setItems(komp.getMainArray());
                             tableView.setItems(komponenter.getMainArray());
@@ -289,6 +335,18 @@ public class Viskomponenter_Superbruker_Controller {
 
                             showRediger = false;
                             showLeggTil = false;
+=======
+
+                            //tableSøk.setItems(komp.getMainArray());
+                            tableView.setItems(komponenter.getMainArray());
+
+                            saveKomponenter();
+                            labelError.setText("Et komponent har blitt fjernet!");
+
+                            showRediger = false;
+                            showLeggTil = false;
+
+>>>>>>> Stashed changes
                         }
                     }
                 });
@@ -331,6 +389,7 @@ public class Viskomponenter_Superbruker_Controller {
             });
 
         }
+<<<<<<< Updated upstream
 
 
         //showFjern = true;
@@ -338,6 +397,8 @@ public class Viskomponenter_Superbruker_Controller {
 
         //     showFjern = false;
         //}
+=======
+>>>>>>> Stashed changes
     }
 
     @FXML
@@ -356,6 +417,18 @@ public class Viskomponenter_Superbruker_Controller {
                 tableView.setVisible(false);
                 txtSøk.setVisible(false);
                 labelSøk.setVisible(false);
+<<<<<<< Updated upstream
+=======
+                leggTilKomponenterGrid.setVisible(true);
+                txtNavn.setText("");
+                txtPris.setText("");
+                txtSpecs.setText("");
+                ObservableList<String> typer = FXCollections.observableArrayList();
+                for (String s : Komponenter.getTyper()) {
+                    typer.add(s);
+                }
+                choice.setItems(typer);
+>>>>>>> Stashed changes
 
 
                 ChoiceBox choice = new ChoiceBox(FXCollections.observableArrayList(
@@ -438,27 +511,27 @@ public class Viskomponenter_Superbruker_Controller {
                                     txtPris.setText("");
                                     txtPris.setPromptText("Vennligst skriv inn gyldige verdier!");
                                 }
-                                if (sjekk){
-                                    if (choice.getValue().equals("Prosessor")){//spesifikke attributter går inn i if eller else if setningene
+                                if (sjekk) {
+                                    if (choice.getValue().equals("Prosessor")) {//spesifikke attributter går inn i if eller else if setningene
                                         Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
-                                        if (komponenter.add(pro)){
+                                        if (komponenter.add(pro)) {
                                             System.out.println("funker");
                                         } else {
                                             System.out.println("Noe er galt");
                                         }
-                                    } else if (choice.getValue().equals("Skjermkort")){
+                                    } else if (choice.getValue().equals("Skjermkort")) {
                                         komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
-                                    } else if (choice.getValue().equals("Minne")){
+                                    } else if (choice.getValue().equals("Minne")) {
                                         komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
-                                    } else if (choice.getValue().equals("Harddisk")){
+                                    } else if (choice.getValue().equals("Harddisk")) {
                                         komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
-                                    } else if (choice.getValue().equals("Tastatur")){
+                                    } else if (choice.getValue().equals("Tastatur")) {
                                         komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
-                                    } else if (choice.getValue().equals("Mus")){
+                                    } else if (choice.getValue().equals("Mus")) {
                                         komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
-                                    } else if (choice.getValue().equals("Skjerm")){
+                                    } else if (choice.getValue().equals("Skjerm")) {
                                         komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                                    } else if (choice.getValue().equals("Operativsystem")){
+                                    } else if (choice.getValue().equals("Operativsystem")) {
                                         komponenter.add(new Operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
                                     }
                                     //deretter lagre Komponenter
@@ -666,7 +739,7 @@ public class Viskomponenter_Superbruker_Controller {
     }
 
     public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
-        if(!showSpecs) {
+        if (!showSpecs) {
             tableView.setVisible(true);
             tableView.setEditable(false);
             txtSøk.setVisible(true);
@@ -746,7 +819,7 @@ public class Viskomponenter_Superbruker_Controller {
                     }
                 }
             });
-        }else{
+        } else {
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
             btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");

@@ -436,7 +436,7 @@ public class Visbruker_Superbruker_Controller {
                         valgtBruker = -1;
                     }
 
-                    if (valgtBruker >= 0 && brukere.getArray().get(valgtBruker) instanceof Standardbruker){
+                    if (valgtBruker >= 0 && brukere.getArray().get(valgtBruker) instanceof Standardbruker) {
                         IDs = valgtBruker;
                         System.out.println("1");
                         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
@@ -466,31 +466,30 @@ public class Visbruker_Superbruker_Controller {
                                     return sjekk;
                                 };
                                 brukere2.setArray(brukere.getArray());
-                                ((Standardbruker)brukere2.getArray().get(IDs)).getHandlekurv().setMainArray
+                                ((Standardbruker) brukere2.getArray().get(IDs)).getHandlekurv().setMainArray
                                         (((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().getMainArray()
-                                        .stream().filter(Navn).collect(Collectors
-                                                .toCollection(FXCollections::observableArrayList)));
+                                                .stream().filter(Navn).collect(Collectors
+                                                        .toCollection(FXCollections::observableArrayList)));
                                 tableView.setItems(((Standardbruker) brukere2.
                                         getArray().get(IDs)).getHandlekurv().getMainArray());
                             }
                         });
 
-                    } else if (valgtBruker >= brukere.getArray().size()){
+                    } else if (valgtBruker >= brukere.getArray().size()) {
                         System.out.println("2");
                         labelError.setText("Vennligst velg en bruker som eksisterer");
-                    } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)){
+                    } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
                         labelError.setText("Vennligst velg en kunde");
                         System.out.println("3");
-                    } else if (valgtBruker < 0){
+                    } else if (valgtBruker < 0) {
                         System.out.println("4");
                         labelError.setText("Vennlist skriv inn en gyldig ID");
                     }
 
 
-
-                        showRediger = false;
-                        showFjern = false;
-                        btnVisKomponenter.setText(" Tilbake ");
+                    showRediger = false;
+                    showFjern = false;
+                    btnVisKomponenter.setText(" Tilbake ");
 
 
                 }
@@ -624,7 +623,7 @@ public class Visbruker_Superbruker_Controller {
             txtSubmit.setText("");
             btnFjernKomponenter.setText("Tilbake");
             showFjernK = true;
-            if(!showKomponenter){
+            if (!showKomponenter) {
                 txtSubmit.setPromptText("Velg bruker. (ID)");
                 btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -637,70 +636,70 @@ public class Visbruker_Superbruker_Controller {
                             valgtBruker = -1;
                         }
 
-                        if (valgtBruker >= 0 && brukere.getArray().get(valgtBruker) instanceof Standardbruker){
+                        if (valgtBruker >= 0 && brukere.getArray().get(valgtBruker) instanceof Standardbruker) {
 
-                                TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-                                TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
-                                TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-                                TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-                                //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
+                            TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
+                            TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
+                            TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
+                            TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
+                            //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
 
-                                IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-                                navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-                                typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-                                prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-                                //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
-                                tableView.getColumns().clear();
-                                tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
-                                tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
-                                        .getHandlekurv().getMainArray());
+                            IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
+                            navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
+                            typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
+                            prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
+                            //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+                            tableView.getColumns().clear();
+                            tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
+                            tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
+                                    .getHandlekurv().getMainArray());
 
-                                IDs = valgtBruker;
-                                txtSubmit.setText("");
-                                txtSubmit.setPromptText("Velg kompoenent. (ID)");
-                                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-                                    @Override
-                                    public void handle(ActionEvent event) {
-                                        int valgtKomponent;
-                                        try {
-                                            valgtKomponent = Integer.parseInt(txtSubmit.getText());
-                                        } catch (Exception e) {
-                                            labelError.setText("Vennligst skriv inn et gyldig tall.");
-                                            valgtKomponent = -1;
-                                        }
-
-                                        if (valgtKomponent >= 0){
-                                            ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv()
-                                                    .remove(valgtKomponent);
-                                            saveBrukere();
-                                            labelError.setText("En brukers komponent har blitt fjernet!");
-                                            tableView.setItems(((Standardbruker) brukere.getArray().get(IDs))
-                                                    .getHandlekurv().getMainArray());
-
-                                            txtSubmit.setText("");
-                                            txtSubmit.setPromptText("Velg komponent. (ID)");
-
-                                        } else {
-                                            labelError.setText("Vennligst velg en kunde!");
-                                        }
+                            IDs = valgtBruker;
+                            txtSubmit.setText("");
+                            txtSubmit.setPromptText("Velg kompoenent. (ID)");
+                            btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent event) {
+                                    int valgtKomponent;
+                                    try {
+                                        valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                                    } catch (Exception e) {
+                                        labelError.setText("Vennligst skriv inn et gyldig tall.");
+                                        valgtKomponent = -1;
                                     }
-                                });
 
-                            } else if (valgtBruker >= brukere.getArray().size()) {
-                                labelError.setText("Vennligst velg en bruker som eksisterer");
-                            } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
-                                labelError.setText("Vennligst velg en kunde");
-                            } else if (valgtBruker < 0) {
-                                labelError.setText("Vennlist skriv inn en gyldig ID");
-                            }
-                            showKomponenter = true;
-                            showRediger = false;
-                            showFjern = false;
-                            btnVisKomponenter.setText(" Tilbake ");
+                                    if (valgtKomponent >= 0) {
+                                        ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv()
+                                                .remove(valgtKomponent);
+                                        saveBrukere();
+                                        labelError.setText("En brukers komponent har blitt fjernet!");
+                                        tableView.setItems(((Standardbruker) brukere.getArray().get(IDs))
+                                                .getHandlekurv().getMainArray());
+
+                                        txtSubmit.setText("");
+                                        txtSubmit.setPromptText("Velg komponent. (ID)");
+
+                                    } else {
+                                        labelError.setText("Vennligst velg en kunde!");
+                                    }
+                                }
+                            });
+
+                        } else if (valgtBruker >= brukere.getArray().size()) {
+                            labelError.setText("Vennligst velg en bruker som eksisterer");
+                        } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
+                            labelError.setText("Vennligst velg en kunde");
+                        } else if (valgtBruker < 0) {
+                            labelError.setText("Vennlist skriv inn en gyldig ID");
+                        }
+                        showKomponenter = true;
+                        showRediger = false;
+                        showFjern = false;
+                        btnVisKomponenter.setText(" Tilbake ");
 
                     }
                 });
-            }else{
+            } else {
                 txtSubmit.setText("");
                 txtSubmit.setPromptText("Velg kompoenent. (ID)");
                 btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
@@ -714,7 +713,7 @@ public class Visbruker_Superbruker_Controller {
                             valgtKomponent = -1;
                         }
 
-                        if (valgtKomponent >= 0 && brukere.getArray().get(IDs) instanceof Standardbruker){
+                        if (valgtKomponent >= 0 && brukere.getArray().get(IDs) instanceof Standardbruker) {
 
                             ((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().remove(valgtKomponent);
                             saveBrukere();

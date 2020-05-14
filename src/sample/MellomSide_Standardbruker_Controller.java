@@ -36,22 +36,18 @@ public class MellomSide_Standardbruker_Controller {
         try {
             Avbryt_Standarbruker = loader.load();
         } catch (IOException e) {
-            labelError.setText("Klarte ikke å gå tilbake til LoggInn siden");
+            labelError.setText("Klarte ikke å gå tilbake til LoggInn siden!");
             Avbryt_Standarbruker = null;
             value_1 = false;
         }
         if (value_1) {
-
             Scene LoggInn = new Scene(Avbryt_Standarbruker);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(LoggInn);
             Scene_1.setHeight(480);
             Scene_1.setWidth(440);
             Scene_1.show();
-
         }
-
-
     }
 
     @FXML
@@ -65,12 +61,11 @@ public class MellomSide_Standardbruker_Controller {
         try {
             Standardbruker_mellomside = loader.load();
         } catch (IOException e) {
-            labelError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden.");
+            labelError.setText("Klarte ikke å bytte til Ferdig-bygd-PC siden!");
             Standardbruker_mellomside = null;
             value_2 = false;
         }
         if (value_2) {
-
             Standardbruker_FerdigByggetPc_Controller controller = loader.getController();
             controller.initBruker(bruker, brukere, komponenter);
             Scene Standardbruker_ByggDinEgenPc = new Scene(Standardbruker_mellomside);
@@ -79,9 +74,7 @@ public class MellomSide_Standardbruker_Controller {
             Scene_1.setHeight(531);
             Scene_1.setWidth(1200);
             Scene_1.show();
-
         }
-
     }
 
     @FXML
@@ -94,7 +87,7 @@ public class MellomSide_Standardbruker_Controller {
             Standardbruker_mellomside = loader.load();
         } catch (IOException e) {
 
-            labelError.setText("Klarte ikke å bytte til individuelle komponenter-siden.");
+            labelError.setText("Klarte ikke å bytte til individuelle komponenter-siden!");
             Standardbruker_mellomside = null;
             value_3 = false;
         }
@@ -115,5 +108,4 @@ public class MellomSide_Standardbruker_Controller {
         brukere = r;
         bruker = b;
     }
-
 }

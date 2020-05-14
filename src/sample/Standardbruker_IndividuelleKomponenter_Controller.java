@@ -111,7 +111,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
-        if (!showKurv){
+        if (!showKurv) {
             defualt(false);
             showKurv = true;
             showSpecs = false;
@@ -125,7 +125,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             txtSubmit.setVisible(false);
 
             txtSubmit.setText("");
-        }else{
+        } else {
             btnVisKurv.setText("Vis handlekurv");
             showKurv = false;
             defualt(true);
@@ -143,11 +143,17 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         showSpecs = false;
         btnLeggTil.setText("Tilbake");
 
+<<<<<<< Updated upstream
         if(!showKurv) {
             if(!showLeggTil) {
+=======
+        if (!showKurv) {
+            btnKjøp.setVisible(false);
+            if (!showLeggTil) {
+>>>>>>> Stashed changes
                 showLeggTil = true;
                 txtSubmit.setPromptText("Velg komponent. (ID)");
-                labelError.setText("Husk å velge antall ved å dobbel klikke på varens antall kolonne!");
+                labelError.setText("Husk å velge antall ved å dobbelklikke på varens antall kolonne!");
 
                 defualt(true);
 
@@ -174,10 +180,10 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                 }
                                 if (!funnet) {
                                     bruker.getIndividuelleVarer().add(komponenter.getMainArray().get(valgtkomponent));
-                                    labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+                                    labelTotaleSum.setText("Totalpris: " + bruker.getIndividuellevarerSum());
                                     labelError.setText("Varen har blitt lagt til.");
                                 } else {
-                                    labelError.setText("Kan ikke legge til samme vare flere ganger. vennligst endre antall.");
+                                    labelError.setText("Kan ikke legge til samme vare flere ganger. Vennligst endre antall.");
                                 }
                             } else {
                                 labelError.setText("Du har ikke valgt et antall av varen!");
@@ -185,13 +191,13 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         }
                     }
                 });
-            }else{
+            } else {
                 showLeggTil = false;
                 btnLeggTil.setText("Legg til handlekurv");
                 btnSubmit.setVisible(false);
                 txtSubmit.setVisible(false);
             }
-        }else {
+        } else {
             if (!showLeggTil) {
                 showLeggTil = true;
                 txtSubmit.setPromptText("Velg komponent. (ID)");
@@ -209,11 +215,11 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         if (valgtkomponent >= 0) {
                             bruker.getIndividuelleVarer().remove(valgtkomponent);
                             labelError.setText("En brukers komponent har blitt fjernet");
-                            labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+                            labelTotaleSum.setText("Totalpris: " + bruker.getIndividuellevarerSum());
                         }
                     }
                 });
-            }else{
+            } else {
                 showLeggTil = false;
                 btnLeggTil.setText("Fjern en komponent");
                 txtSubmit.setVisible(false);
@@ -230,7 +236,14 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         visSpesifikasjoner();
     }
 
+<<<<<<< Updated upstream
     public void visSpesifikasjoner(){
+=======
+    public void visSpesifikasjoner() {
+        btnKvittering.setVisible(false);
+        btnKjøp.setVisible(false);
+
+>>>>>>> Stashed changes
         if (!showSpecs) {
 
             defualt(true);
@@ -279,7 +292,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         tableView.setItems(spesifikasjoner);
 
                         txtSøk.setText("");
-                        txtSøk.setPromptText("søk inn spesifikasjon");
+                        txtSøk.setPromptText("Søk inn spesifikasjon");
 
                         choice.setDisable(true);
 
@@ -300,7 +313,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                     }
                 }
             });
-        }else{
+        } else {
             defualt(true);
             choice.setDisable(false);
             btnVisSpecs.setText("Vis spesifikasjoner");
@@ -319,12 +332,12 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         boolean value = true;
         try {
             Standardbruker = loader.load();
-        }catch (IOException e) {
-            labelError.setText("Klart ikke å bytte side");
+        } catch (IOException e) {
+            labelError.setText("Klarte ikke å bytte side!");
             Standardbruker = null;
             value = false;
         }
-        if(value){
+        if (value) {
             MellomSide_Standardbruker_Controller controller = loader.getController();
             controller.setInfo(brukere, komponenter, bruker);
             Scene LoggInn = new Scene(Standardbruker);
@@ -336,7 +349,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         }
     }
 
-    public void start(Standardbruker bruker, Register brukere, Komponenter komponenter){
+    public void start(Standardbruker bruker, Register brukere, Komponenter komponenter) {
         this.bruker = bruker;
         this.brukere = brukere;
         this.komponenter = komponenter;
@@ -350,12 +363,12 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         choice.setItems(choices);
         //choice.setValue("Velg type");
 
-        labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+        labelTotaleSum.setText("Totalpris: " + bruker.getIndividuellevarerSum());
 
         defualt(true);
     }
 
-    private void defualt(boolean view){
+    private void defualt(boolean view) {
 
         choice.setDisable(false);
         tableView.setEditable(true);
@@ -372,30 +385,50 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         antallKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, Integer>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<Komponent, Integer> event) {
+<<<<<<< Updated upstream
                 if(event.getNewValue() > 0){
                     event.getRowValue().setAntall(event.getNewValue());
                     labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+=======
+                boolean sjekk = true;
+                int antall;
+                try {
+                    antall = event.getNewValue();
+                } catch (InvalidNumberException e) {
+                    labelError.setText("Vennligst skriv inn gyldig antall");
+                    sjekk = false;
+                }
+                try {
+                    event.getRowValue().setAntall(event.getNewValue());
+                } catch (InvalidNumberException e) {
+                    labelError.setText(e.getMessage());
+                    sjekk = false;
+                }
+
+                if (sjekk) {
+                    labelTotaleSum.setText("Totalpris: " + bruker.getIndividuellevarerSum());
+>>>>>>> Stashed changes
                 }
             }
         });
         tableView.getColumns().clear();
         tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne, antallKolonne);
 
-        if(view) {
+        if (view) {
             Komponenter k = new Komponenter();
-            for(int i = 0; i < komponenter.getMainArray().size(); i++){
+            for (int i = 0; i < komponenter.getMainArray().size(); i++) {
                 k.add(komponenter.getMainArray().get(i));
             }
             komponenter = k;
             tableView.setItems(komponenter.getMainArray());
-        }else{
+        } else {
             tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
         }
 
         choice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(!choice.getValue().equals("Alle")) {
+                if (!choice.getValue().equals("Alle")) {
                     Predicate<Komponent> type = Komponent -> {
                         boolean sjekk = Komponent.getType().equals(choice.getValue());
                         return sjekk;
@@ -411,7 +444,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                         tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
                     }
-                }else{
+                } else {
                     tableView.setItems(komponenter.getMainArray());
                 }
             }
@@ -420,7 +453,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         søk(view);
     }
 
-    public void søk(boolean view){
+    public void søk(boolean view) {
         txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -433,11 +466,11 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                     boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
                     return sjekk;
                 };
-                if(view) {
+                if (view) {
                     komponenter2.setMainArray(komponenter.getMainArray().stream().filter(Navn)
                             .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                     tableView.setItems(komponenter2.getMainArray());
-                }else{
+                } else {
                     bruker2.getIndividuelleVarer().setMainArray(bruker.getHandlekurv().getMainArray().stream().filter(Navn)
                             .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                     tableView.setItems(bruker2.getIndividuelleVarer().getMainArray());
@@ -447,4 +480,46 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     }
 
 
+<<<<<<< Updated upstream
+=======
+    public void On_Click_BtnKjøp(ActionEvent event) {
+        if (bruker.getIndividuelleVarer().getMainArray().size() > 0) {
+            if (!showFullført) {
+                showFullført = true;
+                btnKvittering.setVisible(true);
+                labelViser.setText("Ditt kjøp er fullført.");
+                btnKjøp.setText("Avbryt");
+                btnKvittering.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        DirectoryChooser fc = new DirectoryChooser();
+                        bruker.setAntallKjøp(bruker.getAntallKjøp() + 1);
+
+                        File f = fc.showDialog(null);
+                        Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering(" + bruker.getAntallKjøp() + ").csv");
+                        String s = f.getAbsolutePath();
+
+                        FiledataTxt save = new FiledataTxt();
+                        String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                        String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum;" + bruker.getIndividuellevarerSum();
+                        bruker.getIndividuelleVarer().getMainArray().clear();
+
+                        try {
+                            save.save(brukerInfo + komponenter, path);
+                        } catch (IOException e) {
+                            labelError.setText(e.getMessage());
+                        }
+
+                    }
+                });
+
+            } else {
+                showFullført = false;
+                btnKjøp.setText("Fullfør kjøp");
+            }
+        } else {
+            labelError.setText("Du må ha minst en vare for å foreta kjøpet");
+        }
+    }
+>>>>>>> Stashed changes
 }

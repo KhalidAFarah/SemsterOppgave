@@ -37,7 +37,7 @@ public class Mellom_side_SuperbrukerController {
         try {
             Mellom_side_superbruker = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side!");
             Mellom_side_superbruker = null;
             value_2 = false;
 
@@ -68,7 +68,7 @@ public class Mellom_side_SuperbrukerController {
         try {
             Mellom_side_Superbruker = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side!");
             Mellom_side_Superbruker = null;
             value_4 = false;
 
@@ -100,7 +100,7 @@ public class Mellom_side_SuperbrukerController {
         try {
             Superbruker = loader.load();
         } catch (IOException e) {
-            lblError.setText("Klarte ikke å bytte side");
+            lblError.setText("Klarte ikke å bytte side!");
             Superbruker = null;
             value_3 = false;
 
