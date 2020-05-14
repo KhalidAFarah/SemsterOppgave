@@ -44,8 +44,8 @@ public class MellomSide_Standardbruker_Controller {
             Scene LoggInn = new Scene(Avbryt_Standarbruker);
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(LoggInn);
-            Scene_1.setHeight(480);
-            Scene_1.setWidth(440);
+            Scene_1.setHeight(700);
+            Scene_1.setWidth(420);
             Scene_1.centerOnScreen();
             Scene_1.show();
         }
@@ -73,8 +73,8 @@ public class MellomSide_Standardbruker_Controller {
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Standardbruker_ByggDinEgenPc);
             Scene_1.centerOnScreen();
-            Scene_1.setHeight(531);
-            Scene_1.setWidth(1200);
+            Scene_1.setHeight(650);
+            Scene_1.setWidth(1500);
             Scene_1.centerOnScreen();
             Scene_1.show();
         }

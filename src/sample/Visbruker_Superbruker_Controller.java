@@ -401,40 +401,7 @@ public class Visbruker_Superbruker_Controller {
 
                 }
             });
-            /*int valgtBruker;
-            try {
-                valgtBruker = Integer.parseInt(ID);
-            } catch (Exception e) {
-                valgtBruker = -1;
-            }
 
-            if (valgtBruker >= 0 &&
-                    brukere.getArray().get(valgtBruker) instanceof Standardbruker &&
-                    valgtBruker < brukere.getArray().size()) {
-
-
-                TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-                TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
-                TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-                TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-                //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
-
-                IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-                navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-                typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-                prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-                //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
-                tableView.getColumns().clear();
-                tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
-                tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
-                        .getHandlekurv().getMainArray());
-            } else if (valgtBruker >= brukere.getArray().size()) {
-                LabelError.setText("Vennligst velg en bruker som eksisterer");
-            } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
-                LabelError.setText("Vennligst velg en kunde");
-            } else if (valgtBruker < 0) {
-                LabelError.setText("Vennlist skriv inn en gyldig ID");
-            }*/
             showKomponenter = true;
             showRediger = false;
             showFjern = false;
@@ -498,8 +465,8 @@ public class Visbruker_Superbruker_Controller {
             Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(Mellom_side);
-            Scene_4.setHeight(650);
-            Scene_4.setWidth(580);
+            Scene_4.setHeight(700);
+            Scene_4.setWidth(420);
             Scene_4.centerOnScreen();
             Scene_4.show();
         } catch (IOException e) {
