@@ -1,5 +1,6 @@
 package komponenter;
 
+import Brukere.InvalidNumberException;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -94,13 +95,18 @@ public abstract class Komponent {
         this.ID = new SimpleIntegerProperty(ID);
     }
 
-    public void setAntall(int antall) {
-        this.antall.setValue(antall);
+    public void setAntall(int antall) throws InvalidNumberException {
+        if(antall > 0)
+            this.antall.setValue(antall);
+        else{
+            throw new InvalidNumberException("Vennligst velg et antall over 0");
+        }
     }
 
     public abstract String toString();
 
     public abstract String toStringTxt();
+    public abstract String toStringTxtMedAntall();
 
     /*public abstract void writeObject(ObjectOutputStream stream) throws IOException;
     public abstract <T extends Komponent> T readObject(ObjectInputStream stream) throws IOException;*/

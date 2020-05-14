@@ -154,6 +154,7 @@ public class Registrering_Controller {
             Scene_1.setScene(Avbryt_Registrering);
             Scene_1.setHeight(480);
             Scene_1.setWidth(440);
+            Scene_1.centerOnScreen();
             Scene_1.show();
 
         }
@@ -210,6 +211,7 @@ public class Registrering_Controller {
                         Scene_9.setHeight(380);
                         Scene_9.setWidth(450);
                         Scene_9.show();
+                        Scene_9.centerOnScreen();
                         save(); //se her på problemet med size på fxml vinduet *
                     }
                 }

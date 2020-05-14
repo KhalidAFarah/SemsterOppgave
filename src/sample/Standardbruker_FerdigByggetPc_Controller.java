@@ -123,19 +123,20 @@ public class Standardbruker_FerdigByggetPc_Controller {
         boolean value = true;
         try {
             Standardbruker = loader.load();
-        } catch (IOException e) {
-            labelError.setText("Klarte ikke å bytte side!");
+        }catch (IOException e) {
+            labelError.setText("Klart ikke å bytte side");
             Standardbruker = null;
             value = false;
         }
-        if (value) {
+        if(value){
             MellomSide_Standardbruker_Controller controller = loader.getController();
             controller.setInfo(brukere, komponenter, bruker);
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(350);
+            Scene_3.setHeight(610);
             Scene_3.setWidth(566);
+            Scene_3.centerOnScreen();
             Scene_3.show();
         }
     }
@@ -148,8 +149,11 @@ public class Standardbruker_FerdigByggetPc_Controller {
         pane.setContent(APane);
         Label labelViser = new Label("Viser " + type.toLowerCase());
         labelViser.setLayoutY(10);
-        labelViser.setLayoutX(150);
+        labelViser.setLayoutX(200);
+        labelViser.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
         APane.getChildren().add(labelViser);
+
+
         if (komponenter != null || bruker != null) {
 
             for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
@@ -160,20 +164,20 @@ public class Standardbruker_FerdigByggetPc_Controller {
                     Label labelNavn = new Label(komponenter.getMainArray().get(i).getNavn());
                     labelNavn.setLayoutY(y);
                     labelNavn.setLayoutX(10);
-<<<<<<< Updated upstream
-                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
-=======
 
                     labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
-                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " kr");
->>>>>>> Stashed changes
+                    Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
                     labelPris.setLayoutY(y);
                     labelPris.setLayoutX(400);
+                    labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Button btnVelg = new Button("Velg");
                     btnVelg.setLayoutY(y + 30);
                     btnVelg.setLayoutX(10);
+
+
                     Button btnVisMer = new Button("Vis spesifikasjoner");
                     btnVisMer.setLayoutY(y + 30);
+
                     btnVisMer.setLayoutX(85);
 
                     y += 100;
@@ -240,7 +244,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                 }
             }
         } else if (komponenter == null || bruker == null) {
-            labelError.setText("Klarte ikke å laste inn komponenter eller brukeren!");
+            labelError.setText("Klarte ikke å laste inn komponenter eller brukeren");
         }
     }
 
@@ -294,10 +298,10 @@ public class Standardbruker_FerdigByggetPc_Controller {
                             @Override
                             public void handle(ActionEvent event) {
                                 DirectoryChooser fc = new DirectoryChooser();
-                                bruker.setAntallKjøp(bruker.getAntallKjøp() + 1);
+                                bruker.setAntallKjøp(bruker.getAntallKjøp() +1);
 
                                 File f = fc.showDialog(null);
-                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering(" + bruker.getAntallKjøp() + ").csv");
+                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering("+bruker.getAntallKjøp()+").csv");
                                 String s = f.getAbsolutePath();
                                 System.out.println(path.toAbsolutePath().toString());
 
@@ -443,7 +447,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
                 if (funnet2 == false && first == false) {
                     System.out.println("funker");
-                    typer = "Du mangler " + bruker.getHandlekurv().getMainArray().size() + " av 8 følgende typer komponenter:\n";
+                    typer = "Du mangler " + bruker.getHandlekurv().getMainArray().size() + " ut av 8 følgende typer komponenter:\n";
                     typer += "En " + Komponenter.getTyper()[j];
                     first = true;
                     y += 60;
@@ -466,7 +470,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
             APane.getChildren().add(kvittering);
 
         } else if (bruker == null || komponenter == null) {
-            labelError.setText("Klarte ikke å laste inn brukeren eller komponenter!");
+            labelError.setText("Klarte ikke å laste inn brukeren eller komponenter");
         }
     }
 
