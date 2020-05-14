@@ -20,14 +20,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import jdk.internal.org.objectweb.asm.Handle;
 import komponenter.Komponent;
 import komponenter.Komponenter;
-import komponenter.Prosessor;
 import komponenter.Spesifikasjon;
 
 import java.io.File;
@@ -104,24 +102,6 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     @FXML
     private Button btnKjøp;
-
-    @FXML
-    private GridPane gridSøk1;
-
-    @FXML
-    private GridPane gridSøk2;
-
-    @FXML
-    private GridPane gridSøk3;
-
-    @FXML
-    private Label labelChoice1;
-
-    @FXML
-    private Label labelChoice2;
-
-    @FXML
-    private Label labelChoice3;
 
     private Standardbruker bruker;
     private Standardbruker bruker2 = new Standardbruker();
@@ -445,7 +425,6 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         choice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                avansertSøkVisible(true);
                 if(!choice.getValue().equals("Alle")) {
                     Predicate<Komponent> type = Komponent -> {
                         boolean sjekk = Komponent.getType().equals(choice.getValue());
@@ -538,101 +517,4 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             labelError.setText("Du må ha minst en vare for å foreta kjøpet");
         }
     }
-
-    @FXML
-    public void avansertSøk(ActionEvent event){
-        bareEn();
-
-
-        if(choice.getValue().equals("Prosessor")){
-            Predicate<Komponent> Navn = Komponent -> {
-                int antallKjerner;
-                for (int i = 0; i < Komponent.getSpecs().size(); i += 2){
-                    if(Komponent.getSpecs().get(i).equals("Antall kjerner")){
-                        try{
-                            antallKjerner = Integer.parseInt(Komponent.getSpecs().get(i+1));
-                        }catch(Exception e){
-                            labelError.setText("det skjedde en feil med søket");
-                        }
-                    }
-                }
-
-                boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
-                return sjekk;
-            };
-
-                komponenter2.setMainArray(komponenter.getMainArray().stream().filter(Navn)
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                tableView.setItems(komponenter2.getMainArray());
-        }
-
-    }
-    public void avansertSøkVisible(boolean visible){
-        if(visible) {
-            if (choice.getValue().equals("Prosessor")) {
-                gridSøk1.setVisible(visible);
-                gridSøk2.setVisible(visible);
-            }
-            gridSøk3.setVisible(!visible);
-        }
-
-        labelChoice1.setVisible(visible);
-        labelChoice2.setVisible(visible);
-        labelChoice3.setVisible(visible);
-    }
-
-    public void bareEn(){
-        for(int i = 0; i < gridSøk1.getChildren().size(); i++){
-            if(gridSøk1.getChildren().get(i) instanceof CheckBox && ((CheckBox)gridSøk1.getChildren().get(i)).isSelected()){
-                for(int j = 0; j < gridSøk1.getChildren().size(); j++){
-                    if(i != j){
-                        ((CheckBox) gridSøk1.getChildren().get(j)).setDisable(true);
-                    }
-                }
-            }
-        }
-        for(int i = 0; i < gridSøk2.getChildren().size(); i++){
-            if(gridSøk2.getChildren().get(i) instanceof CheckBox && ((CheckBox)gridSøk2.getChildren().get(i)).isSelected()){
-                for(int j = 0; j < gridSøk2.getChildren().size(); j++){
-                    if(i != j){
-                        ((CheckBox) gridSøk2.getChildren().get(j)).setDisable(true);
-                    }
-                }
-            }
-        }
-        for(int i = 0; i < gridSøk3.getChildren().size(); i++){
-            if(gridSøk3.getChildren().get(i) instanceof CheckBox && ((CheckBox)gridSøk3.getChildren().get(i)).isSelected()){
-                for(int j = 0; j < gridSøk3.getChildren().size(); j++){
-                    if(i != j){
-                        ((CheckBox) gridSøk3.getChildren().get(j)).setDisable(true);
-                    }
-                }
-            }
-        }
-
-    }
-    public void setterNavn(){
-        boolean erCheckBoxes = true;
-        for(int i = 0; i < gridSøk1.getChildren().size(); i++){
-            if(!(gridSøk1.getChildren().get(i) instanceof CheckBox &&
-                    gridSøk2.getChildren().get(i) instanceof CheckBox &&
-                    gridSøk3.getChildren().get(i) instanceof CheckBox)){
-                erCheckBoxes = false;
-            }
-
-        }
-        if(erCheckBoxes) {
-            if (choice.getValue().equals("Prosessor")) {
-                labelChoice1.setText("Antall kjerner");
-                ((CheckBox) gridSøk1.getChildren().get(0)).setText(" > 6");
-                ((CheckBox) gridSøk1.getChildren().get(0)).setText(" mellom 6 og 25");
-                ((CheckBox) gridSøk1.getChildren().get(0)).setText(" > 6");
-                labelChoice2.setText("Cache");
-
-                labelChoice3.setText("Kompatible sokkel");
-            }
-        }
-    }
-
-
 }

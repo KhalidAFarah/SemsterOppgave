@@ -88,6 +88,7 @@ public class Viskomponenter_Superbruker_Controller {
 
     private final TableColumn<Spesifikasjon, Integer> idSpecKolonne = new TableColumn<>("ID");
     private final TableColumn<Spesifikasjon, String> specNavnKolonne = new TableColumn<>("Spesifikasjoner");
+    private final TableColumn<Spesifikasjon, String> specVerdiKolonne = new TableColumn<>("Verdi");
 
     @FXML
     private Label labelSøk;
@@ -323,7 +324,7 @@ public class Viskomponenter_Superbruker_Controller {
                             ObservableList<Spesifikasjon> ny = FXCollections.observableArrayList();
 
                             for (int i = 0; i < spesifikasjoner.size(); i++) {
-                                spesifikasjoner.get(i).setID2(i);
+                                spesifikasjoner.get(i).setID(i);
                             }
                             tableView.refresh();
                             saveKomponenter();
@@ -426,7 +427,7 @@ public class Viskomponenter_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn ID");
+            txtSubmit.setPromptText("");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -507,15 +508,15 @@ public class Viskomponenter_Superbruker_Controller {
                 specNavnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Spesifikasjon, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Spesifikasjon, String> event) {
-                        komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getNavn2());
-                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID2(),
+                        komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getNavn());
+                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID(),
                                 event.getNewValue());
 
                         for (String s : komponenter.getMainArray().get(IDs).getSpecs()) {
                             System.out.println(s);
                         }
 
-                        event.getRowValue().setNavn2(event.getNewValue());
+                        event.getRowValue().setNavn(event.getNewValue());
                         event.getTableView().refresh();
                         saveKomponenter();
                     }
@@ -648,8 +649,9 @@ public class Viskomponenter_Superbruker_Controller {
                         spesifikasjoner = FXCollections.observableArrayList();
                         IDs = ID;
 
-                        for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i++) {
-                            Spesifikasjon t = new Spesifikasjon(komponenter.getMainArray().get(ID).getSpecs().get(i), i);
+                        for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i+=2) {
+                            Spesifikasjon t = new Spesifikasjon(komponenter.getMainArray().get(ID).getSpecs().get(i), i
+                            , komponenter.getMainArray().get(ID).getSpecs().get(i+1));
                             spesifikasjoner.add(t);
                         }
                         idSpecKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, Integer>("ID2"));

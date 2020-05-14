@@ -106,7 +106,7 @@ public class MellomSide_Standardbruker_Controller {
             Stage Scene_1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_1.setScene(Standardbruker_IndividuelleKomponenter);
             Scene_1.setHeight(710);
-            Scene_1.setWidth(1300);
+            Scene_1.setWidth(1100);
             Scene_1.centerOnScreen();
             Scene_1.show();
         }
