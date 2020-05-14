@@ -124,23 +124,6 @@ public class Viskomponenter_Superbruker_Controller {
 
     public void start() {
 
-
-
-
-        /*TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
-        TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
-        TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
-        TableColumn<Komponent, Double> prisKolonne = new TableColumn<>("Pris");
-        //TableColumn<Komponent, String> specsKolonne = new TableColumn<>("Specs");
-
-        IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
-        navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
-        typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
-        prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
-        //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
-
-        tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);*/
-
         IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
         navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
         typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
@@ -208,23 +191,6 @@ public class Viskomponenter_Superbruker_Controller {
                                 }
                                 if (valgtKomponent != -1) {
 
-                        /*for(int i = 0; i < Brukere.getArray().size(); i++) {
-                            if (Brukere.getArray().get(i) instanceof Standardbruker) {
-                                for (int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
-                                        .getHandelskurv().getMainArray().size(); j++) {
-
-                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
-                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
-                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
-                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
-                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
-                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
-                                    }
-                                }
-                            }
-                        }*/
-
-
                                     komponenter.remove(valgtKomponent);
                                     komp.setMainArray(komponenter.getMainArray());
 
@@ -262,23 +228,6 @@ public class Viskomponenter_Superbruker_Controller {
                                 valgtKomponent = -1;
                             }
                             if (valgtKomponent != -1) {
-
-                        /*for(int i = 0; i < Brukere.getArray().size(); i++) {
-                            if (Brukere.getArray().get(i) instanceof Standardbruker) {
-                                for (int j = 0; j < ((Standardbruker) Brukere.getArray().get(i))
-                                        .getHandelskurv().getMainArray().size(); j++) {
-
-                                    //lagre brukere og flytt den til standard bruker controller der brukeren for info om det
-                                    if (((Standardbruker) Brukere.getArray().get(i)).getHandelskurv()
-                                            .getMainArray().get(j).getNavn().equals(komponenter.getMainArray().get(valgtKomponent).getNavn())){
-                                        ((Standardbruker) Brukere.getArray().get(i)).getHandelskurv().remove(j);
-                                        System.out.println("Brukeren" + ((Standardbruker) Brukere.getArray().get(i)).getBrukernavn() + " " +
-                                                komponenter.getMainArray().get(valgtKomponent).getNavn());
-                                    }
-                                }
-                            }
-                        }*/
-
 
                                 komponenter.remove(valgtKomponent);
                                 komp.setMainArray(komponenter.getMainArray());

@@ -66,69 +66,6 @@ public class Registrering_Controller {
         brukere = reg;
     }
 
-    /*private void load() {
-        FiledataTxt lese = new FiledataTxt();
-        Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
-
-        lese.setPathTxt(path);
-        lese.setRegister(brukere);
-
-        txtBrukernavn.setDisable(true);
-        txtPassord.setDisable(true);
-        txtTelefonnummer.setDisable(true);
-        txtEmail.setDisable(true);
-        chxAdmin.setDisable(true);
-        chxStandarbruker.setDisable(true);
-
-
-        lese.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                txtBrukernavn.setDisable(false);
-                txtPassord.setDisable(false);
-                txtTelefonnummer.setDisable(false);
-                txtEmail.setDisable(false);
-                chxAdmin.setDisable(false);
-                chxStandarbruker.setDisable(false);
-            }
-        });
-        lese.setOnFailed(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                txtBrukernavn.setDisable(false);
-                txtPassord.setDisable(false);
-                txtTelefonnummer.setDisable(false);
-                txtEmail.setDisable(false);
-                chxAdmin.setDisable(false);
-                chxStandarbruker.setDisable(false);
-
-                showMessageDialog(null, "Klarte ikke laste inn lagert data");
-            }
-        });
-
-        Thread tr = new Thread(lese);
-        tr.setDaemon(true);
-        tr.start();
-
-        try {
-            tr.sleep(5000);
-        } catch (InterruptedException e) {
-            showMessageDialog(null, "Klarte ikke å stoppen tråden");
-        }
-
-
-
-        /*try {
-            lese.loadBruker(brukere, path);
-        }catch (Exception e){
-            //for nå
-            showMessageDialog(null, "klarte ikke å laste inn data");
-        }
-    }
-    //Done fxml scenes
-     */
-
-
     @FXML
     void onClick_btn_Avbryt(ActionEvent event) {
 
@@ -210,8 +147,9 @@ public class Registrering_Controller {
                         Scene_9.setScene(MellomSide);
                         Scene_9.setHeight(380);
                         Scene_9.setWidth(450);
-                        Scene_9.show();
                         Scene_9.centerOnScreen();
+                        Scene_9.show();
+
                         save(); //se her på problemet med size på fxml vinduet *
                     }
                 }
@@ -260,6 +198,7 @@ public class Registrering_Controller {
                         Scene_10.setScene(MellomSide);
                         Scene_10.setHeight(380);
                         Scene_10.setWidth(450);
+                        Scene_10.centerOnScreen();
                         Scene_10.show();
                         save();
                     }

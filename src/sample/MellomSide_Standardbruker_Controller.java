@@ -46,6 +46,7 @@ public class MellomSide_Standardbruker_Controller {
             Scene_1.setScene(LoggInn);
             Scene_1.setHeight(480);
             Scene_1.setWidth(440);
+            Scene_1.centerOnScreen();
             Scene_1.show();
         }
     }
@@ -74,6 +75,7 @@ public class MellomSide_Standardbruker_Controller {
             Scene_1.centerOnScreen();
             Scene_1.setHeight(531);
             Scene_1.setWidth(1200);
+            Scene_1.centerOnScreen();
             Scene_1.show();
         }
     }
