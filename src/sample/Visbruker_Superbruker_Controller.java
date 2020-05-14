@@ -129,8 +129,6 @@ public class Visbruker_Superbruker_Controller {
             passordKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("passord"));
             tlfKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("tlf"));
             mailKolonne.setCellValueFactory(new PropertyValueFactory<Bruker, String>("email"));
-            //PropertyValueFactory<? extends Bruker, Boolean> sd = new PropertyValueFactory<>("ADMIN");
-            //adminKolonne.setCellValueFactory(sd);
             adminKolonne.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Bruker, Boolean>, ObservableValue<Boolean>>() {
                 @Override
                 public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<Bruker, Boolean> param) {
@@ -138,27 +136,9 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
 
-            /*brukerKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-            passordKolonne.setCellFactory(TextFieldTableCell.forTableColumn());*/
             tlfKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
             mailKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
 
-            /*brukerKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
-                @Override
-                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
-                    event.getRowValue().setBrukernavn(event.getNewValue());
-                    saveBrukere();
-                    brukerKolonne.getTableView().refresh();
-                }
-            });
-            passordKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
-                @Override
-                public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
-                    event.getRowValue().setPassord(event.getNewValue());
-                    saveBrukere();
-                    passordKolonne.getTableView().refresh();
-                }
-            });*/
             tlfKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Bruker, String>>() {
                 @Override
                 public void handle(TableColumn.CellEditEvent<Bruker, String> event) {
@@ -184,9 +164,6 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
 
-
-            //tableView.getColumns().addAll(IDKolonne, brukerKolonne, passordKolonne, tlfKolonne, mailKolonne, adminKolonne);
-            //System.out.println(brukere.toStringTxt());
             tableView.setItems(brukere.getArray());
 
             txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
@@ -203,53 +180,9 @@ public class Visbruker_Superbruker_Controller {
                 }
             });
         } else if (this.brukere == null) {
-            showMessageDialog(null, "Brukere er null.");
+            labelError.setText("Brukere er null.");
         }
     }
-
-    private void succeded(WorkerStateEvent event) {
-        tableView.setDisable(false);
-        btnVisKomponenter.setDisable(false);
-        btnFjern.setDisable(false);
-        btnRediger.setDisable(false);
-        btnTilbake.setDisable(false);
-    }
-
-    private void failed(WorkerStateEvent event) {
-        tableView.setDisable(false);
-        btnVisKomponenter.setDisable(false);
-        btnFjern.setDisable(false);
-        btnRediger.setDisable(false);
-        btnTilbake.setDisable(false);
-
-        showMessageDialog(null, "Klarte ikke å laste inn varer!");
-    }
-
-    /*public void loadKomponenter() {
-        FiledataJOBJ data = new FiledataJOBJ();
-        Path path = (Path) Paths.get("src/filbehandling/LagredeKomponenter.JOBJ");
-
-        data.setKomponent(komponenter);
-        data.setPath((java.nio.file.Path) path);
-
-        data.setOnSucceeded(this::succeded);
-        data.setOnFailed(this::failed);
-
-        tableView.setDisable(true);
-        btnLeggTil.setDisable(true);
-        btnFjern.setDisable(true);
-        btnRediger.setDisable(true);
-        btnTilbake.setDisable(true);
-
-        Thread tr = new Thread(data);
-        tr.start();
-
-        try {
-            tr.sleep(1000);
-        } catch (InterruptedException e) {
-            showMessageDialog(null, "Klarte ikke å stoppe tråden");
-        }
-    }*/
 
     public void saveBrukere() {
         FiledataTxt data = new FiledataTxt();
@@ -258,18 +191,27 @@ public class Visbruker_Superbruker_Controller {
         try {
             data.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
-            showMessageDialog(null, "Klarte ikke å laste inn data");// for nå
+            labelError.setText("Klarte ikke å laste inn data");// for nå
         }
     }
     @FXML
     void On_Click_BtnFjernBruker(ActionEvent event) {
-        if (!showFjern) {
 
+        showRediger = false;
+        showLeggTil = false;
+        showKomponenter = false;
+        showFjernK = false;
+        if (!showFjern) {
+            showFjern = true;
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
             txtSubmit.setPromptText("Skriv inn ID.");
             btnFjern.setText("Tilbake");
+            btnRediger.setText("Rediger brukere");
+            btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
+            btnVisKomponenter.setText("Vis komponenter\ntil en bruker");
+
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -292,27 +234,7 @@ public class Visbruker_Superbruker_Controller {
                     }
                 }
             });
-            /*String melding = showInputDialog(null, "Skriv brukerens ID");
-            int valgtBruker;
-            try {
-                valgtBruker = Integer.parseInt(melding);
-            } catch (Exception e) {
-                showMessageDialog(null, "Vennligst skriv inn riktig brukers ID");
-                valgtBruker = -1;
-            }
-            if (valgtBruker != -1) {
 
-                brukere.remove(valgtBruker);
-                brukere2.setArray(brukere.getArray());
-
-                tableView.setItems(brukere.getArray());
-
-                saveBrukere();
-            }*/
-
-            showFjern = true;
-            showRediger = false;
-            showLeggTil = false;
         } else if (showFjern) {
             leggtilPane.setVisible(false);
             showFjern = false;
@@ -332,6 +254,15 @@ public class Visbruker_Superbruker_Controller {
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
             txtSubmit.setPromptText("Velg bruker. (ID)");
+            btnVisKomponenter.setText("Tilbake");
+            btnRediger.setText("Rediger brukere");
+            btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
+            btnFjern.setText("Fjern bruker");
+            showRediger = false;
+            showFjern = false;
+            showFjernK = false;
+            showKomponenter = true;
+
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -345,7 +276,7 @@ public class Visbruker_Superbruker_Controller {
 
                     if (valgtBruker >= 0 && brukere.getArray().get(valgtBruker) instanceof Standardbruker) {
                         IDs = valgtBruker;
-                        System.out.println("1");
+
                         TableColumn<Komponent, Integer> IDKolonne = new TableColumn<>("ID");
                         TableColumn<Komponent, String> navnKolonne = new TableColumn<>("Produkt navn");
                         TableColumn<Komponent, String> typeKolonne = new TableColumn<>("Type");
@@ -363,49 +294,38 @@ public class Visbruker_Superbruker_Controller {
                                 .getHandlekurv().getMainArray());
                         txtSubmit.setVisible(false);
                         btnSubmit.setVisible(false);
-                        showKomponenter = true;
+
+                        btnVisKomponenter.setText("Vis brukere");
+                        labelError.setText("Brukerens komponenter er visst");
+                        txtSøk.setText("");
+                        txtSøk.setPromptText("søk produktnavn");
+
+                        txtSøk.setVisible(false);/////////////////////////////////////////////////se på det her////////////////////////////////////
+                        labelSøk.setVisible(false);
 
                         txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
                             @Override
                             public void handle(KeyEvent event) {
-                                Predicate<Komponent> Navn = komponent -> {
-                                    boolean sjekk = komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                                Predicate<Komponent> Navn = Komponent -> {
+                                    boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
                                     return sjekk;
                                 };
                                 brukere2.setArray(brukere.getArray());
-                                ((Standardbruker) brukere2.getArray().get(IDs)).getHandlekurv().setMainArray
-                                        (((Standardbruker) brukere.getArray().get(IDs)).getHandlekurv().getMainArray()
-                                                .stream().filter(Navn).collect(Collectors
-                                                        .toCollection(FXCollections::observableArrayList)));
-                                tableView.setItems(((Standardbruker) brukere2.
-                                        getArray().get(IDs)).getHandlekurv().getMainArray());
+                                ((Standardbruker)brukere2.getArray().get(IDs)).getHandlekurv().setMainArray(((Standardbruker)brukere.getArray().get(IDs)).getHandlekurv().getMainArray().stream().filter(Navn)
+                                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                                tableView.setItems(((Standardbruker) brukere2.getArray().get(IDs)).getHandlekurv().getMainArray());
                             }
                         });
 
                     } else if (valgtBruker >= brukere.getArray().size()) {
-                        System.out.println("2");
                         labelError.setText("Vennligst velg en bruker som eksisterer");
                     } else if (!(brukere.getArray().get(valgtBruker) instanceof Standardbruker)) {
                         labelError.setText("Vennligst velg en kunde");
-                        System.out.println("3");
                     } else if (valgtBruker < 0) {
-                        System.out.println("4");
                         labelError.setText("Vennlist skriv inn en gyldig ID");
                     }
-
-
-                    showRediger = false;
-                    showFjern = false;
-                    btnVisKomponenter.setText(" Tilbake ");
-
-
                 }
             });
-
-            showKomponenter = true;
-            showRediger = false;
-            showFjern = false;
-            btnVisKomponenter.setText(" Tilbake ");
         } else if (showKomponenter) {
             showKomponenter = false;
             tableView.getColumns().clear();
@@ -424,8 +344,10 @@ public class Visbruker_Superbruker_Controller {
                     tableView.setItems(brukere2.getArray());
                 }
             });
-            btnRediger.setText("Rediger bruker");
+            btnRediger.setText("Rediger brukere");
             btnVisKomponenter.setText("Vis en brukers\nkomponenter");
+            btnFjern.setText("Fjern bruker");
+            btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
             tableView.setItems(brukere.getArray());
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
@@ -433,6 +355,8 @@ public class Visbruker_Superbruker_Controller {
 
             txtSøk.setText("");
             txtSøk.setPromptText("Skriv inn brukernavn.");
+            txtSøk.setVisible(true);
+            labelSøk.setVisible(true);
 
         }
     }
@@ -445,9 +369,14 @@ public class Visbruker_Superbruker_Controller {
             showRediger = true;
             showLeggTil = false;
             showFjern = false;
+            showFjernK = false;
+            btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
+            btnFjern.setText("Fjern brukere");
+            btnVisKomponenter.setText("Vis komponenter\ntil en bruker");
+            labelError.setText("Du kan kun redigere på telefon nummer og email, ved å klikke på kolonen og deretter trykke enter!");
         } else if (showRediger) {
             tableView.setEditable(false);
-            btnRediger.setText("Rediger bruker");
+            btnRediger.setText("Rediger brukere");
             showRediger = false;
         }
     }
@@ -481,23 +410,18 @@ public class Visbruker_Superbruker_Controller {
 
     public void On_Click_BtnFjernKomponenter(ActionEvent actionEvent) {
 
-        //senere bruke komponenter sin søk
-
-        /*String idBruker = showInputDialog("Skiv inn brukerens ID");
-        int valgtBruker;
-        try {
-            valgtBruker = Integer.parseInt(idBruker);
-        } catch (Exception e) {
-            LabelError.setText("venligst skriv inn et gyldig tall");
-            valgtBruker = -1;
-        }*/
+        showRediger = false;
+        showFjern = false;
 
         if (!showFjernK) {
+            showFjernK = true;
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
             btnFjernKomponenter.setText("Tilbake");
-            showFjernK = true;
+            btnRediger.setText("Rediger bruker");
+            btnFjern.setText("Fjern brukere");
+
             if (!showKomponenter) {
                 txtSubmit.setPromptText("Velg bruker. (ID)");
                 btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
@@ -524,6 +448,9 @@ public class Visbruker_Superbruker_Controller {
                             typeKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("type"));
                             prisKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Double>("pris"));
                             //specsKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("specs"));
+
+                            btnVisKomponenter.setText("Vis bruker");
+                            showKomponenter = true;
                             tableView.getColumns().clear();
                             tableView.getColumns().addAll(IDKolonne, navnKolonne, typeKolonne, prisKolonne);
                             tableView.setItems(((Standardbruker) brukere.getArray().get(valgtBruker))
@@ -554,6 +481,13 @@ public class Visbruker_Superbruker_Controller {
                                         txtSubmit.setText("");
                                         txtSubmit.setPromptText("Velg komponent. (ID)");
 
+                                        txtSubmit.setVisible(false);
+                                        btnSubmit.setVisible(false);
+                                        showFjernK = false;
+
+                                        btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
+
+
                                     } else {
                                         labelError.setText("Vennligst velg en kunde!");
                                     }
@@ -567,16 +501,18 @@ public class Visbruker_Superbruker_Controller {
                         } else if (valgtBruker < 0) {
                             labelError.setText("Vennlist skriv inn en gyldig ID");
                         }
-                        showKomponenter = true;
-                        showRediger = false;
-                        showFjern = false;
                         btnVisKomponenter.setText(" Tilbake ");
 
                     }
                 });
             } else {
+                showFjernK = true;
                 txtSubmit.setText("");
                 txtSubmit.setPromptText("Velg kompoenent. (ID)");
+                btnRediger.setText("Rediger bruker");
+                btnVisKomponenter.setText("Vis bruker");
+                btnFjern.setText("Fjern bruker");
+                btnFjernKomponenter.setText("Tilbake");
                 btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -596,6 +532,10 @@ public class Visbruker_Superbruker_Controller {
 
                             txtSubmit.setText("");
                             txtSubmit.setPromptText("Velg komponent. (ID)");
+
+                            txtSubmit.setVisible(false);
+                            btnSubmit.setVisible(false);
+                            btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
                         } else {
                             labelError.setText("Dette er en Admin, vennligst velg en kunde!");
                         }
@@ -607,7 +547,7 @@ public class Visbruker_Superbruker_Controller {
             btnSubmit.setVisible(false);
             showFjernK = false;
             txtSubmit.setText("");
-            btnFjernKomponenter.setText("Fjern en brukers\nkomponenter");
+            btnFjernKomponenter.setText("Fjern en brukers \nkomponenter\nfor ferdig bygget\npc");
             labelError.setText("");
         }
     }

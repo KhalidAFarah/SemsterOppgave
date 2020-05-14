@@ -129,7 +129,9 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
         if (!showKurv){
-            System.out.println(bruker.getIndividuelleVarer().toStringTxt());
+            if(bruker.getIndividuelleVarer().getMainArray().size() == 0){
+                labelError.setText("Din handlekurve er tom, legg til varer");
+            }
             defualt(false);
 
             Komponenter k = new Komponenter();
@@ -150,6 +152,10 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             btnSubmit.setVisible(false);
             txtSubmit.setVisible(false);
             btnKjøp.setVisible(true);
+            choice.setValue("Alle");
+            choice.setDisable(true);
+            txtSøk.setVisible(true);
+            søk(false);
 
             txtSubmit.setText("");
         }else{
@@ -170,13 +176,15 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         showSpecs = false;
         showFullført = false;
         btnLeggTil.setText("Tilbake");
+        btnVisSpecs.setText("Vis spesifikasjoner");
 
         if(!showKurv) {
             btnKjøp.setVisible(false);
             if(!showLeggTil) {
                 showLeggTil = true;
                 txtSubmit.setPromptText("Velg komponent. (ID)");
-                labelError.setText("Husk å velge antall ved å dobbel klikke på varens antall kolonne!");
+                labelError.setText("For å legge til varer så må velge antall varer som du vil ha ved å dobbel klikke" +
+                        " på varens antall \n kolonne og deretter klikke enter!");
 
                 defualt(true);
 
@@ -210,7 +218,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                     labelError.setText("Kan ikke legge til samme vare flere ganger. vennligst endre antall.");
                                 }
                             } else {
-                                labelError.setText("Du har ikke valgt et antall av varen!");
+                                labelError.setText("Du har ikke valgt et antall av varen eller så har du valgt feil (ID) til varen!");
                             }
                         }
                     }
@@ -238,6 +246,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
                         if (valgtkomponent >= 0) {
                             bruker.getIndividuelleVarer().remove(valgtkomponent);
+                            tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
                             labelError.setText("En brukers komponent har blitt fjernet");
                             labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
                             save();
@@ -292,6 +301,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                     }
 
                     if (valgtKomponent >= 0) {
+                        labelError.setText("En vares sin spesifikasjon har blitt visst");
                         labelViser.setText("Viser spesifikasjoner for varen");
                         tableView.getColumns().clear();
 
@@ -365,8 +375,8 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(700);
-            Scene_3.setWidth(420);
+            Scene_3.setHeight(610);
+            Scene_3.setWidth(566);
             Scene_3.centerOnScreen();
             Scene_3.show();
         }
@@ -376,6 +386,8 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         this.bruker = bruker;
         this.brukere = brukere;
         this.komponenter = komponenter;
+
+        labelTotaleSum.setText("Totale sum: " + bruker.getIndividuellevarerSum() + "Kr");
 
         //sette backgrounden til samme width og height som scenen
 
@@ -450,6 +462,18 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         choice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                if (choice.getValue().equals("Alle")){
+                    tableView.setItems(komponenter.getMainArray());
+                }else{
+                    Predicate<Komponent> type = Komponent -> {
+                        boolean sjekk = Komponent.getNavn().toLowerCase().indexOf(txtSøk.getText().toLowerCase()) != -1;
+                        return sjekk;
+                    };
+                    komponenter2.setMainArray(komponenter.getMainArray().stream().filter(type)
+                            .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                    tableView.setItems(komponenter2.getMainArray());
+
+                }
                 txtSøk.setVisible(true);
                 søk(view);
             }
@@ -474,7 +498,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                             .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                     tableView.setItems(komponenter2.getMainArray());
                 }else{
-                    bruker2.getIndividuelleVarer().setMainArray(bruker.getHandlekurv().getMainArray().stream().filter(Navn)
+                    bruker2.getIndividuelleVarer().setMainArray(bruker.getIndividuelleVarer().getMainArray().stream().filter(Navn)
                             .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                     tableView.setItems(bruker2.getIndividuelleVarer().getMainArray());
                 }
@@ -497,18 +521,25 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         bruker.setAntallKjøp(bruker.getAntallKjøp() + 1);
 
                         File f = fc.showDialog(null);
-                        Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering(" + bruker.getAntallKjøp() + ").csv");
-                        String s = f.getAbsolutePath();
+                        if(f != null) {
+                            Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering(" + bruker.getAntallKjøp() + ").csv");
+                            String s = f.getAbsolutePath();
 
-                        FiledataTxt save = new FiledataTxt();
-                        String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                        String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum;" + bruker.getIndividuellevarerSum();
-                        bruker.getIndividuelleVarer().getMainArray().clear();
+                            FiledataTxt save = new FiledataTxt();
+                            String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                            String komponenter = bruker.getIndividuelleVarer().toStringTxtMedAntall() + "\nTotalsum;" + bruker.getIndividuellevarerSum();
+                            bruker.getIndividuelleVarer().getMainArray().clear();
 
-                        try {
-                            save.save(brukerInfo + komponenter, path);
-                        } catch (IOException e) {
-                            labelError.setText(e.getMessage());
+                            try {
+                                save.save(brukerInfo + komponenter, path);
+                            } catch (IOException e) {
+                                labelError.setText(e.getMessage());
+                            }
+
+                            save();
+                            bruker.getIndividuelleVarer().getMainArray().clear();
+                            labelError.setText("Kjøpet er fullført");
+                            tableView.getItems().clear();
                         }
 
                     }

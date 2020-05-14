@@ -357,7 +357,7 @@ public class Viskomponenter_Superbruker_Controller {
 
                             @Override
                             public void handle(ActionEvent event) {
-                                String[] specs = txtSpecs.getText().split("\n");
+                                String[] lines = txtSpecs.getText().split("\n");
                                 double pris;
                                 boolean sjekk = true;
                                 try {
@@ -368,14 +368,16 @@ public class Viskomponenter_Superbruker_Controller {
                                     txtPris.setText("");
                                     txtPris.setPromptText("Vennligst skriv inn gyldige verdier!");
                                 }
+                                String line = lines[0];
+                                for(int i = 1; i < lines.length; i++){
+                                    line += ":" + lines[i];
+                                }
+                                String[] specs = line.split(":");
+
+
                                 if (sjekk){
                                     if (choice.getValue().equals("Prosessor")){//spesifikke attributter går inn i if eller else if setningene
-                                        Prosessor pro = new Prosessor(txtNavn.getText(), pris, "Prosessor", specs);
-                                        if (komponenter.add(pro)){
-                                            System.out.println("funker");
-                                        } else {
-                                            System.out.println("Noe er galt");
-                                        }
+                                        komponenter.add(new Prosessor(txtNavn.getText(), pris, "Prosessor", specs));
                                     } else if (choice.getValue().equals("Skjermkort")){
                                         komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
                                     } else if (choice.getValue().equals("Minne")){
@@ -454,6 +456,7 @@ public class Viskomponenter_Superbruker_Controller {
         btnf.setVisible(false);
         tableView.setEditable(true);
         tableView.setVisible(true);
+        tableView.refresh();
 
         txtSubmit.setVisible(false);
         btnSubmit.setVisible(false);
@@ -462,10 +465,11 @@ public class Viskomponenter_Superbruker_Controller {
 
         if (!showSpecs) {
             if (!showRediger) {
+                labelError.setText("Du kan kun redigere på navn og pris etter å ha klikket på disse,\nhusk å klikke på enter etter å ha redigert ferdig ");
                 DoubleStringConverter doubleString = new DoubleStringConverter();
 
                 navnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-                typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+                //typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
                 prisKolonne.setCellFactory(TextFieldTableCell.forTableColumn(doubleString));
 
                 navnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
@@ -508,10 +512,12 @@ public class Viskomponenter_Superbruker_Controller {
                 btnRediger.setText("Rediger komponenter");
                 tableView.setEditable(false);
                 showRediger = false;
+                labelError.setText("");
             }
         } else if (showSpecs) {
             if (!showRediger) {
                 specNavnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
+                specVerdiKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
                 specNavnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Spesifikasjon, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Spesifikasjon, String> event) {
@@ -525,6 +531,23 @@ public class Viskomponenter_Superbruker_Controller {
 
 
                         event.getRowValue().setNavn(event.getNewValue());
+                        event.getTableView().refresh();
+                        saveKomponenter();
+                    }
+                });
+                specVerdiKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Spesifikasjon, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<Spesifikasjon, String> event) {
+                        komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getNavn());
+                        komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getVerdi());
+                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID(),
+                                event.getNewValue());
+                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID()+1,
+                                event.getRowValue().getVerdi());
+
+
+
+                        event.getRowValue().setVerdi(event.getNewValue());
                         event.getTableView().refresh();
                         saveKomponenter();
                     }

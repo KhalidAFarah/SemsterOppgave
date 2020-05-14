@@ -200,21 +200,37 @@ public class FiledataTxt extends Task<Void> {
 
                         if (bruker instanceof Standardbruker && sjekk) {
                             if (type.equals("Prosessor")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Prosessor(navn, pris, type, specs));
+                                Prosessor p = new Prosessor(navn, pris, type, specs);
+                                p.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(p);
                             } else if (type.equals("Skjermkort")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Skjermkort(navn, pris, type, specs));
+                                Skjermkort s = new Skjermkort(navn, pris, type, specs);
+                                s.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(s);
                             } else if (type.equals("Minne")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Minne(navn, pris, type, specs));
+                                Minne m = new Minne(navn, pris, type, specs);
+                                m.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(m);
                             } else if (type.equals("Harddisk")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Harddisk(navn, pris, type, specs));
+                                Harddisk h = new Harddisk(navn, pris, type, specs);
+                                h.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(h);
                             } else if (type.equals("Tastatur")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Tastatur(navn, pris, type, specs));
+                                Tastatur t = new Tastatur(navn, pris, type, specs);
+                                t.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(t);
                             } else if (type.equals("Mus")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Mus(navn, pris, type, specs));
+                                Mus m = new Mus(navn, pris, type, specs);
+                                m.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(m);
                             } else if (type.equals("Skjerm")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Skjerm(navn, pris, type, specs));
+                                Skjerm s = new Skjerm(navn, pris, type, specs);
+                                s.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(s);
                             } else if (type.equals("Operativsystem")) {
-                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(new Operativsystem(navn, pris, type, specs));
+                                Operativsystem o = new Operativsystem(navn, pris, type, specs);
+                                o.setAntall(antall);
+                                ((Standardbruker) bruker).leggTilIndividuelleHandlekurv(o);
                             }
                             intervaler--;
                         }

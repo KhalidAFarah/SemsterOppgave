@@ -62,7 +62,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
         try {
             lagreTxt.save(brukere.toStringTxt(), path);
         } catch (IOException e) {
-            //txtError.setText(e.getMessage());
             labelError.setText(e.getMessage());
         }
     }
@@ -189,6 +188,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                 if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
                                     bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
                                     save();
+                                    labelError.setText("En vare har blitt langt inn i handlekurven");
                                 }
                             }
                         }
@@ -303,24 +303,47 @@ public class Standardbruker_FerdigByggetPc_Controller {
                             @Override
                             public void handle(ActionEvent event) {
                                 DirectoryChooser fc = new DirectoryChooser();
-                                bruker.setAntallKjøp(bruker.getAntallKjøp() +1);
+                                bruker.setAntallKjøp(bruker.getAntallKjøp() + 1);
 
                                 File f = fc.showDialog(null);
-                                Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering("+bruker.getAntallKjøp()+").csv");
-                                String s = f.getAbsolutePath();
-                                System.out.println(path.toAbsolutePath().toString());
+                                if (f != null) {
+                                    Path path = Paths.get(f.getAbsolutePath() + "\\Kvittering(" + bruker.getAntallKjøp() + ").csv");
 
-                                FiledataTxt save = new FiledataTxt();
-                                bruker.setSum();
-                                String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
-                                String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotalsum" + bruker.getSum();
-                                bruker.getHandlekurv().getMainArray().clear();
-                                updateVarer();
-                                try {
-                                    save.save(brukerInfo + komponenter, path);
-                                } catch (IOException e) {
-                                    labelError.setText(e.getMessage());
+                                    String s = f.getAbsolutePath();
+
+
+                                    FiledataTxt save = new FiledataTxt();
+                                    bruker.setSum();
+                                    String brukerInfo = bruker.getBrukernavn() + ";" + bruker.getTlf() + ";" + bruker.getEmail() + "\n";
+                                    String komponenter = bruker.getHandlekurv().toStringTxt() + "\nTotalsum;" + bruker.getSum();
+                                    bruker.getHandlekurv().getMainArray().clear();
+                                    labelHeader.setText("Kjøpet er fullført");
+                                    labelText.setText("");
+                                    labelPris.setText("");
+                                    labelTotalPris.setText("");
+
+
+                                    try {
+                                        save.save(brukerInfo + komponenter, path);
+                                    } catch (IOException e) {
+                                        labelError.setText(e.getMessage());
+                                    }
+                                    save();
+                                    skrivUt.setVisible(false);
+                                    avbryt.setVisible(false);
+                                    Button nyttKjøp = new Button("Foreta et nytt kjøp");
+                                    nyttKjøp.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+                                            visVarer("alle varer");
+                                        }
+                                    });
+                                    APane.getChildren().add(nyttKjøp);
+                                    nyttKjøp.setLayoutY(250);
+                                    nyttKjøp.setLayoutX(100);
                                 }
+
+
                             }
                         });
 
@@ -386,6 +409,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         bruker.setSum();
                         updateVarer();
                         save();
+                        labelError.setText("En vare har blitt fjernet fra handlekurven.");
                     }
                 });
                 btnVisMer.setOnAction(new EventHandler<ActionEvent>() {
@@ -493,7 +517,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
             labelError.setText("");
             updateVarer();
         } else {
-            labelError.setText("Handlekurven din er tom.");
+            labelError.setText("Handlekurven din er tom, \nLegg til varer for å se handlekurven");
         }
 
     }

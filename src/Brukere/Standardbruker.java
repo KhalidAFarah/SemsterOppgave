@@ -103,6 +103,7 @@ public class Standardbruker extends Bruker {
         //tester om det samme komponent type eksisterer dersom den finnes legges den nye ikke til
         for (int i = 0; i < handlekurv.getMainArray().size(); i++) {
             if (handlekurv.getMainArray().get(i).getType().equals(elem.getType())) {
+                handlekurv.remove(i);
                 handlekurv.add(elem);
                 sjekk = false;
 
