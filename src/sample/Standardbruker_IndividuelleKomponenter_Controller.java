@@ -274,17 +274,18 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         tableView.getColumns().clear();
 
                         TableColumn<Spesifikasjon, String> spesifikasjonKolonne = new TableColumn<>();
-                        spesifikasjonKolonne.setCellValueFactory(new PropertyValueFactory<>("navn2"));
-                        spesifikasjonKolonne.setPrefWidth(tableView.getPrefWidth());
-                        spesifikasjonKolonne.setMinWidth(tableView.getMinWidth());
-                        spesifikasjonKolonne.setMaxWidth(tableView.getMaxWidth());
+                        TableColumn<Spesifikasjon, String> spesifikasjonVerdiKolonne = new TableColumn<>();
+                        spesifikasjonKolonne.setCellValueFactory(new PropertyValueFactory<>("navn"));
+                        spesifikasjonVerdiKolonne.setCellValueFactory(new PropertyValueFactory<>("verdi"));
+
 
                         ObservableList<Spesifikasjon> spesifikasjoner = FXCollections.observableArrayList();
                         ObservableList<Spesifikasjon> spesifikasjoner2 = FXCollections.observableArrayList();
-                        int teller = 0;
-                        for (String s : komponenter.getMainArray().get(valgtKomponent).getSpecs()) {
-                            spesifikasjoner.add(new Spesifikasjon(s, teller));
-                            teller++;
+
+                        for(int i = 0; i < komponenter.getMainArray().get(valgtKomponent).getSpecs().size(); i+=2){
+                            spesifikasjoner.add(new Spesifikasjon(komponenter.getMainArray().get(valgtKomponent)
+                                    .getSpecs().get(i), i, komponenter.getMainArray()
+                                    .get(valgtKomponent).getSpecs().get(i+1)));
                         }
 
                         tableView.getColumns().add(spesifikasjonKolonne);
@@ -299,7 +300,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                             @Override
                             public void handle(KeyEvent event) {
                                 Predicate<Spesifikasjon> Navn = Spesifikasjon -> {
-                                    boolean sjekk = Spesifikasjon.getNavn2().indexOf(txtSøk.getText()) != -1;
+                                    boolean sjekk = Spesifikasjon.getNavn().indexOf(txtSøk.getText()) != -1;
                                     return sjekk;
                                 };
 

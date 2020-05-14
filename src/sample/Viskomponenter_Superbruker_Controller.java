@@ -427,12 +427,15 @@ public class Viskomponenter_Superbruker_Controller {
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("");
+            txtSubmit.setPromptText("spesifikasjon: verdi");
 
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    Spesifikasjon spesifikasjon = new Spesifikasjon(txtSubmit.getText(), tableView.getItems().size());
+                    String[] strings = txtSubmit.getText().split(":");
+                    String navn = strings[0].trim();
+                    String verdi = strings[1].trim();
+                    Spesifikasjon spesifikasjon = new Spesifikasjon(navn, tableView.getItems().size(), verdi);
                     tableView.getItems().add(spesifikasjon);
                     komponenter.getMainArray().get(IDs).getSpecs().add(txtSubmit.getText());
                     saveKomponenter();
@@ -509,12 +512,13 @@ public class Viskomponenter_Superbruker_Controller {
                     @Override
                     public void handle(TableColumn.CellEditEvent<Spesifikasjon, String> event) {
                         komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getNavn());
+                        komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getVerdi());
                         komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID(),
                                 event.getNewValue());
+                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID()+1,
+                                event.getRowValue().getVerdi());
 
-                        for (String s : komponenter.getMainArray().get(IDs).getSpecs()) {
-                            System.out.println(s);
-                        }
+
 
                         event.getRowValue().setNavn(event.getNewValue());
                         event.getTableView().refresh();
@@ -658,7 +662,7 @@ public class Viskomponenter_Superbruker_Controller {
                         specNavnKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, String>("navn2"));
 
 
-                        tableView.getColumns().addAll(idSpecKolonne, specNavnKolonne);
+                        tableView.getColumns().addAll(idSpecKolonne, specNavnKolonne, specVerdiKolonne);
 
                         tableView.setItems(spesifikasjoner);
                         showSpecs = true;
@@ -669,7 +673,7 @@ public class Viskomponenter_Superbruker_Controller {
                         txtSøk.setOnKeyTyped(new EventHandler<KeyEvent>() {
                             @Override
                             public void handle(KeyEvent event) {
-                                spesifikasjonerSøk = spesifikasjoner.stream().filter(s -> s.getNavn2().indexOf(txtSøk.getText()) != -1)
+                                spesifikasjonerSøk = spesifikasjoner.stream().filter(s -> s.getNavn().indexOf(txtSøk.getText()) != -1)
                                         .collect(Collectors.toCollection(FXCollections::observableArrayList));
                                 tableView.setItems(spesifikasjonerSøk);
                             }
