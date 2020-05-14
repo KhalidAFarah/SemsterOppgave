@@ -118,7 +118,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
     void On_Click_BtnTilbake(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("MellomSide_Standardbruker.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/MellomSide_Standardbruker.fxml"));
         Parent Standardbruker;
         boolean value = true;
         try {

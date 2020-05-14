@@ -15,7 +15,7 @@ public class Main extends Application {
         try {
             //BorderPane root = new BorderPane();
 
-            Parent root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/FXML/LoggInn.fxml"));
             primaryStage.setTitle("TechMet");
             Scene scene = new Scene(root, 420, 700);
             scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
