@@ -612,7 +612,6 @@ public class Viskomponenter_Superbruker_Controller {
 
         btnFjern.setText("Fjern komponenter");
         btnRediger.setText("Rediger komponenter");
-        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:15;" + "-fx-font-family: Candara Light");
         tableView.setEditable(false);
 
         btnLeggTil.setText("Legg til komponenter");
@@ -689,7 +688,6 @@ public class Viskomponenter_Superbruker_Controller {
                         });
                         btnFjern.setText("Fjern spesifikasjoner");
                         btnRediger.setText("Rediger spesifikasjoner");
-                        btnRediger.setStyle("-fx-background-color: #3daee4;" + "-fx-font-size:13;" + "-fx-font-family: Candara Light");
                         btnLeggTil.setText("Legg til spesifikasjoner");
 
                         txtSubmit.setVisible(false);
