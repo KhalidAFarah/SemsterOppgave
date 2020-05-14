@@ -172,7 +172,7 @@ public class LoggInn_Controller implements Initializable {
 
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/FXML/Mellom_side_Superbruker.fxml"));
+                    loader.setLocation(getClass().getResource("Mellom_side_Superbruker.fxml"));
                     Parent Logg_inn;
                     try {
                         Logg_inn = loader.load();
@@ -197,7 +197,7 @@ public class LoggInn_Controller implements Initializable {
                 } else {
 
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/FXML/MellomSide_Standardbruker.fxml"));
+                    loader.setLocation(getClass().getResource("MellomSide_Standardbruker.fxml"));
                     Parent Logg_inn;
                     try {
                         Logg_inn = loader.load();
@@ -234,7 +234,7 @@ public class LoggInn_Controller implements Initializable {
     void onClick_btn_RegistrerNyBruker(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FXML/Registrering.fxml"));
+        loader.setLocation(getClass().getResource("Registrering.fxml"));
         Parent Logg_inn;
         boolean value_7 = true;
         try {
