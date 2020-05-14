@@ -560,8 +560,8 @@ public class Viskomponenter_Superbruker_Controller {
             Scene Mellom_side = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(Mellom_side);
-            Scene_4.setHeight(650);
-            Scene_4.setWidth(580);
+            Scene_4.setHeight(700);
+            Scene_4.setWidth(420);
             Scene_4.centerOnScreen();
             Scene_4.show();
         } catch (IOException e) {
