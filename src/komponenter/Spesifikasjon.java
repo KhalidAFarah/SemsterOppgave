@@ -5,33 +5,37 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Spesifikasjon {
-    private final SimpleStringProperty navn2;
-    private final SimpleIntegerProperty ID2;
+    private final SimpleStringProperty navn;
+    private final SimpleStringProperty verdi;
+    private final SimpleIntegerProperty ID;
 
-    private int ID;
-    private String navn;
-
-    public Spesifikasjon(String navn, int ID) {
-        navn2 = new SimpleStringProperty(navn);
-        ID2 = new SimpleIntegerProperty(ID);
-
-        navn = getNavn2();
-        ID = getID2();
+    public Spesifikasjon(String navn, int ID, String verdi) {
+        this.navn = new SimpleStringProperty(navn);
+        this.verdi = new SimpleStringProperty(verdi);
+        this.ID = new SimpleIntegerProperty(ID);
     }
 
-    public void setNavn2(String navn) {
-        this.navn2.setValue(navn);
+    public String getNavn(){
+        return navn.getValue();
+    }
+    public String getVerdi(){
+        return verdi.getValue();
     }
 
-    public void setID2(int ID) {
-        this.ID2.setValue(ID);
+    public int getID(){
+        return ID.getValue();
     }
 
-    public String getNavn2() {
-        return navn2.getValue();
+    public void setNavn(String navn) {
+        this.navn.setValue(navn);
     }
 
-    public Integer getID2() {
-        return ID2.getValue();
+    public void setVerdi(String verdi) {
+        this.verdi.setValue(verdi);
+    }
+
+    public void setID(int ID) {
+        this.ID.setValue(ID);
     }
 }
+
