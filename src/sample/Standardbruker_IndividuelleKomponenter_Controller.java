@@ -119,6 +119,12 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         if (!showKurv){
             defualt(false);
 
+            Komponenter k = new Komponenter();
+            for(int i = 0; i < komponenter.getMainArray().size(); i++){
+                k.add(komponenter.getMainArray().get(i));
+            }
+            bruker.getIndividuelleVarer().setMainArray(k.getMainArray());
+
             showKurv = true;
             showSpecs = false;
             showLeggTil = false;
@@ -292,7 +298,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         tableView.setItems(spesifikasjoner);
 
                         txtSøk.setText("");
-                        txtSøk.setPromptText("søk inn spesifikasjon");
+                        txtSøk.setPromptText("Søk spesifikasjoner");
 
                         choice.setDisable(true);
 
@@ -300,7 +306,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                             @Override
                             public void handle(KeyEvent event) {
                                 Predicate<Spesifikasjon> Navn = Spesifikasjon -> {
-                                    boolean sjekk = Spesifikasjon.getNavn().indexOf(txtSøk.getText()) != -1;
+                                    boolean sjekk = Spesifikasjon.getNavn().toLowerCase().indexOf(txtSøk.getText().toLowerCase()) != -1;
                                     return sjekk;
                                 };
 
@@ -375,6 +381,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         choice.setDisable(false);
         tableView.setEditable(true);
         btnKjøp.setVisible(false);
+        txtSøk.setPromptText("Søk produktnavn");
 
         IDKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, Integer>("ID"));
         navnKolonne.setCellValueFactory(new PropertyValueFactory<Komponent, String>("navn"));
@@ -426,29 +433,10 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
         choice.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(!choice.getValue().equals("Alle")) {
-                    Predicate<Komponent> type = Komponent -> {
-                        boolean sjekk = Komponent.getType().equals(choice.getValue());
-                        return sjekk;
-                    };
-
-
-                    if (view) {
-                        komponenter2.setMainArray(komponenter.getMainArray().stream().filter(type)
-                                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                        tableView.setItems(komponenter2.getMainArray());
-                    } else {
-                        bruker2.getIndividuelleVarer().setMainArray(bruker.getHandlekurv().getMainArray().stream().filter(type)
-                                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                        tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
-                    }
-                }else{
-                    tableView.setItems(komponenter.getMainArray());
-                }
+                txtSøk.setVisible(true);
+                søk(view);
             }
         });
-
-        søk(view);
     }
 
     public void søk(boolean view){
@@ -456,12 +444,12 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             @Override
             public void handle(KeyEvent event) {
                 Predicate<Komponent> Navn = Komponent -> {
-                    if (!choice.getValue().equals("Velg type") || choice.getValue() == null) {
-                        boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1
+                    if (!choice.getValue().equals("Alle")) {
+                        boolean sjekk = Komponent.getNavn().toLowerCase().indexOf(txtSøk.getText().toLowerCase()) != -1
                                 && choice.getValue().equals(Komponent.getType());
                         return sjekk;
                     }
-                    boolean sjekk = Komponent.getNavn().indexOf(txtSøk.getText()) != -1;
+                    boolean sjekk = Komponent.getNavn().toLowerCase().indexOf(txtSøk.getText().toLowerCase()) != -1;
                     return sjekk;
                 };
                 if(view) {
