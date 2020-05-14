@@ -32,7 +32,7 @@
                 </ImageView>
                 <Label alignment="CENTER" prefHeight="34.0" prefWidth="562.0" text="Du har nå logget inn som en standardbruker, hvilken side vil du til nå?" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                     <font>
-                        <Font name="Verdana Bold" size="14.0" />
+                        <Font name="Verdana Bold" size="13.0" />
                     </font>
                 </Label>
                 <Button alignment="CENTER" mnemonicParsing="false" onAction="#click_btn_bygg_egen_pc" prefHeight="70.0" prefWidth="234.0" style="-fx-background-color: #3daee4;" text="Kjøp ferdig bygd pc " textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2">
@@ -48,7 +48,7 @@
                 <Button mnemonicParsing="false" onAction="#click_btn_Tilbake" prefHeight="26.0" prefWidth="88.0" style="-fx-background-color: black;" text="Logg ut" textFill="#dfdada" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
               <Label fx:id="labelError" alignment="CENTER" prefHeight="31.0" prefWidth="558.0" GridPane.rowIndex="4">
                   <font>
-                      <Font name="Verdana Bold" size="14.0" />
+                      <Font name="Verdana Bold" size="12.0" />
                   </font>
               </Label>
             </children>
