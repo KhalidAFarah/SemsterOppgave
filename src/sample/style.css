@@ -3,3 +3,7 @@ AnchorPane {
     -fx-background-size: stretch;
     -fx-alignment: center;
 }
+
+#anchorPaneVisBruker {
+    -fx-background-image: none;
+}
