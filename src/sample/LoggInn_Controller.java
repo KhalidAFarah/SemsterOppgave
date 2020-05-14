@@ -67,7 +67,7 @@ public class LoggInn_Controller implements Initializable {
         btnRegistrer.setDisable(false);
         btnAvslutt.setDisable(false);
 
-        showMessageDialog(null, "Klarte ikke å laste inn varer!");
+        lblError.setText("klaret ikke å laste inn varer");
     }
 
     public void loadKomponenter() {
@@ -93,7 +93,7 @@ public class LoggInn_Controller implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                showMessageDialog(null, "Klarte ikke å stoppe tråden!");
+                lblError.setText("Klarte ikke å stoppe tråden!");
             }
         }
     }
@@ -122,7 +122,7 @@ public class LoggInn_Controller implements Initializable {
         btnRegistrer.setDisable(false);
         btnAvslutt.setDisable(false);
 
-        showMessageDialog(null, "Klarte ikke laste inn lagret data!");
+        lblError.setText("klarte ikke å laste inn lagrede brukere");
     }
 
     private void loadBruker() {
