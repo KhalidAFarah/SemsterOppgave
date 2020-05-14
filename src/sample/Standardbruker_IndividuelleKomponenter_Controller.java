@@ -109,21 +109,35 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
     private Komponenter komponenter;
     private Komponenter komponenter2 = new Komponenter();
 
+    private FiledataTxt lagreTxt;
+
     private boolean showKurv = false;
     private boolean showSpecs = false;
     private boolean showLeggTil = false;
     private boolean showFullført = false;
 
+    private void save() {
+        lagreTxt = new FiledataTxt();
+        Path path = Paths.get("src/filbehandling/StandardbrukerSinIndividuelleHandlekurv.csv");
+        try {
+            lagreTxt.save(brukere.toStringTxtMedAntall(), path);
+        } catch (IOException e) {
+            labelError.setText("Klarte ikke å lagre data");
+        }
+    }
+
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
         if (!showKurv){
+            System.out.println(bruker.getIndividuelleVarer().toStringTxt());
             defualt(false);
 
             Komponenter k = new Komponenter();
-            for(int i = 0; i < komponenter.getMainArray().size(); i++){
-                k.add(komponenter.getMainArray().get(i));
+            for(int i = 0; i < bruker.getIndividuelleVarer().getMainArray().size(); i++){
+                k.add(bruker.getIndividuelleVarer().getMainArray().get(i));
             }
             bruker.getIndividuelleVarer().setMainArray(k.getMainArray());
+
 
             showKurv = true;
             showSpecs = false;
@@ -191,6 +205,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                     bruker.getIndividuelleVarer().add(komponenter.getMainArray().get(valgtkomponent));
                                     labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
                                     labelError.setText("Varen har blitt lagt til.");
+                                    save();
                                 } else {
                                     labelError.setText("Kan ikke legge til samme vare flere ganger. vennligst endre antall.");
                                 }
@@ -225,6 +240,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                             bruker.getIndividuelleVarer().remove(valgtkomponent);
                             labelError.setText("En brukers komponent har blitt fjernet");
                             labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
+                            save();
                         }
                     }
                 });
@@ -411,6 +427,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                 }
 
                 if(sjekk){
+                    save();
                     labelTotaleSum.setText("totale pris: " + bruker.getIndividuellevarerSum());
                 }
 

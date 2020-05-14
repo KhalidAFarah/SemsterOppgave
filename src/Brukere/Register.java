@@ -52,4 +52,15 @@ public class Register {
 
         return ut;
     }
+    public String toStringTxtMedAntall() {
+        String ut = "";
+
+        for (int i = 0; i < brukere.size(); i++) {
+            if(brukere.get(i) instanceof Standardbruker){
+                ut += ((Standardbruker) brukere.get(i)).toStringFormatMedAntall() + "\n";
+            }
+        }
+
+        return ut;
+    }
 }

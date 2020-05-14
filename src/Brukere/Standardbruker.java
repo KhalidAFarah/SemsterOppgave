@@ -100,10 +100,9 @@ public class Standardbruker extends Bruker {
 
     public <T extends Komponent> void leggTilHandlekurv(T elem) {
         boolean sjekk = true;
-        //tester om det samme komponent type eksisterer dersom den finnes fjernes den gamle og legger til den nye
+        //tester om det samme komponent type eksisterer dersom den finnes legges den nye ikke til
         for (int i = 0; i < handlekurv.getMainArray().size(); i++) {
             if (handlekurv.getMainArray().get(i).getType().equals(elem.getType())) {
-                handlekurv.remove(i);
                 handlekurv.add(elem);
                 sjekk = false;
 
@@ -116,9 +115,26 @@ public class Standardbruker extends Bruker {
             setSum();//ny sum av alle varer
         }
     }
+    public <T extends Komponent> void leggTilIndividuelleHandlekurv(T elem) {
+        boolean sjekk = true;
+        //tester om det samme komponent type eksisterer dersom den finnes legges den nye ikke til
+        for (int i = 0; i < individuelleVarer.getMainArray().size(); i++) {
+            if (individuelleVarer.getMainArray().get(i).getNavn().equals(elem.getNavn())) {
+                sjekk = false;
+            }
+        }
+        if (sjekk) {
+            individuelleVarer.add(elem);
+        }
+    }
 
     public String toStringFormat() {
-        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";" + antallKjøp + ";" + handlekurv.getMainArray().size() + ";" + handlekurv.toStringTxt();
+        return super.toStringFormat() + isAdmin() + ";" + sum.getValue() + ";"
+                + antallKjøp + ";" + handlekurv.getMainArray().size() + ";" + handlekurv.toStringTxt();
+    }
+    public String toStringFormatMedAntall() {
+        return getBrukernavn() + ";" + getPassord() + ";" + antallKjøp + ";"
+                + individuelleVarer.getMainArray().size() + ";" + individuelleVarer.toStringTxtMedAntall();
     }
 
 
