@@ -273,8 +273,8 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                         labelViser.setText("Viser spesifikasjoner for varen");
                         tableView.getColumns().clear();
 
-                        TableColumn<Spesifikasjon, String> spesifikasjonKolonne = new TableColumn<>();
-                        TableColumn<Spesifikasjon, String> spesifikasjonVerdiKolonne = new TableColumn<>();
+                        TableColumn<Spesifikasjon, String> spesifikasjonKolonne = new TableColumn<>("Spesifikasjon");
+                        TableColumn<Spesifikasjon, String> spesifikasjonVerdiKolonne = new TableColumn<>("Verdi");
                         spesifikasjonKolonne.setCellValueFactory(new PropertyValueFactory<>("navn"));
                         spesifikasjonVerdiKolonne.setCellValueFactory(new PropertyValueFactory<>("verdi"));
 
@@ -288,7 +288,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
                                     .get(valgtKomponent).getSpecs().get(i+1)));
                         }
 
-                        tableView.getColumns().add(spesifikasjonKolonne);
+                        tableView.getColumns().addAll(spesifikasjonKolonne, spesifikasjonVerdiKolonne);
                         tableView.setItems(spesifikasjoner);
 
                         txtSøk.setText("");

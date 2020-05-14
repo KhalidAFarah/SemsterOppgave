@@ -202,8 +202,9 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                     String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\nPris "
                                             + komponenter.getMainArray().get(j).getPris();
                                     String spesifikasjonerText = "";
-                                    for (String s : komponenter.getMainArray().get(j).getSpecs()) {
-                                        spesifikasjonerText += s + "\n";
+                                    for (int i = 0; i < komponenter.getMainArray().get(j).getSpecs().size(); i+=2) {
+                                        spesifikasjonerText += komponenter.getMainArray().get(j).getSpecs().get(i)
+                                                + ": " + komponenter.getMainArray().get(j).getSpecs().get(i+1) + "\n";
                                     }
 
                                     Label labelInfoHeader = new Label(spesifikasjonerHeader);
@@ -387,8 +388,9 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                 String spesifikasjonerHeader = bruker.getHandlekurv().getMainArray().get(j).getNavn() + "\nPris "
                                         + bruker.getHandlekurv().getMainArray().get(j).getPris();
                                 String spesifikasjonerText = "";
-                                for (String s : bruker.getHandlekurv().getMainArray().get(j).getSpecs()) {
-                                    spesifikasjonerText += s + "\n";
+                                for (int i = 0; i < komponenter.getMainArray().get(j).getSpecs().size(); i+=2) {
+                                    spesifikasjonerText += komponenter.getMainArray().get(j).getSpecs().get(i)
+                                            + ": " + komponenter.getMainArray().get(j).getSpecs().get(i+1) + "\n";
                                 }
 
 
