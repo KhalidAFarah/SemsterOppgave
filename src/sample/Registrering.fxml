@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="596.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
     <children>
-      <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="481.0" prefWidth="596.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+      <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="454.0" prefWidth="596.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.7999755859375" minWidth="10.0" prefWidth="199.99998779296874" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.4" minWidth="10.0" prefWidth="267.1999755859375" />
@@ -28,7 +28,6 @@
           <RowConstraints maxHeight="92.80000610351561" minHeight="10.0" prefHeight="70.39998779296877" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="108.00002441406252" minHeight="10.0" prefHeight="84.00001220703126" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="64.80002441406248" minHeight="10.0" prefHeight="46.400048828124966" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="45.5999755859375" minHeight="10.0" prefHeight="43.199951171875" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
               <Label prefHeight="18.0" prefWidth="77.0" text="Brukernavn" GridPane.halignment="CENTER" GridPane.rowIndex="1">
@@ -99,12 +98,12 @@
                       <Font name="Verdana" size="14.0" />
                   </font>
               </Button>
-              <Label fx:id="labelError" prefHeight="24.0" prefWidth="267.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                  <font>
-                      <Font name="Verdana Bold" size="13.0" />
-                  </font>
-              </Label>
          </children>
       </GridPane>
+        <Label fx:id="labelError" layoutX="42.0" layoutY="455.0" prefHeight="24.0" prefWidth="531.0" textAlignment="CENTER" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="22.799999999999955">
+            <font>
+                <Font name="Verdana Bold" size="13.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>
