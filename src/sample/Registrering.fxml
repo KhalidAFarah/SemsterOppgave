@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="596.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="596.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registrering_Controller">
     <children>
       <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="481.0" prefWidth="596.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
         <columnConstraints>
@@ -88,6 +88,9 @@
                   <image>
                       <Image url="@../img/logo2.png" />
                   </image>
+               <GridPane.margin>
+                  <Insets top="25.0" />
+               </GridPane.margin>
               </ImageView>
               <Button fx:id="btnRegistrer" mnemonicParsing="false" onAction="#onClick_btn_Register" prefHeight="66.0" prefWidth="118.0" style="-fx-background-color: #3daee4;" text="Register" GridPane.columnIndex="2" GridPane.rowIndex="2">
                   <font>
@@ -99,11 +102,19 @@
                       <Font name="Verdana" size="14.0" />
                   </font>
               </Button>
-              <Label fx:id="labelError" prefHeight="24.0" prefWidth="267.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+              <Label fx:id="labelError" prefHeight="41.0" prefWidth="268.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
                   <font>
                       <Font name="Verdana Bold" size="13.0" />
                   </font>
               </Label>
+            <Label text="Register ny bruker" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Verdana Bold" size="22.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="25.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
     </children>

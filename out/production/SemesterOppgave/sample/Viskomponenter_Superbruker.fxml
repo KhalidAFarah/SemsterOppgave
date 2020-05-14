@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="591.0" prefWidth="934.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Viskomponenter_Superbruker_Controller">
+<AnchorPane prefHeight="591.0" prefWidth="960.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Viskomponenter_Superbruker_Controller">
     <children>
         <Separator layoutY="67.0" prefHeight="3.0" prefWidth="900.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.2000000000000455" AnchorPane.topAnchor="67.0" />
         <ImageView fitHeight="149.0" fitWidth="200.0" layoutX="351.0" layoutY="-35.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="350.20000000000005" AnchorPane.topAnchor="-35.0">
@@ -133,7 +133,7 @@
                 </HBox>
                 <Label fx:id="labelError" alignment="CENTER" prefHeight="22.0" prefWidth="534.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <font>
-                        <Font name="Verdana" size="12.0" />
+                        <Font name="Verdana Bold" size="13.0" />
                     </font>
                 </Label>
             </children>

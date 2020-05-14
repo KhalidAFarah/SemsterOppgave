@@ -25,7 +25,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label prefHeight="34.0" prefWidth="452.0" text="Du har nå logget inn som administrator, hvilken side vil du til nå?" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                <Label prefHeight="34.0" prefWidth="474.0" text="Du har nå logget inn som administrator, hvilken side vil du til nå?" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                     <font>
                         <Font name="Verdana Bold" size="12.0" />
                     </font>
@@ -50,7 +50,7 @@
                         <Image url="@../img/logo1.png" />
                     </image>
                 </ImageView>
-              <Label fx:id="lblError" alignment="CENTER" prefHeight="36.0" prefWidth="462.0" GridPane.rowIndex="5">
+              <Label fx:id="lblError" alignment="CENTER" prefHeight="36.0" prefWidth="462.0" textAlignment="CENTER" GridPane.rowIndex="5">
                   <font>
                       <Font name="Verdana Bold" size="12.0" />
                   </font>
