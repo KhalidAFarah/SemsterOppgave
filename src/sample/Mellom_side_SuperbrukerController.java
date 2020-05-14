@@ -31,7 +31,7 @@ public class Mellom_side_SuperbrukerController {
     void On_Click_BtnVisBrukere(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Visbruker_Superbruker.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/Visbruker_Superbruker.fxml"));
         Parent Mellom_side_superbruker;
         boolean value_2 = true;
         try {
@@ -51,8 +51,8 @@ public class Mellom_side_SuperbrukerController {
             Scene VisBruker_Super = new Scene(Mellom_side_superbruker);
             Stage Scene_12 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_12.setScene(VisBruker_Super);
-            Scene_12.setHeight(650);
-            Scene_12.setWidth(1500);
+            Scene_12.setHeight(585);
+            Scene_12.setWidth(900);
             Scene_12.centerOnScreen();
             Scene_12.show();
         }
@@ -63,7 +63,7 @@ public class Mellom_side_SuperbrukerController {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/Viskomponenter_Superbruker.fxml"));
         Parent Mellom_side_Superbruker;
         boolean value_4 = true;
         try {
@@ -83,8 +83,8 @@ public class Mellom_side_SuperbrukerController {
             Scene VisKomponenter_Super = new Scene(Mellom_side_Superbruker);
             Stage Scene_13 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_13.setScene(VisKomponenter_Super);
-            Scene_13.setHeight(650);
-            Scene_13.setWidth(1500);
+            Scene_13.setHeight(630);
+            Scene_13.setWidth(975);
             Scene_13.centerOnScreen();
             Scene_13.show();
         }
@@ -96,7 +96,7 @@ public class Mellom_side_SuperbrukerController {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("LoggInn.fxml"));
+        loader.setLocation(getClass().getResource("/FXML/LoggInn.fxml"));
         Parent Superbruker;
         boolean value_3 = true;
         try {

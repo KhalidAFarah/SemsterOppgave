@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="1170.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_FerdigByggetPc_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="1170.0" stylesheets="@../sample/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Standardbruker_FerdigByggetPc_Controller">
     <children>
         <ImageView fx:id="img_Techmet" fitHeight="152.0" fitWidth="237.0" layoutX="227.0" layoutY="-27.0" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="-27.0">
             <image>
