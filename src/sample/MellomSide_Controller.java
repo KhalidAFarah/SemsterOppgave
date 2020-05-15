@@ -10,9 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.io.IOException;
 
 public class MellomSide_Controller {

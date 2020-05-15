@@ -1,5 +1,4 @@
 package sample;
-//
 
 import Brukere.Register;
 import javafx.event.ActionEvent;
@@ -10,13 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import komponenter.Komponent;
 import komponenter.Komponenter;
 
 import java.io.IOException;
 
-import static javax.swing.JOptionPane.showMessageDialog;
-//Done try and catch with fxml scenes
 
 
 public class Mellom_side_SuperbrukerController {

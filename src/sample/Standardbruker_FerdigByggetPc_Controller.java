@@ -2,45 +2,28 @@ package sample;
 
 import Brukere.Register;
 import Brukere.Standardbruker;
-import com.sun.deploy.util.UpdateCheck;
-import com.sun.javafx.scene.control.skin.LabeledText;
 import filbehandling.FiledataJOBJ;
 import filbehandling.FiledataTxt;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import komponenter.Komponent;
 import komponenter.Komponenter;
-import sun.plugin.javascript.navig.Anchor;
-
-import static javax.swing.JOptionPane.*;
-
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.URIParameter;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class Standardbruker_FerdigByggetPc_Controller {
-
-    @FXML
-    private ImageView img_Techmet;
 
     @FXML
     private ScrollPane pane;
@@ -52,7 +35,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
     private Komponenter komponenter = new Komponenter();
 
-    private int kompNr;
     private Register brukere;
     private FiledataTxt lagreTxt;
     private final Path path = Paths.get("src/filbehandling/Brukerinfo.csv");
@@ -71,29 +53,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
         this.brukere = brukere;
         this.komponenter = komponenter;
 
-        String fjernet = "Følgende varer ble fjernet fra din handlekurv: \n";
-
-        boolean fantNoe = false;
-
-        for (int i = 0; i < bruker.getHandlekurv().getMainArray().size(); i++) {
-            boolean funnet = false;
-            for (int j = 0; j < komponenter.getMainArray().size(); j++) {
-                if (bruker.getHandlekurv().getMainArray().get(i).getNavn().equals(komponenter.getMainArray().get(j).getNavn())) {
-                    funnet = true;
-
-                }
-            }
-            if (!funnet) {
-                fjernet += bruker.getHandlekurv().getMainArray().get(i).getNavn() + "\n";
-                bruker.getHandlekurv().remove(i);
-                fantNoe = true;
-            }
-        }
-        if (fantNoe) {
-            save();
-            showMessageDialog(null, fjernet);
-        }
-
         visVarer("alle varer");
     }
 
@@ -106,11 +65,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
         } catch (Exception e) {
             labelError.setText(e.getMessage());
         }
-
-        /*FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Viskomponenter_Superbruker.fxml"));
-        Viskomponenter_Superbruker_Controller controller = loader.getController();
-        controller.loadKomponenter();*/
     }
 
     @FXML
@@ -122,12 +76,12 @@ public class Standardbruker_FerdigByggetPc_Controller {
         boolean value = true;
         try {
             Standardbruker = loader.load();
-        }catch (IOException e) {
-            labelError.setText("Klart ikke å bytte side");
+        } catch (IOException e) {
+            labelError.setText("Klarte ikke å bytte side");
             Standardbruker = null;
             value = false;
         }
-        if(value){
+        if (value) {
             MellomSide_Standardbruker_Controller controller = loader.getController();
             controller.setInfo(brukere, komponenter, bruker);
             Scene LoggInn = new Scene(Standardbruker);
@@ -155,8 +109,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
         if (komponenter != null || bruker != null) {
 
-            for (int i = 0; i < komponenter.getMainArray().size(); i++) { // lag en komponent array senere
-                //ImageView img = new ImageView();
+            for (int i = 0; i < komponenter.getMainArray().size(); i++) {
 
                 if (komponenter.getMainArray().get(i).getType().equals(type) || type.equals("alle varer")) {
 
@@ -188,7 +141,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                 if (komponenter.getMainArray().get(j).getNavn().equals(labelNavn.getText())) {
                                     bruker.leggTilHandlekurv(komponenter.getMainArray().get(j));
                                     save();
-                                    labelError.setText("En vare har blitt langt inn i handlekurven");
+                                    labelError.setText("En vare har blitt lagt inn i handlekurven");
                                 }
                             }
                         }
@@ -202,9 +155,9 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                     String spesifikasjonerHeader = komponenter.getMainArray().get(j).getNavn() + "\nPris "
                                             + komponenter.getMainArray().get(j).getPris();
                                     String spesifikasjonerText = "";
-                                    for (int i = 0; i < komponenter.getMainArray().get(j).getSpecs().size(); i+=2) {
+                                    for (int i = 0; i < komponenter.getMainArray().get(j).getSpecs().size(); i += 2) {
                                         spesifikasjonerText += komponenter.getMainArray().get(j).getSpecs().get(i)
-                                                + ": " + komponenter.getMainArray().get(j).getSpecs().get(i+1) + "\n";
+                                                + ": " + komponenter.getMainArray().get(j).getSpecs().get(i + 1) + "\n";
                                     }
 
                                     Label labelInfoHeader = new Label(spesifikasjonerHeader);
@@ -286,8 +239,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         y += 60;
                         labelText.setText(s);
                         labelPris.setText(p);
-
-
 
 
                         Button avbryt = new Button("Avbryt");
@@ -426,9 +377,9 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                 String spesifikasjonerHeader = bruker.getHandlekurv().getMainArray().get(j).getNavn() + "\nPris "
                                         + bruker.getHandlekurv().getMainArray().get(j).getPris();
                                 String spesifikasjonerText = "";
-                                for (int i = 0; i < komponenter.getMainArray().get(j).getSpecs().size(); i+=2) {
+                                for (int i = 0; i < komponenter.getMainArray().get(j).getSpecs().size(); i += 2) {
                                     spesifikasjonerText += komponenter.getMainArray().get(j).getSpecs().get(i)
-                                            + ": " + komponenter.getMainArray().get(j).getSpecs().get(i+1) + "\n";
+                                            + ": " + komponenter.getMainArray().get(j).getSpecs().get(i + 1) + "\n";
                                 }
 
 
@@ -490,7 +441,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
                 if (funnet2 == false && first == false) {
                     System.out.println("funker");
-                    typer = "Du mangler " + bruker.getHandlekurv().getMainArray().size() + " ut av 8 følgende typer komponenter:\n";
+                    typer = "Du mangler " + bruker.getHandlekurv().getMainArray().size() + " ut av de 8 følgende typer komponenter:\n";
                     typer += "En " + Komponenter.getTyper()[j];
                     first = true;
                     y += 60;

@@ -41,12 +41,6 @@ public class Registrering_Controller {
     private CheckBox chxStandardbruker;
 
     @FXML
-    private Button btnRegistrer;
-
-    @FXML
-    private Button btnAvbryt;
-
-    @FXML
     private Label labelError;
 
     private Register brukere;
@@ -103,26 +97,26 @@ public class Registrering_Controller {
     void onClick_btn_Register(ActionEvent event) {
         if (brukere != null) {
             boolean eksisterer = false;
-            for(int i = 0; i < brukere.getArray().size(); i++){
-                if(brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText()) &&
-                brukere.getArray().get(i).getPassord().equals(txtPassord.getText())){
+            for (int i = 0; i < brukere.getArray().size(); i++) {
+                if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText()) &&
+                        brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
                     eksisterer = true;
-                     i = brukere.getArray().size();
+                    i = brukere.getArray().size();
                     labelError.setText("Brukernavn og passordet er tatt\nvelg et annet");
 
-                }else if(brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText()) &&
-                        !(brukere.getArray().get(i).getPassord().equals(txtPassord.getText()))){
+                } else if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText()) &&
+                        !(brukere.getArray().get(i).getPassord().equals(txtPassord.getText()))) {
                     labelError.setText("Brukernavn er tatt\nvelg et annet");
                     i = brukere.getArray().size();
                     eksisterer = true;
-                }else if(brukere.getArray().get(i).getPassord().equals(txtPassord.getText()) &&
-                        !(brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText()))){
+                } else if (brukere.getArray().get(i).getPassord().equals(txtPassord.getText()) &&
+                        !(brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText()))) {
                     labelError.setText("Passordet er tatt\nvelg et annet");
                     i = brukere.getArray().size();
                     eksisterer = true;
                 }
             }
-            if(!eksisterer) {
+            if (!eksisterer) {
                 boolean sjekk = true;
                 Bruker b;
                 if (chxAdmin.isSelected() && !chxStandardbruker.isSelected()) {
@@ -172,7 +166,7 @@ public class Registrering_Controller {
                             Scene_9.centerOnScreen();
                             Scene_9.show();
 
-                            save(); //se her på problemet med size på fxml vinduet *
+                            save();
                         }
                     }
 
@@ -195,7 +189,6 @@ public class Registrering_Controller {
                         sjekk = false;
                     }
 
-                    //A.leggTilHandlekurv(new Prosessor("AMD", 200, "Prossesor", "hdd", "ssd"));
                     if (sjekk) {
                         brukere.add(b);
 

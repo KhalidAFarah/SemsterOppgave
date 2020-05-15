@@ -1,5 +1,3 @@
 admin;admin;oslomet@gmail.com;123123123;true;
-bruker1;bruker1;Oslomet@sdgmail.com;12312321;false;5961.0;0;3;
-AMD Ryzen 5 2600X;1790.0;Prosessor;Cache; 16 MB;Antall kjerner; 6 kjerner;Max Turbo-hastighet; 4.2 GHz;Kompatibel prosessorsokkel; Socket AM4;
-ASUS GeForce Dual GTX 1660 Ti OC (6 GB);3569.0;Skjermkort;Minne; 6 GB;Klokkefrekvens; 1500 MHz;Grensesnitt; PCI Express 3.0;Vifteløs; Nei;
-Samsung DDR4 2666MHz (8 GB);602.0;Minne;Minnetype; DDR4;Minnehastighet; 2666MHz;Lagringskapasitet; 8 GB;
+bruker1;bruker1;Oslomet@sdgmail.com;12312321;false;12312.0;0;1;
+dummy;12312.0;Operativsystem;Ksd;sdsd;

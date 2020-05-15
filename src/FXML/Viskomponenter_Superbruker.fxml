@@ -101,61 +101,6 @@
                 </Label>
             </children>
         </GridPane>
-        <GridPane fx:id="leggTilKomponenterGrid" layoutX="235.0" layoutY="78.0" prefHeight="505.0" prefWidth="614.0" visible="false" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="78.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <GridPane prefHeight="213.0" prefWidth="567.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <ComboBox fx:id="choice" prefHeight="26.0" prefWidth="250.0" promptText="Velg komponent type" />
-                        <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="26.0" prefWidth="267.0" text="Legg til komponent" GridPane.columnIndex="1" />
-                        <Label prefHeight="18.0" prefWidth="266.0" text="Skriv inn pris" GridPane.rowIndex="2">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="txtPris" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label prefHeight="18.0" prefWidth="266.0" text="Skriv inn komponentens navn" GridPane.rowIndex="1">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="txtNavn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    </children>
-                </GridPane>
-                <GridPane prefHeight="193.0" prefWidth="567.0" GridPane.rowIndex="1">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="90.599951171875" minHeight="10.0" prefHeight="61.799963378906256" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="129.00003662109376" minHeight="10.0" prefHeight="129.00003662109376" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <TextArea fx:id="txtSpecs" prefHeight="75.0" prefWidth="514.0" GridPane.rowIndex="1" />
-                        <Label text="Skriv inn spesifikasjoner (f.eks. RAM : 8GB)">
-                            <font>
-                                <Font name="Verdana" size="15.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </GridPane>
-            </children>
-        </GridPane>
         <GridPane layoutX="1.0" prefHeight="74.0" prefWidth="973.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -198,5 +143,49 @@
                   <Button fx:id="btnSubmit" mnemonicParsing="false" text="Submit" visible="false" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
+          <GridPane fx:id="leggTilKomponenterGrid" layoutX="247.0" layoutY="169.0" prefHeight="213.0" prefWidth="567.0" visible="false" AnchorPane.bottomAnchor="246.4" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="254.79999999999995" AnchorPane.topAnchor="169.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+              <children>
+                  <ComboBox fx:id="choice" prefHeight="26.0" prefWidth="250.0" promptText="Velg komponent type" />
+                  <Button fx:id="btnAdd" mnemonicParsing="false" prefHeight="26.0" prefWidth="267.0" text="Legg til komponent" GridPane.columnIndex="1" />
+                  <Label prefHeight="18.0" prefWidth="266.0" text="Skriv inn pris" GridPane.rowIndex="2">
+                      <font>
+                          <Font name="System Bold" size="14.0" />
+                      </font>
+                  </Label>
+                  <TextField fx:id="txtPris" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label prefHeight="18.0" prefWidth="266.0" text="Skriv inn komponentens navn" GridPane.rowIndex="1">
+                      <font>
+                          <Font name="System Bold" size="14.0" />
+                      </font>
+                  </Label>
+                  <TextField fx:id="txtNavn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              </children>
+          </GridPane>
+          <GridPane fx:id="leggTilKomponenterGrid2" layoutX="247.0" layoutY="356.0" prefHeight="193.0" prefWidth="567.0" visible="false" AnchorPane.bottomAnchor="59.39999999999998" AnchorPane.leftAnchor="247.0" AnchorPane.rightAnchor="254.79999999999995">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="90.599951171875" minHeight="10.0" prefHeight="61.799963378906256" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="129.00003662109376" minHeight="10.0" prefHeight="129.00003662109376" vgrow="SOMETIMES" />
+              </rowConstraints>
+              <children>
+                  <TextArea fx:id="txtSpecs" prefHeight="75.0" prefWidth="514.0" GridPane.rowIndex="1" />
+                  <Label text="Skriv inn spesifikasjoner (f.eks. RAM : 8GB)">
+                      <font>
+                          <Font name="Verdana" size="15.0" />
+                      </font>
+                  </Label>
+              </children>
+          </GridPane>
     </children>
 </AnchorPane>

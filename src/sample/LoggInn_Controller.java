@@ -25,7 +25,6 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-//Done try and catch with fxml scenes
 
 public class LoggInn_Controller implements Initializable {
 
@@ -67,7 +66,7 @@ public class LoggInn_Controller implements Initializable {
         btnRegistrer.setDisable(false);
         btnAvslutt.setDisable(false);
 
-        lblError.setText("klaret ikke å laste inn varer");
+        lblError.setText("Klarte ikke å laste inn varer");
     }
 
     public void loadKomponenter() {
@@ -91,7 +90,7 @@ public class LoggInn_Controller implements Initializable {
             tr.start();
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 lblError.setText("Klarte ikke å stoppe tråden!");
             }
@@ -122,7 +121,7 @@ public class LoggInn_Controller implements Initializable {
         btnRegistrer.setDisable(false);
         btnAvslutt.setDisable(false);
 
-        lblError.setText("klarte ikke å laste inn lagrede brukere");
+        lblError.setText("Klarte ikke å laste inn lagrede brukere");
     }
 
     private void loadBruker() {
@@ -143,11 +142,10 @@ public class LoggInn_Controller implements Initializable {
             lese.setOnFailed(this::FailedBruker);
 
             Thread tr = new Thread(lese);
-            //tr.setDaemon(true);
             tr.start();
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 lblError.setText("Klarte ikke å stoppe tråden!");
             }
@@ -156,18 +154,16 @@ public class LoggInn_Controller implements Initializable {
 
     @FXML
     void onClick_btn_LoggInn(ActionEvent event) {
-        //load();
         boolean login_successful = false;
 
-        //System.out.println(brukere.toStringTxt());
+
 
         for (int i = 0; i < brukere.getArray().size(); i++) {
             boolean verdi = true;
-            if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText())
-                    && brukere.getArray().get(i).getPassord().equals(txtPassord.getText())) {
+            if (brukere.getArray().get(i).getBrukernavn().equals(txtBrukernavn.getText().trim())
+                    && brukere.getArray().get(i).getPassord().equals(txtPassord.getText().trim())) {
                 login_successful = true;
 
-                //System.out.println(brukere.getArray().get(i).isAdmin());
                 if (brukere.getArray().get(i).isAdmin()) {
 
 
@@ -202,13 +198,12 @@ public class LoggInn_Controller implements Initializable {
                     try {
                         Logg_inn = loader.load();
                     } catch (IOException e) {
-                        lblError.setText("Klarer ikke å bytte side!");
+                        lblError.setText("Klarte ikke å bytte side!");
                         Logg_inn = null;
                         verdi = false;
                     }
 
                     if (verdi) {
-                        //passerer inn data i standardBruker_Controller
                         MellomSide_Standardbruker_Controller controller = loader.getController();
                         controller.setInfo(brukere, komponenter, (Standardbruker) brukere.getArray().get(i));
 
@@ -260,7 +255,6 @@ public class LoggInn_Controller implements Initializable {
     }
 
 
-    //For å gå ut fra applikasjonen
     @FXML
     void onClick_btn_Avslutt(ActionEvent event) {
         Platform.exit();

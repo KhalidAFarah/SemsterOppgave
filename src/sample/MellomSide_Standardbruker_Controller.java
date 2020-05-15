@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import komponenter.Komponenter;
-
 import java.io.IOException;
 
 public class MellomSide_Standardbruker_Controller {
@@ -20,6 +19,7 @@ public class MellomSide_Standardbruker_Controller {
     private Komponenter komponenter;
 
     private Register brukere;
+
     private Standardbruker bruker;
 
     @FXML

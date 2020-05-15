@@ -1,6 +1,7 @@
 package sample;
 
 import Brukere.Register;
+import Brukere.Standardbruker;
 import filbehandling.FiledataJOBJ;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +33,7 @@ import java.util.stream.Collectors;
 public class Viskomponenter_Superbruker_Controller {
 
     //@FXML
-   // private AnchorPane pane;
+    // private AnchorPane pane;
 
     @FXML
     private TableView tableView;
@@ -114,6 +115,9 @@ public class Viskomponenter_Superbruker_Controller {
     @FXML
     private GridPane leggTilKomponenterGrid;
 
+    @FXML
+    private GridPane leggTilKomponenterGrid2;
+
     private boolean showLeggTil = false;
     private boolean showFjern = false;
     private boolean showSpecs = false;
@@ -162,160 +166,156 @@ public class Viskomponenter_Superbruker_Controller {
     void On_Click_BtnFjernKomponenter(ActionEvent event) {
 
 
-            txtSubmit.setVisible(true);
-            btnSubmit.setVisible(true);
-            txtSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn ID");
-            showRediger = false;
-            showLeggTil = false;
+        txtSubmit.setVisible(true);
+        btnSubmit.setVisible(true);
+        txtSubmit.setText("");
+        txtSubmit.setPromptText("skriv inn ID");
+        showRediger = false;
+        showLeggTil = false;
 
 
-            if (!showSpecs) {
-                tableView.setEditable(false);
-                btnLeggTil.setText("Legg til komponenter");
-                btnFjern.setText("Tilbake");
-                btnRediger.setText("Rediger komponenter");
-                if(!showFjern) {
-                    showFjern = true;
-                    leggTilKomponenterGrid.setVisible(false);
+        if (!showSpecs) {
+            tableView.setEditable(false);
+            btnLeggTil.setText("Legg til komponenter");
+            btnFjern.setText("Tilbake");
+            btnRediger.setText("Rediger komponenter");
+            if (!showFjern) {
+                showFjern = true;
+                leggTilKomponenterGrid.setVisible(false);
+                leggTilKomponenterGrid2.setVisible(false);
 
-                    if (tableView.isVisible()) {
-
-                        btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                int valgtKomponent;
-                                try {
-                                    valgtKomponent = Integer.parseInt(txtSubmit.getText());
-                                } catch (Exception e) {
-                                    labelError.setText("Vennligst skriv inn riktig varens ID");
-                                    valgtKomponent = -1;
-                                }
-                                if (valgtKomponent != -1) {
-
-                                    komponenter.remove(valgtKomponent);
-                                    komp.setMainArray(komponenter.getMainArray());
-
-                                    //tableSøk.setItems(komp.getMainArray());
-                                    tableView.setItems(komponenter.getMainArray());
-
-                                    saveKomponenter();
-                                    labelError.setText("Et komponent har blitt fjernet!");
-
-                                    btnSubmit.setVisible(false);
-                                    txtSubmit.setVisible(false);
-                                    showFjern = true;
-                                    btnFjern.setText("Fjern komponenter");
-
-                                }
-                            }
-                        });
-
-
-                        //String melding = showInputDialog(null, "Skriv varens ID");
-                    } else {
-
-                        tableView.setVisible(true);
-                        labelSøk.setVisible(true);
-                        txtSøk.setVisible(true);
-                        showFjern = true;
-
-                        //btnf.setVisible(true);
-                        btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                //String melding = showInputDialog(null, "Skriv varens ID");
-                                int valgtKomponent;
-                                try {
-                                    valgtKomponent = Integer.parseInt(txtSubmit.getText());
-                                } catch (Exception e) {
-                                    labelError.setText("Vennligst skriv inn riktig varens ID");
-                                    valgtKomponent = -1;
-                                }
-                                if (valgtKomponent != -1) {
-
-                                komponenter.remove(valgtKomponent);
-                                komp.setMainArray(komponenter.getMainArray());
-
-                                    //tableSøk.setItems(komp.getMainArray());
-                                    tableView.setItems(komponenter.getMainArray());
-
-                                    saveKomponenter();
-                                    labelError.setText("Et komponent har blitt fjernet!");
-
-                                    showRediger = false;
-                                    showLeggTil = false;
-                                    txtSubmit.setVisible(false);
-                                    btnSubmit.setVisible(false);
-                                    showFjern = false;
-                                    btnFjern.setText("Fjern komponenter");
-
-                                }
-                            }
-                        });
-                    }
-                }else {
-                    showFjern = false;
-                    btnFjern.setText("Fjern komponenter");
-                    txtSubmit.setVisible(false);
-                    btnSubmit.setVisible(false);
-                }
-            } else if (showSpecs) {
-                if (!showFjern) {
-                    tableView.setEditable(false);
-                    btnLeggTil.setText("Legg til spesifikasjoner");
-                    btnFjern.setText("Tilbake");
-                    btnRediger.setText("Rediger spesifikasjoner");
-
-                    txtSubmit.setText("");
-                    txtSubmit.setPromptText("skriv inn ID");
-                    showFjern = true;
-                    showLeggTil = false;
-                    showRediger = false;
+                if (tableView.isVisible()) {
 
                     btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            int specID;
-                            if (txtSubmit.getText() != null) {
-                                try {
-                                    specID = Integer.parseInt(txtSubmit.getText());
-                                } catch (Exception e) {
-                                    labelError.setText("Skriv inn en gyldig id");
-                                    specID = -1;
-                                }
-                            } else {
-                                labelError.setText("Skriv inn en gyldig id");
-                                specID = -1;
+                            int valgtKomponent;
+                            try {
+                                valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                            } catch (Exception e) {
+                                labelError.setText("Vennligst skriv inn riktig varens ID");
+                                valgtKomponent = -1;
                             }
+                            if (valgtKomponent != -1) {
 
-                            if (specID >= 0) {
-                                komponenter.getMainArray().get(IDs).getSpecs().remove(specID);
-                                tableView.getItems().remove(specID);
 
-                                ObservableList<Spesifikasjon> ny = FXCollections.observableArrayList();
 
-                                for (int i = 0; i < spesifikasjoner.size(); i++) {
-                                    spesifikasjoner.get(i).setID(i);
-                                }
-                                tableView.refresh();
+                                komponenter.remove(valgtKomponent);
+                                komp.setMainArray(komponenter.getMainArray());
+
+                                tableView.setItems(komponenter.getMainArray());
+
                                 saveKomponenter();
-                                labelError.setText("Et komponent sin spesifikasjon har blitt fjernet!");
-                                txtSubmit.setVisible(false);
+                                labelError.setText("Et komponent har blitt fjernet!");
+
                                 btnSubmit.setVisible(false);
-                                btnFjern.setText("Fjern spesifikasjon");
-                                showFjern = false;
+                                txtSubmit.setVisible(false);
+                                showFjern = true;
+                                btnFjern.setText("Fjern komponenter");
                             }
                         }
                     });
 
-                }else{
-                    showFjern = false;
-                    btnFjern.setText("Fjern Spesifikasjoner");
-                    txtSubmit.setVisible(false);
-                    btnSubmit.setVisible(false);
+                } else {
+
+                    tableView.setVisible(true);
+                    labelSøk.setVisible(true);
+                    txtSøk.setVisible(true);
+                    showFjern = true;
+
+                    btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            int valgtKomponent;
+                            try {
+                                valgtKomponent = Integer.parseInt(txtSubmit.getText());
+                            } catch (Exception e) {
+                                labelError.setText("Vennligst skriv inn riktig vare. (ID)");
+                                valgtKomponent = -1;
+                            }
+                            if (valgtKomponent != -1) {
+
+                                komponenter.remove(valgtKomponent);
+                                komp.setMainArray(komponenter.getMainArray());
+
+                                tableView.setItems(komponenter.getMainArray());
+
+                                saveKomponenter();
+                                labelError.setText("En komponent har blitt fjernet!");
+
+                                showRediger = false;
+                                showLeggTil = false;
+                                txtSubmit.setVisible(false);
+                                btnSubmit.setVisible(false);
+                                showFjern = false;
+                                btnFjern.setText("Fjern komponenter");
+
+                            }
+                        }
+                    });
                 }
+            } else {
+                showFjern = false;
+                btnFjern.setText("Fjern komponenter");
+                txtSubmit.setVisible(false);
+                btnSubmit.setVisible(false);
             }
+        } else if (showSpecs) {
+            if (!showFjern) {
+                tableView.setEditable(false);
+                btnLeggTil.setText("Legg til spesifikasjoner");
+                btnFjern.setText("Tilbake");
+                btnRediger.setText("Rediger spesifikasjoner");
+
+                txtSubmit.setText("");
+                txtSubmit.setPromptText("Skriv inn ID");
+                showFjern = true;
+                showLeggTil = false;
+                showRediger = false;
+
+                btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        int specID;
+                        if (txtSubmit.getText() != null) {
+                            try {
+                                specID = Integer.parseInt(txtSubmit.getText());
+                            } catch (Exception e) {
+                                labelError.setText("Skriv inn en gyldig id");
+                                specID = -1;
+                            }
+                        } else {
+                            labelError.setText("Skriv inn en gyldig id");
+                            specID = -1;
+                        }
+
+                        if (specID >= 0) {
+                            komponenter.getMainArray().get(IDs).getSpecs().remove(specID);
+                            tableView.getItems().remove(specID);
+
+                            ObservableList<Spesifikasjon> ny = FXCollections.observableArrayList();
+
+                            for (int i = 0; i < spesifikasjoner.size(); i++) {
+                                spesifikasjoner.get(i).setID(i);
+                            }
+                            tableView.refresh();
+                            saveKomponenter();
+                            labelError.setText("En komponent sin spesifikasjon har blitt fjernet!");
+                            txtSubmit.setVisible(false);
+                            btnSubmit.setVisible(false);
+                            btnFjern.setText("Fjern spesifikasjon");
+                            showFjern = false;
+                        }
+                    }
+                });
+
+            } else {
+                showFjern = false;
+                btnFjern.setText("Fjern spesifikasjoner");
+                txtSubmit.setVisible(false);
+                btnSubmit.setVisible(false);
+            }
+        }
     }
 
     @FXML
@@ -323,6 +323,7 @@ public class Viskomponenter_Superbruker_Controller {
 
 
         leggTilKomponenterGrid.setVisible(false);
+        leggTilKomponenterGrid2.setVisible(false);
 
         txtSubmit.setVisible(false);
         btnSubmit.setVisible(false);
@@ -341,11 +342,12 @@ public class Viskomponenter_Superbruker_Controller {
                 txtSøk.setVisible(false);
                 labelSøk.setVisible(false);
                 leggTilKomponenterGrid.setVisible(true);
+                leggTilKomponenterGrid2.setVisible(true);
                 txtNavn.setText("");
                 txtPris.setText("");
                 txtSpecs.setText("");
                 ObservableList<String> typer = FXCollections.observableArrayList();
-                for(String s : Komponenter.getTyper()){
+                for (String s : Komponenter.getTyper()) {
                     typer.add(s);
                 }
                 choice.setItems(typer);
@@ -369,33 +371,35 @@ public class Viskomponenter_Superbruker_Controller {
                                     txtPris.setPromptText("Vennligst skriv inn gyldige verdier!");
                                 }
                                 String line = lines[0];
-                                for(int i = 1; i < lines.length; i++){
+                                for (int i = 1; i < lines.length; i++) {
                                     line += ":" + lines[i];
                                 }
                                 String[] specs = line.split(":");
 
 
-                                if (sjekk){
-                                    if (choice.getValue().equals("Prosessor")){//spesifikke attributter går inn i if eller else if setningene
+                                if (sjekk) {
+                                    if (choice.getValue().equals("Prosessor")) {
                                         komponenter.add(new Prosessor(txtNavn.getText(), pris, "Prosessor", specs));
-                                    } else if (choice.getValue().equals("Skjermkort")){
+                                    } else if (choice.getValue().equals("Skjermkort")) {
                                         komponenter.add(new Skjermkort(txtNavn.getText(), pris, "Skjermkort", specs));
-                                    } else if (choice.getValue().equals("Minne")){
+                                    } else if (choice.getValue().equals("Minne")) {
                                         komponenter.add(new Minne(txtNavn.getText(), pris, "Minne", specs));
-                                    } else if (choice.getValue().equals("Harddisk")){
+                                    } else if (choice.getValue().equals("Harddisk")) {
                                         komponenter.add(new Harddisk(txtNavn.getText(), pris, "Harddisk", specs));
-                                    } else if (choice.getValue().equals("Tastatur")){
+                                    } else if (choice.getValue().equals("Tastatur")) {
                                         komponenter.add(new Tastatur(txtNavn.getText(), pris, "Tastatur", specs));
-                                    } else if (choice.getValue().equals("Mus")){
+                                    } else if (choice.getValue().equals("Mus")) {
                                         komponenter.add(new Mus(txtNavn.getText(), pris, "Mus", specs));
-                                    } else if (choice.getValue().equals("Skjerm")){
+                                    } else if (choice.getValue().equals("Skjerm")) {
                                         komponenter.add(new Skjerm(txtNavn.getText(), pris, "Skjerm", specs));
-                                    } else if (choice.getValue().equals("Operativsystem")){
+                                    } else if (choice.getValue().equals("Operativsystem")) {
                                         komponenter.add(new Operativsystem(txtNavn.getText(), pris, "Operativsystem", specs));
+                                    } else {
+                                        labelError.setText("Husk å velg en komponent type");
                                     }
-                                    //deretter lagre Komponenter
                                     labelError.setText("En komponent har blitt lagt til!");
                                     saveKomponenter();
+                                    tableView.setItems(komponenter.getMainArray());
                                 }
                             }
                         });
@@ -409,10 +413,11 @@ public class Viskomponenter_Superbruker_Controller {
                 txtSubmit.setVisible(false);
                 btnSubmit.setVisible(false);
                 leggTilKomponenterGrid.setVisible(false);
+                leggTilKomponenterGrid2.setVisible(false);
                 showLeggTil = false;
             }
         } else if (showSpecs) {
-            if(!showLeggTil) {
+            if (!showLeggTil) {
                 showLeggTil = true;
                 btnFjern.setText("Fjern spesifikasjoner");
                 btnRediger.setText("Rediger spesifikasjoner");
@@ -440,19 +445,19 @@ public class Viskomponenter_Superbruker_Controller {
                         btnLeggTil.setText("Legg til spesifikasjoner");
                     }
                 });
-            }else{
+            } else {
                 btnLeggTil.setText("Legg til spesifikasjoner");
                 showLeggTil = false;
                 txtSubmit.setVisible(false);
                 btnSubmit.setVisible(false);
             }
-            //String spec = showInputDialog("Skriv inn spesifikasjonen til komponenten");
         }
     }
 
     @FXML
     void On_Click_BtnRedigerKomponenter(ActionEvent event) {
         leggTilKomponenterGrid.setVisible(false);
+        leggTilKomponenterGrid2.setVisible(false);
         btnf.setVisible(false);
         tableView.setEditable(true);
         tableView.setVisible(true);
@@ -465,11 +470,10 @@ public class Viskomponenter_Superbruker_Controller {
 
         if (!showSpecs) {
             if (!showRediger) {
-                labelError.setText("Du kan kun redigere på navn og pris etter å ha klikket på disse,\nhusk å klikke på enter etter å ha redigert ferdig ");
+                labelError.setText("Du kan kun redigere på navn og pris etter å ha klikket på disse,\nhusk å klikke på enter etter å ha redigert ferdig.");
                 DoubleStringConverter doubleString = new DoubleStringConverter();
 
                 navnKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
-                //typeKolonne.setCellFactory(TextFieldTableCell.forTableColumn());
                 prisKolonne.setCellFactory(TextFieldTableCell.forTableColumn(doubleString));
 
                 navnKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
@@ -479,15 +483,6 @@ public class Viskomponenter_Superbruker_Controller {
 
                         navnKolonne.getTableView().refresh();
 
-                        saveKomponenter();
-                    }
-                });
-                typeKolonne.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Komponent, String>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Komponent, String> event) {
-                        event.getRowValue().setType(event.getNewValue());
-
-                        typeKolonne.getTableView().refresh();
                         saveKomponenter();
                     }
                 });
@@ -525,9 +520,8 @@ public class Viskomponenter_Superbruker_Controller {
                         komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getVerdi());
                         komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID(),
                                 event.getNewValue());
-                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID()+1,
+                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID() + 1,
                                 event.getRowValue().getVerdi());
-
 
 
                         event.getRowValue().setNavn(event.getNewValue());
@@ -542,9 +536,8 @@ public class Viskomponenter_Superbruker_Controller {
                         komponenter.getMainArray().get(IDs).getSpecs().remove(event.getRowValue().getVerdi());
                         komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID(),
                                 event.getNewValue());
-                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID()+1,
+                        komponenter.getMainArray().get(IDs).getSpecs().add(event.getRowValue().getID() + 1,
                                 event.getRowValue().getVerdi());
-
 
 
                         event.getRowValue().setVerdi(event.getNewValue());
@@ -552,7 +545,7 @@ public class Viskomponenter_Superbruker_Controller {
                         saveKomponenter();
                     }
                 });
-                btnRediger.setText("Stop redigering");
+                btnRediger.setText("Stopp redigering");
                 showRediger = true;
                 showLeggTil = false;
                 showFjern = false;
@@ -607,6 +600,7 @@ public class Viskomponenter_Superbruker_Controller {
         btnSubmit.setVisible(false);
 
         leggTilKomponenterGrid.setVisible(false);
+        leggTilKomponenterGrid2.setVisible(false);
 
         btnf.setVisible(false);
 
@@ -638,26 +632,26 @@ public class Viskomponenter_Superbruker_Controller {
         tableView.setEditable(false);
 
         btnLeggTil.setText("Legg til komponenter");
-        txtSøk.setPromptText("Skriv inn produktnavn");
+        txtSøk.setPromptText("Skriv inn produktnavnet");
     }
 
     public void On_Click_BtnVisSpesifikasjoner(ActionEvent event) {
-        if(!showSpecs) {
+        if (!showSpecs) {
             tableView.setVisible(true);
             tableView.setEditable(false);
             txtSøk.setVisible(true);
             labelSøk.setVisible(true);
 
             leggTilKomponenterGrid.setVisible(false);
+            leggTilKomponenterGrid2.setVisible(false);
 
             btnf.setVisible(false);
 
             txtSubmit.setVisible(true);
             btnSubmit.setVisible(true);
             txtSubmit.setText("");
-            txtSubmit.setPromptText("skriv inn ID");
+            txtSubmit.setPromptText("Velg komponent. (ID)");
 
-            //String str = showInputDialog("Skriv inn komponentens id");
             btnSubmit.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -667,11 +661,11 @@ public class Viskomponenter_Superbruker_Controller {
                         try {
                             ID = Integer.parseInt(txtSubmit.getText());
                         } catch (Exception e) {
-                            labelError.setText("Vennlighst Skriv inn riktig verdi");
+                            labelError.setText("Vennligst Skriv inn riktig verdi");
                             ID = -1;
                         }
                     } else {
-                        labelError.setText("Vennlighst Skriv inn riktig verdi");
+                        labelError.setText("Vennligst Skriv inn riktig verdi");
                         ID = -1;
                     }
 
@@ -683,9 +677,9 @@ public class Viskomponenter_Superbruker_Controller {
                         spesifikasjoner = FXCollections.observableArrayList();
                         IDs = ID;
 
-                        for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i+=2) {
+                        for (int i = 0; i < komponenter.getMainArray().get(ID).getSpecs().size(); i += 2) {
                             Spesifikasjon t = new Spesifikasjon(komponenter.getMainArray().get(ID).getSpecs().get(i), i
-                            , komponenter.getMainArray().get(ID).getSpecs().get(i+1));
+                                    , komponenter.getMainArray().get(ID).getSpecs().get(i + 1));
                             spesifikasjoner.add(t);
                         }
                         idSpecKolonne.setCellValueFactory(new PropertyValueFactory<Spesifikasjon, Integer>("ID"));
@@ -720,13 +714,13 @@ public class Viskomponenter_Superbruker_Controller {
                     }
                 }
             });
-        }else{
+        } else {
             txtSubmit.setVisible(false);
             btnSubmit.setVisible(false);
             btnVisSpecs.setText("Vis en komponents\nspesifikasjoner");
             On_Click_BtnVisKomponenter(event);
             showSpecs = false;
-        }//d
+        }
 
     }
 }
