@@ -133,8 +133,8 @@ public class Standardbruker_FerdigByggetPc_Controller {
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(700);
-            Scene_3.setWidth(420);
+            Scene_3.setHeight(750);
+            Scene_3.setWidth(500);
             Scene_3.centerOnScreen();
             Scene_3.show();
         }
@@ -167,7 +167,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                     labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Label labelPris = new Label(komponenter.getMainArray().get(i).getPris() + " Kr");
                     labelPris.setLayoutY(y);
-                    labelPris.setLayoutX(500);
+                    labelPris.setLayoutX(650);
                     labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                     Button btnVelg = new Button("Velg");
                     btnVelg.setLayoutY(y + 30);
@@ -253,7 +253,6 @@ public class Standardbruker_FerdigByggetPc_Controller {
         labelError.setText("Du må velge en vare fra hver komponent type for å kunne kjøpe pc-en");
         AnchorPane APane = new AnchorPane();
         pane.setContent(APane);
-        //System.out.println(bruker.toStringFormat());
         int y = 10;
         if (bruker != null || komponenter != null) {
             Label labelTotalPris = new Label("Totalprisen er " + bruker.getSum() + " kr.");
@@ -271,6 +270,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
                         Label labelText = new Label();
                         Label labelPris = new Label();
+                        Label labelTot = new Label();
 
 
                         String s = "";
@@ -282,7 +282,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                             y += 80;
                         }
                         bruker.setSum();
-                        s += "\nTotalpris: " + bruker.getSum();
+                        labelTot.setText("Totalpris: " + bruker.getSum());
                         y += 60;
                         labelText.setText(s);
                         labelPris.setText(p);
@@ -321,6 +321,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                                     labelText.setText("");
                                     labelPris.setText("");
                                     labelTotalPris.setText("");
+                                    labelTot.setText("");
 
 
                                     try {
@@ -349,6 +350,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
 
                         APane.getChildren().add(labelHeader);
                         APane.getChildren().add(labelText);
+                        APane.getChildren().add(labelTot);
                         APane.getChildren().add(labelPris);
                         APane.getChildren().add(skrivUt);
                         APane.getChildren().add(avbryt);
@@ -361,9 +363,13 @@ public class Standardbruker_FerdigByggetPc_Controller {
                         labelText.setLayoutX(10);
                         labelText.setStyle("-fx-font-size: 16; -fx-font-family: Verdana");
 
-                        labelPris.setLayoutY(60);
+                        labelTot.setLayoutY(420);
+                        labelTot.setLayoutX(250);
+                        labelTot.setStyle("-fx-font-size: 16; -fx-font-family: Verdana;-fx-font-weight: bold;");
+
+                        labelPris.setLayoutY(68);
                         labelPris.setLayoutX(500);
-                        labelPris.setStyle("-fx-font-size: 16; -fx-text-alignment: right;  -fx-font-family: Verdana");
+                        labelPris.setStyle("-fx-font-size: 16; -fx-text-alignment: right;  -fx-font-family: Verdana;");
 
                         labelHeader.setPrefWidth(pane.getPrefWidth());
                         labelText.setPrefWidth(pane.getPrefWidth());
@@ -384,7 +390,7 @@ public class Standardbruker_FerdigByggetPc_Controller {
                 labelNavn.setLayoutX(10);
                 Label labelPris = new Label(bruker.getHandlekurv().getMainArray().get(i).getPris() + " kr");
                 labelPris.setLayoutY(y);
-                labelPris.setLayoutX(450);
+                labelPris.setLayoutX(650);
                 labelPris.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
                 labelNavn.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-font-family: Verdana");
 

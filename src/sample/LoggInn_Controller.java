@@ -149,7 +149,7 @@ public class LoggInn_Controller implements Initializable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                showMessageDialog(null, "Klarte ikke å stoppe tråden!");
+                lblError.setText("Klarte ikke å stoppe tråden!");
             }
         }
     }
@@ -189,8 +189,8 @@ public class LoggInn_Controller implements Initializable {
                         Scene Standardbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standardbruker);
-                        Scene_5.setHeight(700);
-                        Scene_5.setWidth(420);
+                        Scene_5.setHeight(750);
+                        Scene_5.setWidth(500);
                         Scene_5.centerOnScreen();
                         Scene_5.show();
                     }
@@ -215,8 +215,8 @@ public class LoggInn_Controller implements Initializable {
                         Scene Standarbruker = new Scene(Logg_inn);
                         Stage Scene_5 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         Scene_5.setScene(Standarbruker);
-                        Scene_5.setHeight(700);
-                        Scene_5.setWidth(420);
+                        Scene_5.setHeight(750);
+                        Scene_5.setWidth(500);
                         Scene_5.centerOnScreen();
                         Scene_5.show();
 
@@ -226,7 +226,7 @@ public class LoggInn_Controller implements Initializable {
             }
         }
         if (!login_successful) {
-            showMessageDialog(null, "Ugyldig brukernavn eller passord");
+            lblError.setText("Ugyldig brukernavn eller passord");
         }
     }
 
@@ -251,8 +251,8 @@ public class LoggInn_Controller implements Initializable {
             Scene Register_ny_bruker = new Scene(Logg_inn);
             Stage Scene_2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_2.setScene(Register_ny_bruker);
-            Scene_2.setHeight(600);
-            Scene_2.setWidth(600);
+            Scene_2.setHeight(700);
+            Scene_2.setWidth(700);
             Scene_2.centerOnScreen();
             Scene_2.show();
         }

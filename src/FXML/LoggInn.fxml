@@ -68,7 +68,7 @@
                         <Insets top="20.0" />
                     </GridPane.margin>
                 </Button>
-                <Button fx:id="btnAvslutt" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                <Button fx:id="btnAvslutt" minHeight="25.0" mnemonicParsing="false" onAction="#onClick_btn_Avslutt" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: black;" text="Avslutt" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="6">
                     <font>
                         <Font name="Verdana" size="11.0" />
                     </font>

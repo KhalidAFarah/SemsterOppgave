@@ -115,8 +115,8 @@ public class Mellom_side_SuperbrukerController {
             Scene LoggInn = new Scene(Superbruker);
             Stage Scene_4 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_4.setScene(LoggInn);
-            Scene_4.setHeight(700);
-            Scene_4.setWidth(420);
+            Scene_4.setHeight(750);
+            Scene_4.setWidth(500);
             Scene_4.centerOnScreen();
             Scene_4.show();
         }

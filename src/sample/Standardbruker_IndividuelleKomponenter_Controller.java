@@ -128,6 +128,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
 
     @FXML
     void On_Click_BtnKurv(ActionEvent event) {
+        choice.setValue("Alle");
         if (!showKurv){
             if(bruker.getIndividuelleVarer().getMainArray().size() == 0){
                 labelError.setText("Din handlekurve er tom, legg til varer");
@@ -148,6 +149,7 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             btnLeggTil.setText("Fjern komponent");
             btnVisSpecs.setText("Vis spesifikasjoner");
             labelViser.setText("Viser varene i din handlekurv");
+            tableView.setItems(bruker.getIndividuelleVarer().getMainArray());
 
             btnSubmit.setVisible(false);
             txtSubmit.setVisible(false);
@@ -375,8 +377,8 @@ public class Standardbruker_IndividuelleKomponenter_Controller {
             Scene LoggInn = new Scene(Standardbruker);
             Stage Scene_3 = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene_3.setScene(LoggInn);
-            Scene_3.setHeight(610);
-            Scene_3.setWidth(566);
+            Scene_3.setHeight(750);
+            Scene_3.setWidth(500);
             Scene_3.centerOnScreen();
             Scene_3.show();
         }
