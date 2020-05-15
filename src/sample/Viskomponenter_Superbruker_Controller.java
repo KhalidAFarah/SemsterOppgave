@@ -158,7 +158,7 @@ public class Viskomponenter_Superbruker_Controller {
         try {
             data.save(komponenter, path);
         } catch (IOException e) {
-            showMessageDialog(null, "klarte ikke å laste inn data");// for nå
+            labelError.setText("klarte ikke å laste inn data");
         }
     }
 
